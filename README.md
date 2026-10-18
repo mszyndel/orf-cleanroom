@@ -15,6 +15,8 @@ Today LightCraft decodes uncompressed ORF only; compressed ORF (the default on m
 - `RULES.md`: the clean-room contract
 - `AGENTS.md`: instructions for AI coding agents
 - `FINDINGS.md`: what has been established, with evidence (append-only)
-- `OPEN-QUESTIONS.md`: what is still unknown
+- `OPEN-QUESTIONS.md`: what is still unknown, plus unverified hypotheses
+- `VARIANTS.md`: the variant registry, keyed by measured file signatures
+- `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant
 - `tools/`: analysis scripts (our own code only)
 - `stats/`: aggregate tables only, no images or raw payloads
