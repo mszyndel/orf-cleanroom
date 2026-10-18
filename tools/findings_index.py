@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List and validate the findings in findings/ (plus legacy F1-F4 if FINDINGS.md exists).
+"""List and validate the findings in findings/ (F1-F4 are the files with an `Alias:`).
 
 Supports: findings/README.md (file format and status rules), CONTRIBUTING.md.
 Standard library only. Prints, per variant folder, each finding's ID, author,

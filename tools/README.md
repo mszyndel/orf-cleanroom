@@ -18,7 +18,7 @@ Each script should:
 
     python tools/orf_signature.py path/to/* > rows.csv
 
-**`bit_runs.py`** gives a histogram of zero-bit runs in the payload (MSB-first), as aggregate numbers. It's a starting point for bitstream work (FINDINGS F1).
+**`bit_runs.py`** gives a histogram of zero-bit runs in the payload (MSB-first), as aggregate numbers. It's a starting point for bitstream work (finding F1).
 
     python tools/bit_runs.py path/to/file.ORF --mb 1
 
@@ -29,7 +29,7 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     q= 2  share=0.13019
     q= 3  share=0.06272
 
-**`findings_index.py`** lists every finding under `findings/` (plus the legacy F1-F4) by variant, with author, title, peer-validation status (lead, reproduced, disputed) and who reproduced it. `--check` validates the files (file name, `Author:` matches the handle, `Variant:` matches the folder, referenced IDs exist) and exits 1 on errors; CI runs it on pull requests.
+**`findings_index.py`** lists every finding under `findings/` (including F1-F4) by variant, with author, title, peer-validation status (lead, reproduced, disputed) and who reproduced it. `--check` validates the files (file name, `Author:` matches the handle, `Variant:` matches the folder, referenced IDs exist) and exits 1 on errors; CI runs it on pull requests.
 
     python tools/findings_index.py
     python tools/findings_index.py --check

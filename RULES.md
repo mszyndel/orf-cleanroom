@@ -26,13 +26,12 @@ If you have read the ORF decompression code in any of those projects, you're wel
 - An existing finding file is never edited, renamed or deleted, by anyone, so nobody's work can be erased.
 - To correct or retract a finding, add a new file with `Corrects: <ID>` that says which one and why.
 - Status is peer validation, not maintainer sign-off: a finding is a *lead* until a finding by a different author lists it in `Reproduces:`, and is *disputed* if a different author lists it in `Corrects:`. `tools/findings_index.py` shows the status.
-- FINDINGS.md holds the first four findings (F1-F4) and is frozen. CI rejects any change to it.
 - CI rejects pull requests that modify or remove existing finding files, or that add a finding file that doesn't validate.
 
 ## Credit
 Everyone who finds something keeps the credit for it.
 - Each finding names its author (`@handle`) in its file name and its `Author:` line. Because existing files are never edited, that credit can't be edited away, and a later correction is a new file that leaves the original and its author in place.
-- If your work builds on someone else's finding, say so with a `Builds on: <ID>` line (`F1`..`F4` for the legacy ones). If you reproduce one, list it in `Reproduces:`; the reproducer is credited in the index.
+- If your work builds on someone else's finding, say so with a `Builds on: <ID>` line (`F1`..`F4` are the first four findings). If you reproduce one, list it in `Reproduces:`; the reproducer is credited in the index.
 - Add only your own work under your own handle. If you're adding someone else's result, for example from a Discussion, credit them as the author (file name and `Author:`) and add `Submitted by: @you`. Such a PR needs a maintainer, because the file name handle differs from the PR author.
 - In `samples/manifest.csv`, rows are append-only and `measured_by` is never overwritten. When you measure more columns of a file already listed, add a new row for the same `sha256` under your own handle.
 - Pull requests are squash-merged with the contributor kept as the commit author. Add `Co-authored-by:` lines for anyone else who did the work.
