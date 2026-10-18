@@ -9,7 +9,13 @@ Read the open issues and open pull requests, including finding files not merged 
 Submit from your own GitHub account so the work is linked to you. New to git or GitHub? An AI assistant can walk you through the account, fork and pull request (AGENTS.md tells it how).
 
 1. Pick a task: "Start here" in the README, or an issue labelled `good first issue`. Comment on the issue to claim it.
-2. Fork the repo and create a branch.
+2. Fork the repo and create a branch. With the GitHub CLI (after `gh auth login`):
+
+       gh repo fork radialmonster/orf-cleanroom --clone
+       cd orf-cleanroom
+       git switch -c my-change
+
+   Later, `git push -u origin my-change` sends the branch to your fork, and `gh pr create --repo radialmonster/orf-cleanroom` opens the pull request.
 3. Make one focused change per pull request.
    - New findings are **new files**: `findings/<folder>/YYYY-MM-DD--yourhandle--short-slug.md`, in the folder for the variant (`container`, `V0`, `V1`, `V2`, `unassigned`). Template and rules: [findings/README.md](findings/README.md). Existing findings are never edited (CI enforces this); correct a finding with a new file that has `Corrects:`. Files are independent, so there are no numbers to pick and no merge conflicts.
    - Manifest rows are appended: use `tools/manifest_rows.py`. Never edit existing rows; to add measurements for a file already listed, add a new row for the same `sha256`.
