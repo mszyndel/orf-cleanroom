@@ -167,7 +167,7 @@ def report(path, a):
         " 12+:%.5f" % (sum(c for q, c in qh.items() if q >= 12) / n)))
     esc_q = collections.Counter(q for q in qs if q >= ESC_Q)
     if esc_q:
-        print("escape q values: " + " ".join("%d:%d" % kv for kv in sorted(esc_q.items())[:12]))
+        print("escape q values: " + " ".join("%d:%d" % kv for kv in sorted(esc_q.items())))
     if not n:
         return
 
