@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Zero-run statistics of a payload bitstream, read MSB-first.
 
-Supports: FINDINGS F1 (token structure: q zero bits, then a stop bit).
+Supports: finding F1 (token structure: q zero bits, then a stop bit).
 Standard library only. A simple starting point for bitstream exploration:
 it makes no assumption about suffixes or escapes, it just counts runs of 0
 bits ending in a 1 and prints their histogram as aggregate numbers.

@@ -18,7 +18,7 @@ Issues labelled [`good first issue`](https://github.com/radialmonster/orf-cleanr
 ## How to help
 - **Samples:** upload varied ORFs (daylight, indoor, high ISO, different bodies) to [raw.pixls.us](https://raw.pixls.us). They are CC0, so anyone here can use them. Please don't attach raw files to this repo.
 - **Analysis:** pick an item from [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) or the issues, comment that you're working on it, and report back with numbers and a way to reproduce them.
-- **Findings:** one file per finding, in the folder for its variant under [findings/](findings/README.md), with its evidence. Other people check each other's findings: a finding is a *lead* until someone else reproduces it. FINDINGS.md holds the first four (F1-F4) and is frozen.
+- **Findings:** one file per finding, in the folder for its variant under [findings/](findings/README.md), with its evidence. Other people check each other's findings: a finding is a *lead* until someone else reproduces it. The first four findings are in there too, with IDs `F1`..`F4`.
 
 ## Getting test files
 
@@ -51,8 +51,7 @@ Findings stay credited to whoever found them: the author handle is in each findi
 ## Layout
 - `RULES.md`: the clean-room contract
 - `AGENTS.md`: instructions for AI coding agents
-- `findings/`: what has been established, one file per finding, by variant, with evidence and peer-validation status
-- `FINDINGS.md`: the first four findings (F1-F4), frozen
+- `findings/`: what has been established, one file per finding, by variant, with evidence and peer-validation status (the first four are `F1`..`F4`)
 - `OPEN-QUESTIONS.md`: what is still unknown, plus unverified hypotheses
 - `VARIANTS.md`: the variant registry, keyed by measured file signatures
 - `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant

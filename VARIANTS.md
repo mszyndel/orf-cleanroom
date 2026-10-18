@@ -3,7 +3,7 @@
 Variants are defined by **what can be measured in the files**, not by camera model. Model names are listed as observations only. A variant is never inferred from another decoder's behaviour (see RULES.md).
 
 ## Signature fields
-- **Container:** compression tag (note F2 in FINDINGS.md: it reads 1 even on compressed files, so use bits per pixel instead), maker-note version, raw data offset and length.
+- **Container:** compression tag (note F2 in findings/container/: it reads 1 even on compressed files, so use bits per pixel instead), maker-note version, raw data offset and length.
 - **Payload:** width x height, bits per pixel (payload bytes x 8 / pixels).
 - **Bitstream:** escape length, whether the calm parse (F1) works, per-row token stride.
 - **Mode:** normal, High Res Shot / pixel-shift, other.
@@ -31,7 +31,7 @@ One issue per variant (https://github.com/radialmonster/orf-cleanroom/issues), l
 ## V1: calm-parse compressed
 - Signature: compressed; the calm parse from F1 works (q zeros, stop bit, 5-bit suffix, escape at q ≥ 17); per-row stride equals the payload width on at least one body (5240 wide).
 - Models seen: none recorded yet. The PR that assigns a manifest row to this variant also adds its model here.
-- Findings: [findings/V1/](findings/V1/) (F1 in FINDINGS.md is the first).
+- Findings: [findings/V1/](findings/V1/) (F1 is the first).
 - Status: `parse understood`. Value assembly and predictor open (OPEN-QUESTIONS 1-2). On some bodies the stride drifts (question 3), which may split this variant.
 
 ## V2: 31-bit-escape compressed

@@ -19,7 +19,7 @@ Columns:
 - `make`, `model`: from the file's own tags, spelled as the tags spell them (e.g. `E-M5MarkIII`; the raw.pixls.us list may write `E-M5 Mark III`)
 - `mode`: `normal` / `hires`, measured from the payload width (over 6000 = High Res Shot)
 - `payload_w`, `payload_h`, `bpp`: measured payload size and bits per pixel
-- `size_class`: `packed-12`, `packed-12.8` or `packed-16` when the payload size exactly matches that fixed packing; `variable` otherwise (compressed). See F4 in FINDINGS.md.
+- `size_class`: `packed-12`, `packed-12.8` or `packed-16` when the payload size exactly matches that fixed packing; `variable` otherwise (compressed). See F4 in findings/container/.
 - `compression_tag`: the TIFF compression value of the raw data
 - `escape_bits`: measured escape length
 - `calm_parse`: `yes` / `no`
