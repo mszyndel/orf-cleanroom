@@ -28,6 +28,8 @@ jobs:
           if [ -z "$pr_line" ]; then echo "No open PR with head $HEAD_SHA"; exit 0; fi
           pr=${pr_line%% *}
           author=${pr_line#* }
+          # No bot comments on the owner's own PRs: the merge or label says enough, and comments email the owner.
+          owner=${REPO%%/*}; quiet=""; if [ "${author,,}" = "${owner,,}" ]; then quiet=1; fi
 
           files=$(gh api "repos/$REPO/pulls/$pr/files" --paginate --jq '.[]')   # one JSON object per line
           reason=""
@@ -68,7 +70,7 @@ jobs:
 
           if [ -z "$reason" ]; then
             gh pr merge "$pr" --repo "$REPO" --squash --match-head-commit "$HEAD_SHA"
-            gh pr comment "$pr" --repo "$REPO" --body "Merged automatically: findings/manifest only, checks passed. Thanks!"
+            [ -n "$quiet" ] || gh pr comment "$pr" --repo "$REPO" --body "Merged automatically: findings/manifest only, checks passed. Thanks!"
             exit 0
           fi
 
@@ -78,4 +80,4 @@ jobs:
           gh label create needs-maintainer --repo "$REPO" --force --color d93f0b \
             --description "Not auto-mergeable; waits for an occasional maintainer look"
           gh pr edit "$pr" --repo "$REPO" --add-label needs-maintainer
-          gh pr comment "$pr" --repo "$REPO" --body "Checks passed, but this PR is not merged automatically because $reason. Only new files under findings/ and appended manifest rows from the PR author merge on their own (see CONTRIBUTING.md). A maintainer will look occasionally; this can take weeks. Nothing is wrong with your work."
+          [ -n "$quiet" ] || gh pr comment "$pr" --repo "$REPO" --body "Checks passed, but this PR is not merged automatically because $reason. Only new files under findings/ and appended manifest rows from the PR author merge on their own (see CONTRIBUTING.md). A maintainer will look occasionally; this can take weeks. Nothing is wrong with your work."
