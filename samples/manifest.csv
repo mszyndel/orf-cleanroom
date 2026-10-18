@@ -1,1 +1,2 @@
 source,pixls_id,pixls_name,sha256,licence,make,model,mode,payload_w,payload_h,bpp,size_class,compression_tag,escape_bits,calm_parse,row_stride,variant,measured_by
+pixls,3800,Olympus - E-M1MarkIII - 16bit (4:3).ORF,1e7a256eff14df75055dd7fe7a68aabefb4d8ed475317e80ebf7ff77d5bcfd3f,CC0,OLYMPUS CORPORATION,E-M1MarkIII,normal,5240,3912,6.425,variable,1,,,,unassigned,@radialmonster tools/orf_signature.py 65a9441
