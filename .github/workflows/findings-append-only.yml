@@ -1,0 +1,18 @@
+name: findings-append-only
+on: pull_request
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: FINDINGS.md may only grow at the end
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          git show "$base:FINDINGS.md" > /tmp/old.md 2>/dev/null || exit 0
+          n=$(wc -c < /tmp/old.md)
+          if ! head -c "$n" FINDINGS.md | cmp -s - /tmp/old.md; then
+            echo "::error file=FINDINGS.md::Existing content in FINDINGS.md was changed or removed. Findings are append-only: add a new entry at the end instead (see RULES.md)."
+            exit 1
+          fi

@@ -13,7 +13,8 @@ Today LightCraft decodes uncompressed ORF only; compressed ORF (the default on m
 
 ## Layout
 - `RULES.md`: the clean-room contract
-- `FINDINGS.md`: what has been established, with evidence
+- `AGENTS.md`: instructions for AI coding agents
+- `FINDINGS.md`: what has been established, with evidence (append-only)
 - `OPEN-QUESTIONS.md`: what is still unknown
 - `tools/`: analysis scripts (our own code only)
 - `stats/`: aggregate tables only, no images or raw payloads

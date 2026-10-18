@@ -19,5 +19,11 @@ If you have read the ORF decompression code in any of those projects, you're wel
 - Only CC0 / public-domain samples are used for published numbers.
 - No images of decoded or preview data are committed. Aggregate statistics only.
 
+## Findings are append-only
+- New findings are added at the end of FINDINGS.md as a new numbered, dated entry with an author.
+- Existing entries are never edited, reordered or deleted, so nobody's work can be erased.
+- To correct or retract an entry, append a new entry that says which one it corrects and why.
+- A CI check rejects pull requests that change or remove existing lines in FINDINGS.md.
+
 ## Sign-off
 By opening a pull request you confirm that your contribution follows these rules. Please say so in the PR description ("I confirm this follows RULES.md").
