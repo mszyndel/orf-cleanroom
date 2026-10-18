@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Pull request checks for findings/, FINDINGS.md and samples/manifest.csv.
 
-Standard library only (Python 3.8+). Run from the repo root with the PR merged
+FINDINGS.md may be deleted only after its F<n> entries moved verbatim into added
+findings files with matching Alias and Author (check_migration). Standard library
+only (Python 3.8+). Run from the repo root with the PR merged
 into the work tree. Environment: BASE (base commit SHA), PR_AUTHOR (login),
 FINDINGS_INDEX (optional path to the findings_index.py to run; CI passes the
 copy from the base branch so a PR cannot change its own validator).
@@ -43,7 +45,83 @@ def base_file(path, rev=None):
         return None
 
 
-def check_frozen(changed):
+ENTRY = re.compile(r"^## (F[0-9]+) \(\d{4}-\d{2}-\d{2}, (@[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\): .*$")
+ALIAS = re.compile(r"^Alias:[ \t]*(F[0-9]+)[ \t]*$", re.M)
+AUTHOR_LINE = re.compile(r"^Author:[ \t]*(@\S+)[ \t]*$", re.M)
+
+
+def norm(text):
+    return " ".join(text.split())
+
+
+def legacy_entries(text):
+    """FINDINGS.md text -> {id: (handle, body)}; body = lines after the heading up to the next '## '."""
+    out, cur = {}, None
+    for line in text.splitlines():
+        m = ENTRY.match(line)
+        if m:
+            cur = m.group(1)
+            out[cur] = [m.group(2), []]
+        elif line.startswith("## "):
+            cur = None
+        elif cur:
+            out[cur][1].append(line)
+    return dict((k, (v[0], norm("\n".join(v[1])))) for k, v in out.items())
+
+
+def file_head(path):
+    """Text of a file at HEAD before its first '## ' heading (title and header lines), and the whole text."""
+    text = (base_file(path, "HEAD") or b"").decode("utf-8", "replace").replace("\r\n", "\n")
+    return text.split("\n## ", 1)[0], text
+
+
+def check_migration(added):
+    """FINDINGS.md deletion: every base entry must be in an added file with its Alias, Author and body."""
+    entries = legacy_entries((base_file("FINDINGS.md") or b"").decode("utf-8"))
+    if not entries:
+        return error("FINDINGS.md", "FINDINGS.md was deleted, but no F<n> entries were found in the base copy.")
+    files = {}
+    for path in added:
+        head, text = file_head(path)
+        m = ALIAS.search(head)
+        if m:
+            files.setdefault(m.group(1), []).append((head, text))
+    for fid, (handle, body) in sorted(entries.items()):
+        ok = False
+        for head, text in files.get(fid, []):
+            a = AUTHOR_LINE.search(head)
+            if a and a.group(1).lower() == handle.lower() and body in norm(text):
+                ok = True
+        if not ok:
+            error("FINDINGS.md", "FINDINGS.md can only be deleted once %s is in an added findings file with "
+                                 "'Alias: %s', 'Author: %s' and the entry's text verbatim." % (fid, fid, handle))
+
+
+def check_aliases(added):
+    """A new file may only claim the alias of a legacy entry that has not moved yet."""
+    legacy = set(legacy_entries((base_file("FINDINGS.md") or b"").decode("utf-8")))
+    taken = set()
+    tree = git("ls-tree", "-r", "--name-only", BASE, "findings/").decode("utf-8").splitlines()
+    for line in tree:
+        if line.endswith(".md") and not line.endswith("/README.md"):
+            m = ALIAS.search((base_file(line) or b"").decode("utf-8", "replace").replace("\r\n", "\n")
+                             .split("\n## ", 1)[0])
+            if m:
+                taken.add(m.group(1))
+    for path in added:
+        m = ALIAS.search(file_head(path)[0])
+        if not m:
+            continue
+        if m.group(1) in taken:
+            error(path, "Alias %s is already taken by another finding." % m.group(1))
+        elif m.group(1) not in legacy:
+            error(path, "Alias %s is reserved for the first findings (F1-F4) and is not available." % m.group(1))
+
+
+def check_frozen(changes):
+    changed = [p for _, p in changes]
+    added = [p for s, p in changes if s == "A" and p.startswith("findings/") and not p.endswith("/README.md")]
+    check_aliases(added)
     if "FINDINGS.md" not in changed:
         return
     old = base_file("FINDINGS.md") or b""
@@ -51,7 +129,7 @@ def check_frozen(changed):
         with open("FINDINGS.md", "rb") as f:
             new = f.read()
     except OSError:
-        return error("FINDINGS.md", "FINDINGS.md was deleted. It is frozen history.")
+        return check_migration(added)
     if NOTE.encode() in old:
         return error("FINDINGS.md", "FINDINGS.md is frozen. Add a file under findings/ instead "
                                     "(see findings/README.md).")
@@ -141,7 +219,7 @@ def check_manifest(changes):
 def main():
     out = git("diff", "--name-status", "--no-renames", "%s...HEAD" % BASE).decode("utf-8")
     changes = [tuple(l.split("\t", 1)) for l in out.splitlines() if "\t" in l]
-    check_frozen([p for _, p in changes])
+    check_frozen(changes)
     check_findings(changes)
     check_manifest(changes)
     if errors:

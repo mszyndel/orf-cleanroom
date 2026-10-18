@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List and validate the findings in findings/ (plus legacy F1-F4 in FINDINGS.md).
+"""List and validate the findings in findings/ (plus legacy F1-F4 if FINDINGS.md exists).
 
 Supports: findings/README.md (file format and status rules), CONTRIBUTING.md.
 Standard library only. Prints, per variant folder, each finding's ID, author,
@@ -9,6 +9,13 @@ title and status, and who reproduced it. Status comes from peer validation:
   disputed    a finding by a different author lists it in `Corrects:`
 (disputed wins over reproduced). `Reproduces:` means "I got matching results";
 if yours differ, write a finding with `Corrects:` instead.
+
+A finding file may carry an optional `Alias: F<n>` line (used by the first four
+findings, F1-F4). The alias resolves in `Builds on:` / `Reproduces:` / `Corrects:`
+exactly like the file's own ID. Aliases must be well formed and unique. If
+FINDINGS.md still exists, its F1-F4 entries are listed only when no file claims
+that alias. Files with an alias are exempt from the Claim/Evidence/Reproduce
+section check (they keep the older entries' wording).
 
 Validation (--check): file name pattern, Author matches the handle in the file
 name, Variant matches the folder, required sections present, referenced IDs
@@ -28,11 +35,12 @@ NAME_RE = re.compile(
 ID_PATTERN = r"(?:F[0-9]+|\d{4}-\d{2}-\d{2}--[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*--[a-z0-9]+(?:-[a-z0-9]+)*)"
 REF_RE = re.compile(r"^(" + ID_PATTERN + r")(?:\s|$)")
 KEY_RE = re.compile(r"^([A-Z][A-Za-z ]*):\s*(.*)$")
-KNOWN_KEYS = ["Author", "Submitted by", "Variant", "Builds on", "Reproduces", "Corrects"]
+KNOWN_KEYS = ["Author", "Submitted by", "Variant", "Alias", "Builds on", "Reproduces", "Corrects"]
 REF_KEYS = ["Builds on", "Reproduces", "Corrects"]
 SECTIONS = ["Claim", "Evidence", "Reproduce"]
+ALIAS_RE = re.compile(r"^F[0-9]+$")
 HANDLE_RE = re.compile(r"^@([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)$")
-# Legacy entries stay in FINDINGS.md; this only says where they are listed.
+# Legacy entries still in FINDINGS.md (if the file exists) are listed in these folders.
 LEGACY_FOLDER = {"F1": "V1", "F2": "container", "F3": "container", "F4": "container"}
 LEGACY_RE = re.compile(r"^## (F[0-9]+) \((\d{4}-\d{2}-\d{2}), @([A-Za-z0-9-]+)\): (.*)$")
 
@@ -41,6 +49,7 @@ class Finding:
     def __init__(self, fid, folder, path, author, title, legacy=False):
         self.id, self.folder, self.path = fid, folder, path
         self.author, self.title, self.legacy = author, title, legacy
+        self.alias = ""
         self.refs = {k: [] for k in REF_KEYS}
 
 
@@ -52,7 +61,7 @@ def folder_key(name):
     return (1, int(name[1:]))
 
 
-def read_legacy(root, found):
+def read_legacy(root, found, aliases):
     path = os.path.join(root, "FINDINGS.md")
     if not os.path.isfile(path):
         return
@@ -61,6 +70,8 @@ def read_legacy(root, found):
             m = LEGACY_RE.match(line.rstrip("\r\n"))
             if m and m.group(1) in LEGACY_FOLDER:
                 fid = m.group(1)
+                if fid in aliases:  # migrated to a file: prefer the file, don't double count
+                    continue
                 found[fid] = Finding(fid, LEGACY_FOLDER[fid], "FINDINGS.md", m.group(3), m.group(4), True)
 
 
@@ -95,6 +106,9 @@ def parse_file(path, folder, name, found, errors):
         if line.startswith("## "):
             in_header = False
             headings.append(line[3:].strip())
+        elif in_header and not line.strip():
+            if header:  # the header block ends at the first blank line after its first key
+                in_header = False
         elif in_header:
             km = KEY_RE.match(line)
             if km:
@@ -105,7 +119,13 @@ def parse_file(path, folder, name, found, errors):
                     err("'%s:' appears twice" % key)
                 else:
                     header[key] = val
+    alias = header.get("Alias", "")
+    if "Alias" in header and not ALIAS_RE.match(alias):
+        err("'Alias:' must look like F1, F2, ...")
+        alias = ""
     for sec in SECTIONS:
+        if alias:
+            break
         if not any(h == sec or h.startswith(sec + " ") for h in headings):
             err("missing section '## %s'" % sec)
     author = header.get("Author", "")
@@ -120,6 +140,7 @@ def parse_file(path, folder, name, found, errors):
     if variant != folder:
         err("Variant '%s' does not match the folder '%s'" % (variant, folder))
     f = Finding(fid, folder, path, handle, title)
+    f.alias = alias
     for key in REF_KEYS:
         for part in header.get(key, "").split(","):
             part = part.strip()
@@ -134,6 +155,19 @@ def parse_file(path, folder, name, found, errors):
 
 
 def scan(root, found, errors):
+    """Read findings/ into found (id -> Finding). Returns alias -> file id."""
+    aliases = {}
+    _scan(root, found, errors)
+    for f in sorted(found.values(), key=lambda f: f.id):
+        if f.alias:
+            if f.alias in aliases:
+                errors.append("%s: alias %s is already used by %s" % (f.path, f.alias, aliases[f.alias]))
+            else:
+                aliases[f.alias] = f.id
+    return aliases
+
+
+def _scan(root, found, errors):
     base = os.path.join(root, "findings")
     if not os.path.isdir(base):
         return
@@ -182,15 +216,20 @@ def main():
     args = ap.parse_args()
 
     found, errors = {}, []
-    read_legacy(args.root, found)
-    scan(args.root, found, errors)
+    aliases = scan(args.root, found, errors)
+    read_legacy(args.root, found, aliases)
     for f in found.values():
         for key in REF_KEYS:
+            resolved = []
             for ref in f.refs[key]:
+                ref = aliases.get(ref, ref)  # an alias means the same finding as its file
                 if ref not in found:
                     errors.append("%s: '%s:' refers to unknown finding %s" % (f.path, key, ref))
                 elif ref == f.id:
                     errors.append("%s: '%s:' refers to itself" % (f.path, key))
+                else:
+                    resolved.append(ref)
+            f.refs[key] = resolved
 
     if errors:
         for e in errors:
@@ -209,7 +248,8 @@ def main():
         for f in items:
             status, rep, dis = st[f.id]
             tag = " [legacy]" if f.legacy else ""
-            print("  %s  @%s  %s  %s%s" % (f.id, f.author, status, f.title, tag))
+            ident = f.id + (" (%s)" % f.alias if f.alias else "")
+            print("  %s  @%s  %s  %s%s" % (ident, f.author, status, f.title, tag))
             if rep:
                 print("      reproduced by: " + ", ".join("@%s (%s)" % (g.author, g.id) for g in rep))
             if dis:
