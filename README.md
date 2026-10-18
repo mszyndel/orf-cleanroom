@@ -20,3 +20,6 @@ Today LightCraft decodes uncompressed ORF only; compressed ORF (the default on m
 - `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant
 - `tools/`: analysis scripts (our own code only)
 - `stats/`: aggregate tables only, no images or raw payloads
+
+## Licence
+Everything in this repo (text, tables and code) is dedicated to the public domain under [CC0 1.0](LICENSE). By contributing, you agree your contribution is released under CC0 too.

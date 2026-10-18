@@ -26,4 +26,4 @@ If you have read the ORF decompression code in any of those projects, you're wel
 - A CI check rejects pull requests that change or remove existing lines in FINDINGS.md.
 
 ## Sign-off
-By opening a pull request you confirm that your contribution follows these rules. Please say so in the PR description ("I confirm this follows RULES.md").
+By opening a pull request you confirm that your contribution follows these rules and is released under CC0 1.0 (see LICENSE). Please say so in the PR description ("I confirm this follows RULES.md").
