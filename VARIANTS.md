@@ -23,8 +23,8 @@ One issue per variant (https://github.com/radialmonster/orf-cleanroom/issues), l
 ---
 
 ## V0: fixed-size packing (uncompressed)
-- Signature: `size_class` is `packed-12`, `packed-12.8` or `packed-16`: the payload size exactly equals width x height x that many bits (lead #LEAD-f4).
-- Models seen (lead #LEAD-f4): C5060WZ, C7070WZ, SH-2, SP-510UZ/550UZ/565UZ/570UZ, XZ-2, XZ-10 (12); E-300, E-330, E-500, and High Res Shot files from PEN-F and E-M5 Mark II (12.8); E-1, E-10, E-400 (16).
+- Signature: `size_class` is `packed-12`, `packed-12.8` or `packed-16`: the payload size exactly equals width x height x that many bits (lead #28).
+- Models seen (lead #28): C5060WZ, C7070WZ, SH-2, SP-510UZ/550UZ/565UZ/570UZ, XZ-2, XZ-10 (12); E-300, E-330, E-500, and High Res Shot files from PEN-F and E-M5 Mark II (12.8); E-1, E-10, E-400 (16).
 - Findings: [findings/V0/](findings/V0/).
 - Status: LightCraft decodes uncompressed ORF; whether it covers every packing listed here hasn't been checked in this repo.
 
