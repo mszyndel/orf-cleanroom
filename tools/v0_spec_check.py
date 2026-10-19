@@ -6,8 +6,8 @@ The shared Tiff class supplies only header/endian and integer-reading primitives
 S1.3/S1.4, S2.5 and S4.2 candidate selectors are unverified generalizations.
 S3/S4 remain leads. S2.4 first/second order is a convention, not physical proof.
 S4.3 preserves stored 16-bit words; S6 'unshifted' means no numeric shift here.
-Regular-file measurement requires os.O_NONBLOCK; missing support yields
-nonblocking_open_unavailable per sample. --help/--self-test remain usable.
+Input is opened with os.O_NONBLOCK where the platform has it; otherwise a
+non-regular path is refused by os.stat before opening (e.g. Windows).
 """
 import argparse
 import bisect
@@ -43,9 +43,9 @@ SELECTORS = {
     "shared_container": "orf_signature.Tiff header/endian/u16/u32 only; strict original descriptor wrapper",
     "payload_source": "original code from pinned spec; no decoder or oracle used",
 }
-INPUT_OPEN_CONTRACT = ("regular-file measurement requires os.O_NONBLOCK; validate the exact "
-                       "descriptor with fstat before mmap/read; missing support returns "
-                       "nonblocking_open_unavailable per sample without opening it")
+INPUT_OPEN_CONTRACT = ("open with os.O_NONBLOCK where available, otherwise refuse non-regular "
+                       "paths with os.stat before opening; either way validate the exact "
+                       "descriptor with fstat before mmap/read")
 LIMITS = {"file_bytes": MAX_FILE_BYTES, "dimension": MAX_DIMENSION,
           "pixels": MAX_PIXELS, "ifds": MAX_IFDS, "strips": MAX_STRIPS}
 
@@ -366,11 +366,14 @@ def measure(data, tiff_class=None):
 
 
 def measure_path(path):
-    # Opening a FIFO in buffered read mode can block before fstat. Acquire a
-    # nonblocking descriptor, validate that exact object, and close on all paths.
-    # Fail closed without O_NONBLOCK rather than race a path stat against open.
-    require(hasattr(os, "O_NONBLOCK"), "nonblocking_open_unavailable")
-    flags = os.O_RDONLY | os.O_NONBLOCK | getattr(os, "O_BINARY", 0) | getattr(os, "O_CLOEXEC", 0)
+    # Opening a FIFO in buffered read mode can block before fstat. Where the
+    # platform has O_NONBLOCK, acquire a nonblocking descriptor. Where it does
+    # not (Windows), refuse non-regular paths with os.stat before opening; the
+    # descriptor is still validated with fstat below. Close on all paths.
+    nonblock = getattr(os, "O_NONBLOCK", 0)
+    if not nonblock:
+        require(stat.S_ISREG(os.stat(path).st_mode), "unsupported_file_type")
+    flags = os.O_RDONLY | nonblock | getattr(os, "O_BINARY", 0) | getattr(os, "O_CLOEXEC", 0)
     descriptor = os.open(path, flags)
     try:
         before = os.fstat(descriptor)
