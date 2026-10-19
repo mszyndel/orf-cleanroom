@@ -15,3 +15,9 @@ jobs:
         run: |
           python -m py_compile tools/*.py
           for t in tools/*.py; do python "$t" --help > /dev/null || { echo "::error file=$t::--help failed"; exit 1; }; done
+      - name: Compile and run --help for the reference decoder
+        run: |
+          python -m py_compile decoder/*.py
+          python decoder/orf_decode.py --help > /dev/null
+      - name: Decoder round-trip tests (synthetic bytes)
+        run: python tools/test_orf_decode.py

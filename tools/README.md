@@ -18,6 +18,12 @@ Each script should:
 
     python tools/orf_signature.py path/to/* > rows.csv
 
+**`conformance.py`** runs the reference decoder (`decoder/orf_decode.py`) on files and prints per file the input SHA-256, packing, size, bytes consumed vs payload size, min/max, out-of-range count, smoothness and the output hash, then a summary. `--csv` gives the `samples/conformance-V0.csv` format. Supports ROADMAP.md.
+
+    python -I tools/conformance.py path/to/*
+
+**`test_orf_decode.py`** round-trip tests of the decoder on synthetic bytes: `python -I tools/test_orf_decode.py`.
+
 **`bit_runs.py`** gives a histogram of zero-bit runs in the payload (MSB-first), as aggregate numbers. It's a starting point for bitstream work (the F1 lead, #11).
 
     python tools/bit_runs.py path/to/file.ORF --mb 1
