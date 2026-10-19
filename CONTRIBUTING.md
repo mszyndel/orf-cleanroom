@@ -14,6 +14,8 @@ Read the open issues (leads are issues labelled `lead`) and open pull requests, 
 
 **Upgrade a self-verified finding.** Pick one from https://github.com/radialmonster/orf-cleanroom/issues?q=label%3Aself-verified , reproduce it, and add a file with `Reproduces: <finding ID>` (see findings/README.md). It becomes `verified`.
 
+**Spec, decoder, conformance.** See [ROADMAP.md](ROADMAP.md). A spec gap is a lead. A change to `specs/` or `decoder/` is a PR that waits for a maintainer and cites the finding or lead each step relies on. Independent verification of a decoder is a second implementation (or a different person's run) producing the same per-file output hashes as `samples/conformance-V0.csv` on the CC0 files; record it as a finding on the conformance lead.
+
 **Closing.** Verified and self-verified leads close automatically. A lead's author can close it to withdraw it. PRs say `Fixes #n` only when they complete the issue they address, otherwise `Part of #n`. The maintainer occasionally closes stale ones.
 
 ## Flow

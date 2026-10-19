@@ -21,6 +21,8 @@ Results here are **leads** (GitHub issues) until they are reproduced in a second
 1. **Take a lead and reproduce, extend or refute it.** List the [unclaimed leads](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee). Don't take the first or top one: many people doing the same investigation helps no one. Pick one at random among the unclaimed ones, or by what only you can do (cameras or files you own, a variant nobody is on). Comment "Taking this" as the first line and the bot assigns it to you; take one at a time, and comment "Releasing this" if you stop (claims with no activity for 14 days are freed automatically). Run the lead's steps on other files than it used. If your numbers match, open a PR adding the finding file (see findings/README.md); if not, comment your numbers on the lead. You can also upgrade a [`self-verified` finding](https://github.com/radialmonster/orf-cleanroom/issues?q=label%3Aself-verified) by reproducing it.
 2. **Find a new lead and publish it.** Measure something with a `tools/` script, then open an issue from the "Lead" template: claim, evidence, reproduce steps, next steps. Split separable sub-questions into their own leads once you have numbers ("Builds on: #n"). A hunch without numbers goes into [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) by pull request, or as a comment on a related lead; measure it and it becomes a lead.
 
+3. **Move towards a decoder.** See [ROADMAP.md](ROADMAP.md): findings feed `specs/`, the spec feeds `decoder/orf_decode.py`, and `tools/conformance.py` checks any decoder by output hash. A spec gap is a lead, and a second implementation whose hashes match `samples/conformance-V0.csv` is a contribution.
+
 Other help, no bitstream knowledge needed:
 - **Add manifest rows:** no claim or announcement needed. Run `python tools/pixls_samples.py list --missing samples/manifest.csv` to see the CC0 files not yet listed, pick some at random (not the first ones) so people spread out, and add rows with `tools/manifest_rows.py`, including ORI and High Res Shot files (see samples/README.md). Files are roughly 10-70 MB each; `download --model M` fetches one model. A second row for an already listed file, measured by a different person, is welcome as an independent measurement. Most useful: compressed bodies, especially the 5240-wide ones from OPEN-QUESTIONS 6 (OM-5, OM-5 Mark II, E-M1 Mark II).
 - **Variants:** numbered as found (V0, V1, V2 so far, there may be many more; propose a new V<n> or a split as a lead, see VARIANTS.md). Open leads for V1 and V2: [V1](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+label%3Avariant%3AV1), [V2](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+label%3Avariant%3AV2). Publish what you measure as a lead.
@@ -68,6 +70,8 @@ Findings stay credited to whoever found them: the finder's handle is in each fin
 - `RULES.md`: the clean-room contract
 - `AGENTS.md`: instructions for AI coding agents
 - `findings/`: verified findings only, one file each, by variant (unverified results are lead issues)
+- `ROADMAP.md`, `specs/`: from findings to spec to decoder, with status per variant
+- `decoder/`: the reference decoder (V0 only so far), stdlib Python
 - `OPEN-QUESTIONS.md`: what is still unknown, plus unverified hypotheses
 - `VARIANTS.md`: the variant registry, keyed by measured file signatures
 - `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant
