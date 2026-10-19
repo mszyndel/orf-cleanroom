@@ -25,3 +25,7 @@ jobs:
         run: python tools/test_value_map_probe.py
       - name: orf_tokens tests
         run: python tools/test_orf_tokens.py
+      - name: suffix_match_probe tests
+        run: |
+          python -I tools/test_suffix_match_probe.py
+          python -I tools/suffix_match_probe.py --self-test
