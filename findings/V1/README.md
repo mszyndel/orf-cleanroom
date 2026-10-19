@@ -2,9 +2,7 @@
 
 Findings for variant V1, calm-parse compressed. Definition: [VARIANTS.md, V1](../../VARIANTS.md#v1-calm-parse-compressed).
 
-Format, file names and status rules: [../README.md](../README.md).
+Format, file names and rules: [../README.md](../README.md).
 
 ## Findings here
-A snapshot; `python tools/findings_index.py` gives the live list with peer status.
-
-- [F1 (f1-initial-results)](2026-10-18--radialmonster--f1-initial-results.md): First measurements of the token structure in compressed ORFs, still without a reproducible script.
+No verified findings yet. A verified finding is a lead that a different person reproduced; it is added here by that person's PR. Open leads for this folder are issues labelled `lead` (https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead). `python tools/findings_index.py` lists what is here.
