@@ -18,3 +18,5 @@ Variant: unassigned
 List separable sub-questions one per line ("- [ ] ..."). Anyone can take one on its own.
 Which files or bodies to try first. When a test gives numbers, publish the result as a lead issue.
 -->
+
+- [ ] This follows RULES.md: public specs, patents and my own measurements only; I have not read the ORF decompression code of LibRaw, rawspeed, dcraw or their derivatives, and nothing here comes from their output.
