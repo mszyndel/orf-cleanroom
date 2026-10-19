@@ -1,0 +1,161 @@
+name: leads
+# Issue housekeeping only. It never checks out code, never closes issues and never
+# edits issue bodies. Issue and comment text is untrusted: it is parsed in Python
+# from the event JSON file and never put into a shell command.
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+permissions:
+  issues: write
+jobs:
+  label:
+    # "Variant: X" -> label variant:X (other variant labels removed); has ## Claim and
+    # ## Reproduce sections -> label lead.
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Label from the issue body
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess
+
+          VARIANTS = ["container", "V0", "V1", "V2", "unassigned"]
+
+
+          def plan(body, labels):
+              """-> (labels to add, labels to remove) for an issue body and its current labels."""
+              body = re.sub(r"<!--.*?-->", "", (body or "").replace("\r\n", "\n"), flags=re.S)
+              add, remove = [], []
+              m = re.search(r"^[ \t]*Variant:[ \t]*(\S+)[ \t]*$", body, re.M | re.I)
+              known = dict((v.lower(), v) for v in VARIANTS)
+              if m and m.group(1).lower() in known:
+                  want = "variant:" + known[m.group(1).lower()]
+                  if want not in labels:
+                      add.append(want)
+                  remove += [l for l in labels if l.startswith("variant:") and l != want]
+              if ("lead" not in labels and re.search(r"^## Claim[ \t]*$", body, re.M | re.I)
+                      and re.search(r"^## Reproduce[ \t]*$", body, re.M | re.I)):
+                  add.append("lead")
+              return add, remove
+
+
+          def main():
+              with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
+                  issue = json.load(f)["issue"]
+              if "pull_request" in issue:
+                  return
+              labels = [l["name"] for l in issue.get("labels", [])]
+              add, remove = plan(issue.get("body"), labels)
+              repo = os.environ["REPO"]
+              for name in add:
+                  desc = "A result someone else can check" if name == "lead" else "Variant " + name[8:]
+                  color = "0e8a16" if name == "lead" else "1d76db"
+                  subprocess.run(["gh", "label", "create", name, "--repo", repo, "--force",
+                                  "--color", color, "--description", desc], check=True)
+              if add or remove:
+                  cmd = ["gh", "issue", "edit", str(issue["number"]), "--repo", repo]
+                  for name in add:
+                      cmd += ["--add-label", name]
+                  for name in remove:
+                      cmd += ["--remove-label", name]
+                  subprocess.run(cmd, check=True)
+
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+  claim:
+    # "Taking this" on an unassigned open lead/idea assigns the commenter and labels it
+    # `claimed`; "Releasing this" from the assignee undoes that.
+    if: github.event_name == 'issue_comment'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: claim-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Claim or release
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess
+
+          LIST_URL = "https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee"
+
+
+          def first_line(text):
+              for line in (text or "").replace("\r\n", "\n").split("\n"):
+                  if line.strip():
+                      return line.strip().lower()
+              return ""
+
+
+          def claim_action(issue, comment):
+              """-> None, ("assign", user), ("taken", user, assignees) or ("release", user)."""
+              if "pull_request" in issue or issue.get("state") != "open":
+                  return None
+              labels = set(l["name"] for l in issue.get("labels", []))
+              if not labels & set(["lead", "idea"]):
+                  return None
+              user = comment["user"]["login"]
+              if comment["user"].get("type") == "Bot":
+                  return None
+              assignees = [a["login"] for a in issue.get("assignees", [])]
+              mine = user.lower() in [a.lower() for a in assignees]
+              line = first_line(comment.get("body"))
+              if re.match(r"^taking this\b", line):
+                  if not assignees:
+                      return ("assign", user)
+                  return None if mine else ("taken", user, assignees)
+              if re.match(r"^releasing this\b", line) and mine:
+                  return ("release", user)
+              return None
+
+
+          def gh(*args, **kw):
+              return subprocess.run(["gh"] + list(args), check=kw.get("check", True),
+                                    stdout=subprocess.PIPE, universal_newlines=True)
+
+
+          def main():
+              repo = os.environ["REPO"]
+              with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
+                  ev = json.load(f)
+              num = str(ev["issue"]["number"])
+              # Fresh copy: another claim may have landed since this event was queued.
+              issue = json.loads(gh("api", "repos/%s/issues/%s" % (repo, num)).stdout)
+              act = claim_action(issue, ev["comment"])
+              if not act:
+                  return
+              if act[0] == "assign":
+                  gh("label", "create", "claimed", "--repo", repo, "--force", "--color", "5319e7",
+                     "--description", "Someone is working on this lead")
+                  r = gh("issue", "edit", num, "--repo", repo, "--add-assignee", act[1], check=False)
+                  if r.returncode == 0:
+                      gh("issue", "edit", num, "--repo", repo, "--add-label", "claimed")
+              elif act[0] == "release":
+                  gh("issue", "edit", num, "--repo", repo, "--remove-assignee", act[1])
+                  left = [a["login"] for a in issue.get("assignees", []) if a["login"].lower() != act[1].lower()]
+                  if not left and any(l["name"] == "claimed" for l in issue.get("labels", [])):
+                      gh("issue", "edit", num, "--repo", repo, "--remove-label", "claimed")
+              elif act[0] == "taken":
+                  marker = "<!-- claim-bot:taken:%s -->" % act[1].lower()
+                  seen = gh("api", "repos/%s/issues/%s/comments" % (repo, num), "--paginate",
+                            "--jq", ".[].body").stdout
+                  if marker not in seen:
+                      body = ("%s\nThis is already taken by %s. Please pick another lead: %s\n"
+                              "You can still comment with numbers or a different angle here."
+                              % (marker, ", ".join("@" + a for a in act[2]), LIST_URL))
+                      gh("issue", "comment", num, "--repo", repo, "--body", body)
+
+
+          if __name__ == "__main__":
+              main()
+          PY

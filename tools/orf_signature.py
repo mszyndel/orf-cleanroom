@@ -17,7 +17,7 @@ TYPE_SIZES = {1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 6: 1, 7: 1, 8: 2, 9: 4, 10: 8, 11: 4
 # Olympus uses its own magic numbers in place of TIFF's 42.
 MAGICS = {42: "TIFF", 0x4F52: "ORF-RO", 0x5352: "ORF-RS"}
 # Payload sizes that exactly match a fixed-size packing (bits per pixel).
-# Anything else has a data-dependent size, i.e. it is compressed (finding F4).
+# Anything else has a data-dependent size, i.e. it is compressed (lead #LEAD-f4).
 PACKINGS = (12, 12.8, 16)
 
 

@@ -1,0 +1,66 @@
+name: stale-claims
+# Frees a lead or idea whose assignee has been quiet for 14 days, so claims do not
+# block the work. It uses the issue's updated_at (any comment or linked PR activity
+# moves it). No code is checked out.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+permissions:
+  issues: write
+jobs:
+  free:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Unassign stale claims
+        run: |
+          python3 - <<'PY'
+          import datetime, json, os, subprocess
+
+          DAYS = 14
+
+
+          def stale(issues, now):
+              """Issues with an assignee and no activity for DAYS days."""
+              out = []
+              for i in issues:
+                  if not i.get("assignees"):
+                      continue
+                  t = datetime.datetime.strptime(i["updatedAt"], "%Y-%m-%dT%H:%M:%SZ")
+                  if now - t > datetime.timedelta(days=DAYS):
+                      out.append(i)
+              return out
+
+
+          def gh(*args):
+              return subprocess.run(["gh"] + list(args), check=True, stdout=subprocess.PIPE,
+                                    universal_newlines=True).stdout
+
+
+          def main():
+              repo = os.environ["REPO"]
+              seen = {}
+              for label in ("lead", "idea"):
+                  data = json.loads(gh("issue", "list", "--repo", repo, "--label", label, "--state", "open",
+                                       "--limit", "500", "--json", "number,assignees,updatedAt,labels"))
+                  for i in data:
+                      seen[i["number"]] = i
+              now = datetime.datetime.utcnow()
+              for i in stale(list(seen.values()), now):
+                  num = str(i["number"])
+                  names = [a["login"] for a in i["assignees"]]
+                  cmd = ["issue", "edit", num, "--repo", repo, "--remove-assignee", ",".join(names)]
+                  if any(l["name"] == "claimed" for l in i["labels"]):
+                      cmd += ["--remove-label", "claimed"]
+                  gh(*cmd)
+                  gh("issue", "comment", num, "--repo", repo, "--body",
+                     "This lead had no activity for %d days, so it is free again (%s unassigned). "
+                     "Anyone can take it by commenting \"Taking this\"." % (DAYS, ", ".join("@" + n for n in names)))
+
+
+          if __name__ == "__main__":
+              main()
+          PY

@@ -6,7 +6,7 @@ Each script should:
 - take raw.pixls.us file paths as arguments and not download anything itself (`pixls_samples.py` is the one exception);
 - print or write aggregate statistics only, with no images or pixel dumps;
 - run on CPU, with GPU acceleration optional;
-- state at the top which finding (an ID from `findings/`, or F1-F4) or OPEN-QUESTIONS item it supports.
+- state at the top which finding (an ID from `findings/`), lead issue (`#n`) or OPEN-QUESTIONS item it supports.
 
 ## Example tools
 
@@ -18,7 +18,7 @@ Each script should:
 
     python tools/orf_signature.py path/to/* > rows.csv
 
-**`bit_runs.py`** gives a histogram of zero-bit runs in the payload (MSB-first), as aggregate numbers. It's a starting point for bitstream work (finding F1).
+**`bit_runs.py`** gives a histogram of zero-bit runs in the payload (MSB-first), as aggregate numbers. It's a starting point for bitstream work (the F1 lead, #11).
 
     python tools/bit_runs.py path/to/file.ORF --mb 1
 
@@ -29,7 +29,7 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     q= 2  share=0.13019
     q= 3  share=0.06272
 
-**`findings_index.py`** lists every finding under `findings/` (including F1-F4) by variant, with author, title, peer-validation status (lead, reproduced, disputed) and who reproduced it. `--check` validates the files (file name, `Author:` matches the handle, `Variant:` matches the folder, referenced IDs exist) and exits 1 on errors; CI runs it on pull requests.
+**`findings_index.py`** lists the verified findings under `findings/` by variant, with finder, verifier, title and status (verified or superseded). `--check` validates the files (file name, `Author:` matches the handle, `Verified by:` is another person, `Lead:` is `#n`, `Variant:` matches the folder, referenced IDs exist) and exits 1 on errors; CI runs it on pull requests.
 
     python tools/findings_index.py
     python tools/findings_index.py --check

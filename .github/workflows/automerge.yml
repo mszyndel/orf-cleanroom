@@ -1,6 +1,6 @@
 name: automerge
 # Runs with a write token. It never checks out or runs PR code: it only calls
-# the GitHub API and parses text.
+# the GitHub API and parses text (file contents are read as data via the API).
 on:
   workflow_run:
     workflows: [checks]
@@ -18,66 +18,141 @@ jobs:
       REPO: ${{ github.repository }}
       HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
     steps:
-      - name: Merge findings and manifest PRs, flag the rest
+      - name: Merge verification and manifest PRs, flag the rest
         run: |
-          set -euo pipefail
+          python3 - <<'PY'
+          import base64, csv, json, os, re, subprocess, sys
 
-          # workflow_run.pull_requests is empty for forks, so match on the head SHA.
-          pr_line=$(gh pr list --repo "$REPO" --state open --limit 200 --json number,headRefOid,author \
-            | jq -r --arg sha "$HEAD_SHA" 'map(select(.headRefOid == $sha)) | first // empty | "\(.number) \(.author.login)"')
-          if [ -z "$pr_line" ]; then echo "No open PR with head $HEAD_SHA"; exit 0; fi
-          pr=${pr_line%% *}
-          author=${pr_line#* }
-          # No bot comments on the owner's own PRs: the merge or label says enough, and comments email the owner.
-          owner=${REPO%%/*}; quiet=""; if [ "${author,,}" = "${owner,,}" ]; then quiet=1; fi
+          FINDING_RE = re.compile(r"^findings/[^/]+/[^/]+[.]md$")
 
-          files=$(gh api "repos/$REPO/pulls/$pr/files" --paginate --jq '.[]')   # one JSON object per line
-          reason=""
 
-          # Rule 1: only new findings files, and rows appended to the manifest.
-          other=$(jq -r 'select((
-              (.status == "added" and (.filename | test("^findings/[^/]+/[^/]+[.]md$")) and (.filename | endswith("/README.md") | not))
-              or (.status == "modified" and .filename == "samples/manifest.csv")) | not) | .filename' <<< "$files")
-          if [ -z "$files" ] || [ -n "$other" ]; then
-            reason="it changes more than new files under findings/ and rows added to samples/manifest.csv"
-          fi
+          def gh(*args, **kw):
+              r = subprocess.run(["gh"] + list(args), stdout=subprocess.PIPE, universal_newlines=True)
+              if r.returncode != 0 and kw.get("check", True):
+                  raise RuntimeError("gh %s failed" % " ".join(args[:3]))
+              return r.stdout
 
-          # Rule 2: every new findings file is named for the PR author.
-          if [ -z "$reason" ]; then
-            while IFS= read -r name; do
-              handle=$(basename "$name" | awk -F'--' '{print $2}')
-              if [ "${handle,,}" != "${author,,}" ]; then
-                reason="a new findings file is named for a different GitHub handle than the PR author (@$author)"
-              fi
-            done < <(jq -r 'select(.filename | startswith("findings/")) | .filename' <<< "$files")
-          fi
 
-          # Rule 3: every new manifest row has measured_by starting with "@author ".
-          if [ -z "$reason" ] && jq -e 'select(.filename == "samples/manifest.csv")' <<< "$files" > /dev/null; then
-            patch=$(jq -r 'select(.filename == "samples/manifest.csv") | .patch // ""' <<< "$files")
-            if [ -z "$patch" ] || grep -q '^-' <<< "$patch"; then
-              reason="the manifest change is empty or removes lines"
-            else
-              while IFS= read -r line; do
-                last=${line##*,}
-                last=${last#\"}
-                if [[ "${last,,}" != "@${author,,} "* ]]; then
-                  reason="a new manifest row has a measured_by that does not start with @$author"
-                fi
-              done < <(grep '^+' <<< "$patch" | sed 's/^+//')
-            fi
-          fi
+          def header(text, key):
+              """Value of a `Key: value` line in the part of the file before the first '## '."""
+              head = text.replace("\r\n", "\n").split("\n## ", 1)[0]
+              m = re.search(r"^%s:[ \t]*(.*?)[ \t]*$" % re.escape(key), head, re.M)
+              return m.group(1) if m else ""
 
-          if [ -z "$reason" ]; then
-            gh pr merge "$pr" --repo "$REPO" --squash --match-head-commit "$HEAD_SHA"
-            [ -n "$quiet" ] || gh pr comment "$pr" --repo "$REPO" --body "Merged automatically: findings/manifest only, checks passed. Thanks!"
-            exit 0
-          fi
 
-          if gh pr view "$pr" --repo "$REPO" --json labels --jq '.labels[].name' | grep -qx 'needs-maintainer'; then
-            echo "Already flagged: $reason"; exit 0
-          fi
-          gh label create needs-maintainer --repo "$REPO" --force --color d93f0b \
-            --description "Not auto-mergeable; waits for an occasional maintainer look"
-          gh pr edit "$pr" --repo "$REPO" --add-label needs-maintainer
-          [ -n "$quiet" ] || gh pr comment "$pr" --repo "$REPO" --body "Checks passed, but this PR is not merged automatically because $reason. Only new files under findings/ and appended manifest rows from the PR author merge on their own (see CONTRIBUTING.md). A maintainer will look occasionally; this can take weeks. Nothing is wrong with your work."
+          def is_finding(f):
+              return f["status"] == "added" and FINDING_RE.match(f["filename"]) and not f["filename"].endswith("/README.md")
+
+
+          def decide(files, author, read_text, read_issue):
+              """-> (reason, leads). reason "" means auto-mergeable; leads = [(issue number, finding path)].
+
+              read_text(file entry) -> decoded text of the file at the PR head (data only);
+              read_issue(n) -> {"author": login, "labels": [...], "pr": bool} or None."""
+              leads = []
+              if not files or any(not (is_finding(f) or (f["status"] == "modified" and f["filename"] == "samples/manifest.csv"))
+                                  for f in files):
+                  return "it changes more than new files under findings/ and rows added to samples/manifest.csv", []
+              for f in files:
+                  if not f["filename"].startswith("findings/"):
+                      continue
+                  path = f["filename"]
+                  handle = os.path.basename(path).split("--")[1] if path.count("--") >= 2 else ""
+                  try:
+                      text = read_text(f)
+                  except Exception:
+                      return "a new findings file could not be read", []
+                  fauthor = header(text, "Author").lstrip("@")
+                  if header(text, "Verified by").lower() != "@" + author.lower():
+                      return "a new findings file does not have 'Verified by: @%s' (the PR author)" % author, []
+                  if not handle or handle.lower() != fauthor.lower() or handle.lower() == author.lower():
+                      return ("a new findings file's Author and file name must name the finder, who must be "
+                              "someone other than the PR author (@%s)" % author), []
+                  m = re.match(r"^#([0-9]+)$", header(text, "Lead"))
+                  if not m:
+                      return "a new findings file has no valid 'Lead: #<issue>' line", []
+                  issue = read_issue(int(m.group(1)))
+                  if (not issue or issue["pr"] or issue["author"].lower() != fauthor.lower()
+                          or "lead" not in issue["labels"]):
+                      return ("the lead issue #%s is missing, is not labelled lead, or was not opened by @%s"
+                              % (m.group(1), fauthor)), []
+                  leads.append((int(m.group(1)), path))
+              for f in files:
+                  if f["filename"] != "samples/manifest.csv":
+                      continue
+                  patch = f.get("patch") or ""
+                  if not patch or any(l.startswith("-") for l in patch.split("\n")):
+                      return "the manifest change is empty or removes lines", []
+                  for line in patch.split("\n"):
+                      if not line.startswith("+"):
+                          continue
+                      last = line[1:].rsplit(",", 1)[-1].lstrip('"')
+                      if not last.lower().startswith("@" + author.lower() + " "):
+                          return "a new manifest row has a measured_by that does not start with @" + author, []
+              return "", leads
+
+
+          def main():
+              repo, sha = os.environ["REPO"], os.environ["HEAD_SHA"]
+              prs = json.loads(gh("pr", "list", "--repo", repo, "--state", "open", "--limit", "200",
+                                  "--json", "number,headRefOid,author"))
+              # workflow_run.pull_requests is empty for forks, so match on the head SHA.
+              pr = next((p for p in prs if p["headRefOid"] == sha), None)
+              if not pr:
+                  print("No open PR with head " + sha)
+                  return
+              num, author = str(pr["number"]), pr["author"]["login"]
+              # No bot comments on the owner's own PRs (they email the owner). Lead issues still get theirs.
+              quiet = author.lower() == repo.split("/")[0].lower()
+              files = [json.loads(l) for l in gh("api", "repos/%s/pulls/%s/files" % (repo, num), "--paginate",
+                                                 "--jq", ".[]").splitlines() if l.strip()]
+
+              def read_text(f):
+                  url = f["contents_url"].replace("https://api.github.com/", "", 1)  # includes ?ref=<head sha>
+                  data = json.loads(gh("api", url))
+                  return base64.b64decode(data["content"]).decode("utf-8")
+
+              def read_issue(n):
+                  r = subprocess.run(["gh", "api", "repos/%s/issues/%d" % (repo, n)], stdout=subprocess.PIPE,
+                                     universal_newlines=True)
+                  if r.returncode != 0:
+                      return None
+                  d = json.loads(r.stdout)
+                  return {"author": d["user"]["login"], "labels": [l["name"] for l in d["labels"]],
+                          "pr": "pull_request" in d}
+
+              reason, leads = decide(files, author, read_text, read_issue)
+              if not reason:
+                  gh("pr", "merge", num, "--repo", repo, "--squash", "--match-head-commit", sha)
+                  if not quiet:
+                      gh("pr", "comment", num, "--repo", repo, "--body",
+                         "Merged automatically: verified findings/manifest only, checks passed. Thanks!")
+                  for n, path in leads:
+                      link = "https://github.com/%s/blob/main/%s" % (repo, path)
+                      gh("label", "create", "verified", "--repo", repo, "--force", "--color", "0e8a16",
+                         "--description", "Reproduced by a different person; the finding is in findings/")
+                      gh("issue", "edit", str(n), "--repo", repo, "--add-label", "verified", check=False)
+                      gh("issue", "comment", str(n), "--repo", repo, "--body",
+                         "Verified by @%s in %s; closing as verified." % (author, link), check=False)
+                      gh("issue", "close", str(n), "--repo", repo, check=False)
+                  return
+
+              labels = gh("pr", "view", num, "--repo", repo, "--json", "labels", "--jq", ".labels[].name").split()
+              if "needs-maintainer" in labels:
+                  print("Already flagged: " + reason)
+                  return
+              gh("label", "create", "needs-maintainer", "--repo", repo, "--force", "--color", "d93f0b",
+                 "--description", "Not auto-mergeable; waits for an occasional maintainer look")
+              gh("pr", "edit", num, "--repo", repo, "--add-label", "needs-maintainer")
+              if not quiet:
+                  gh("pr", "comment", num, "--repo", repo, "--body",
+                     "Checks passed, but this PR is not merged automatically because %s. Only a verification "
+                     "(a new findings file you reproduced yourself, for an existing lead issue by someone else) "
+                     "and appended manifest rows from the PR author merge on their own (see CONTRIBUTING.md). "
+                     "A maintainer will look occasionally; this can take weeks. Nothing is wrong with your work."
+                     % reason)
+
+
+          if __name__ == "__main__":
+              main()
+          PY

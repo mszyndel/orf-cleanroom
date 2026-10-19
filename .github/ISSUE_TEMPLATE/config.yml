@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Unclaimed leads (pick one and reproduce, extend or refute it)
+    url: https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee
+    about: Open lead issues nobody has taken yet

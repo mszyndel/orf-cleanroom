@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
-"""List and validate the findings in findings/ (F1-F4 are the files with an `Alias:`).
+"""List and validate the verified findings in findings/.
 
 Supports: findings/README.md (file format and status rules), CONTRIBUTING.md.
-Standard library only. Prints, per variant folder, each finding's ID, author,
-title and status, and who reproduced it. Status comes from peer validation:
-  lead        no finding by a different author reproduces or corrects it yet
-  reproduced  a finding by a different author lists it in `Reproduces:`
-  disputed    a finding by a different author lists it in `Corrects:`
-(disputed wins over reproduced). `Reproduces:` means "I got matching results";
-if yours differ, write a finding with `Corrects:` instead.
-
-A finding file may carry an optional `Alias: F<n>` line (used by the first four
-findings, F1-F4). The alias resolves in `Builds on:` / `Reproduces:` / `Corrects:`
-exactly like the file's own ID. Aliases must be well formed and unique. If
-FINDINGS.md still exists, its F1-F4 entries are listed only when no file claims
-that alias. Files with an alias are exempt from the Claim/Evidence/Reproduce
-section check (they keep the older entries' wording).
+Standard library only. A finding is a lead that a DIFFERENT person reproduced.
+Leads themselves are GitHub issues labelled `lead`, not files. Each finding file
+names the finder (`Author:`, also in the file name), the reproducer
+(`Verified by:`) and the lead issue (`Lead: #<n>`). Status:
+  verified    nobody has corrected it
+  superseded  a later verified finding lists it in `Corrects:`
 
 Validation (--check): file name pattern, Author matches the handle in the file
-name, Variant matches the folder, required sections present, referenced IDs
-exist, no stray files. Exits 1 if anything is wrong.
+name, Verified by is a different handle, Lead is `#<n>`, Variant matches the
+folder, required sections present, `Builds on:` / `Corrects:` entries are finding
+IDs that exist or `#<n>` issue numbers (accepted without lookup). Exits 1 on errors.
+
+Transition: the eight files from before the lead-issue model (LEGACY_NAMES) are
+unverified and are listed as `legacy`, not validated. They go away when they
+move to lead issues; delete LEGACY_NAMES with them.
 
 Usage: python findings_index.py [--root DIR] [--check]
 """
@@ -32,24 +29,30 @@ import sys
 FOLDER_RE = re.compile(r"^(container|unassigned|V[0-9]+)$")
 NAME_RE = re.compile(
     r"^(\d{4}-\d{2}-\d{2})--([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)--([a-z0-9]+(?:-[a-z0-9]+)*)\.md$")
-ID_PATTERN = r"(?:F[0-9]+|\d{4}-\d{2}-\d{2}--[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*--[a-z0-9]+(?:-[a-z0-9]+)*)"
-REF_RE = re.compile(r"^(" + ID_PATTERN + r")(?:\s|$)")
+ID_PATTERN = r"(?:\d{4}-\d{2}-\d{2}--[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*--[a-z0-9]+(?:-[a-z0-9]+)*|#[0-9]+)"
+REF_RE = re.compile(r"^(" + ID_PATTERN + r")$")
 KEY_RE = re.compile(r"^([A-Z][A-Za-z ]*):\s*(.*)$")
-KNOWN_KEYS = ["Author", "Submitted by", "Variant", "Alias", "Builds on", "Reproduces", "Corrects"]
-REF_KEYS = ["Builds on", "Reproduces", "Corrects"]
-SECTIONS = ["Claim", "Evidence", "Reproduce"]
-ALIAS_RE = re.compile(r"^F[0-9]+$")
+KNOWN_KEYS = ["Author", "Verified by", "Lead", "Variant", "Builds on", "Corrects"]
+REF_KEYS = ["Builds on", "Corrects"]
+SECTIONS = ["Claim", "Original evidence", "Verification", "Reproduce"]
 HANDLE_RE = re.compile(r"^@([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)$")
-# Legacy entries still in FINDINGS.md (if the file exists) are listed in these folders.
-LEGACY_FOLDER = {"F1": "V1", "F2": "container", "F3": "container", "F4": "container"}
-LEGACY_RE = re.compile(r"^## (F[0-9]+) \((\d{4}-\d{2}-\d{2}), @([A-Za-z0-9-]+)\): (.*)$")
+LEAD_RE = re.compile(r"^#[0-9]+$")
+LEGACY_NAMES = {
+    "2026-10-18--radialmonster--f1-initial-results.md",
+    "2026-10-18--radialmonster--f2-compression-tag-does-not-identify-compressed-orf.md",
+    "2026-10-18--radialmonster--f3-entry-format-update.md",
+    "2026-10-18--radialmonster--f4-fixed-size-payloads-are-exact.md",
+    "2026-10-18--radialmonster--additional-established-facts.md",
+    "2026-10-18--radialmonster--ruled-out-layouts-and-framing.md",
+    "2026-10-18--radialmonster--ruled-out-predictors-and-transforms.md",
+    "2026-10-18--radialmonster--ruled-out-value-mappings.md",
+}
 
 
 class Finding:
-    def __init__(self, fid, folder, path, author, title, legacy=False):
+    def __init__(self, fid, folder, path, author, title, verifier="", legacy=False):
         self.id, self.folder, self.path = fid, folder, path
-        self.author, self.title, self.legacy = author, title, legacy
-        self.alias = ""
+        self.author, self.title, self.verifier, self.legacy = author, title, verifier, legacy
         self.refs = {k: [] for k in REF_KEYS}
 
 
@@ -59,20 +62,6 @@ def folder_key(name):
     if name == "unassigned":
         return (2, 0)
     return (1, int(name[1:]))
-
-
-def read_legacy(root, found, aliases):
-    path = os.path.join(root, "FINDINGS.md")
-    if not os.path.isfile(path):
-        return
-    with open(path, encoding="utf-8") as f:
-        for line in f:
-            m = LEGACY_RE.match(line.rstrip("\r\n"))
-            if m and m.group(1) in LEGACY_FOLDER:
-                fid = m.group(1)
-                if fid in aliases:  # migrated to a file: prefer the file, don't double count
-                    continue
-                found[fid] = Finding(fid, LEGACY_FOLDER[fid], "FINDINGS.md", m.group(3), m.group(4), True)
 
 
 def parse_file(path, folder, name, found, errors):
@@ -100,6 +89,9 @@ def parse_file(path, folder, name, found, errors):
         title = lines[0][2:].strip()
     else:
         err("first line must be '# <title>'")
+    if name in LEGACY_NAMES:
+        found[fid] = Finding(fid, folder, path, handle, title, legacy=True)
+        return
     header, headings = {}, []
     in_header = True
     for line in lines[1:]:
@@ -119,13 +111,7 @@ def parse_file(path, folder, name, found, errors):
                     err("'%s:' appears twice" % key)
                 else:
                     header[key] = val
-    alias = header.get("Alias", "")
-    if "Alias" in header and not ALIAS_RE.match(alias):
-        err("'Alias:' must look like F1, F2, ...")
-        alias = ""
     for sec in SECTIONS:
-        if alias:
-            break
         if not any(h == sec or h.startswith(sec + " ") for h in headings):
             err("missing section '## %s'" % sec)
     author = header.get("Author", "")
@@ -134,40 +120,31 @@ def parse_file(path, folder, name, found, errors):
         err("'Author: @handle' line is missing or malformed")
     elif am.group(1).lower() != handle.lower():
         err("Author %s does not match the handle '%s' in the file name" % (author, handle))
-    if "Submitted by" in header and not HANDLE_RE.match(header["Submitted by"]):
-        err("'Submitted by:' must be a single @handle")
+    verifier = header.get("Verified by", "")
+    vm = HANDLE_RE.match(verifier)
+    if not vm:
+        err("'Verified by: @handle' line is missing or malformed")
+    elif am and vm.group(1).lower() == am.group(1).lower():
+        err("Verified by must be a different person than Author (nobody verifies their own lead)")
+    if not LEAD_RE.match(header.get("Lead", "")):
+        err("'Lead: #<issue number>' line is missing or malformed")
     variant = header.get("Variant", "")
     if variant != folder:
         err("Variant '%s' does not match the folder '%s'" % (variant, folder))
-    f = Finding(fid, folder, path, handle, title)
-    f.alias = alias
+    f = Finding(fid, folder, path, handle, title, vm.group(1) if vm else "")
     for key in REF_KEYS:
         for part in header.get(key, "").split(","):
             part = part.strip()
             if not part:
                 continue
-            rm = REF_RE.match(part)
-            if not rm:
-                err("'%s:' entry is not a finding ID: %s" % (key, part))
+            if not REF_RE.match(part):
+                err("'%s:' entry is not a finding ID or #issue: %s" % (key, part))
             else:
-                f.refs[key].append(rm.group(1))
+                f.refs[key].append(part)
     found[fid] = f
 
 
 def scan(root, found, errors):
-    """Read findings/ into found (id -> Finding). Returns alias -> file id."""
-    aliases = {}
-    _scan(root, found, errors)
-    for f in sorted(found.values(), key=lambda f: f.id):
-        if f.alias:
-            if f.alias in aliases:
-                errors.append("%s: alias %s is already used by %s" % (f.path, f.alias, aliases[f.alias]))
-            else:
-                aliases[f.alias] = f.id
-    return aliases
-
-
-def _scan(root, found, errors):
     base = os.path.join(root, "findings")
     if not os.path.isdir(base):
         return
@@ -188,27 +165,35 @@ def _scan(root, found, errors):
                 parse_file(fp, entry, name, found, errors)
 
 
+def resolve(found, errors):
+    for f in found.values():
+        for key in REF_KEYS:
+            ok = []
+            for ref in f.refs[key]:
+                if ref.startswith("#"):
+                    ok.append(ref)  # issue numbers are not looked up
+                elif ref not in found:
+                    errors.append("%s: '%s:' refers to unknown finding %s" % (f.path, key, ref))
+                elif ref == f.id:
+                    errors.append("%s: '%s:' refers to itself" % (f.path, key))
+                else:
+                    ok.append(ref)
+            f.refs[key] = ok
+
+
 def statuses(found):
-    """id -> (status, reproduced_by, disputed_by); only different authors count."""
+    """id -> (status, superseded_by); only verified (non-legacy) findings can supersede."""
     out = {}
     for fid, f in found.items():
-        rep, dis = [], []
-        for g in found.values():
-            if g.author.lower() == f.author.lower():
-                continue
-            if fid in g.refs["Reproduces"]:
-                rep.append(g)
-            if fid in g.refs["Corrects"]:
-                dis.append(g)
-        status = "disputed" if dis else "reproduced" if rep else "lead"
-        out[fid] = (status, rep, dis)
+        sup = [g for g in found.values() if not g.legacy and fid in g.refs["Corrects"]]
+        out[fid] = ("legacy" if f.legacy else "superseded" if sup else "verified", sup)
     return out
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0],
-                                 epilog="Status rules: lead -> reproduced (another author's 'Reproduces:') "
-                                        "or disputed (another author's 'Corrects:').")
+                                 epilog="Leads are GitHub issues labelled `lead`; this lists only findings "
+                                        "(leads a different person verified).")
     ap.add_argument("--root", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."),
                     help="repo root (default: the repo this script is in)")
     ap.add_argument("--check", action="store_true",
@@ -216,24 +201,10 @@ def main():
     args = ap.parse_args()
 
     found, errors = {}, []
-    aliases = scan(args.root, found, errors)
-    read_legacy(args.root, found, aliases)
-    for f in found.values():
-        for key in REF_KEYS:
-            resolved = []
-            for ref in f.refs[key]:
-                ref = aliases.get(ref, ref)  # an alias means the same finding as its file
-                if ref not in found:
-                    errors.append("%s: '%s:' refers to unknown finding %s" % (f.path, key, ref))
-                elif ref == f.id:
-                    errors.append("%s: '%s:' refers to itself" % (f.path, key))
-                else:
-                    resolved.append(ref)
-            f.refs[key] = resolved
-
-    if errors:
-        for e in errors:
-            print("ERROR " + e)
+    scan(args.root, found, errors)
+    resolve(found, errors)
+    for e in errors:
+        print("ERROR " + e)
     if args.check:
         if errors:
             sys.exit(1)
@@ -241,19 +212,17 @@ def main():
         return
 
     st = statuses(found)
+    if not found:
+        print("No verified findings yet. Leads are open issues labelled `lead`.")
     for folder in sorted({f.folder for f in found.values()}, key=folder_key):
-        items = sorted((f for f in found.values() if f.folder == folder),
-                       key=lambda f: (not f.legacy, f.id if not f.legacy else int(f.id[1:])))
+        items = sorted((f for f in found.values() if f.folder == folder), key=lambda f: f.id)
         print("%s (%d)" % (folder, len(items)))
         for f in items:
-            status, rep, dis = st[f.id]
-            tag = " [legacy]" if f.legacy else ""
-            ident = f.id + (" (%s)" % f.alias if f.alias else "")
-            print("  %s  @%s  %s  %s%s" % (ident, f.author, status, f.title, tag))
-            if rep:
-                print("      reproduced by: " + ", ".join("@%s (%s)" % (g.author, g.id) for g in rep))
-            if dis:
-                print("      disputed by: " + ", ".join("@%s (%s)" % (g.author, g.id) for g in dis))
+            status, sup = st[f.id]
+            by = "  verified by @%s" % f.verifier if f.verifier else ""
+            print("  %s  @%s  %s  %s%s" % (f.id, f.author, status, f.title, by))
+            if sup:
+                print("      superseded by: " + ", ".join("%s (@%s)" % (g.id, g.author) for g in sup))
     if errors:
         sys.exit(1)
 
