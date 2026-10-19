@@ -5,7 +5,7 @@ title: "<short statement of the result>"
 labels: lead
 ---
 Variant: unassigned
-<!-- container, V0, V1, V2 or unassigned (see VARIANTS.md). A labeler reads this line. Keep it as the first line. -->
+<!-- container, unassigned, or a variant V<n> (V0, V1, V2, ... any number; see VARIANTS.md). To propose a new variant, write the next free V<n>. A labeler reads this line. Keep it as the first line. -->
 
 ## Claim
 <!-- What you found, in plain sentences. One result per lead; split separate results into separate issues. -->
@@ -31,7 +31,7 @@ Make this useful to the next person:
 - Which other files or bodies to try.
 - Open questions.
 List separable sub-questions one per line ("- [ ] ..."). Anyone can take one on its own,
-or publish it as its own lead or idea issue with "Builds on: #<this issue>".
+or publish it as its own lead (once you have numbers) with "Builds on: #<this issue>".
 -->
 
 - [ ] This follows RULES.md: public specs, patents and my own measurements only; I have not read the ORF decompression code of LibRaw, rawspeed, dcraw or their derivatives, and nothing here comes from their output.

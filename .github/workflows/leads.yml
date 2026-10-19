@@ -24,7 +24,7 @@ jobs:
           python3 - <<'PY'
           import json, os, re, subprocess
 
-          VARIANTS = ["container", "V0", "V1", "V2", "unassigned"]
+          VARIANT_RE = re.compile(r"^(container|unassigned|V[0-9]{1,4})$", re.I)
 
 
           def plan(body, labels):
@@ -32,9 +32,10 @@ jobs:
               body = re.sub(r"<!--.*?-->", "", (body or "").replace("\r\n", "\n"), flags=re.S)
               add, remove = [], []
               m = re.search(r"^[ \t]*Variant:[ \t]*(\S+)[ \t]*$", body, re.M | re.I)
-              known = dict((v.lower(), v) for v in VARIANTS)
-              if m and m.group(1).lower() in known:
-                  want = "variant:" + known[m.group(1).lower()]
+              if m and VARIANT_RE.match(m.group(1)):
+                  name = m.group(1)
+                  name = name.upper() if name[0] in "Vv" else name.lower()
+                  want = "variant:" + name
                   if want not in labels:
                       add.append(want)
                   remove += [l for l in labels if l.startswith("variant:") and l != want]
@@ -71,7 +72,7 @@ jobs:
           PY
 
   claim:
-    # "Taking this" on an unassigned open lead/idea assigns the commenter and labels it
+    # "Taking this" on an unassigned open lead assigns the commenter and labels it
     # `claimed`; "Releasing this" from the assignee undoes that.
     if: github.event_name == 'issue_comment'
     runs-on: ubuntu-latest
@@ -102,7 +103,7 @@ jobs:
               if "pull_request" in issue or issue.get("state") != "open":
                   return None
               labels = set(l["name"] for l in issue.get("labels", []))
-              if not labels & set(["lead", "idea"]):
+              if not labels & set(["lead"]):
                   return None
               user = comment["user"]["login"]
               if comment["user"].get("type") == "Bot":
