@@ -100,12 +100,10 @@ IFDs, repeated pointers, overlaps, nonascending strips and unsupported gaps are
 rejected. Report mismatches under these frozen assumptions; do not tune them to
 expected hashes.
 
-Input opening requires `os.O_NONBLOCK`: the acquired descriptor is checked with
-`fstat` before any mmap/read, so a FIFO without a writer is rejected promptly and
-later inputs still run. Descriptors close on success and failure. Platforms
-without that flag fail explicitly per sample with `nonblocking_open_unavailable`;
-regular-file decoding therefore requires nonblocking descriptor-open support.
-This restriction is included in provenance and help. There is no path-check/open
-fallback with a race. Symlinks to regular files remain usable. `--help` and
-`--self-test` remain portable; FIFO and regular-file measurement tests skip when
-the required platform facilities are absent, while the fail-closed mock still runs.
+Input opening uses `os.O_NONBLOCK` where the platform has it: the acquired
+descriptor is checked with `fstat` before any mmap/read, so a FIFO without a
+writer is rejected promptly and later inputs still run. Where the flag is missing
+(Windows), a non-regular path is refused by `os.stat` before opening, and the
+opened descriptor is still checked with `fstat`. Descriptors close on success
+and failure. Symlinks to regular files remain usable. `--help` and `--self-test`
+are portable; the FIFO test skips where FIFOs or `O_NONBLOCK` are absent.

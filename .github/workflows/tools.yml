@@ -29,3 +29,7 @@ jobs:
         run: |
           python -I tools/test_suffix_match_probe.py
           python -I tools/suffix_match_probe.py --self-test
+      - name: v0_spec_check tests
+        run: |
+          python -I tools/test_v0_spec_check.py
+          python -I tools/v0_spec_check.py --self-test

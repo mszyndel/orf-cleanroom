@@ -396,7 +396,6 @@ class V0SpecTests(unittest.TestCase):
         obj.patch32(obj.positions[259] + 8, 999)
         self.assertEqual(self.measure(obj)["compression_tag"], [999])
 
-    @unittest.skipUnless(hasattr(os, "O_NONBLOCK"), "regular-file measurement requires nonblocking open")
     def test_cli_hashes_identities_failure_isolation(self):
         with tempfile.TemporaryDirectory(prefix="v0-synthetic-") as directory:
             private = Path(directory) / "private-input.ORF"
@@ -454,7 +453,7 @@ class V0SpecTests(unittest.TestCase):
             self.assertNotIn(directory, result.stdout)
             self.assertNotIn("private-", result.stdout)
 
-    def test_safe_open_closes_rejected_descriptor_and_fails_closed(self):
+    def test_safe_open_closes_rejected_descriptor_and_refuses_non_regular_without_nonblock(self):
         if hasattr(os, "O_NONBLOCK"):
             with tempfile.TemporaryDirectory(prefix="v0-synthetic-descriptor-") as directory:
                 path = Path(directory) / "empty.ORF"
@@ -467,25 +466,21 @@ class V0SpecTests(unittest.TestCase):
                     self.assertEqual(caught.exception.category, "truncated_header")
                     self.assertEqual(closed.call_count, 1)
                     self.assertTrue(opened.call_args[0][1] & os.O_NONBLOCK)
-        # No path stat/open fallback can reintroduce a check/open race. Both
-        # samples promptly report the public category without touching paths.
-        with mock.patch.dict(self.c.os.__dict__):
-            self.c.os.__dict__.pop("O_NONBLOCK", None)
-            buffer = io.StringIO()
-            with mock.patch.object(self.c.os, "open") as opened, \
-                    contextlib.redirect_stdout(buffer):
-                code = self.c.main(["--measured-by", "tester",
-                                    "--sample", "1", "first.ORF", "/private/first",
-                                    "--sample", "2", "second.ORF", "/private/second"])
-                opened.assert_not_called()
-            self.assertEqual(code, 1)
-            rows = [json.loads(line) for line in buffer.getvalue().splitlines()]
-            self.assertEqual([row["sample_id"] for row in rows], ["1", "2"])
-            self.assertTrue(all(row["status"] == "error" and
-                                row["category"] == "nonblocking_open_unavailable" for row in rows))
-            self.assertTrue(all("requires os.O_NONBLOCK" in row["provenance"]["input_open_contract"]
-                                for row in rows))
-            self.assertNotIn("/private/", buffer.getvalue())
+        # Without O_NONBLOCK (e.g. Windows) regular files still decode, and a
+        # non-regular path is refused by os.stat before it is opened.
+        with tempfile.TemporaryDirectory(prefix="v0-synthetic-nonblock-") as directory:
+            path = Path(directory) / "regular.ORF"
+            path.write_bytes(make_orf(bytes.fromhex("12 3a bc"), 2, 1).data)
+            with mock.patch.dict(self.c.os.__dict__):
+                self.c.os.__dict__.pop("O_NONBLOCK", None)
+                result = self.c.measure_path(path)
+                self.assertEqual(result["output_sha256"],
+                                 hashlib.sha256(bytes.fromhex("23 01 bc 0a")).hexdigest())
+                with mock.patch.object(self.c.os, "open") as opened:
+                    with self.assertRaises(self.c.CheckError) as caught:
+                        self.c.measure_path(directory)
+                    self.assertEqual(caught.exception.category, "unsupported_file_type")
+                    opened.assert_not_called()
 
     def test_provenance_failure_keeps_each_identity(self):
         buffer = io.StringIO()
@@ -566,7 +561,6 @@ class V0SpecTests(unittest.TestCase):
         self.assertIn("--sample", result.stdout)
         self.assertEqual(result.stderr, "")
 
-    @unittest.skipUnless(hasattr(os, "O_NONBLOCK"), "regular-file measurement requires nonblocking open")
     def test_mmap_empty_changed_and_resource_guards(self):
         with tempfile.TemporaryDirectory(prefix="v0-synthetic-") as directory:
             path = Path(directory) / "synthetic.ORF"
