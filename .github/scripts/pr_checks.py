@@ -4,7 +4,7 @@
 Findings are verified leads, one new file each. Existing finding files are never
 modified, renamed or deleted, except in a PR whose author is the repo owner
 (OWNER, default radialmonster). Added findings must pass findings_index.py
---check, and their `Verified by:` must be the PR author.
+--check, and their `Verified by:` must be the PR author (which may be the finder).
 Standard library only (Python 3.8+). Run from the repo root with the PR merged
 into the work tree. Environment: BASE (base commit SHA), PR_AUTHOR (login),
 OWNER (repo owner login), FINDINGS_INDEX (optional path to the findings_index.py
@@ -70,7 +70,6 @@ def check_findings(changes):
                     print("::error::" + line[6:])
             errors.append("findings_index.py --check failed")
     for path in added:
-        parts = os.path.basename(path).split("--")
         text = (base_file(path, "HEAD") or b"").decode("utf-8", "replace").replace("\r\n", "\n")
         head = text.split("\n## ", 1)[0]
         m = VERIFIED_BY.search(head)
@@ -78,10 +77,7 @@ def check_findings(changes):
             warning(path, "PR_AUTHOR is not set, so 'Verified by' was not compared with the PR author.")
         elif not m or m.group(1).lower() != AUTHOR.lower():
             error(path, "'Verified by:' must be the PR author @%s: you add a finding only for a lead "
-                        "you reproduced yourself." % AUTHOR)
-        if len(parts) == 3 and AUTHOR and parts[1].lower() == AUTHOR.lower():
-            error(path, "The finder (file name handle) is the PR author. Nobody verifies their own lead; "
-                        "a different person adds the finding.")
+                        "you reproduced yourself (the finder may verify their own lead)." % AUTHOR)
 
 
 def check_manifest(changes):

@@ -2,17 +2,24 @@
 """List and validate the verified findings in findings/.
 
 Supports: findings/README.md (file format and status rules), CONTRIBUTING.md.
-Standard library only. A finding is a lead that a DIFFERENT person reproduced.
-Leads themselves are GitHub issues labelled `lead`, not files. Each finding file
-names the finder (`Author:`, also in the file name), the reproducer
-(`Verified by:`) and the lead issue (`Lead: #<n>`). Status:
-  verified    nobody has corrected it
-  superseded  a later verified finding lists it in `Corrects:`
+Standard library only. A finding is a lead that was reproduced in a second,
+separate run. Leads themselves are GitHub issues labelled `lead`, not files.
+Each finding file names the finder (`Author:`, also in the file name), the
+verifier (`Verified by:`, which may be the finder) and the lead issue
+(`Lead: #<n>`). Status:
+  self-verified  the verifier is the finder
+  verified       the verifier is a different person
+  superseded     a later verified finding lists it in `Corrects:`
+Upgrade: a later file by a different person with `Reproduces: <finding ID>`
+(same Author and Lead as that finding) turns a self-verified finding into
+verified and lists that person as an independent verifier.
 
 Validation (--check): file name pattern, Author matches the handle in the file
-name, Verified by is a different handle, Lead is `#<n>`, Variant matches the
+name, Verified by is a handle (self-verification is allowed), Lead is `#<n>`, Variant matches the
 folder, required sections present, `Builds on:` / `Corrects:` entries are finding
-IDs that exist or `#<n>` issue numbers (accepted without lookup). Exits 1 on errors.
+IDs that exist or `#<n>` issue numbers (accepted without lookup), `Reproduces:`
+is an existing finding with the same Author and Lead and a different verifier.
+Exits 1 on errors.
 
 Usage: python findings_index.py [--root DIR] [--check]
 """
@@ -28,17 +35,18 @@ NAME_RE = re.compile(
 ID_PATTERN = r"(?:\d{4}-\d{2}-\d{2}--[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*--[a-z0-9]+(?:-[a-z0-9]+)*|#[0-9]+)"
 REF_RE = re.compile(r"^(" + ID_PATTERN + r")$")
 KEY_RE = re.compile(r"^([A-Z][A-Za-z ]*):\s*(.*)$")
-KNOWN_KEYS = ["Author", "Verified by", "Lead", "Variant", "Builds on", "Corrects"]
-REF_KEYS = ["Builds on", "Corrects"]
+KNOWN_KEYS = ["Author", "Verified by", "Lead", "Variant", "Builds on", "Corrects", "Reproduces"]
+REF_KEYS = ["Builds on", "Corrects"]  # lists; Reproduces is a single ID
 SECTIONS = ["Claim", "Original evidence", "Verification", "Reproduce"]
 HANDLE_RE = re.compile(r"^@([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)$")
 LEAD_RE = re.compile(r"^#[0-9]+$")
 
 
 class Finding:
-    def __init__(self, fid, folder, path, author, title, verifier=""):
+    def __init__(self, fid, folder, path, author, title, verifier="", lead=""):
         self.id, self.folder, self.path = fid, folder, path
-        self.author, self.title, self.verifier = author, title, verifier
+        self.author, self.title, self.verifier, self.lead = author, title, verifier, lead
+        self.reproduces = ""
         self.refs = {k: [] for k in REF_KEYS}
 
 
@@ -107,14 +115,20 @@ def parse_file(path, folder, name, found, errors):
     vm = HANDLE_RE.match(verifier)
     if not vm:
         err("'Verified by: @handle' line is missing or malformed")
-    elif am and vm.group(1).lower() == am.group(1).lower():
-        err("Verified by must be a different person than Author (nobody verifies their own lead)")
     if not LEAD_RE.match(header.get("Lead", "")):
         err("'Lead: #<issue number>' line is missing or malformed")
     variant = header.get("Variant", "")
     if variant != folder:
         err("Variant '%s' does not match the folder '%s'" % (variant, folder))
-    f = Finding(fid, folder, path, handle, title, vm.group(1) if vm else "")
+    f = Finding(fid, folder, path, handle, title, vm.group(1) if vm else "", header.get("Lead", ""))
+    rep = header.get("Reproduces", "")
+    if rep:
+        if not REF_RE.match(rep) or rep.startswith("#"):
+            err("'Reproduces:' must be one finding ID: %s" % rep)
+        else:
+            f.reproduces = rep
+            if am and vm and vm.group(1).lower() == am.group(1).lower():
+                err("a file with 'Reproduces:' must be verified by a different person than Author")
     for key in REF_KEYS:
         for part in header.get(key, "").split(","):
             part = part.strip()
@@ -162,21 +176,53 @@ def resolve(found, errors):
                 else:
                     ok.append(ref)
             f.refs[key] = ok
+    for f in found.values():
+        if not f.reproduces:
+            continue
+        t = found.get(f.reproduces)
+        if t is None:
+            errors.append("%s: 'Reproduces:' refers to unknown finding %s" % (f.path, f.reproduces))
+            f.reproduces = ""
+        elif t is f:
+            errors.append("%s: 'Reproduces:' refers to itself" % f.path)
+            f.reproduces = ""
+        else:
+            if t.author.lower() != f.author.lower():
+                errors.append("%s: 'Reproduces:' %s has a different Author; the file must be named for the "
+                              "original finder" % (f.path, t.id))
+            if t.lead != f.lead:
+                errors.append("%s: 'Lead:' must be the same as in %s (%s)" % (f.path, t.id, t.lead))
+            if t.verifier and f.verifier.lower() == t.verifier.lower():
+                errors.append("%s: 'Verified by' must be someone who did not already verify %s" % (f.path, t.id))
 
 
 def statuses(found):
-    """id -> (status, superseded_by); a later finding that lists it in `Corrects:` supersedes it."""
+    """id -> (status, superseded_by, independent verifiers).
+
+    self-verified: the verifier is the finder; verified: a different person, or a later
+    `Reproduces:` file by a different person. A later `Corrects:` makes it superseded."""
     out = {}
     for fid, f in found.items():
         sup = [g for g in found.values() if fid in g.refs["Corrects"]]
-        out[fid] = ("superseded" if sup else "verified", sup)
+        indep = []
+        if f.verifier and f.verifier.lower() != f.author.lower():
+            indep.append(f.verifier)
+        for g in found.values():
+            if (g.reproduces == fid and g.verifier and g.verifier.lower() != f.author.lower()
+                    and g.verifier.lower() not in [v.lower() for v in indep]):
+                indep.append(g.verifier)
+        if sup:
+            status = "superseded"
+        else:
+            status = "verified" if indep else "self-verified"
+        out[fid] = (status, sup, indep)
     return out
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0],
                                  epilog="Leads are GitHub issues labelled `lead`; this lists only findings "
-                                        "(leads a different person verified).")
+                                        "(leads reproduced in a second run; self-verified ones can be upgraded by a different person).")
     ap.add_argument("--root", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."),
                     help="repo root (default: the repo this script is in)")
     ap.add_argument("--check", action="store_true",
@@ -201,8 +247,13 @@ def main():
         items = sorted((f for f in found.values() if f.folder == folder), key=lambda f: f.id)
         print("%s (%d)" % (folder, len(items)))
         for f in items:
-            status, sup = st[f.id]
+            status, sup, indep = st[f.id]
             by = "  verified by @%s" % f.verifier if f.verifier else ""
+            if f.verifier and f.verifier.lower() == f.author.lower():
+                by += " (self)"
+            extra = [v for v in indep if v.lower() != f.verifier.lower()]
+            if extra:
+                by += ", independently by " + ", ".join("@" + v for v in extra)
             print("  %s  @%s  %s  %s%s" % (f.id, f.author, status, f.title, by))
             if sup:
                 print("      superseded by: " + ", ".join("%s (@%s)" % (g.id, g.author) for g in sup))

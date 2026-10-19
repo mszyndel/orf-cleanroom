@@ -45,7 +45,9 @@ jobs:
 
 
           def decide(files, author, read_text, read_issue):
-              """-> (reason, leads). reason "" means auto-mergeable; leads = [(issue number, finding path)].
+              """-> (reason, leads). reason "" means auto-mergeable; leads = [(issue number, finding path, kind)],
+              kind "self" (verifier is the finder), "independent" (a different person) or "upgrade"
+              (a `Reproduces:` file by a different person, for a self-verified finding; the lead may be closed).
 
               read_text(file entry) -> decoded text of the file at the PR head (data only);
               read_issue(n) -> {"author": login, "labels": [...], "pr": bool} or None."""
@@ -65,9 +67,12 @@ jobs:
                   fauthor = header(text, "Author").lstrip("@")
                   if header(text, "Verified by").lower() != "@" + author.lower():
                       return "a new findings file does not have 'Verified by: @%s' (the PR author)" % author, []
-                  if not handle or handle.lower() != fauthor.lower() or handle.lower() == author.lower():
-                      return ("a new findings file's Author and file name must name the finder, who must be "
-                              "someone other than the PR author (@%s)" % author), []
+                  if not handle or handle.lower() != fauthor.lower():
+                      return "a new findings file's Author and file name must name the same finder", []
+                  selfv = handle.lower() == author.lower()
+                  if selfv and header(text, "Reproduces"):
+                      return "a self-verification cannot carry 'Reproduces:'", []
+                  kind = "self" if selfv else ("upgrade" if header(text, "Reproduces") else "independent")
                   m = re.match(r"^#([0-9]+)$", header(text, "Lead"))
                   if not m:
                       return "a new findings file has no valid 'Lead: #<issue>' line", []
@@ -76,7 +81,7 @@ jobs:
                           or "lead" not in issue["labels"]):
                       return ("the lead issue #%s is missing, is not labelled lead, or was not opened by @%s"
                               % (m.group(1), fauthor)), []
-                  leads.append((int(m.group(1)), path))
+                  leads.append((int(m.group(1)), path, kind))
               for f in files:
                   if f["filename"] != "samples/manifest.csv":
                       continue
@@ -127,14 +132,20 @@ jobs:
                   if not quiet:
                       gh("pr", "comment", num, "--repo", repo, "--body",
                          "Merged automatically: verified findings/manifest only, checks passed. Thanks!")
-                  for n, path in leads:
+                  for n, path, kind in leads:
                       link = "https://github.com/%s/blob/main/%s" % (repo, path)
+                      label = "self-verified" if kind == "self" else "verified"
                       gh("label", "create", "verified", "--repo", repo, "--force", "--color", "0e8a16",
                          "--description", "Reproduced by a different person; the finding is in findings/")
-                      gh("issue", "edit", str(n), "--repo", repo, "--add-label", "verified", check=False)
+                      gh("label", "create", "self-verified", "--repo", repo, "--force", "--color", "fbca04",
+                         "--description", "Reproduced by the finder; a different person can upgrade it (Reproduces:)")
+                      gh("issue", "edit", str(n), "--repo", repo, "--add-label", label, check=False)
+                      if kind == "upgrade":
+                          gh("issue", "edit", str(n), "--repo", repo, "--remove-label", "self-verified", check=False)
                       gh("issue", "comment", str(n), "--repo", repo, "--body",
-                         "Verified by @%s in %s; closing as verified." % (author, link), check=False)
-                      gh("issue", "close", str(n), "--repo", repo, check=False)
+                         "Verified by @%s%s in %s" % (author, " (self-verified)" if kind == "self" else "", link),
+                         check=False)
+                      gh("issue", "close", str(n), "--repo", repo, check=False)  # no-op if already closed
                   return
 
               labels = gh("pr", "view", num, "--repo", repo, "--json", "labels", "--jq", ".labels[].name").split()
@@ -147,7 +158,7 @@ jobs:
               if not quiet:
                   gh("pr", "comment", num, "--repo", repo, "--body",
                      "Checks passed, but this PR is not merged automatically because %s. Only a verification "
-                     "(a new findings file you reproduced yourself, for an existing lead issue by someone else) "
+                     "(a new findings file you reproduced yourself, for an existing lead issue you or someone else opened) "
                      "and appended manifest rows from the PR author merge on their own (see CONTRIBUTING.md). "
                      "A maintainer will look occasionally; this can take weeks. Nothing is wrong with your work."
                      % reason)
