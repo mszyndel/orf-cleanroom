@@ -8,9 +8,9 @@ Today LightCraft decodes uncompressed ORF only; compressed ORF (the default on m
 
 ## Start here
 
-Results here are **leads** (GitHub issues) until a different person reproduces them; then they become **findings** (files in `findings/`). Two main ways to help:
+Results here are **leads** (GitHub issues) until they are reproduced in a second, separate run; then they become **findings** (files in `findings/`). A different person verifying is preferred; the finder may verify their own lead (status `self-verified`), and a different person can upgrade it later. Two main ways to help:
 
-1. **Take a lead and reproduce, extend or refute it.** List the [unclaimed leads](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee). Don't take the first or top one: many people doing the same investigation helps no one. Pick one at random, or by what only you can do (cameras or files you own, a variant nobody is on). Comment "Taking this" as the first line and the bot assigns it to you; take one at a time, and comment "Releasing this" if you stop (claims with no activity for 14 days are freed automatically). Run the lead's steps on other files than it used. If your numbers match, open a PR adding the finding file (see findings/README.md); if not, comment your numbers on the lead.
+1. **Take a lead and reproduce, extend or refute it.** List the [unclaimed leads](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee). Don't take the first or top one: many people doing the same investigation helps no one. Pick one at random, or by what only you can do (cameras or files you own, a variant nobody is on). Comment "Taking this" as the first line and the bot assigns it to you; take one at a time, and comment "Releasing this" if you stop (claims with no activity for 14 days are freed automatically). Run the lead's steps on other files than it used. If your numbers match, open a PR adding the finding file (see findings/README.md); if not, comment your numbers on the lead. You can also upgrade a [`self-verified` finding](https://github.com/radialmonster/orf-cleanroom/issues?q=label%3Aself-verified) by reproducing it.
 2. **Find a new lead and publish it.** Measure something with a `tools/` script, then open an issue from the "Lead" template: claim, evidence, reproduce steps, next steps. Split separable sub-questions into their own lead or idea issues ("Builds on: #n"). Use the "Idea" template for a hunch without numbers.
 
 Other help, no bitstream knowledge needed:
@@ -22,7 +22,7 @@ Issues labelled [`good first issue`](https://github.com/radialmonster/orf-cleanr
 ## How to help
 - **Samples:** upload varied ORFs (daylight, indoor, high ISO, different bodies) to [raw.pixls.us](https://raw.pixls.us). They are CC0, so anyone here can use them. Please don't attach raw files to this repo.
 - **Analysis:** pick an item from [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) or a lead, say you're working on it, and publish the numbers and a way to reproduce them as a lead issue.
-- **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when a different person reproduces it and adds the file by PR.
+- **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when it is reproduced in a second run and the file is added by PR.
 
 ## Getting test files
 
@@ -46,11 +46,11 @@ Record each file you use in `samples/manifest.csv` (see samples/README.md).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: fork, branch, pull request; `main` is protected.
 
-**Data pull requests merge automatically.** A PR that only adds a verified finding (`Verified by:` you, finder someone else, `Lead:` their lead issue) or appends rows to `samples/manifest.csv` under your own handle merges by itself once the checks pass, and the lead issue is closed as verified. Anything else (tools, docs, rules, edits to the shared files) waits for a maintainer, who looks only occasionally, so it can take weeks. That's normal; nothing is wrong with your PR.
+**Data pull requests merge automatically.** A PR that only adds a verified finding (`Verified by:` you, `Lead:` the finder's lead issue; the finder may be you) or appends rows to `samples/manifest.csv` under your own handle merges by itself once the checks pass, and the lead issue is closed as `self-verified` or `verified`. Anything else (tools, docs, rules, edits to the shared files) waits for a maintainer, who looks only occasionally, so it can take weeks. That's normal; nothing is wrong with your PR.
 
 ## Credit
 
-Findings stay credited to whoever found them: the finder's handle is in each finding's file name and `Author:` line, the verifier is credited as `Verified by:`, existing findings can't be edited, renamed or deleted, and anything built from this work credits them. See RULES.md, "Credit".
+Findings stay credited to whoever found them: the finder's handle is in each finding's file name and `Author:` line, the verifier is credited as `Verified by:` (which may be the finder), existing findings can't be edited, renamed or deleted, and anything built from this work credits them. See RULES.md, "Credit".
 
 ## Layout
 - `RULES.md`: the clean-room contract
@@ -59,7 +59,7 @@ Findings stay credited to whoever found them: the finder's handle is in each fin
 - `OPEN-QUESTIONS.md`: what is still unknown, plus unverified hypotheses
 - `VARIANTS.md`: the variant registry, keyed by measured file signatures
 - `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant
-- `tools/`: analysis scripts (our own code only), including `findings_index.py` (lists verified findings)
+- `tools/`: analysis scripts (our own code only), including `findings_index.py` (lists findings and their status)
 - `stats/`: aggregate tables only, no images or raw payloads
 
 ## Licence
