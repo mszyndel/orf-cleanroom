@@ -8,17 +8,21 @@ Today LightCraft decodes uncompressed ORF only; compressed ORF (the default on m
 
 ## Start here
 
-New? These need no knowledge of the bitstream:
-1. **Add manifest rows:** pick a model with no rows in `samples/manifest.csv` yet (at first, every model), comment one line on [issue #3](https://github.com/radialmonster/orf-cleanroom/issues/3) such as "Taking E-P5, E-410" so two people don't do the same one (a courtesy; nothing breaks if you skip it), then add rows with `tools/manifest_rows.py` for every CC0 file of that model, including ORI and High Res Shot files (see samples/README.md). Files are roughly 10-70 MB each (High Res Shot files are the large ones); `list --model` shows how many a model has. If a model has more than you want to download, do some and say which in the PR; anyone can add the rest later. Most useful first: compressed bodies, especially the 5240-wide ones from OPEN-QUESTIONS 6 (OM-5, OM-5 Mark II, E-M1 Mark II).
-2. **Reproduce a finding:** run `python tools/findings_index.py` to see every finding and its status. Pick a `lead` (for example F2: run `tools/orf_signature.py` on more bodies) and add a finding file with `Reproduces:` if you get matching results, or `Corrects:` if you don't. Reproducing someone's lead is a contribution in itself.
-3. **Write a reproduction script for part of F1** (see OPEN-QUESTIONS 6).
+Results here are **leads** (GitHub issues) until a different person reproduces them; then they become **findings** (files in `findings/`). Two main ways to help:
+
+1. **Take a lead and reproduce, extend or refute it.** List the [unclaimed leads](https://github.com/radialmonster/orf-cleanroom/issues?q=is%3Aopen+label%3Alead+no%3Aassignee). Don't take the first or top one: many people doing the same investigation helps no one. Pick one at random, or by what only you can do (cameras or files you own, a variant nobody is on). Comment "Taking this" as the first line and the bot assigns it to you; take one at a time, and comment "Releasing this" if you stop (claims with no activity for 14 days are freed automatically). Run the lead's steps on other files than it used. If your numbers match, open a PR adding the finding file (see findings/README.md); if not, comment your numbers on the lead.
+2. **Find a new lead and publish it.** Measure something with a `tools/` script, then open an issue from the "Lead" template: claim, evidence, reproduce steps, next steps. Split separable sub-questions into their own lead or idea issues ("Builds on: #n"). Use the "Idea" template for a hunch without numbers.
+
+Other help, no bitstream knowledge needed:
+- **Add manifest rows:** pick a model with no rows in `samples/manifest.csv` yet, comment one line on [issue #3](https://github.com/radialmonster/orf-cleanroom/issues/3) such as "Taking E-P5, E-410" so two people don't do the same one (a courtesy), then add rows with `tools/manifest_rows.py` for every CC0 file of that model, including ORI and High Res Shot files (see samples/README.md). Files are roughly 10-70 MB each; `list --model` shows how many a model has. Most useful first: compressed bodies, especially the 5240-wide ones from OPEN-QUESTIONS 6 (OM-5, OM-5 Mark II, E-M1 Mark II).
+- **Split an open-ended task:** #1 (V1), #2 (V2) and #3 (manifest) stay open. Claim a specific model or sub-question in a comment, and publish what you measure as a lead.
 
 Issues labelled [`good first issue`](https://github.com/radialmonster/orf-cleanroom/labels/good%20first%20issue) are the same kind of task. All issues: https://github.com/radialmonster/orf-cleanroom/issues
 
 ## How to help
 - **Samples:** upload varied ORFs (daylight, indoor, high ISO, different bodies) to [raw.pixls.us](https://raw.pixls.us). They are CC0, so anyone here can use them. Please don't attach raw files to this repo.
-- **Analysis:** pick an item from [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) or the issues, comment that you're working on it, and report back with numbers and a way to reproduce them.
-- **Findings:** one file per finding, in the folder for its variant under [findings/](findings/README.md), with its evidence. Other people check each other's findings: a finding is a *lead* until someone else reproduces it. The first four findings are in there too, with IDs `F1`..`F4`.
+- **Analysis:** pick an item from [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) or a lead, say you're working on it, and publish the numbers and a way to reproduce them as a lead issue.
+- **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when a different person reproduces it and adds the file by PR.
 
 ## Getting test files
 
@@ -42,20 +46,20 @@ Record each file you use in `samples/manifest.csv` (see samples/README.md).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: fork, branch, pull request; `main` is protected.
 
-**Data pull requests merge automatically.** A PR that only adds new files under `findings/` and rows to `samples/manifest.csv`, under your own handle, merges by itself once the checks pass. Anything else (tools, docs, rules, edits to the shared files) waits for a maintainer, who looks only occasionally, so it can take weeks. That's normal; nothing is wrong with your PR.
+**Data pull requests merge automatically.** A PR that only adds a verified finding (`Verified by:` you, finder someone else, `Lead:` their lead issue) or appends rows to `samples/manifest.csv` under your own handle merges by itself once the checks pass, and the lead issue is closed as verified. Anything else (tools, docs, rules, edits to the shared files) waits for a maintainer, who looks only occasionally, so it can take weeks. That's normal; nothing is wrong with your PR.
 
 ## Credit
 
-Findings stay credited to whoever found them: the author handle is in each finding's file name and `Author:` line, and existing findings can't be edited, renamed or deleted, and anything built from this work credits them. See RULES.md, "Credit".
+Findings stay credited to whoever found them: the finder's handle is in each finding's file name and `Author:` line, the verifier is credited as `Verified by:`, existing findings can't be edited, renamed or deleted, and anything built from this work credits them. See RULES.md, "Credit".
 
 ## Layout
 - `RULES.md`: the clean-room contract
 - `AGENTS.md`: instructions for AI coding agents
-- `findings/`: what has been established, one file per finding, by variant, with evidence and peer-validation status (the first four are `F1`..`F4`)
+- `findings/`: verified findings only, one file each, by variant (unverified results are lead issues)
 - `OPEN-QUESTIONS.md`: what is still unknown, plus unverified hypotheses
 - `VARIANTS.md`: the variant registry, keyed by measured file signatures
 - `samples/manifest.csv`: raw.pixls.us files used, with their measured signature and variant
-- `tools/`: analysis scripts (our own code only), including `findings_index.py` (lists findings and their status)
+- `tools/`: analysis scripts (our own code only), including `findings_index.py` (lists verified findings)
 - `stats/`: aggregate tables only, no images or raw payloads
 
 ## Licence

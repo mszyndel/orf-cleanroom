@@ -21,21 +21,21 @@ If you have read the ORF decompression code in any of those projects, you're wel
 - Don't use files whose licence you don't know, or that are under a non-CC0 licence (e.g. the CC BY-NC-SA files on raw.pixls.us).
 - No images of decoded or preview data are committed. Aggregate statistics only.
 
-## Findings are files, and never edited
-- Each finding is its own file `findings/<folder>/YYYY-MM-DD--handle--short-slug.md`, in the folder for its variant (`container`, `V0`, `V1`, `V2`, `unassigned`). Format and rules: findings/README.md.
-- An existing finding file is never edited, renamed or deleted, by anyone, so nobody's work can be erased.
-- To correct or retract a finding, add a new file with `Corrects: <ID>` that says which one and why.
-- Status is peer validation, not maintainer sign-off: a finding is a *lead* until a finding by a different author lists it in `Reproduces:`, and is *disputed* if a different author lists it in `Corrects:`. `tools/findings_index.py` shows the status.
-- CI rejects pull requests that modify or remove existing finding files, or that add a finding file that doesn't validate.
+## Leads are issues, findings are files
+- A **lead** is an unverified result, published as a GitHub issue. Leads follow the same rules as everything else here: public specs, patents, the files' own structure and original code. Leads that come from another decoder's code or output are not accepted.
+- A **finding** is a lead that a different person reproduced. Each finding is its own file `findings/<folder>/YYYY-MM-DD--finder--short-slug.md`, in the folder for its variant (`container`, `V0`, `V1`, `V2`, `unassigned`), added by the reproducer's PR. Format and rules: findings/README.md.
+- An existing finding file is never edited, renamed or deleted (except by the repo owner), so nobody's work can be erased.
+- To correct a finding, add a new verified finding with `Corrects: <ID>`; the index shows the old one as superseded.
+- CI rejects pull requests that modify or remove existing finding files, or that add a finding file that doesn't validate (including one not verified by its own PR author, or verified by the finder).
 
 ## Credit
 Everyone who finds something keeps the credit for it.
-- Each finding names its author (`@handle`) in its file name and its `Author:` line. Because existing files are never edited, that credit can't be edited away, and a later correction is a new file that leaves the original and its author in place.
-- If your work builds on someone else's finding, say so with a `Builds on: <ID>` line (`F1`..`F4` are the first four findings). If you reproduce one, list it in `Reproduces:`; the reproducer is credited in the index.
-- Add only your own work under your own handle. If you're adding someone else's result, for example from a Discussion, credit them as the author (file name and `Author:`) and add `Submitted by: @you`. Such a PR needs a maintainer, because the file name handle differs from the PR author.
+- The finder keeps credit: their `@handle` is in the finding's file name and its `Author:` line, and the lead issue stays theirs. The verifier is credited as `Verified by:`. Because existing files are never edited, that credit can't be edited away, and a later correction is a new file that leaves the original and its author in place.
+- If your work builds on someone else's finding or lead, say so with a `Builds on:` line (a finding ID or `#n`). A lead you reproduce is credited by `Verified by:`.
+- Publish leads under your own handle. If you want to publish someone else's result (for example from a Discussion), ask them to open the lead themselves, or link their post from your own lead as `Builds on`.
 - In `samples/manifest.csv`, rows are append-only and `measured_by` is never overwritten. When you measure more columns of a file already listed, add a new row for the same `sha256` under your own handle.
 - Pull requests are squash-merged with the contributor kept as the commit author. Add `Co-authored-by:` lines for anyone else who did the work.
-- When a decoder built from this work is contributed to LightCraft or elsewhere, it credits every finding author it relies on, by name and finding ID.
+- When a decoder built from this work is contributed to LightCraft or elsewhere, it credits every finding author and verifier it relies on, by name and finding ID.
 
 ## Sign-off
 By opening a pull request you confirm that your contribution follows these rules and is released under CC0 1.0 (see LICENSE). Please say so in the PR description ("I confirm this follows RULES.md").

@@ -3,9 +3,9 @@
 Variants are defined by **what can be measured in the files**, not by camera model. Model names are listed as observations only. A variant is never inferred from another decoder's behaviour (see RULES.md).
 
 ## Signature fields
-- **Container:** compression tag (note F2 in findings/container/: it reads 1 even on compressed files, so use bits per pixel instead), maker-note version, raw data offset and length.
+- **Container:** compression tag (see the F2 lead, #10: it reads 1 even on compressed files, so use bits per pixel instead), maker-note version, raw data offset and length.
 - **Payload:** width x height, bits per pixel (payload bytes x 8 / pixels).
-- **Bitstream:** escape length, whether the calm parse (F1) works, per-row token stride.
+- **Bitstream:** escape length, whether the calm parse (the F1 lead, #11) works, per-row token stride.
 - **Mode:** normal, High Res Shot / pixel-shift, other.
 
 ## Status levels
@@ -23,15 +23,15 @@ One issue per variant (https://github.com/radialmonster/orf-cleanroom/issues), l
 ---
 
 ## V0: fixed-size packing (uncompressed)
-- Signature: `size_class` is `packed-12`, `packed-12.8` or `packed-16`: the payload size exactly equals width x height x that many bits (F4).
-- Models seen (F4): C5060WZ, C7070WZ, SH-2, SP-510UZ/550UZ/565UZ/570UZ, XZ-2, XZ-10 (12); E-300, E-330, E-500, and High Res Shot files from PEN-F and E-M5 Mark II (12.8); E-1, E-10, E-400 (16).
+- Signature: `size_class` is `packed-12`, `packed-12.8` or `packed-16`: the payload size exactly equals width x height x that many bits (lead #LEAD-f4).
+- Models seen (lead #LEAD-f4): C5060WZ, C7070WZ, SH-2, SP-510UZ/550UZ/565UZ/570UZ, XZ-2, XZ-10 (12); E-300, E-330, E-500, and High Res Shot files from PEN-F and E-M5 Mark II (12.8); E-1, E-10, E-400 (16).
 - Findings: [findings/V0/](findings/V0/).
 - Status: LightCraft decodes uncompressed ORF; whether it covers every packing listed here hasn't been checked in this repo.
 
 ## V1: calm-parse compressed
-- Signature: compressed; the calm parse from F1 works (q zeros, stop bit, 5-bit suffix, escape at q ≥ 17); per-row stride equals the payload width on at least one body (5240 wide).
+- Signature: compressed; the calm parse from the F1 lead (#11) works (q zeros, stop bit, 5-bit suffix, escape at q ≥ 17); per-row stride equals the payload width on at least one body (5240 wide).
 - Models seen: none recorded yet. The PR that assigns a manifest row to this variant also adds its model here.
-- Findings: [findings/V1/](findings/V1/) (F1 is the first).
+- Findings: [findings/V1/](findings/V1/) (the F1 lead, #11, is the first candidate).
 - Status: `parse understood`. Value assembly and predictor open (OPEN-QUESTIONS 1-2). On some bodies the stride drifts (question 3), which may split this variant.
 
 ## V2: 31-bit-escape compressed
