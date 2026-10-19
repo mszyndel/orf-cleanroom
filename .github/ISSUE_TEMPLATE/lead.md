@@ -33,3 +33,5 @@ Make this useful to the next person:
 List separable sub-questions one per line ("- [ ] ..."). Anyone can take one on its own,
 or publish it as its own lead or idea issue with "Builds on: #<this issue>".
 -->
+
+- [ ] This follows RULES.md: public specs, patents and my own measurements only; I have not read the ORF decompression code of LibRaw, rawspeed, dcraw or their derivatives, and nothing here comes from their output.
