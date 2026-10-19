@@ -14,10 +14,6 @@ name, Verified by is a different handle, Lead is `#<n>`, Variant matches the
 folder, required sections present, `Builds on:` / `Corrects:` entries are finding
 IDs that exist or `#<n>` issue numbers (accepted without lookup). Exits 1 on errors.
 
-Transition: the eight files from before the lead-issue model (LEGACY_NAMES) are
-unverified and are listed as `legacy`, not validated. They go away when they
-move to lead issues; delete LEGACY_NAMES with them.
-
 Usage: python findings_index.py [--root DIR] [--check]
 """
 import argparse
@@ -37,22 +33,12 @@ REF_KEYS = ["Builds on", "Corrects"]
 SECTIONS = ["Claim", "Original evidence", "Verification", "Reproduce"]
 HANDLE_RE = re.compile(r"^@([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)$")
 LEAD_RE = re.compile(r"^#[0-9]+$")
-LEGACY_NAMES = {
-    "2026-10-18--radialmonster--f1-initial-results.md",
-    "2026-10-18--radialmonster--f2-compression-tag-does-not-identify-compressed-orf.md",
-    "2026-10-18--radialmonster--f3-entry-format-update.md",
-    "2026-10-18--radialmonster--f4-fixed-size-payloads-are-exact.md",
-    "2026-10-18--radialmonster--additional-established-facts.md",
-    "2026-10-18--radialmonster--ruled-out-layouts-and-framing.md",
-    "2026-10-18--radialmonster--ruled-out-predictors-and-transforms.md",
-    "2026-10-18--radialmonster--ruled-out-value-mappings.md",
-}
 
 
 class Finding:
-    def __init__(self, fid, folder, path, author, title, verifier="", legacy=False):
+    def __init__(self, fid, folder, path, author, title, verifier=""):
         self.id, self.folder, self.path = fid, folder, path
-        self.author, self.title, self.verifier, self.legacy = author, title, verifier, legacy
+        self.author, self.title, self.verifier = author, title, verifier
         self.refs = {k: [] for k in REF_KEYS}
 
 
@@ -89,9 +75,6 @@ def parse_file(path, folder, name, found, errors):
         title = lines[0][2:].strip()
     else:
         err("first line must be '# <title>'")
-    if name in LEGACY_NAMES:
-        found[fid] = Finding(fid, folder, path, handle, title, legacy=True)
-        return
     header, headings = {}, []
     in_header = True
     for line in lines[1:]:
@@ -182,11 +165,11 @@ def resolve(found, errors):
 
 
 def statuses(found):
-    """id -> (status, superseded_by); only verified (non-legacy) findings can supersede."""
+    """id -> (status, superseded_by); a later finding that lists it in `Corrects:` supersedes it."""
     out = {}
     for fid, f in found.items():
-        sup = [g for g in found.values() if not g.legacy and fid in g.refs["Corrects"]]
-        out[fid] = ("legacy" if f.legacy else "superseded" if sup else "verified", sup)
+        sup = [g for g in found.values() if fid in g.refs["Corrects"]]
+        out[fid] = ("superseded" if sup else "verified", sup)
     return out
 
 
@@ -208,7 +191,7 @@ def main():
     if args.check:
         if errors:
             sys.exit(1)
-        print("ok: %d findings (%d legacy)" % (len(found), sum(1 for f in found.values() if f.legacy)))
+        print("ok: %d findings" % len(found))
         return
 
     st = statuses(found)
