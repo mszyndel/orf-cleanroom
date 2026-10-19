@@ -29,6 +29,11 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     q= 2  share=0.13019
     q= 3  share=0.06272
 
+**`orf_tokens.py`** parses the token stream described in lead #11 (q zero bits, stop bit, 5-bit suffix; escape at q >= 17) and prints aggregate statistics per file: tokens against width x height, bit alignment at multiples of the width, q histogram and escapes, suffix bit balance, H/L shares, and mutual information at token lags 1-3 (H->L, L->H, L->L, H->H), the b2 context gain and vertical lag 2, each with a baseline that shows the estimator bias. Numbers are printed as measured, whether or not they match that lead. It parses a prefix by default (`--max-tokens`, `--rows`); `--all` parses the whole payload.
+
+    python tools/orf_tokens.py path/to/file.ORF --rows 400
+    python tools/orf_tokens.py path/to/file.ORF --all
+
 **`findings_index.py`** lists the verified findings under `findings/` by variant, with finder, verifier, title and status (verified or superseded). `--check` validates the files (file name, `Author:` matches the handle, `Verified by:` is another person, `Lead:` is `#n`, `Variant:` matches the folder, referenced IDs exist) and exits 1 on errors; CI runs it on pull requests.
 
     python tools/findings_index.py
