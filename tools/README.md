@@ -57,6 +57,19 @@ camera framing. It can be combined with `--markov`.
 
     python -I -B tools/token_framing_probe.py --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
 
+Optional `--offset-bytes 1048576` selects an exact-length window of the
+logical strip payload. The candidate parser restarts at that window's bit zero;
+all null parameters and local-byte blocks use only that window. Reports retain
+requested/actual length and absolute payload byte/bit anchors. A requested
+window beyond the payload fails before statistics, including a short default
+prefix. The old `prefix_bytes` and `requested_prefix_bytes` fields remain length
+aliases for compatibility; `window` gives their offset context. Complete
+zero-offset model statistics remain unchanged. These newly anchored parses are
+not known whole-stream token boundaries and do not establish framing,
+stationarity, significance or a decode. Use fixed offsets before outcomes.
+
+    python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
