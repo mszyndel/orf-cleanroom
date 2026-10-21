@@ -204,6 +204,21 @@ permutation tests run with `python -I tools/suffix_match_probe.py --self-test`.
 
     python -I tools/suffix_match_probe.py --cohort PUBLIC_COHORT.json --measured-by @yourhandle --sample ID path/to/file.ORF
 
+**`token_loop_probe.py`** supports the double-integration/Lorenzo and plain
+running-sum bullets of lead #31. It parses the first rows x payload-width
+candidate tokens with the #11 model and maps each suffix to three fixed
+residuals. It reports peak-to-peak growth for second-order per-row,
+per-parity, Lorenzo and running-sum loops against four within-row token
+shuffles, with all cells and nulls retained. Rows are nominal W-token blocks,
+not physical image rows; within-row shuffles preserve each row's value
+multiset and mean. Double/Lorenzo cells use a predeclared 1.5x threshold;
+running-sum cells use a 0.5..1.5 "equal to null" band. These are descriptive
+comparisons, not significance tests, a decode or a reproduction of the lead's
+private figures. Stdlib only, aggregates only; no images or raw values.
+
+    python -I -B tools/token_loop_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_loop_probe.py
+
 **`pixls_samples.py`** lists, checks and downloads raw.pixls.us Olympus/OM samples using the site's licence listing. It downloads CC0 files only and verifies SHA-256. See the top-level README.
 
 **`manifest_rows.py`** turns local CC0 files into ready-made `samples/manifest.csv` rows, combining the licence listing with `orf_signature.py`.
