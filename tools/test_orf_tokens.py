@@ -32,6 +32,14 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(qs, [2, 20, 0])
         self.assertEqual(esc, [(8, 20)])
 
+    def test_token_must_fit_payload(self):
+        # (0,0), then 9 zeros and a final 1: the next token's stop bit is in the
+        # payload, but its 5 suffix bits would be past the end, so it must not count.
+        buf = bits_to_bytes(token(0, 0) + "0" * 9 + "1")
+        qs, ss, _, pos = t.parse(buf, 99, 0)
+        self.assertEqual(list(zip(qs, ss)), [(0, 0)])
+        self.assertLessEqual(pos, len(buf) * 8)
+
     def test_scan_matches_parse(self):
         # the compact one-byte-per-token streams used by --all equal the plain lists
         spec = [(0, 5), (3, 31), (45, 7), (1, 0), (20, 9), (0, 1)]

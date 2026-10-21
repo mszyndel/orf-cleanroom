@@ -104,6 +104,9 @@ def scan(buf, max_tokens, w, esc_extra, esc_pos, qs, ss, cap, esc_q=None, esc_ma
             pos = p + 6
         else:
             q = avail - v.bit_length()
+            if pos + q + 6 > nbits:
+                # The stop bit is in the payload but the 5-bit suffix is not.
+                break
             s = (v >> (avail - q - 6)) & 31
             pos += q + 6
         if q >= ESC_Q:
