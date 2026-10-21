@@ -14,7 +14,8 @@ and does swapping b1/b0 change the classification?
 
 The new cohort is public CC0 raw.pixls.us ids 241 (E-P3), 1079 (E-PM1),
 4126 (E-M10 Mark IV), and 6946 (TG-7). Ids 1993 (E-M1 Mark II) and 6343
-(OM-5) are known references from #152. Their earlier conditional outcomes
+(OM-5) are known references measured with the #152 tool (results reported
+on #29). Their earlier conditional outcomes
 were known, as were other metrics on these bodies. Selection is based on
 available public bodies, not a blind scene-controlled sample or outcomes of
 this measurement. No sample replacement or parameter tuning occurred.
