@@ -230,3 +230,17 @@ ISO/bpp correlation, scene content, or causality. Licence-check inputs first.
 
     python -I -B tools/exif_sensitivity_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_exif_sensitivity_probe.py
+
+**`token_lag_probe.py`** supports lead #29 item 6 and builds on #11 and
+`suffix_joint_probe.py`'s bounded candidate scanner. In the first 262144 tokens,
+it keeps complete 128-token blocks without q>=17, forms only within-block
+pairs, and reports q>0 and low-three-suffix-symbol plug-in MI at all lags 1..5.
+It emits exact contingency counts, 16 fixed-seed within-block whole-token
+permutation MI values, selection counts, source/input hashes and sanitized
+per-sample failures. Blocks are not established camera rows; comparison values
+are descriptive, without a significance test. This different metric does not
+reproduce #29's historical private held-out/smoothed estimates or establish
+stationarity, magnitude meaning or a decoder. Check CC0 licences first.
+
+    python -I -B tools/token_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_lag_probe.py
