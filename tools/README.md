@@ -192,3 +192,18 @@ writer is rejected promptly and later inputs still run. Where the flag is missin
 opened descriptor is still checked with `fstat`. Descriptors close on success
 and failure. Symlinks to regular files remain usable. `--help` and `--self-test`
 are portable; the FIFO test skips where FIFOs or `O_NONBLOCK` are absent.
+
+**`token_phase_probe.py`** supports the unverified token-phase part of lead #30
+and builds on candidate parse #11. It reports every modulo-2..8 contingency
+table between absolute token phase and joint suffix symbol `2*b4+b2`, together
+with plug-in symbol entropy, phase-conditional entropy and mutual information.
+The fixed prefix is 262144 complete tokens; escapes (`q>=17`) are omitted
+without compacting indices, with zero extra escape bits. It requires a single
+in-bounds variable-size strip and prints aggregate JSON with sample hashes,
+measured dimensions, prefix shortfall, source hashes and sanitized failures.
+Licence-check downloaded samples first. This descriptive metric has no bias
+correction, significance threshold or physical column interpretation; it does
+not reproduce the historical conditional-context gain or private figures.
+
+    python -I -B tools/token_phase_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_phase_probe.py
