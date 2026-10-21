@@ -357,3 +357,17 @@ sanitized; successful reports survive and any failure makes the exit nonzero.
 
     python -I -B tools/q_value_bridge_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_q_value_bridge_probe.py
+
+**`token_b4_gate_probe.py`** supports the b4 significance-gate question in
+lead #32 and builds on candidate parser #11. It emits complete low3/low4
+unsigned histograms by b4, current-q/current-b4 and previous-q/current-b4
+17-by-2 count tables, conditional probabilities and unsmoothed plug-in MI.
+The first 262144 complete tokens use zero extra escape bits; q>=17 tokens
+are omitted, with both endpoints required ordinary for lag1 pairs. Original
+indices are preserved; omitted tokens are never joined. Both low-bit field
+definitions are explicit because the historical phrase was unspecified.
+No significance, independence, semantic gate or historical-number claim
+follows; omission cannot repair unknown framing. Licence-check inputs first.
+
+    python -I -B tools/token_b4_gate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_b4_gate_probe.py
