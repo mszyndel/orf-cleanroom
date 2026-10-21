@@ -110,6 +110,13 @@ class ScaleTests(unittest.TestCase):
         self.assertEqual(len(measured["permutations"]), 16)
         self.assertEqual(measured["permutation_means"][5]["loss_bits"], measured["observed"][5]["loss_bits"])
 
+    def test_cli_rejects_invalid_and_duplicate_ids(self):
+        for ids in (("0",), ("\u00b2",), ("\u0662",), ("1", "1"), ("1", "01")):
+            args = [value for sid in ids for value in ("--sample", sid, "public", "unused")]
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
+                probe.main(args)
+            self.assertEqual(caught.exception.code, 2)
+
     def test_mixed_cli_keeps_success_and_sanitizes_errors(self):
         def fake_report(sid, name, path):
             if sid == "2":
