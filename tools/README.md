@@ -589,3 +589,27 @@ samples and prints aggregates only; missing inputs and shortfalls exit nonzero.
 
     python -I -B tools/token_phase_surrogate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_phase_surrogate_probe.py
+
+**`token_tail_distribution_probe.py`** supports #144's candidate extra-token
+question, Builds on #11/#218/#234. At a fixed supplied stride S and measured
+width W, T=S-W defines tail positions [W,S). Every complete candidate row
+contributes exact uncapped q and five-bit suffix histograms to the tail,
+first-width [0,W), preceding [W-T,W), and middle [S//2,S//2+T) regions.
+Both comparison windows have T tokens and fit inside first-width; they can
+overlap each other for some geometries. Histograms include q>=17, with zero
+extra escape skip. Reports retain region counts, q sums, localized escapes,
+entropies, tail-versus-comparison total-variation distances, all band
+shortfalls, endpoints and source/input hashes. Incomplete final candidate
+rows contribute no region statistics. Defaults are 300 candidate rows at
+ordinal starts 0/1000/2000, with absolute r*S boundaries and no phase/stride
+fit. Position comparisons are descriptive and not exchangeable nulls;
+differences cannot identify padding, headers, a field, physical rows or an
+actual entropy grammar. Unknown post-escape framing remains unresolved.
+No significance, historical private-number reproduction or decode is
+claimed. Reuse retained CC0 verification after matching the supplied hash,
+which the tool checks before TIFF parsing. Every sample identity survives
+sanitized failures; any failure or shortfall returns nonzero. Stdlib,
+reads files/prints aggregates only.
+
+    python -I -B tools/token_tail_distribution_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
+    python -I -B tools/test_token_tail_distribution_probe.py
