@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Measure local H/L lag tables in four fixed token windows (lead #11).
+"""Measure local H/L lag tables in four declared token windows (lead #11).
 
 Original measurement convention, not a decoder or historical reproduction.
 Parse from payload bit zero: q zeros, one stop bit, five suffix bits; q>=17
-has no extra skip. Four consecutive 262144-token windows count escapes in
-their absolute indices. For lags 1..3 omit pairs with either endpoint q>=17,
+has no extra skip. Four 262144-token windows count escapes in their absolute
+indices. Their start-to-start stride defaults to 262144 (consecutive windows);
+--window-stride can declare separated windows, and must be at least 262144.
+For lags 1..3 omit pairs with either endpoint q>=17,
 without compacting indices; intervening escapes remain. Pairs never cross
 windows. H=suffix>>3, L=suffix&7. Report all four ordered H/L pair tables,
 unsmoothed empirical plug-in MI (bits) and exact omission counts.
@@ -32,10 +34,13 @@ WINDOW = 262144
 COUNT = 4
 
 
-def measure(tokens):
+def measure(tokens, stride=None):
+    stride = WINDOW if stride is None else stride
+    if stride < WINDOW:
+        raise ValueError("window stride must be at least the window size")
     results = []
     for window in range(COUNT):
-        start = window * WINDOW
+        start = window * stride
         selected = tokens[start:start + WINDOW]
         lag_results = []
         for lag in (1, 2, 3):
@@ -78,7 +83,10 @@ def measure(tokens):
     return results
 
 
-def report(sample_id, name, path):
+def report(sample_id, name, path, stride=None):
+    stride = WINDOW if stride is None else stride
+    if stride < WINDOW:
+        raise ValueError("window stride must be at least the window size")
     with open(path, "rb") as handle:
         data = handle.read()
     best = max(Tiff(data).all_ifds(), key=lambda d: sum(d.get(0x117) or []))
@@ -91,25 +99,31 @@ def report(sample_id, name, path):
         raise ValueError("payload out of bounds")
     if w <= 0 or h <= 0 or size_class(count, w, h) != "variable" or best.get(0x103) != [1]:
         raise ValueError("positive variable-size payload with compression tag 1 required")
-    tokens, end = scan_prefix(data[off:off + count], WINDOW * COUNT)
+    requested = (COUNT - 1) * stride + WINDOW
+    tokens, end = scan_prefix(data[off:off + count], requested)
     return {"pixls_id": sample_id, "pixls_name": name, "sha256": hashlib.sha256(data).hexdigest(),
             "variant": "unassigned", "payload_w": w, "payload_h": h,
             "payload_offset": off, "payload_bytes": count, "compression_tag": 1,
-            "size_class": "variable", "returned_tokens": len(tokens), "bits_consumed": end,
-            "windows": measure(tokens)}
+            "size_class": "variable", "requested_scan_tokens": requested,
+            "returned_tokens": len(tokens), "bits_consumed": end,
+            "window_stride_tokens": stride, "windows": measure(tokens, stride)}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--sample", nargs=3, action="append", required=True, metavar=("ID", "PUBLIC_NAME", "FILE"))
+    parser.add_argument("--window-stride", type=int, default=WINDOW,
+                        help="start-to-start token stride, at least %(default)s; default consecutive")
     args = parser.parse_args()
+    if args.window_stride < WINDOW:
+        parser.error("window stride must be at least %d" % WINDOW)
     ids = [s[0] for s in args.sample]
     if any(not i.isascii() or not i.isdecimal() or int(i) <= 0 for i in ids) or len({int(i) for i in ids}) != len(ids):
         parser.error("sample IDs must be distinct positive ASCII decimals")
     reports, failures = [], []
     for sample_id, name, path in args.sample:
         try:
-            reports.append(report(sample_id, name, path))
+            reports.append(report(sample_id, name, path, args.window_stride))
         except (OSError, ValueError, KeyError, IndexError, TypeError, struct.error) as exc:
             failures.append({"pixls_id": sample_id, "error": type(exc).__name__})
     sources = {}
@@ -117,7 +131,8 @@ def main():
         with open(os.path.join(os.path.dirname(__file__), filename), "rb") as handle:
             sources[filename] = hashlib.sha256(handle.read()).hexdigest()
     print(json.dumps({"source_sha256": sources, "python_version": sys.version.split()[0],
-                      "window_tokens": WINDOW, "window_count": COUNT, "escape_extra_bits": 0,
+                      "window_tokens": WINDOW, "window_count": COUNT,
+                      "window_stride_tokens": args.window_stride, "escape_extra_bits": 0,
                       "samples": reports, "failures": failures}, indent=2, allow_nan=False))
     return 1 if failures else 0
 

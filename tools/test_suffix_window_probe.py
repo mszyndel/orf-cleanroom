@@ -107,6 +107,40 @@ class WindowTests(unittest.TestCase):
                 probe.main()
         self.assertEqual(caught.exception.code, 2)
 
+    def test_separated_windows_absolute_indices_and_no_gap_pairs(self):
+        # Gap tokens include escapes: they are scanned but are never endpoints.
+        tokens = [(0, 0)] * 4 + [(17, 31)] * 3 + [(0, 31)] * 4
+        with mock.patch.object(probe, "WINDOW", 4):
+            reports = probe.measure(tokens, stride=7)
+        self.assertEqual([r["start_token"] for r in reports], [0, 7, 14, 21])
+        self.assertEqual([r["shortfall_tokens"] for r in reports], [0, 0, 4, 4])
+        for r in reports[:2]:
+            self.assertEqual(r["escape_tokens"], 0)
+            self.assertEqual([x["retained_pairs"] for x in r["lags"]], [3, 2, 1])
+            self.assertTrue(all(p["plugin_mi_bits"] == 0 for x in r["lags"] for p in x["pairings"]))
+
+    def test_stride_scanner_limit_and_partial_final_window(self):
+        tags = {0x111: [16], 0x117: [8], 0x100: [5], 0x101: [4], 0x103: [1]}
+        fake_tiff = mock.Mock()
+        fake_tiff.all_ifds.return_value = [tags]
+        tokens = [(0, i % 32) for i in range(24)]
+        with mock.patch.object(probe, "WINDOW", 4), mock.patch.object(probe, "Tiff", return_value=fake_tiff), mock.patch(
+                "builtins.open", mock.mock_open(read_data=bytes([255]) * 64)), mock.patch.object(
+                probe, "scan_prefix", return_value=(tokens, 144)) as scan:
+            result = probe.report("1", "public", "local", stride=7)
+        self.assertEqual(scan.call_args.args[1], 25)
+        self.assertEqual(result["requested_scan_tokens"], 25)
+        self.assertEqual(result["windows"][-1]["returned_tokens"], 3)
+        self.assertEqual(result["windows"][-1]["shortfall_tokens"], 1)
+
+    def test_overlapping_stride_rejected(self):
+        with self.assertRaises(ValueError):
+            probe.measure([], stride=probe.WINDOW - 1)
+        with mock.patch.object(sys, "argv", ["probe", "--window-stride", "0", "--sample", "1", "a", "a"]):
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
+                probe.main()
+        self.assertEqual(caught.exception.code, 2)
+
 
 if __name__ == "__main__":
     unittest.main()
