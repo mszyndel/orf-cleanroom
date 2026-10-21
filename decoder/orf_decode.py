@@ -43,6 +43,7 @@ F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
 F_FIXED = "2026-10-19--radialmonster--fixed-size-payloads-exact-else-compressed"
 F_ROWLAYOUT = "2026-10-21--radialmonster--two-field-row-layout-reproduction"
 F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
+F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
 
 # what the evidence is for each layout
 STATUS = {
@@ -248,7 +249,9 @@ def decode_file(path, order=None, layout=None):
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
         # specify neither tokens nor padding.
-        r.update(variant="compressed", status="not yet specified")
+        # F_BRIDGE_RANGE corrects the six-file Partial suffix-only evidence range;
+        # it establishes no value assembly or compressed decode step (V1 S1.9).
+        r.update(variant="compressed", status="not yet specified (value assembly remains open)")
         r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet, see specs/V1.md S1.7-S1.8 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
