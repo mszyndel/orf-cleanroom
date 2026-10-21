@@ -22,6 +22,18 @@ Reuse retained CC0 provenance after verifying the exact input hash.
 
 ## Example tools
 
+**`token_framing_probe.py`** is the corrected null comparison for lead #197,
+building on the unmerged probe in #198. Bernoulli bits use the measured ones
+fraction as their success probability; density is preserved in expectation.
+Byte shuffling preserves the exact byte histogram. Separate zero/one run-length
+shuffles retain alternating values and exact per-value maximal-run multisets.
+Output is aggregate JSON with exact counts, all input outcomes and a completion
+flag; any failed input exits nonzero. Short residuals and null separation do not
+establish true codec boundaries. Reuse retained CC0 records after local hash checks.
+
+    python -I -B tools/token_framing_probe.py --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
+    python -I -B tools/test_token_framing_probe.py
+
 **`e400_exception_probe.py`** supports lead #79 and `specs/V0.md` G3.
 It scans a licence-checked packed-16 input in TIFF byte order and tests every
 nonempty subset of the axial-2 and diagonal-1 neighbour families under floor,
