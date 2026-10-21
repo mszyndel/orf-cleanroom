@@ -8,10 +8,13 @@ Huffman coded with one of two tables; the figure does not give a full residual
 mapping, so this tool tests the natural category-plus-magnitude-bit convention.
 
 The transcription is a complete-looking Huffman table except that the 9-bit
-code 111111111 is unassigned (Kraft sum 0.998047). The tool reports the parse
-with the transcribed table (which hits that code) and with 111111111 assigned to
-a configurable category (which completes the code and makes any bitstream
-parseable -- that alone is not evidence).
+code 111111111 is unassigned (Kraft sum 0.998047). The figure also prints a
+code-length column: rows 1-6 match their visible codewords, but rows 7-12 are
+listed one bit longer than the visible codeword (for example 11111110 at length
+9 and 111111110 at length 10). The figure is therefore internally inconsistent
+from row 7. This tool uses the literal visible codewords; the stated lengths do
+not form a valid prefix code for those strings, so the result applies to that
+literal reading only, not to every interpretation of Figure 8.
 
 Standard library only. Prints aggregate numbers; writes nothing.
 
@@ -41,6 +44,13 @@ TABLE2 = {
     "00": 11, "01": 10, "100": 9, "101": 8, "1100": 7, "1101": 6,
     "1110": 5, "11110": 4, "111110": 3, "1111110": 2,
     "11111110": 1, "111111110": 0,
+}
+# Code-length column printed in Figure 8. Rows 7-12 are one greater than the
+# visible codeword length; the figure is internally inconsistent from row 7.
+LENGTHS = {
+    "00": 2, "01": 2, "100": 3, "101": 3, "1100": 4, "1101": 4,
+    "1110": 5, "11110": 6, "111110": 7, "1111110": 8,
+    "11111110": 9, "111111110": 10,
 }
 
 
@@ -180,6 +190,9 @@ def run(path, rows, start, missing, sign, reset):
         pf, kraft = prefix_stats(codes)
         print("  %s prefix_free=%s kraft=%.6f codes=%d" % (
             name, pf, kraft, len(codes)))
+        lk = sum(2.0 ** -LENGTHS[c] for c in codes)
+        mis = sum(1 for c in codes if LENGTHS[c] != len(c))
+        print("    stated length column: kraft=%.6f mismatched_codes=%d" % (lk, mis))
         vals, marks, cats, inv, end = parse_rows(
             buf, start, codes, rows, w, sign, None)
         print("    transcribed: values=%d invalid=%d endbit=%d categories=%s" % (
