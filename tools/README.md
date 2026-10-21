@@ -286,3 +286,16 @@ licence-check samples first.
 
     python -I -B tools/token_zero_runs_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_zero_runs_probe.py
+
+**`escape_balance_probe.py`** supports the remaining b1/b0 suffix-balance
+question in lead #11. In the fixed first 262144 complete candidate tokens,
+it splits ordinary tokens strictly before versus after the first q>=17,
+excluding every escape. Exact suffix histograms and b4..b0 one-counts are
+reported, including empty groups, prefix shortfalls and sanitized failures.
+No first escape means all ordinary tokens are in the before group. Framing
+following an escape remains unknown; scene variation and unequal group sizes
+prevent a causal interpretation. This new descriptive metric is not a
+reproduction of historical private numbers. Check CC0 licences first.
+
+    python -I -B tools/escape_balance_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_escape_balance_probe.py
