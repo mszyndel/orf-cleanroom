@@ -10,6 +10,18 @@ Each script should:
 
 ## Example tools
 
+**`e400_exception_probe.py`** supports lead #79 and `specs/V0.md` G3.
+It scans a licence-checked packed-16 input in TIFF byte order and tests every
+nonempty subset of the axial-2 and diagonal-1 neighbour families under floor,
+ceiling and nearest-half-up means. Output contains aggregate counts by low
+nibble, edge exclusions, and residual tests for words unmatched by either
+full-family floor mean. It also tests clearing neighbour low nibbles; no
+pixel values, neighbourhood arrays or images are printed. Subset matches
+are descriptive and do not establish the camera's processing order.
+
+    python -I -B tools/e400_exception_probe.py path/to/E400.ORF
+    python -I -B tools/test_e400_exception_probe.py
+
 **`suffix_match_probe.py`** supports lead #31 with exact suffix-equality counts
 against independent within-block permutations that preserve escape positions.
 It prints aggregate JSON, with every declared lag and explicit sample failures.
