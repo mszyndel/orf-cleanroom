@@ -573,6 +573,14 @@ uncertain framing. Check CC0 licences first. Stdlib, aggregate output only.
     python -I -B tools/token_affine_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_affine_probe.py
 
+Every affine sample now reports `prefix_complete`. Incomplete requests retain
+all selected-row diagnostic ranks/consistency but make the CLI exit nonzero;
+those verdicts cover only observed rows. Failed public identities appear
+in `failures`, with sanitized exception classes, while valid
+reports remain in `samples`. Any input failure also exits nonzero. Every ID
+is validated before reading samples. Existing complete-prefix ranks/counts
+are unchanged. Reuse retained CC0 verification after matching the local hash.
+
 **`suffix_width_lag_probe.py`** follows the neighbour-dependence question after
 the candidate width scan (#29, V1 G8). All k=2..8 and stop=0,1 grammars use
 their first 262144 complete tokens and zero extra escape skip. All lags1..5

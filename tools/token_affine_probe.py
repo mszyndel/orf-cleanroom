@@ -13,7 +13,11 @@ class/context on these rows. Empty systems have no evidence (null verdict).
 Selective omissions cannot repair uncertain post-escape framing. No historical
 private rank reproduction, significance, general scrambler exclusion, physical
 row identification, nonlinear/noisy-law exclusion or decoding is claimed.
-Check CC0 licences separately before use. Builds on #11, #29, #166 and #169.
+Incomplete requested prefixes retain diagnostic ranks but exit nonzero; their
+consistency verdict applies only to observed selected rows. All supplied sample
+identities survive input errors, with sanitized error classes and no local paths.
+Reuse verified CC0 records after matching local hashes; new content needs its
+first licence verification. Builds on #11, #29, #166 and #169.
 """
 import argparse
 import hashlib
@@ -107,7 +111,8 @@ def report(sample_id, name, path):
             "payload_w": w, "payload_h": h, "payload_bytes": count,
             "size_class": "variable", "bits_consumed": end,
             "requested_tokens": LIMIT, "returned_tokens": len(tokens),
-            "token_shortfall": LIMIT - len(tokens), "statistics": measure(tokens)}
+            "token_shortfall": LIMIT - len(tokens),
+            "prefix_complete": len(tokens) == LIMIT, "statistics": measure(tokens)}
 
 
 def main():
@@ -115,22 +120,28 @@ def main():
     parser.add_argument("--sample", nargs=3, action="append", required=True,
                         metavar=("ID", "PUBLIC_NAME", "FILE"))
     args = parser.parse_args()
+    if any(not sample_id.isdigit() for sample_id, _, _ in args.sample):
+        parser.error("sample ID must be numeric")
     reports = []
+    failures = []
+    incomplete = False
     for sample_id, name, path in args.sample:
-        if not sample_id.isdigit():
-            parser.error("sample ID must be numeric")
         try:
-            reports.append(report(sample_id, name, path))
+            item = report(sample_id, name, path)
+            reports.append(item)
+            incomplete = incomplete or not item["prefix_complete"]
         except (OSError, ValueError, KeyError, IndexError, TypeError, struct.error) as exc:
-            parser.exit(1, "sample %s: %s\n" % (sample_id, type(exc).__name__))
+            failures.append({"pixls_id": sample_id, "pixls_name": name,
+                             "error": type(exc).__name__})
     sources = {}
     for name in ("token_affine_probe.py", "suffix_joint_probe.py", "orf_signature.py"):
         with open(os.path.join(os.path.dirname(__file__), name), "rb") as handle:
             sources[name] = hashlib.sha256(handle.read()).hexdigest()
     print(json.dumps({"source_sha256": sources, "python_version": sys.version.split()[0],
                       "lags": LAGS, "context_columns_including_intercept": CONTEXT_COLUMNS,
-                      "samples": reports}, indent=2, allow_nan=False))
+                      "samples": reports, "failures": failures}, indent=2, allow_nan=False))
+    return 1 if failures or incomplete else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
