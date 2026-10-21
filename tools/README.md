@@ -128,6 +128,22 @@ identify padding, codec framing or a decoder. Default output is unchanged.
 
     python -I -B tools/terminal_residual_null_probe.py --fixed-density --sample ID PUBLIC_NAME path/to/file.ORF
 
+Separate opt-in `--fixed-density-lengths` extends the terminal-residual null
+probe (#87, Builds on #11/#224/#257) with all N+1 exact residual-length
+numerators, their common choose(N,K) denominator, exact normalization and
+floating PMF. It includes long rejected candidates, whose first r-5 bits
+must be zero. Seven rolling integer coefficient rows avoid retaining a full
+N-by-K table. O(N*K) integer operations and O(N+K) retained integers have
+costs that grow with integer size; this option is slower than event-only
+counts. Tiny floating probabilities can underflow; exact counts remain
+available. Default and `--fixed-density` outputs are preserved. The uniform
+fixed-density model assumes exchangeable order and remains descriptive:
+length-specific probabilities do not establish framing, padding, calibrated
+significance or decoding. Reuse retained CC0 verification after matching
+local hashes; new content needs its first licence verification.
+
+    python -I -B tools/terminal_residual_null_probe.py --fixed-density-lengths --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`e400_single_pass_probe.py`** supports the remaining exception in #79.
 It marks nonzero-low4 words and tests connected same-colour neighbour
 components of size one or two, excluding whole components touching a
