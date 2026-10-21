@@ -19,6 +19,11 @@ fixed-size prefix blocks (including the final short block). This preserves each
 block's exact byte histogram and ones density, but not within-block ordering,
 bit adjacency or maximal runs. Blocks are diagnostic windows, not camera rows.
 
+Optional --offset-bytes selects an exact-length window of the logical strip payload.
+The parser restarts at window bit zero; all nulls fit that window independently.
+This anchor is not an established whole-stream token boundary. A short requested
+window fails before any model statistics, including at the default zero offset.
+
 Read-only, stdlib, aggregate JSON only; no paths or exception text are emitted.
 Every input has an explicit success/failure record. Any failure exits nonzero
 and the enclosing report is marked incomplete. Each model resets the seeded
@@ -164,9 +169,20 @@ def compare_prefix(prefix, seed, include_markov=False, local_byte_block=None):
     return result
 
 
-def measure(path, nbytes, seed, include_markov=False, local_byte_block=None):
+class WindowShortfall(ValueError):
+    def __init__(self, offset, requested, payload_bytes):
+        super().__init__('requested window exceeds payload')
+        self.window = {'offset_bytes': offset, 'requested_bytes': requested,
+                       'actual_bytes': max(0, payload_bytes - offset),
+                       'payload_bytes': payload_bytes,
+                       'shortfall_bytes': requested - max(0, payload_bytes - offset)}
+
+
+def measure(path, nbytes, seed, include_markov=False, local_byte_block=None, offset_bytes=0):
     if nbytes <= 0:
-        raise ValueError('nonpositive prefix length')
+        raise ValueError('nonpositive window length')
+    if offset_bytes < 0:
+        raise ValueError('negative window offset')
     with open(path, 'rb') as source:
         data = source.read()
     tiff = Tiff(data)
@@ -184,13 +200,20 @@ def measure(path, nbytes, seed, include_markov=False, local_byte_block=None):
         if i and ranges[i - 1][0] + ranges[i - 1][1] > offset:
             raise ValueError('overlapping strips')
     payload = b''.join(data[offset:offset + count] for offset, count in zip(offsets, counts))
-    result = compare_prefix(payload[:nbytes], seed, include_markov=include_markov,
+    if offset_bytes > len(payload) or nbytes > len(payload) - offset_bytes:
+        raise WindowShortfall(offset_bytes, nbytes, len(payload))
+    window = payload[offset_bytes:offset_bytes + nbytes]
+    result = compare_prefix(window, seed, include_markov=include_markov,
                             local_byte_block=local_byte_block)
     result.update({'input_sha256': hashlib.sha256(data).hexdigest(),
                    'width': width, 'height': height, 'payload_bytes': len(payload),
                    'compression_tag': first(best, 0x103),
                    'size_class': size_class(len(payload), width, height),
-                   'requested_prefix_bytes': nbytes})
+                   'requested_prefix_bytes': nbytes,
+                   'window': {'offset_bytes': offset_bytes, 'start_bit': 8 * offset_bytes,
+                              'end_bit_exclusive': 8 * (offset_bytes + nbytes),
+                              'requested_bytes': nbytes, 'actual_bytes': len(window),
+                              'parser_origin': 'window_bit_zero'}})
     return result
 
 
@@ -199,6 +222,8 @@ def main(argv=None):
     parser.add_argument('--sample', nargs=3, action='append', required=True,
                         metavar=('ID', 'PUBLIC_NAME', 'PATH'))
     parser.add_argument('--bytes', type=int, default=131072)
+    parser.add_argument('--offset-bytes', type=int, default=0,
+                        help='byte offset in logical strip payload; restart parsing at window bit zero')
     parser.add_argument('--seed', type=int, default=20261021)
     parser.add_argument('--markov', action='store_true',
                         help='also compare a fitted first-order binary Markov null')
@@ -207,6 +232,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.bytes <= 0:
         parser.error('--bytes must be positive')
+    if args.offset_bytes < 0:
+        parser.error('--offset-bytes must be nonnegative')
     if args.local_byte_block is not None and args.local_byte_block <= 0:
         parser.error('--local-byte-block must be positive')
     ids = [sid for sid, _, _ in args.sample]
@@ -216,11 +243,16 @@ def main(argv=None):
         parser.error('duplicate sample IDs')
     samples, failures = [], 0
     for sid, name, path in args.sample:
-        record = {'pixls_id': sid, 'pixls_name': name}
+        record = {'pixls_id': sid, 'pixls_name': name,
+                  'requested_window': {'offset_bytes': args.offset_bytes, 'bytes': args.bytes}}
         try:
             record.update(measure(path, args.bytes, args.seed, include_markov=args.markov,
-                                  local_byte_block=args.local_byte_block))
+                                  local_byte_block=args.local_byte_block, offset_bytes=args.offset_bytes))
             record['status'] = 'ok'
+        except WindowShortfall as shortfall:
+            failures += 1
+            record.update({'status': 'failed', 'error': 'requested window exceeds payload',
+                           'window': shortfall.window})
         except (OSError, ValueError, TypeError, IndexError, KeyError, struct.error):
             failures += 1
             record.update({'status': 'failed', 'error': 'unreadable or invalid TIFF payload'})
