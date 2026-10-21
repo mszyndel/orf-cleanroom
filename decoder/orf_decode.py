@@ -37,6 +37,7 @@ from array import array
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "tools"))
 import orf_signature  # noqa: E402
 
+F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
 F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
@@ -245,6 +246,8 @@ def decode_file(path, order=None, layout=None):
          "strips": len(p.strips), "strip_gaps": p.gaps,
          "packing": "", "order": "", "notes": []}
     if sc == "variable":
+        # F_WEAK_TABLE (Partial for #155) measures a weak preview-luma correlate;
+        # it specifies neither sensor values nor a predictor or round-trip decode.
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
