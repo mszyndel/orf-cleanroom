@@ -36,6 +36,75 @@ def entropy(counts):
 
 
 class Tests(unittest.TestCase):
+    def test_rotation_tables_against_independent_pair_enumeration(self):
+        rng = random.Random(931)
+        tokens = [(rng.randrange(8), rng.randrange(32)) for _ in range(400)]
+        tokens[130] = (17, 1)
+        result = probe.block_rotation_control(tokens)
+        self.assertEqual(result["complete_blocks"], 3)
+        self.assertEqual(result["retained_blocks"], 2)
+        self.assertEqual(result["omitted_escape_blocks"], 1)
+        self.assertEqual(result["incomplete_tail_tokens"], 16)
+        for cell in result["lags"]:
+            lag = cell["lag"]
+            m = 128 - lag
+            self.assertEqual(cell["retained_pairs"], 2 * m)
+            for label, extract, size in (("q_positive", lambda a: int(a[0] > 0), 2),
+                                         ("suffix_low2", lambda a: a[1] % 4, 4)):
+                expected = [collections.Counter(), collections.Counter()]
+                for start in (0, 256):
+                    donors = [extract(a) for a in tokens[start:start + m]]
+                    targets = [extract(a) for a in tokens[start + lag:start + 128]]
+                    rotated = donors[m // 2:] + donors[:m // 2]
+                    expected[0].update(zip(donors, targets))
+                    expected[1].update(zip(rotated, targets))
+                tables = []
+                for key, counts in zip(("observed_table", "control_table"), expected):
+                    table = [[counts[a, b] for b in range(size)] for a in range(size)]
+                    self.assertEqual(cell[label][key], table)
+                    tables.append(table)
+                self.assertEqual(list(map(sum, tables[0])), list(map(sum, tables[1])))
+                self.assertEqual([sum(row[b] for row in tables[0]) for b in range(size)],
+                                 [sum(row[b] for row in tables[1]) for b in range(size)])
+                scores = [entropy(list(map(sum, table))) + entropy(
+                    [sum(row[b] for row in table) for b in range(size)]) - entropy(
+                    [n for row in table for n in row]) for table in tables]
+                self.assertAlmostEqual(cell[label]["observed_mi_bits"], scores[0], places=12)
+                self.assertAlmostEqual(cell[label]["control_mi_bits"], scores[1], places=12)
+                self.assertAlmostEqual(cell[label]["observed_minus_control_mi_bits"],
+                                       scores[0] - scores[1], places=12)
+
+    def test_rotation_preserves_block_mixture_and_negative_difference(self):
+        tokens = [(0, 0)] * 128 + [(1, 3)] * 128
+        for cell in probe.block_rotation_control(tokens)["lags"]:
+            for label in ("q_positive", "suffix_low2"):
+                self.assertEqual(cell[label]["observed_mi_bits"], 1)
+                self.assertEqual(cell[label]["control_mi_bits"], 1)
+                self.assertEqual(cell[label]["observed_minus_control_mi_bits"], 0)
+        # Period62 creates a stronger shifted than adjacent suffix association.
+        rng = random.Random(432)
+        pattern = [rng.randrange(4) for _ in range(62)]
+        tokens = [(0, pattern[i % 62]) for i in range(128)]
+        first = probe.block_rotation_control(tokens)["lags"][0]
+        self.assertLess(first["suffix_low2"]["observed_minus_control_mi_bits"], 0)
+
+    def test_rotation_empty_tail_and_escape_selection(self):
+        for tokens in ([], [(0, 1)] * 127, [(17, 0)] * 128):
+            result = probe.block_rotation_control(tokens)
+            self.assertEqual(result["retained_blocks"], 0)
+            for cell in result["lags"]:
+                self.assertEqual(cell["retained_pairs"], 0)
+                for label in ("q_positive", "suffix_low2"):
+                    self.assertIsNone(cell[label]["observed_mi_bits"])
+                    self.assertIsNone(cell[label]["control_mi_bits"])
+                    self.assertIsNone(cell[label]["observed_minus_control_mi_bits"])
+
+    def test_rotation_cli_flag_forwarding(self):
+        with mock.patch.object(probe, "report", return_value={}) as report:
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(probe.main(["--block-rotation-control", "--sample", "1", "n", "p"]), 0)
+            report.assert_called_once_with("1", "n", "p", rotation_control=True)
+
     def test_all_bytes_and_random_against_string_parser(self):
         rng = random.Random(20261021)
         buffers = [bytes([i]) for i in range(256)]
