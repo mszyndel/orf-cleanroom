@@ -150,17 +150,21 @@ token-to-luma probe and the geometry part of lead #11.
     python -I tools/jpeg_dc.py path/to/file.ORF
 
 **`token_luma_probe.py`** tests a fixed token-field to low-resolution luma
-mapping against a within-row shuffle null. For each token it takes
-`v = b2 + b4`, box-averages `v` over `--window` tokens within each row,
+mapping against a within-row suffix permutation. The default `--map sum` takes
+`v = b2 + b4`; `--map b2` and `--map b4` select that bit alone. Every map
+zeroes escape markers, box-averages `v` over `--window` tokens within each row,
 block-averages to the preview's luma DC grid, and correlates the row-centred
 grids. The target comes from `jpeg_dc.py`; the null permutes the suffix tokens
 within each row. It prints one aggregate line per file (`r`, shuffle mean and
 sd, z, escape count). The default `--rows 300` is the top token band; a
 full-frame reshape is not used because the token row stride can drift. This is
-a low-frequency luma proxy, not a full pixel decode. Test:
+a low-frequency luma proxy, not a full pixel decode. The camera rendering is
+a numerical sanity reference, not sensor ground truth. Marginal map rankings
+do not establish unique bit contribution or significance. Test:
 `python -I tools/token_luma_probe.py --self-test`.
 
     python -I tools/token_luma_probe.py path/to/file.ORF --rows 300 --window 63 --perms 20
+    python -I tools/token_luma_probe.py path/to/file.ORF --map b2 --rows 300 --window 63 --perms 20
     python -I tools/token_luma_probe.py --self-test
 
 **`token_value_probe.py`** supports leads #11 and #32 with band-wise
@@ -237,6 +241,20 @@ three flags shown below.
     python -I tools/trailing_ones_probe.py --help
     python -I tools/trailing_ones_probe.py --self-test
     python -I tools/trailing_ones_probe.py --cohort tools/cohorts/lead87-trailing-ones-v1-full.json --sample-dir /path/to/samples --measured-by @yourhandle
+
+**`byte_boundary_tail_probe.py`** supports lead #87 with an empirical reference
+for trailing-one runs at every payload byte boundary, including cross-byte
+runs. It compares the final run with all earlier boundaries in that same
+payload, retaining full histograms, ties and exact ratio denominators. Empty
+payloads reject; one-byte payloads have no earlier-boundary fractions. These
+are descriptive frequencies, without endpoint exchangeability, significance,
+padding, token-framing or decoder inference. Match local hashes to retained
+CC0 verification before running; new content needs first verification. The
+CLI retains successful samples and sanitized errors, exits nonzero for any
+failure, and prints aggregates only. Stdlib; no sample data is written.
+
+    python -I -B tools/byte_boundary_tail_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_byte_boundary_tail_probe.py
 
 All of them use the standard library only (Python 3.8+). Contributions of new tools are welcome. Follow the rules above and RULES.md.
 
