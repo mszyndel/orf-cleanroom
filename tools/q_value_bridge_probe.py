@@ -18,6 +18,7 @@ channels. Escape omission can bias selection and cannot repair uncertain
 framing. Detrending removes drift; low ratios establish neither a bounded
 reconstruction, significance nor historical private numerical replication.
 Stdlib only; reads inputs and prints aggregates, never token/pixel arrays.
+Incomplete fixed prefixes produce diagnostic failures without bridge statistics.
 """
 import argparse
 from fractions import Fraction
@@ -33,6 +34,15 @@ import suffix_joint_probe as candidate
 LIMIT = 262144
 BLOCK = 128
 MAPPINGS = ("u32", "zigzag_u32")
+
+
+class IncompletePrefix(ValueError):
+    """Public counts only; never retain input bytes or a local path."""
+    def __init__(self, returned, consumed, payload_bits):
+        super().__init__("incomplete fixed prefix")
+        self.diagnostic = {"reason": "incomplete_prefix", "requested_tokens": LIMIT,
+                           "returned_tokens": returned, "token_shortfall": LIMIT - returned,
+                           "consumed_bits": consumed, "payload_bits": payload_bits}
 
 
 class PrivateParser(argparse.ArgumentParser):
@@ -140,6 +150,8 @@ def report(sample_id, name, path):
             or best.get(0x103) != [1]):
         raise ValueError("variable-size in-bounds payload with compression tag 1 required")
     tokens, consumed = candidate.scan_prefix(data[off:off + count], LIMIT)
+    if len(tokens) != LIMIT:
+        raise IncompletePrefix(len(tokens), consumed, count * 8)
     return {"pixls_id": sample_id, "pixls_name": name,
             "sha256": hashlib.sha256(data).hexdigest(), "variant": "unassigned",
             "payload_w": w, "payload_h": h, "payload_bytes": count,
@@ -165,6 +177,9 @@ def main(argv=None):
     for sample_id, name, path in args.sample:
         try:
             samples.append(report(int(sample_id), name, path))
+        except IncompletePrefix as exc:
+            failures.append({"pixls_id": int(sample_id), "category": "input_or_measurement_error",
+                             **exc.diagnostic})
         except (OSError, ValueError, TypeError, KeyError, IndexError, struct.error, OverflowError):
             failures.append({"pixls_id": int(sample_id), "category": "input_or_measurement_error"})
     sources = {os.path.basename(p): file_hash(p) for p in
