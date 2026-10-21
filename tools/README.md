@@ -453,6 +453,24 @@ Licence-check public inputs first. Stdlib, reads files/prints aggregates only.
     python -I -B tools/suffix_width_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_suffix_width_lag_probe.py
 
+Optional `--block-rotation-control` adds a separate matched descriptive
+control for #29/V1 G8. Complete 128-token blocks from token zero are kept
+only when every q<17; incomplete tails are excluded. At lag L=1..5, M=128-L
+donors at indices 0..M-1 pair with fixed targets L..127. The control rotates
+these M donor tokens by floor(M/2), modulo M. Both observed and control
+tables therefore have identical donor/target marginals in each block and
+pooled. Exact q-positive and low2 suffix tables, MI, signed observed-minus-
+control differences and selection counts are reported for every grammar.
+The default endpoint-only report stays unchanged. Whole-block selection
+differs from that default. This single deterministic rotation preserves
+block mixtures but can retain longer dependencies; it is not a null
+distribution, significance test, unbiased correction or grammar selection.
+Blocks are not physical rows and omission cannot repair escape framing.
+Reuse retained CC0 verification after matching the local hash; new content
+needs its first licence verification. Reports contain aggregates only.
+
+    python -I -B tools/suffix_width_lag_probe.py --block-rotation-control --sample ID PUBLIC_NAME path/to/file.ORF
+
 `token_phase_context_probe.py` also emits a separate `heldout` report for
 lead #30. Complete 128-token blocks containing any q>=17 and the incomplete
 tail are omitted. Original even-index blocks train; original odd-index

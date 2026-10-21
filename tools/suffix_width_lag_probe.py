@@ -9,7 +9,11 @@ Intervening escapes remain. Omission cannot repair unknown escape framing.
 Unsmoothed plug-in MI is descriptive, biased by finite sample, marginal and
 selection effects, without a null/significance test. Equal alphabet sizes do
 not justify ranking grammars. No physical rows, historical reproduction,
-padding, codec selection or decoding is established. Licence-check inputs.
+padding, codec selection or decoding is established. Reuse verified CC0
+records after matching local hashes; new content needs licence verification.
+Optional --block-rotation-control adds whole-block selection and matched
+donor rotations, preserving both marginals. This one deterministic control
+is not a null distribution, significance test or grammar-ranking rule.
 Reads regular files and prints aggregates only; stdlib Python 3.8+.
 """
 import argparse
@@ -26,6 +30,7 @@ from orf_signature import Tiff, size_class
 
 TOKENS = 262144
 MAX_BYTES = 512 * 1024 * 1024
+BLOCK_TOKENS = 128
 
 
 def parse(payload, k, stop, limit=TOKENS):
@@ -89,7 +94,50 @@ def measures(tokens):
     return result
 
 
-def report(sample_id, name, path):
+def block_rotation_control(tokens):
+    """Matched descriptive donor rotation; no null distribution is implied.
+
+    Complete 128-token blocks with any q>=17 are omitted. For lag L, the
+    M=128-L donors at indices 0..M-1 are permuted by floor(M/2), modulo M;
+    targets at indices L..127 are fixed. Thus both marginals match exactly.
+    """
+    complete = len(tokens) // BLOCK_TOKENS
+    blocks = [tokens[start:start + BLOCK_TOKENS]
+              for start in range(0, complete * BLOCK_TOKENS, BLOCK_TOKENS)]
+    kept = [block for block in blocks if all(q < 17 for q, _ in block)]
+    cells = []
+    for lag in range(1, 6):
+        length = BLOCK_TOKENS - lag
+        shift = length // 2
+        fields = {}
+        for label, alphabet, extract in (
+                ("q_positive", 2, lambda token: int(token[0] > 0)),
+                ("suffix_low2", 4, lambda token: token[1] & 3)):
+            observed = [[0] * alphabet for _ in range(alphabet)]
+            control = [[0] * alphabet for _ in range(alphabet)]
+            for block in kept:
+                for j in range(length):
+                    target = extract(block[j + lag])
+                    observed[extract(block[j])][target] += 1
+                    control[extract(block[(j + shift) % length])][target] += 1
+            observed_mi, control_mi = mi(observed), mi(control)
+            fields[label] = {
+                "observed_table": observed, "control_table": control,
+                "observed_mi_bits": observed_mi, "control_mi_bits": control_mi,
+                "observed_minus_control_mi_bits": (
+                    observed_mi - control_mi if observed_mi is not None else None)}
+        cells.append({"lag": lag, "donor_count_per_block": length,
+                      "donor_rotation": shift,
+                      "retained_pairs": len(kept) * length, **fields})
+    return {"block_tokens": BLOCK_TOKENS, "complete_blocks": complete,
+            "retained_blocks": len(kept),
+            "omitted_escape_blocks": complete - len(kept),
+            "incomplete_tail_tokens": len(tokens) % BLOCK_TOKENS,
+            "retained_tokens": len(kept) * BLOCK_TOKENS,
+            "lags": cells}
+
+
+def report(sample_id, name, path, rotation_control=False):
     if not stat.S_ISREG(os.stat(path).st_mode):
         raise ValueError("regular file required")
     with open(path, "rb") as handle:
@@ -112,11 +160,14 @@ def report(sample_id, name, path):
     for stop in (0, 1):
         for k in range(2, 9):
             tokens, end = parse(payload, k, stop)
-            cells.append({"k": k, "stop_bit": stop, "tokens": len(tokens),
+            cell = {"k": k, "stop_bit": stop, "tokens": len(tokens),
                           "token_shortfall": TOKENS - len(tokens),
                           "bits_consumed": end, "remaining_payload_bits": count * 8 - end,
                           "q_ge_17": sum(q >= 17 for q, _ in tokens),
-                          "lags": measures(tokens)})
+                          "lags": measures(tokens)}
+            if rotation_control:
+                cell["block_rotation_control"] = block_rotation_control(tokens)
+            cells.append(cell)
     return {"pixls_id": sample_id, "pixls_name": name,
             "sha256": hashlib.sha256(data).hexdigest(), "variant": "unassigned",
             "size_class": "variable", "compression_tag": 1,
@@ -136,6 +187,8 @@ def main(argv=None):
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--sample", nargs=3, action="append", required=True,
                         metavar=("ID", "PUBLIC_NAME", "FILE"))
+    parser.add_argument("--block-rotation-control", action="store_true",
+                        help="Add matched 128-token donor-rotation tables (descriptive only)")
     args = parser.parse_args(argv)
     ids = [entry[0] for entry in args.sample]
     if any(not value.isascii() or not value.isdecimal() or int(value) <= 0 for value in ids):
@@ -145,7 +198,10 @@ def main(argv=None):
     reports, failures = [], []
     for sample_id, name, path in args.sample:
         try:
-            reports.append(report(sample_id, name, path))
+            if args.block_rotation_control:
+                reports.append(report(sample_id, name, path, rotation_control=True))
+            else:
+                reports.append(report(sample_id, name, path))
         except (OSError, ValueError, KeyError, IndexError, TypeError, struct.error):
             failures.append({"pixls_id": sample_id, "error": "invalid_or_unreadable_input"})
     print(json.dumps({"source_sha256": source_hashes(), "requested_tokens": TOKENS,
