@@ -1,0 +1,1045 @@
+{
+  "source_sha256": {
+    "token_donor_comb_probe.py": "41e5b47255779d8fd66bfaa6be1ed817951496d4f2306be44f31c25388e5f515",
+    "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18",
+    "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+  },
+  "python_version": "3.13.15",
+  "escape_extra_bits": 0,
+  "requested_prefix_tokens": 262144,
+  "samples": [
+    {
+      "pixls_id": "241",
+      "pixls_name": "Olympus - E-P3 - 16bit (4:3).ORF",
+      "sha256": "540edabdd9d4e6ef8602f56443730cc3133d714dc4d3d2c607e2f0aa6be5cbcd",
+      "variant": "unassigned",
+      "payload_w": 4080,
+      "payload_h": 3040,
+      "payload_offset": 1436160,
+      "payload_bytes": 10427128,
+      "size_class": "variable",
+      "compression_tag": [
+        1
+      ],
+      "bits_consumed": 1737004,
+      "requested_tokens": 262144,
+      "prefix_shortfall": 0,
+      "statistics": {
+        "parsed_tokens": 262144,
+        "nominal_width": 4080,
+        "parsed_escape_tokens": 3,
+        "lags": [
+          {
+            "lag": 8158,
+            "initial_targets_without_donor": 8158,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63752,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18366,
+                    15825
+                  ],
+                  [
+                    15781,
+                    13780
+                  ]
+                ],
+                "retained_pairs": 63752,
+                "pearson": 0.003313301637194792
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63752,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    18302,
+                    15776
+                  ],
+                  [
+                    15766,
+                    13906
+                  ]
+                ],
+                "retained_pairs": 63750,
+                "pearson": 0.005719229869688631
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63241,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    17289,
+                    15742
+                  ],
+                  [
+                    15805,
+                    14403
+                  ]
+                ],
+                "retained_pairs": 63239,
+                "pearson": 0.00021164175806938807
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63241,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    17760,
+                    15767
+                  ],
+                  [
+                    15784,
+                    13930
+                  ]
+                ],
+                "retained_pairs": 63241,
+                "pearson": -0.0014751502068395665
+              }
+            ]
+          },
+          {
+            "lag": 8160,
+            "initial_targets_without_donor": 8160,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63752,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    18323,
+                    15861
+                  ],
+                  [
+                    15823,
+                    13744
+                  ]
+                ],
+                "retained_pairs": 63751,
+                "pearson": 0.0008534867975508723
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63752,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    18148,
+                    15935
+                  ],
+                  [
+                    15919,
+                    13748
+                  ]
+                ],
+                "retained_pairs": 63750,
+                "pearson": -0.004124467761466152
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63240,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    17307,
+                    15731
+                  ],
+                  [
+                    15787,
+                    14414
+                  ]
+                ],
+                "retained_pairs": 63239,
+                "pearson": 0.0011203782837954203
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63240,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    17764,
+                    15757
+                  ],
+                  [
+                    15780,
+                    13939
+                  ]
+                ],
+                "retained_pairs": 63240,
+                "pearson": -0.0010370393758244772
+              }
+            ]
+          },
+          {
+            "lag": 8162,
+            "initial_targets_without_donor": 8162,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63751,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    18301,
+                    15886
+                  ],
+                  [
+                    15844,
+                    13719
+                  ]
+                ],
+                "retained_pairs": 63750,
+                "pearson": -0.0006196930754819546
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63751,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    18209,
+                    15879
+                  ],
+                  [
+                    15857,
+                    13804
+                  ]
+                ],
+                "retained_pairs": 63749,
+                "pearson": -0.00043146367803517823
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63240,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    17296,
+                    15738
+                  ],
+                  [
+                    15799,
+                    14406
+                  ]
+                ],
+                "retained_pairs": 63239,
+                "pearson": 0.0005227142454177705
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63240,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    17718,
+                    15798
+                  ],
+                  [
+                    15826,
+                    13898
+                  ]
+                ],
+                "retained_pairs": 63240,
+                "pearson": -0.0037888722589144693
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "pixls_id": "1051",
+      "pixls_name": "Olympus - E-M1 - 16bit (4:3).orf",
+      "sha256": "19ba17e778ae802d4039f0e88bb1cd68825780788b8058c479067e32b9a63eda",
+      "variant": "unassigned",
+      "payload_w": 4640,
+      "payload_h": 3472,
+      "payload_offset": 1491456,
+      "payload_bytes": 13919144,
+      "size_class": "variable",
+      "compression_tag": [
+        1
+      ],
+      "bits_consumed": 1775448,
+      "requested_tokens": 262144,
+      "prefix_shortfall": 0,
+      "statistics": {
+        "parsed_tokens": 262144,
+        "nominal_width": 4640,
+        "parsed_escape_tokens": 3,
+        "lags": [
+          {
+            "lag": 9278,
+            "initial_targets_without_donor": 9278,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63792,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    15831,
+                    16054
+                  ],
+                  [
+                    16025,
+                    15882
+                  ]
+                ],
+                "retained_pairs": 63792,
+                "pearson": -0.005737833886076184
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63792,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    16043,
+                    16064
+                  ],
+                  [
+                    16054,
+                    15631
+                  ]
+                ],
+                "retained_pairs": 63792,
+                "pearson": -0.007002100156362108
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62641,
+                "endpoint_escape_omitted_pairs": 3,
+                "donor_by_target_b2": [
+                  [
+                    15791,
+                    15633
+                  ],
+                  [
+                    15603,
+                    15611
+                  ]
+                ],
+                "retained_pairs": 62638,
+                "pearson": 0.00264214238981042
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62641,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    15625,
+                    15700
+                  ],
+                  [
+                    15738,
+                    15578
+                  ]
+                ],
+                "retained_pairs": 62641,
+                "pearson": -0.0037517349856585015
+              }
+            ]
+          },
+          {
+            "lag": 9280,
+            "initial_targets_without_donor": 9280,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63792,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    15877,
+                    16003
+                  ],
+                  [
+                    15979,
+                    15932
+                  ]
+                ],
+                "retained_pairs": 63791,
+                "pearson": -0.0027125855390415917
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63792,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    16179,
+                    15928
+                  ],
+                  [
+                    15918,
+                    15767
+                  ]
+                ],
+                "retained_pairs": 63792,
+                "pearson": 0.001525970850912533
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62640,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    15673,
+                    15756
+                  ],
+                  [
+                    15720,
+                    15489
+                  ]
+                ],
+                "retained_pairs": 62638,
+                "pearson": -0.005021275107126732
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62640,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    15764,
+                    15560
+                  ],
+                  [
+                    15599,
+                    15717
+                  ]
+                ],
+                "retained_pairs": 62640,
+                "pearson": 0.005140314857779422
+              }
+            ]
+          },
+          {
+            "lag": 9282,
+            "initial_targets_without_donor": 9282,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63791,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    15957,
+                    15928
+                  ],
+                  [
+                    15898,
+                    16007
+                  ]
+                ],
+                "retained_pairs": 63790,
+                "pearson": 0.0021629570933392704
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63791,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    16117,
+                    15996
+                  ],
+                  [
+                    15980,
+                    15698
+                  ]
+                ],
+                "retained_pairs": 63791,
+                "pearson": -0.002567057893944675
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62640,
+                "endpoint_escape_omitted_pairs": 2,
+                "donor_by_target_b2": [
+                  [
+                    15698,
+                    15726
+                  ],
+                  [
+                    15694,
+                    15520
+                  ]
+                ],
+                "retained_pairs": 62638,
+                "pearson": -0.0032327208288392686
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62640,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    15727,
+                    15591
+                  ],
+                  [
+                    15636,
+                    15686
+                  ]
+                ],
+                "retained_pairs": 62640,
+                "pearson": 0.002969439134435056
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "pixls_id": "4126",
+      "pixls_name": "Olympus - E-M10 Mark IV - 16bit (4:3).ORF",
+      "sha256": "ce03e936cb2e8131343e7045a3249f78477bd2ae944e121ace72058b89fef509",
+      "variant": "unassigned",
+      "payload_w": 5200,
+      "payload_h": 3904,
+      "payload_offset": 1523712,
+      "payload_bytes": 17235346,
+      "size_class": "variable",
+      "compression_tag": [
+        1
+      ],
+      "bits_consumed": 1737857,
+      "requested_tokens": 262144,
+      "prefix_shortfall": 0,
+      "statistics": {
+        "parsed_tokens": 262144,
+        "nominal_width": 5200,
+        "parsed_escape_tokens": 1,
+        "lags": [
+          {
+            "lag": 10398,
+            "initial_targets_without_donor": 10398,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63472,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18461,
+                    15739
+                  ],
+                  [
+                    15762,
+                    13510
+                  ]
+                ],
+                "retained_pairs": 63472,
+                "pearson": 0.0013286029962127292
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63472,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18737,
+                    15628
+                  ],
+                  [
+                    15614,
+                    13493
+                  ]
+                ],
+                "retained_pairs": 63472,
+                "pearson": 0.008800119855718755
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62401,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    17895,
+                    15407
+                  ],
+                  [
+                    15406,
+                    13692
+                  ]
+                ],
+                "retained_pairs": 62400,
+                "pearson": 0.007902900640897905
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62401,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18152,
+                    15362
+                  ],
+                  [
+                    15389,
+                    13498
+                  ]
+                ],
+                "retained_pairs": 62401,
+                "pearson": 0.008893986738958153
+              }
+            ]
+          },
+          {
+            "lag": 10400,
+            "initial_targets_without_donor": 10400,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63472,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    18484,
+                    15710
+                  ],
+                  [
+                    15738,
+                    13539
+                  ]
+                ],
+                "retained_pairs": 63471,
+                "pearson": 0.00300780245830969
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63472,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18624,
+                    15735
+                  ],
+                  [
+                    15727,
+                    13386
+                  ]
+                ],
+                "retained_pairs": 63472,
+                "pearson": 0.001835941561898743
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62400,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    17759,
+                    15549
+                  ],
+                  [
+                    15542,
+                    13550
+                  ]
+                ],
+                "retained_pairs": 62400,
+                "pearson": -0.0010609868499967445
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62400,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18113,
+                    15407
+                  ],
+                  [
+                    15427,
+                    13453
+                  ]
+                ],
+                "retained_pairs": 62400,
+                "pearson": 0.006188359436970489
+              }
+            ]
+          },
+          {
+            "lag": 10402,
+            "initial_targets_without_donor": 10402,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 63471,
+                "endpoint_escape_omitted_pairs": 1,
+                "donor_by_target_b2": [
+                  [
+                    18506,
+                    15685
+                  ],
+                  [
+                    15715,
+                    13564
+                  ]
+                ],
+                "retained_pairs": 63470,
+                "pearson": 0.00452106914014306
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 63471,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18798,
+                    15560
+                  ],
+                  [
+                    15553,
+                    13560
+                  ]
+                ],
+                "retained_pairs": 63471,
+                "pearson": 0.012892554155454015
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62400,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    17783,
+                    15527
+                  ],
+                  [
+                    15518,
+                    13572
+                  ]
+                ],
+                "retained_pairs": 62400,
+                "pearson": 0.00041577621487910526
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62400,
+                "endpoint_escape_omitted_pairs": 0,
+                "donor_by_target_b2": [
+                  [
+                    18049,
+                    15471
+                  ],
+                  [
+                    15491,
+                    13389
+                  ]
+                ],
+                "retained_pairs": 62400,
+                "pearson": 0.002062786478990163
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "pixls_id": "6946",
+      "pixls_name": "OM System - TG-7 - 16bit (4:3).ORF",
+      "sha256": "4f7344c67bfcfcfec45f754195ba612fc2ad6312f5fab87812bf04b9e9e7d46a",
+      "variant": "unassigned",
+      "payload_w": 4040,
+      "payload_h": 3016,
+      "payload_offset": 1514496,
+      "payload_bytes": 12300700,
+      "size_class": "variable",
+      "compression_tag": [
+        1
+      ],
+      "bits_consumed": 1946399,
+      "requested_tokens": 262144,
+      "prefix_shortfall": 0,
+      "statistics": {
+        "parsed_tokens": 262144,
+        "nominal_width": 4040,
+        "parsed_escape_tokens": 2235,
+        "lags": [
+          {
+            "lag": 8078,
+            "initial_targets_without_donor": 8078,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 64412,
+                "endpoint_escape_omitted_pairs": 1168,
+                "donor_by_target_b2": [
+                  [
+                    17762,
+                    15816
+                  ],
+                  [
+                    15767,
+                    13899
+                  ]
+                ],
+                "retained_pairs": 63244,
+                "pearson": -0.0025063088826712677
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 64412,
+                "endpoint_escape_omitted_pairs": 1084,
+                "donor_by_target_b2": [
+                  [
+                    17717,
+                    15879
+                  ],
+                  [
+                    15828,
+                    13904
+                  ]
+                ],
+                "retained_pairs": 63328,
+                "pearson": -0.0050007773040627755
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62621,
+                "endpoint_escape_omitted_pairs": 1057,
+                "donor_by_target_b2": [
+                  [
+                    17466,
+                    15345
+                  ],
+                  [
+                    15343,
+                    13410
+                  ]
+                ],
+                "retained_pairs": 61564,
+                "pearson": -0.001292400659015602
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62621,
+                "endpoint_escape_omitted_pairs": 1023,
+                "donor_by_target_b2": [
+                  [
+                    17524,
+                    15310
+                  ],
+                  [
+                    15270,
+                    13494
+                  ]
+                ],
+                "retained_pairs": 61598,
+                "pearson": 0.002842885626936717
+              }
+            ]
+          },
+          {
+            "lag": 8080,
+            "initial_targets_without_donor": 8080,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 64412,
+                "endpoint_escape_omitted_pairs": 1167,
+                "donor_by_target_b2": [
+                  [
+                    17941,
+                    15658
+                  ],
+                  [
+                    15615,
+                    14031
+                  ]
+                ],
+                "retained_pairs": 63245,
+                "pearson": 0.00725837304031176
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 64412,
+                "endpoint_escape_omitted_pairs": 1085,
+                "donor_by_target_b2": [
+                  [
+                    17751,
+                    15831
+                  ],
+                  [
+                    15782,
+                    13963
+                  ]
+                ],
+                "retained_pairs": 63327,
+                "pearson": -0.00198963974646334
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62620,
+                "endpoint_escape_omitted_pairs": 1058,
+                "donor_by_target_b2": [
+                  [
+                    17415,
+                    15406
+                  ],
+                  [
+                    15411,
+                    13330
+                  ]
+                ],
+                "retained_pairs": 61562,
+                "pearson": -0.005597292869391687
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62620,
+                "endpoint_escape_omitted_pairs": 1021,
+                "donor_by_target_b2": [
+                  [
+                    17501,
+                    15334
+                  ],
+                  [
+                    15294,
+                    13470
+                  ]
+                ],
+                "retained_pairs": 61599,
+                "pearson": 0.001291915143330725
+              }
+            ]
+          },
+          {
+            "lag": 8082,
+            "initial_targets_without_donor": 8082,
+            "classes": [
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 64411,
+                "endpoint_escape_omitted_pairs": 1165,
+                "donor_by_target_b2": [
+                  [
+                    17819,
+                    15752
+                  ],
+                  [
+                    15725,
+                    13950
+                  ]
+                ],
+                "retained_pairs": 63246,
+                "pearson": 0.0008781239489194487
+              },
+              {
+                "nominal_row_parity": 0,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 64411,
+                "endpoint_escape_omitted_pairs": 1086,
+                "donor_by_target_b2": [
+                  [
+                    17869,
+                    15746
+                  ],
+                  [
+                    15676,
+                    14034
+                  ]
+                ],
+                "retained_pairs": 63325,
+                "pearson": 0.003943841159658206
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 0,
+                "candidate_pairs": 62620,
+                "endpoint_escape_omitted_pairs": 1055,
+                "donor_by_target_b2": [
+                  [
+                    17592,
+                    15230
+                  ],
+                  [
+                    15221,
+                    13522
+                  ]
+                ],
+                "retained_pairs": 61565,
+                "pearson": 0.006426816457452976
+              },
+              {
+                "nominal_row_parity": 1,
+                "nominal_column_parity": 1,
+                "candidate_pairs": 62620,
+                "endpoint_escape_omitted_pairs": 1023,
+                "donor_by_target_b2": [
+                  [
+                    17448,
+                    15370
+                  ],
+                  [
+                    15343,
+                    13436
+                  ]
+                ],
+                "retained_pairs": 61597,
+                "pearson": -0.0014722578877796064
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "failures": []
+}
