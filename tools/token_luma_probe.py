@@ -5,7 +5,8 @@ Supports: the P0 token-to-value probe, lead #11 (geometry) and the b2/b4
 statistics of leads #11/#29. Standard library only; reads sample files and
 prints aggregate numbers. No images or pixel data are written.
 
-Mapping (fixed, no fitting): v = b2 + b4 for every token; v is box-averaged
+Mapping (fixed, no fitting): --map sum (default) uses v = b2 + b4;
+--map b2 or --map b4 uses that bit alone. Every map is box-averaged
 over `--window` tokens within each row and block-averaged to the preview's
 luma DC grid. The target is the embedded preview's luma DC from
 tools/jpeg_dc.py. The score is the Pearson correlation after subtracting each
@@ -18,7 +19,7 @@ a full-frame reshape is not used because the token row stride can drift.
 
 Usage:
     python -I tools/token_luma_probe.py FILE [FILE ...] [--rows 300]
-        [--window 63] [--perms 20] [--seed 1]
+        [--window 63] [--perms 20] [--seed 1] [--map sum|b2|b4]
     python -I tools/token_luma_probe.py --self-test
 
 Escape tokens (q >= 17) are treated as 0 for b2/b4; their rate is printed.
@@ -35,6 +36,9 @@ import jpeg_dc  # noqa: E402
 import orf_tokens as T  # noqa: E402
 
 DENSITY = bytes((((v >> 2) & 1) + ((v >> 4) & 1)) if v < 32 else 0 for v in range(256))
+MAPPINGS = {"sum": DENSITY,
+            "b2": bytes(((v >> 2) & 1) if v < 32 else 0 for v in range(256)),
+            "b4": bytes(((v >> 4) & 1) if v < 32 else 0 for v in range(256))}
 
 
 def box_mean_rows(v, rows, w, window):
@@ -104,8 +108,8 @@ def corr_rows(a, b):
     return sab / math.sqrt(saa * sbb)
 
 
-def score(sa, rows, w, window, nd, target):
-    v = sa.translate(DENSITY)
+def score(sa, rows, w, window, nd, target, mapping="sum"):
+    v = sa.translate(MAPPINGS[mapping])
     boxed = box_mean_rows(v, rows, w, window)
     grid = block_mean(boxed, rows, w, nd, len(target[0]))
     return corr_rows(grid, target)
@@ -121,7 +125,7 @@ def shuffle_rows(sa, rows, w, rng):
     return buf
 
 
-def run_file(path, rows, window, perms, seed):
+def run_file(path, rows, window, perms, seed, mapping="sum"):
     w, h, buf = T.locate(path)
     qa, sa = array.array("B"), array.array("B")
     T.scan(buf, rows * w, w, 0, None, qa, sa, 40, None, 32)
@@ -136,15 +140,17 @@ def run_file(path, rows, window, perms, seed):
     wb, hb, dc = jpeg_dc.decode(open(path, "rb").read(), best[1])
     nd = max(1, min(hb, round(rows * hb / h)))
     target = [dc[r * wb:(r + 1) * wb] for r in range(nd)]
-    real = score(sa, rows, w, window, nd, target)
+    real = score(sa, rows, w, window, nd, target, mapping)
     rng = random.Random(seed)
-    null = [score(shuffle_rows(sa, rows, w, rng), rows, w, window, nd, target)
+    null = [score(shuffle_rows(sa, rows, w, rng), rows, w, window, nd, target, mapping)
             for _ in range(perms)]
     mean = sum(null) / len(null)
     var = sum((x - mean) ** 2 for x in null) / (len(null) - 1) if len(null) > 1 else 0.0
     sd = math.sqrt(var) if var > 0 else 0.0
     z = (real - mean) / sd if sd else 0.0
     escapes = sum(1 for b in sa if b >= 32)
+    if mapping != "sum":
+        print("  mapping=%s" % mapping)
     print("%s  payload %dx%d  rows %d  window %d  dc %dx%d  used %dx%d" % (
         os.path.basename(path), w, h, rows, window, wb, hb, nd, wb))
     print("  r=%+.5f  shuffle=%+.5f +/- %.5f  z=%+.2f  escapes=%d (treated as 0)" % (
@@ -184,6 +190,8 @@ def main():
     ap.add_argument("--window", type=int, default=63, help="box window in tokens")
     ap.add_argument("--perms", type=int, default=20, help="within-row shuffles")
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--map", dest="mapping", choices=("sum", "b2", "b4"),
+                    default="sum", help="fixed suffix map (default: sum)")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
@@ -193,7 +201,7 @@ def main():
         ap.error("no files (or use --self-test)")
     for p in a.files:
         try:
-            run_file(p, a.rows, a.window, a.perms, a.seed)
+            run_file(p, a.rows, a.window, a.perms, a.seed, a.mapping)
         except (ValueError, IndexError, KeyError, OSError) as exc:
             print("%s: %s" % (p, exc), file=sys.stderr)
 
