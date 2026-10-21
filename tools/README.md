@@ -98,6 +98,20 @@ stationarity, significance or a decode. Use fixed offsets before outcomes.
 
     python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
 
+Optional `--suffix-width-scan` adds every fixed suffix width k=2..8 to each
+enabled model, keeping the default k5 reports unchanged. Each real/control byte
+window is generated once and reused across widths, so the comparison uses
+identical bit intervals rather than different token-block spans. Each candidate
+consumes q zero bits, stop 1 and k suffix bits, with no extra escape skip. All
+token/q0/ones counts and consumed/residual bits are retained; no complete token
+gives a null q0 fraction. This is a descriptive common-window control comparison,
+not calibrated significance, an estimator of optimal k or proof of camera
+framing. Short residuals remain diagnostics. All enabled widths/models are
+reported without selecting a winner; known-profile smoke files are not untouched
+validation captures. Existing output is unchanged when the flag is absent.
+
+    python -I -B tools/token_framing_probe.py --suffix-width-scan --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
+
 **`token_anchor_sync_probe.py`** supports #197 with a distinct anchor diagnostic.
 Restart the candidate q-zero/stop1/five-suffix parser at bits 0..7 of the same
 exact byte window. Report every path's counts/q0/endpoints and the earliest
