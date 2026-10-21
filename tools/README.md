@@ -431,3 +431,25 @@ Licence-check public inputs first. Stdlib, reads files/prints aggregates only.
 
     python -I -B tools/suffix_width_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_suffix_width_lag_probe.py
+
+`token_phase_context_probe.py` also emits a separate `heldout` report for
+lead #30. Complete 128-token blocks containing any q>=17 and the incomplete
+tail are omitted. Original even-index blocks train; original odd-index
+blocks test. Each retained block contributes local targets 2..127, so no
+source triple crosses a split boundary. The fixed target/context are
+Y=b2(t), C=2*b4(t-1)+b2(t-2); phase is the absolute index modulo m=2..8.
+For identical held-out targets it compares Jeffreys-smoothed binary
+P(Y|C) with P(Y|C,phase), emitting full train/test tables, denominators,
+unseen-training-context counts, both log losses, and signed baseline-minus-
+phase gains. Negative gains are retained. Absent training data predicts 0.5
+with null gain; absent test data gives null loss/gain. This whole-block
+selection differs from the earlier triple-wise plug-in tables, which remain
+unchanged. Adjacent blocks may remain dependent; these descriptive scores
+are not unbiased estimates, significance/null calibration, historical
+private-gain reproduction, physical columns or a decoder. Excluding escapes
+cannot repair unknown framing. Reuse prior CC0 verification after checking
+the local file hash against its verified record; new content needs its first
+licence verification.
+
+    python -I -B tools/token_phase_context_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_phase_context_probe.py
