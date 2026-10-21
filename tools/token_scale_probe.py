@@ -161,8 +161,11 @@ def main(argv=None):
     parser.add_argument("--sample", nargs=3, action="append", required=True,
                         metavar=("ID", "PUBLIC_NAME", "FILE"))
     args = parser.parse_args(argv)
-    if any(not sid.isdigit() for sid, _, _ in args.sample):
-        parser.error("sample ID must be numeric")
+    ids = [sid for sid, _, _ in args.sample]
+    if any(not sid.isascii() or not sid.isdecimal() or int(sid) <= 0 for sid in ids):
+        parser.error("sample IDs must be positive ASCII decimal integers")
+    if len(set(map(int, ids))) != len(ids):
+        parser.error("sample IDs must be distinct")
     reports, errors = [], []
     for sid, name, path in args.sample:
         try:

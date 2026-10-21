@@ -257,6 +257,19 @@ stationarity, magnitude meaning or a decoder. Check CC0 licences first.
     python -I -B tools/token_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_lag_probe.py
 
+**`token_scale_probe.py`** supports lead #29 item 7 with held-out binary-q
+prediction from lag1 and preceding 8/16-token positive-q counts. It reports
+exact training/test tables, losses, signed gains against frequency and lag1,
+unseen contexts and all sixteen within-block permutation comparisons.
+Original even/odd 128-token blocks define the split; escape-containing blocks
+and incomplete tails are omitted. Blocks are not physical rows, adjacent
+split blocks may depend, and omission does not repair unknown framing.
+These descriptive scores do not reproduce historical q-entropy estimates or
+establish significance, a codec scale law or a decoder. Check CC0 licences first.
+
+    python -I -B tools/token_scale_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_scale_probe.py
+
 **`token_context_probe.py`** supports the held-out multivariate context step
 for lead #29 item 4, building on #11 and the bounded `suffix_joint_probe.py`
 scanner. Six fixed binary models use common within-block targets, Jeffreys
