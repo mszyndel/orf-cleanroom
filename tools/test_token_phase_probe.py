@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """Synthetic numerical checks for token_phase_probe.py (#30); no sample files."""
+import contextlib
+import io
+import json
+import struct
 import itertools
 import math
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import token_phase_probe as probe  # noqa: E402
 from token_phase_probe import phase_statistics  # noqa: E402
 from suffix_joint_probe import scan_prefix  # noqa: E402
 
@@ -85,6 +91,84 @@ class PhaseTests(unittest.TestCase):
         self.assertEqual(scan_prefix(bytes([0x81])), ([(0, 0)], 6))
         self.assertEqual(scan_prefix(bytes(20)), ([], 0))
         self.assertEqual(scan_prefix(bytes([1])), ([], 0))
+
+
+class PhaseCliTests(unittest.TestCase):
+    @staticmethod
+    def tiff(payload):
+        # Original minimal TIFF fixture, all numeric tags inline; no disk data.
+        tags = [(0x100, 10), (0x101, 10), (0x103, 1),
+                (0x111, 8 + 2 + 5 * 12 + 4), (0x117, len(payload))]
+        header = b"II" + struct.pack("<HIH", 42, 8, len(tags))
+        entries = b"".join(struct.pack("<HHII", tag, 4, 1, value)
+                           for tag, value in tags)
+        return header + entries + struct.pack("<I", 0) + payload
+
+    def run_main(self, payloads):
+        # Mock only sample reads, retaining actual source-hash reads and report.
+        real_open = open
+        argv = ["token_phase_probe.py"]
+        for sample_id in payloads:
+            argv += ["--sample", sample_id, "synthetic", "fixture-" + sample_id]
+
+        def sample_open(path, mode="r", *args, **kwargs):
+            for sample_id, payload in payloads.items():
+                if path == "fixture-" + sample_id:
+                    if payload is None:
+                        raise OSError("private-path-must-not-appear")
+                    return io.BytesIO(self.tiff(payload))
+            return real_open(path, mode, *args, **kwargs)
+
+        output = io.StringIO()
+        with mock.patch.object(probe, "LIMIT", 4), \
+                mock.patch.object(sys, "argv", argv), \
+                mock.patch("builtins.open", side_effect=sample_open), \
+                contextlib.redirect_stdout(output):
+            status = probe.main()
+        self.assertNotIn("private-path-must-not-appear", output.getvalue())
+        return status, json.loads(output.getvalue())
+
+    def test_complete_prefix(self):
+        status, output = self.run_main({"1": bytes([255] * 3)})
+        self.assertEqual(status, 0)
+        sample = output["samples"][0]
+        self.assertEqual(sample["requested_tokens"], 4)
+        self.assertEqual(sample["prefix_shortfall"], 0)
+        self.assertEqual(sample["statistics"]["parsed_tokens"], 4)
+        self.assertEqual(sample["bits_consumed"], 24)
+        self.assertEqual(output["failures"], [])
+
+    def test_short_prefix_retains_statistics(self):
+        status, output = self.run_main({"1": bytes([255])})
+        self.assertEqual(status, 1)
+        sample = output["samples"][0]
+        self.assertEqual(sample["prefix_shortfall"], 3)
+        self.assertEqual(sample["statistics"]["parsed_tokens"], 1)
+        self.assertEqual(sample["statistics"]["retained_tokens"], 1)
+        self.assertEqual(sample["bits_consumed"], 6)
+        self.assertEqual(output["failures"], [])
+
+    def test_no_complete_tokens(self):
+        status, output = self.run_main({"1": bytes([0])})
+        self.assertEqual(status, 1)
+        sample = output["samples"][0]
+        self.assertEqual(sample["prefix_shortfall"], 4)
+        self.assertEqual(sample["statistics"]["parsed_tokens"], 0)
+        self.assertEqual(sample["bits_consumed"], 0)
+        self.assertTrue(all(r["plugin_mi_bits"] is None
+                            for r in sample["statistics"]["moduli"]))
+
+    def test_mixed_complete_and_short(self):
+        status, output = self.run_main({"1": bytes([255] * 3), "2": bytes([255])})
+        self.assertEqual(status, 1)
+        self.assertEqual([s["prefix_shortfall"] for s in output["samples"]], [0, 3])
+        self.assertEqual(output["failures"], [])
+
+    def test_mixed_complete_and_exception(self):
+        status, output = self.run_main({"1": bytes([255] * 3), "2": None})
+        self.assertEqual(status, 1)
+        self.assertEqual([s["pixls_id"] for s in output["samples"]], ["1"])
+        self.assertEqual(output["failures"], [{"pixls_id": "2", "error": "OSError"}])
 
 
 if __name__ == "__main__":
