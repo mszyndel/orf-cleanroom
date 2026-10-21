@@ -1,5 +1,18 @@
 # tools
 
+**`e400_boundary_probe.py`** tests the previously excluded boundary words in
+lead #79. Every nonzero-low4 word within two pixels of any stored-raster edge
+is tested with axial-2/diagonal-1 families, available-neighbour renormalization,
+coordinate clamp, and reflection without edge repetition. Remapped duplicates
+remain separate terms. Exact residual numerator ranges and denominator counts,
+and floor/ceiling/nearest-half-up matches are emitted by low nibble. Clamp may
+change CFA parity; none of these arithmetic candidates identifies camera policy.
+No row-layout detection, fit, sensor ground truth, images or decoder change. Verified CC0
+SHA-256 is checked before parsing; failures are sanitized. Stdlib only.
+
+    python -I -B tools/e400_boundary_probe.py FILE --sha256 VERIFIED_SHA256
+    python -I -B tools/test_e400_boundary_probe.py
+
 Analysis scripts, all original code (see RULES.md).
 
 Each script should:
