@@ -257,6 +257,20 @@ stationarity, magnitude meaning or a decoder. Check CC0 licences first.
     python -I -B tools/token_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_lag_probe.py
 
+**`token_context_probe.py`** supports the held-out multivariate context step
+for lead #29 item 4, building on #11 and the bounded `suffix_joint_probe.py`
+scanner. Six fixed binary models use common within-block targets, Jeffreys
+smoothing and original even/odd block training/test splits; escape-containing
+blocks and incomplete tails are omitted. It reports exact train/test tables,
+absolute held-out log-loss, nested gains, unseen-context counts and all sixteen
+within-block whole-token permutation comparisons. Adjacent blocks can remain
+dependent, and blocks are not camera rows. These descriptive transfer scores
+do not reproduce historical private estimates or establish a conditional law,
+significance or a decoder. Check CC0 licences before measurement.
+
+    python -I -B tools/token_context_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_context_probe.py
+
 **`token_zero_runs_probe.py`** supports the remaining b2 zero-run question in
 lead #30 and builds on #11's candidate parse. In the first 262144 complete
 tokens it splits at every q>=17 escape, omits that token, and counts maximal
