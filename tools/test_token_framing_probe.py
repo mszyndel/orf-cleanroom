@@ -26,6 +26,70 @@ def fixture(endian='<', truncated=False):
 
 
 class FramingTests(unittest.TestCase):
+    def test_local_byte_shuffle_preserves_each_histogram_and_short_tail(self):
+        source = bytes(range(23))
+        for block in (1, 4, 23, 30):
+            result = probe.local_byte_shuffle(source, block, random.Random(7))
+            self.assertEqual(len(result), len(source))
+            for start in range(0, len(source), block):
+                self.assertEqual(Counter(source[start:start + block]),
+                                 Counter(result[start:start + block]))
+            self.assertEqual(result, probe.local_byte_shuffle(source, block, random.Random(7)))
+        self.assertEqual(source, bytes(range(23)))
+        self.assertEqual(probe.local_byte_shuffle(source, 1, random.Random(7)), source)
+        self.assertNotEqual(probe.local_byte_shuffle(source, 4, random.Random(7)), source)
+        self.assertEqual(probe.local_byte_shuffle(b'', 4, random.Random(7)), b'')
+        for block in (0, -1):
+            with self.assertRaises(ValueError):
+                probe.local_byte_shuffle(source, block, random.Random(7))
+
+    def test_local_byte_shuffle_calls_blocks_in_order_including_short_tail(self):
+        class Reverse:
+            def __init__(self):
+                self.seen = []
+
+            def shuffle(self, values):
+                self.seen.append(bytes(values))
+                values.reverse()
+
+        rng = Reverse()
+        self.assertEqual(probe.local_byte_shuffle(b'abcdefghijk', 4, rng), b'dcbahgfekji')
+        self.assertEqual(rng.seen, [b'abcd', b'efgh', b'ijk'])
+
+    def test_local_byte_shuffle_seed_stream_matches_independent_block_loop(self):
+        source = bytes(range(37))
+        rng = random.Random(9)
+        expected = bytearray()
+        for start in range(0, len(source), 8):
+            values = list(source[start:start + 8])
+            rng.shuffle(values)
+            expected.extend(values)
+        self.assertEqual(probe.local_byte_shuffle(source, 8, random.Random(9)), expected)
+
+    def test_local_byte_option_preserves_legacy_results_and_reports_geometry(self):
+        source = bytes(range(23))
+        default = probe.compare_prefix(source, 7, include_markov=True)
+        extended = probe.compare_prefix(source, 7, include_markov=True, local_byte_block=4)
+        self.assertEqual(extended.pop('local_byte_shuffle'),
+                         {'block_bytes': 4, 'complete_blocks': 5, 'tail_bytes': 3})
+        self.assertEqual(extended['models'].pop('local_byte_shuffle'), probe.parse_stats(
+            probe.local_byte_shuffle(source, 4, random.Random(7))))
+        self.assertEqual(default, extended)
+        self.assertNotIn('local_byte_shuffle', default)
+
+    def test_local_byte_cli_forwarding_and_rejection_before_reads(self):
+        with patch.object(probe, 'measure', return_value={}) as measure, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(probe.main(['--sample', '1', 'public', 'unused',
+                                         '--local-byte-block', '256', '--markov']), 0)
+        measure.assert_called_once_with('unused', 131072, 20261021,
+                                        include_markov=True, local_byte_block=256)
+        for value in ('0', '-1'):
+            with patch.object(probe, 'measure') as measure, contextlib.redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit) as failure:
+                    probe.main(['--sample', '1', 'public', 'unused', '--local-byte-block', value])
+            self.assertEqual(failure.exception.code, 2)
+            measure.assert_not_called()
+
     def test_markov_fit_exact_adjacent_counts_without_wraparound(self):
         fit = probe.fit_markov(b'\x39\xc7')  # 0011100111000111
         self.assertEqual(fit['transition_counts'], [[4, 3], [2, 6]])
@@ -85,7 +149,8 @@ class FramingTests(unittest.TestCase):
     def test_markov_cli_option_forwarded(self):
         with patch.object(probe, 'measure', return_value={}) as measure, contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(probe.main(['--sample', '1', 'public', 'unused', '--markov']), 0)
-        measure.assert_called_once_with('unused', 131072, 20261021, include_markov=True)
+        measure.assert_called_once_with('unused', 131072, 20261021,
+                                        include_markov=True, local_byte_block=None)
 
     def test_bounded_parser_exact_and_unfinished_tokens(self):
         result = probe.parse_stats(probe.pack_bits([1, 0, 0, 0, 0, 0] * 4))

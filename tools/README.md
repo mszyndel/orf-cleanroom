@@ -46,6 +46,17 @@ The default four-model report is unchanged.
 
     python -I -B tools/token_framing_probe.py --markov --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
 
+Optional `--local-byte-block 256` adds byte shuffling separately inside
+consecutive fixed-size prefix blocks, including any short final block. A fresh
+seeded generator is consumed in block order. Each block's exact byte histogram
+and density are preserved, while within-block order, bit adjacency and maximal
+runs are not. Output includes block size, complete-block count and tail bytes.
+The default report is unchanged. These diagnostic blocks are not physical rows;
+the assumed local permutation model does not calibrate significance or identify
+camera framing. It can be combined with `--markov`.
+
+    python -I -B tools/token_framing_probe.py --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
