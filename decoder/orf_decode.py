@@ -52,6 +52,7 @@ F_NULL_BPP_2 = "2026-10-21--radialmonster--remaining-om1-family-null-distance"
 F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and-separation"
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
 F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
+F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
 
 # what the evidence is for each layout
 STATUS = {
@@ -276,6 +277,10 @@ def decode_file(path, order=None, layout=None):
         # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
         # prefix and whole payload pass that tolerance, not exact independence,
         # population generality, framing or values (V1 S1.16).
+        # F_DEP (Partial for #11): the cross-field/same-field token-dependence
+        # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
+        # at lower MI; it establishes no values, row stride, geometry or decode
+        # (V1 S1.17).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
@@ -295,7 +300,7 @@ def decode_file(path, order=None, layout=None):
         # public files stays inside a predeclared 0.5..1.5 within-row-null band
         # in 15/15 cells; it specifies no values, predictor or decode (V1 G2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.17, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
