@@ -402,6 +402,15 @@ Check CC0 licences first. Original scanner, stdlib only, aggregates only.
     python -I -B tools/suffix_width_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_suffix_width_probe.py
 
+Optional `--block-tokens 262144` adds exact q0-count histograms over complete
+fixed-size candidate-token blocks and separate tail counts, supporting the
+within-file framing question in #197. The default output is unchanged. Blocks
+under different grammars cover different bit intervals; a high q0 share or its
+variation cannot select a true code or establish adaptation. All candidate
+tokens, including q>=17, contribute; there is no fitted offset or escape skip.
+
+    python -I -B tools/suffix_width_probe.py --block-tokens 262144 --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`token_affine_probe.py`** supports the untested GF(2) part of lead #29
 item 4, building on #11 and #166/#169. It tests exact affine prediction of
 current b2 and b4 from both bits at lags 1..12, with an intercept. All six

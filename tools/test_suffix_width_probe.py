@@ -72,6 +72,39 @@ class Tests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 probe.scan(b"\xff", k, stop)
 
+    def test_q0_blocks_against_independent_bit_parser(self):
+        rng = random.Random(197)
+        for data in (b"", b"\0" * 20, b"\xff" * 20,
+                     bytes(rng.randrange(256) for _ in range(100))):
+            bits = "".join(format(x, "08b") for x in data)
+            for stop in (0, 1):
+                for k in range(2, 9):
+                    pos, flags = 0, []
+                    while pos < len(bits):
+                        end = bits.find(str(stop), pos)
+                        if end < 0 or end + k + 1 > len(bits):
+                            break
+                        flags.append(end == pos)
+                        pos = end + k + 1
+                    for size in (1, 3, 7, 1000):
+                        result = probe.scan(data, k, stop, size)
+                        summary = result["q0_blocks"]
+                        complete = len(flags) // size * size
+                        hist = collections.Counter(sum(flags[i:i + size])
+                                                   for i in range(0, complete, size))
+                        self.assertEqual(summary["full_block_q0_histogram"],
+                                         [[q0, hist[q0]] for q0 in sorted(hist)])
+                        self.assertEqual(summary["full_blocks"], complete // size)
+                        self.assertEqual(summary["tail_tokens"], len(flags) - complete)
+                        self.assertEqual(summary["tail_q0"], sum(flags[complete:]))
+                        self.assertEqual(sum(q0 * n for q0, n in hist.items())
+                                         + summary["tail_q0"], sum(flags))
+                        self.assertEqual(result["bits_consumed"], pos)
+                    self.assertNotIn("q0_blocks", probe.scan(data, k, stop))
+        for invalid in (-1, 1.5):
+            with self.assertRaises(ValueError):
+                probe.scan(b"\xff", 5, 1, invalid)
+
     def test_real_container_report_and_rejection(self):
         class Input(io.BytesIO):
             def fileno(self):
@@ -106,6 +139,17 @@ class Tests(unittest.TestCase):
         self.assertEqual(parsed["samples"], [{"pixls_id": "1"}])
         self.assertEqual(parsed["failures"], [{"pixls_id": "2", "error": "invalid_or_unreadable_input"}])
         self.assertNotIn("secret", output.getvalue())
+
+    def test_cli_block_option_forwarding_and_rejection(self):
+        with mock.patch.object(probe, "report", return_value={}) as report:
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(probe.main(["--sample", "1", "one", "file1",
+                                             "--block-tokens", "7"]), 0)
+            report.assert_called_once_with("1", "one", "file1", 7)
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as caught:
+                probe.main(["--sample", "1", "one", "file1", "--block-tokens", "-1"])
+        self.assertEqual(caught.exception.code, 2)
 
 
 if __name__ == "__main__":
