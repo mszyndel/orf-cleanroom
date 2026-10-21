@@ -843,3 +843,19 @@ SHA256 before TIFF parsing. Stdlib only; reads files/prints aggregate JSON.
 
     python -I -B tools/token_head_stride_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 CENTER path/to/file.ORF
     python -I -B tools/test_token_head_stride_probe.py
+
+**`e400_zero_low4_probe.py`** addresses #79's zero-low4 selection limitation
+(Builds on #146/#190/#215/#261). It counts the entire stored-raster interior,
+excluding two pixels at every edge, with diagonal-1 means at equal coordinate
+parity and axial-2 elsewhere. All four parity strata retain zero/nonzero-low4
+denominators, exact means, floor-only means and nonmatches. Zero-low4 exact
+candidates also retain a 0..4 histogram of nonzero-low4 selected neighbours.
+These are arithmetic candidates, not identified corrections: constant and
+affine scenes can satisfy all equalities without any mapping operation.
+No camera mechanism, processing order, sensor values, significance, finding
+or decoder change follows. Reuse retained CC0 provenance after local hash
+matching; the required hash is checked before TIFF parsing. Stdlib only,
+read-only packed16 strips, aggregate JSON, sanitized failures return 1.
+
+    python -I -B tools/e400_zero_low4_probe.py FILE2151 --sha256 VERIFIED_SHA256
+    python -I -B tools/test_e400_zero_low4_probe.py
