@@ -83,6 +83,25 @@ stationarity, significance or a decode. Use fixed offsets before outcomes.
 
     python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
 
+**`token_anchor_sync_probe.py`** supports #197 with a distinct anchor diagnostic.
+Restart the candidate q-zero/stop1/five-suffix parser at bits 0..7 of the same
+exact byte window. Report every path's counts/q0/endpoints and the earliest
+accepted token start common to all eight; only whole tokens count. Final
+unaccepted cursors are excluded; no common start is censored and reported null.
+Once paths meet their future is identical by determinism, which can also occur
+on generated controls. Compare real/Bernoulli/byte/run/Markov/local-byte256 with
+fresh seeded generators. Defaults: 131072 bytes, offsets 0/1048576, four seeds
+20261021..20261024. Optional repeated offsets/seeds override those defaults.
+Windows restart independently and are limited to 1 MiB. All local hashes must
+match supplied retained verified CC0 hashes before TIFF parsing. Invalid inputs
+and short windows return failure while retaining other aggregate records.
+These known-profile descriptive diagnostics do not establish camera boundaries,
+physical rows, significance, adaptation, values or a decode. No images or
+raw/token arrays are emitted.
+
+    python -I -B tools/token_anchor_sync_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_token_anchor_sync_probe.py
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
