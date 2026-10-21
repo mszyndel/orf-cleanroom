@@ -34,6 +34,24 @@ establish true codec boundaries. Reuse retained CC0 records after local hash che
     python -I -B tools/token_framing_probe.py --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
     python -I -B tools/test_token_framing_probe.py
 
+**`e400_single_pass_probe.py`** supports the remaining exception in #79.
+It marks nonzero-low4 words and tests connected same-colour neighbour
+components of size one or two, excluding whole components touching a
+two-pixel boundary. Equal coordinate parity uses diagonal-1; unequal uses
+axial-2. For increasing/decreasing raster orders, each marked word is
+replaced once by the floor four-neighbour mean; initial marked words must
+be uint16 multiples of 16 and unmarked words are fixed. For a pair it
+inverts the earlier equation and replays every admissible later-site
+initial word. Reports contain aggregate equations, candidates, replays,
+components and exclusions only. Known public values motivated the model.
+Compatibility does not establish actual camera order, sensor values or
+universal correction rules; zero-low4 mapped sites, edges and larger
+components remain untested. Reuse verified CC0 provenance after matching
+the local hash; new content needs its first licence verification.
+
+    python -I -B tools/e400_single_pass_probe.py path/to/E400.ORF
+    python -I -B tools/test_e400_single_pass_probe.py
+
 **`e400_exception_probe.py`** supports lead #79 and `specs/V0.md` G3.
 It scans a licence-checked packed-16 input in TIFF byte order and tests every
 nonempty subset of the axial-2 and diagonal-1 neighbour families under floor,
