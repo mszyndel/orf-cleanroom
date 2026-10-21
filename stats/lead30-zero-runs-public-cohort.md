@@ -71,7 +71,7 @@ for report in reports:
               float(tv), tv <= F(1,20))
 ```
 
-Nine existing synthetic tests passed before measurements. Four hand-calculated reducer assertions passed: point mass at length 1 gives TV=0; point mass at length 2 gives 3/4; equal masses at lengths 1 and 2 give 5/18; empty input has no fitted comparison. Histogram counts and first/second integer moments were checked for every report. Python 3.13.15, CPU only; RTX 3090 was available but unnecessary. Source hashes reflect the actual CRLF working files; LF checkouts may differ in source-byte hashes while aggregates agree.
+Nine existing synthetic tests passed before measurements. Four hand-calculated reducer assertions passed: point mass at length 1 gives TV=0; point mass at length 2 gives 3/4; equal masses at lengths 1 and 2 give 5/18; empty input has no fitted comparison. Histogram counts and first/second integer moments were checked for every report. Python 3.13.15, CPU only; RTX 3090 was available but unnecessary. Source hashes record the measured source-file bytes; this repository enforces LF line endings through `.gitattributes`.
 
 ## Status
 
