@@ -312,3 +312,18 @@ reproduction of historical private numbers. Check CC0 licences first.
 
     python -I -B tools/escape_balance_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_escape_balance_probe.py
+
+**`token_width_lag_probe.py`** supports the nominal-width-lag part of lead #29
+item 8, building on #11 and the bounded `suffix_joint_probe.py` scanner.
+It reports exact binary tables and Pearson correlations at W, 2W, 2W-2,
+2W+2 (past/current b2) and 2W-1 (past b4/current b2), pooled and by all four
+target nominal-grid parity strata. W is measured payload width, not an
+established token row stride or sensor/CFA grid. In the first 262144 complete
+tokens it omits pairs with q>=17 at either endpoint without renumbering;
+intervening escapes remain. Every candidate, omitted and retained pair count
+is reported; empty/zero-variance correlations are null. These descriptive
+aggregates do not reproduce historical private figures or establish donor
+structure, parity invariance, significance or a decoder. Check CC0 licences first.
+
+    python -I -B tools/token_width_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_width_lag_probe.py
