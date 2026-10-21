@@ -662,3 +662,28 @@ Stdlib only; reads files and prints aggregate JSON, no token/pixel dumps.
 
     python -I -B tools/token_cyclic_phase_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240
     python -I -B tools/test_token_cyclic_phase_probe.py
+
+**`token_head_stride_probe.py`** adds a local head-by-stride diagnostic for
+#144's remaining head-sensitive maximum question; Builds on #11/#218/#230.
+Defaults: heads 8/32/128, integer strides supplied-center-16 through center+16,
+150 training rows and 150 test rows. All absolute r*S candidate blocks retain
+exact capped-q moments, escapes, signed mean/SE and completeness. For each
+head, the greatest defined signed training score selects a stride; ties in
+the computed floating score select the lowest stride. Undefined scores cannot
+win. The test begins at candidate ordinal ceil(rows*maxS/minS) for EVERY
+stride, so its earliest token is at or beyond the latest token used by ANY
+training candidate. Global endpoints and the intervening gap are explicit.
+All candidate test cells are printed, but only training chooses the reported
+selection. Candidate windows cover different token spans, and heads overlap;
+this is an exploratory descriptive comparison, with no null or calibrated
+significance. A boundary maximum cannot establish a global peak. Known-profile
+reused files are not untouched confirmation. No phase adjustment, physical
+rows, actual escape syntax, historical private-value reproduction or decoder
+inference. Candidate unary-plus-five retains q>=17, caps q at 40, skips zero
+extra escape bits. Every requested split must complete; any shortfall or
+sanitized input failure returns nonzero while retaining all input identities.
+Match supplied hashes to retained verified CC0 records; the tool checks local
+SHA256 before TIFF parsing. Stdlib only; reads files/prints aggregate JSON.
+
+    python -I -B tools/token_head_stride_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 CENTER path/to/file.ORF
+    python -I -B tools/test_token_head_stride_probe.py
