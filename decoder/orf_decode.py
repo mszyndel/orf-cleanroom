@@ -266,8 +266,11 @@ def decode_file(path, order=None, layout=None):
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
+        # F_NULL_BPP and F_NULL_BPP_2 (Partial for #106) measure only the k=5
+        # tokens-per-pixel distance from a Bernoulli null and its bpp/body relation;
+        # they specify no value assembly or compressed decode step (V2 S1.1).
         r.update(variant="compressed", status="not yet specified (value assembly remains open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.11, S2.3 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.11, S2.3, specs/V2.md S1.1 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
