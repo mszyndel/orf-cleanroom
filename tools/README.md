@@ -270,3 +270,19 @@ significance or a decoder. Check CC0 licences before measurement.
 
     python -I -B tools/token_context_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_context_probe.py
+
+**`token_zero_runs_probe.py`** supports the remaining b2 zero-run question in
+lead #30 and builds on #11's candidate parse. In the first 262144 complete
+tokens it splits at every q>=17 escape, omits that token, and counts maximal
+positive-length b2 zero runs bounded by ones within a retained segment.
+Leading, trailing and all-zero-segment censoring are reported separately.
+It emits the full run histogram, integer moment sums, population moments and
+the fitted positive-geometric variance `mean*(mean-1)`. This is descriptive,
+without a fit/significance test, physical-row or run-copy interpretation.
+Historical private figures have unspecified run-support/censoring definitions
+and are not reproduced. Escape omission does not repair uncertain framing.
+Outputs are aggregate JSON with hashes and sanitized per-sample failures;
+licence-check samples first.
+
+    python -I -B tools/token_zero_runs_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_zero_runs_probe.py
