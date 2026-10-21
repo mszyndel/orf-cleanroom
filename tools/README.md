@@ -35,6 +35,21 @@ Reuse retained CC0 provenance after verifying the exact input hash.
 
 ## Example tools
 
+**`token_donor_comb_probe.py`** supports the remaining donor-comb question in
+lead #30, building on #11. First 262144 complete candidate tokens, payload
+bit zero, no extra escape skip. Count b2(t-lag) by b2(t) for every lag
+2W-2, 2W, 2W+2, separately for all four nominal target row/column parity
+classes. W is payload width, not established token row length. Omit pairs
+with q>=17 at either endpoint without compacting indices; intervening
+escapes remain. Emit every 2x2 table, pair/omission count and binary Pearson.
+Short prefixes and input errors fail the CLI while retaining available
+reports. This is a descriptive nominal lattice, not physical rows,
+serpentine inference, significance or reproduction of the unspecified
+historical donor metric. Reuse retained CC0 records after local hash checks.
+
+    python -I -B tools/token_donor_comb_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_donor_comb_probe.py
+
 **`token_framing_probe.py`** is the corrected null comparison for lead #197,
 building on the superseded probe in #198. Bernoulli bits use the measured ones
 fraction as their success probability; density is preserved in expectation.
@@ -83,6 +98,25 @@ stationarity, significance or a decode. Use fixed offsets before outcomes.
 
     python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
 
+**`token_anchor_sync_probe.py`** supports #197 with a distinct anchor diagnostic.
+Restart the candidate q-zero/stop1/five-suffix parser at bits 0..7 of the same
+exact byte window. Report every path's counts/q0/endpoints and the earliest
+accepted token start common to all eight; only whole tokens count. Final
+unaccepted cursors are excluded; no common start is censored and reported null.
+Once paths meet their future is identical by determinism, which can also occur
+on generated controls. Compare real/Bernoulli/byte/run/Markov/local-byte256 with
+fresh seeded generators. Defaults: 131072 bytes, offsets 0/1048576, four seeds
+20261021..20261024. Optional repeated offsets/seeds override those defaults.
+Windows restart independently and are limited to 1 MiB. All local hashes must
+match supplied retained verified CC0 hashes before TIFF parsing. Invalid inputs
+and short windows return failure while retaining other aggregate records.
+These known-profile descriptive diagnostics do not establish camera boundaries,
+physical rows, significance, adaptation, values or a decode. No images or
+raw/token arrays are emitted.
+
+    python -I -B tools/token_anchor_sync_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_token_anchor_sync_probe.py
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
@@ -112,6 +146,22 @@ for camera data; conditioning density does not calibrate significance or
 identify padding, codec framing or a decoder. Default output is unchanged.
 
     python -I -B tools/terminal_residual_null_probe.py --fixed-density --sample ID PUBLIC_NAME path/to/file.ORF
+
+Separate opt-in `--fixed-density-lengths` extends the terminal-residual null
+probe (#87, Builds on #11/#224/#257) with all N+1 exact residual-length
+numerators, their common choose(N,K) denominator, exact normalization and
+floating PMF. It includes long rejected candidates, whose first r-5 bits
+must be zero. Seven rolling integer coefficient rows avoid retaining a full
+N-by-K table. O(N*K) integer operations and O(N+K) retained integers have
+costs that grow with integer size; this option is slower than event-only
+counts. Tiny floating probabilities can underflow; exact counts remain
+available. Default and `--fixed-density` outputs are preserved. The uniform
+fixed-density model assumes exchangeable order and remains descriptive:
+length-specific probabilities do not establish framing, padding, calibrated
+significance or decoding. Reuse retained CC0 verification after matching
+local hashes; new content needs its first licence verification.
+
+    python -I -B tools/terminal_residual_null_probe.py --fixed-density-lengths --sample ID PUBLIC_NAME path/to/file.ORF
 
 **`e400_single_pass_probe.py`** supports the remaining exception in #79.
 It marks nonzero-low4 words and tests connected same-colour neighbour
@@ -737,3 +787,20 @@ Incomplete requested bands are rejected without phase selection.
 
     python -I -B tools/token_phase_holdout_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
     python -I -B tools/test_token_phase_holdout_probe.py
+
+`unit_order_probe.py` supports lead #75 and V0 gap G4 with the original
+central-300-stored-row edge metric. It reports exact within/cross-unit sums,
+selected counts, means and cross/within ratios for emitted and swapped pairs.
+Selection is strictly gradient > THRESHOLD; an empty selection reports null
+means/ratios, and zero within sum reports a null ratio. Every explicit public
+sample identity survives sanitized failures, which make the exit nonzero.
+Legacy directory arguments remain accepted, but output is now aggregate JSON
+instead of formatted text; directory scans process regular files only.
+Unspecified packings are explicitly skipped. Container parsing, byte-order
+selection and unpacking reuse the reference decoder unchanged. The statistic
+does not establish physical pixel order or change conformance hashes. Match
+local hashes to retained verified CC0 records before measurement.
+
+    python -I -B tools/unit_order_probe.py 300 --sample ID PUBLIC_NAME FILE
+    python -I -B tools/unit_order_probe.py 300 SAMPLE_DIR
+    python -I -B tools/test_unit_order_probe.py

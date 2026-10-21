@@ -259,6 +259,9 @@ def decode_file(path, order=None, layout=None):
         # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
         # preview-luma correlates; they specify neither sensor values nor a
         # predictor or round-trip decode.
+        # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
+        # correlate from b2/b4; they specify no sensor values or decode step
+        # (V1 S1.15).
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
@@ -272,7 +275,7 @@ def decode_file(path, order=None, layout=None):
         # establishes neither exact independence nor values (V1 S1.14).
         # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
         # prefix and whole payload pass that tolerance, not exact independence,
-        # population generality, framing or values (V1 S1.15).
+        # population generality, framing or values (V1 S1.16).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
@@ -285,8 +288,8 @@ def decode_file(path, order=None, layout=None):
         # 83 variable-size CC0 files and q=47/suffix 0 on four large-sensor files;
         # it specifies no value assembly, decode step or variant assignment
         # (V1 S1.13, V2 S1.2).
-        r.update(variant="compressed", status="not yet specified (suffix balance does not establish framing or values)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.15, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])

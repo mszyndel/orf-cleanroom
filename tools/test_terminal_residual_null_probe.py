@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from terminal_residual_null_probe import fixed_density_null, main, residual_null, scan_window, window_report
+from terminal_residual_null_probe import fixed_density_lengths, fixed_density_null, main, residual_null, scan_window, window_report
 
 
 def brute(n, p):
@@ -43,6 +43,7 @@ class TerminalNullTests(unittest.TestCase):
         # No production boundary counter, scanner or combinatorial formula.
         for n in range(16):
             counts = [[0, 0, 0] for _ in range(n+1)]
+            lengths = [[0] * (n+1) for _ in range(n+1)]
             for values in itertools.product((0, 1), repeat=n):
                 position = 0
                 while position < n:
@@ -52,11 +53,16 @@ class TerminalNullTests(unittest.TestCase):
                     if stop + 6 > n:
                         break
                     position = stop + 6
+                lengths[sum(values)][n-position] += 1
                 row = counts[sum(values)]
                 row[0] += 1
                 row[1] += position == n
                 row[2] += position < n and all(values[position:])
             for ones, (total, empty, event) in enumerate(counts):
+                distribution = fixed_density_lengths(n, ones)
+                self.assertEqual(distribution["residual_length_strings"], lengths[ones])
+                self.assertEqual(distribution["count_sum"], total)
+                self.assertEqual(distribution["residual_length_pmf"], [v/total for v in lengths[ones]])
                 got = fixed_density_null(n, ones)
                 self.assertEqual(got["total_strings"], total)
                 self.assertEqual(got["empty_residual_strings"], empty)
@@ -77,6 +83,11 @@ class TerminalNullTests(unittest.TestCase):
             self.assertEqual(one["total_strings"], 1)
             self.assertEqual(one["empty_residual_strings"], int(n % 6 == 0))
             self.assertEqual(one["nonempty_all_one_residual_strings"], int(n % 6 != 0))
+            for ones, residual in ((0, n), (n, n % 6)):
+                lengths = fixed_density_lengths(n, ones)
+                self.assertEqual(lengths["count_sum"], 1)
+                self.assertEqual(lengths["residual_length_strings"][residual], 1)
+                self.assertEqual(sum(lengths["residual_length_strings"]), 1)
         # Only a stop at position 94 gives an exact boundary; every other
         # position leaves residual zeros or a rejected short-suffix candidate.
         self.assertEqual(fixed_density_null(100, 1)["nonempty_residual_strings"], 99)
@@ -85,19 +96,27 @@ class TerminalNullTests(unittest.TestCase):
         for n, ones in ((-1, 0), (2, -1), (2, 3), (True, 0), (2, True), (2., 1), (2, 1.)):
             with self.assertRaises(ValueError):
                 fixed_density_null(n, ones)
+            with self.assertRaises(ValueError):
+                fixed_density_lengths(n, ones)
 
     def test_fixed_density_binomial_mixture_matches_iid(self):
         for n in range(25):
             for p in (.25, .5, .75):
                 event, nonempty = [], []
+                pmf = [0.0] * (n+1)
                 for ones in range(n+1):
                     got = fixed_density_null(n, ones)
                     weight = p**ones * (1-p)**(n-ones)
                     event.append(got["nonempty_all_one_residual_strings"] * weight)
                     nonempty.append(got["nonempty_residual_strings"] * weight)
+                    lengths = fixed_density_lengths(n, ones)
+                    for r, count in enumerate(lengths["residual_length_strings"]):
+                        pmf[r] += count * weight
                 iid = residual_null(n, p)
                 self.assertAlmostEqual(math.fsum(event), iid["nonempty_all_one_probability"], places=14)
                 self.assertAlmostEqual(math.fsum(nonempty), iid["nonempty_probability"], places=14)
+                for a, b in zip(pmf, iid["residual_length_pmf"]):
+                    self.assertAlmostEqual(a, b, places=14)
 
     def test_fixed_density_cli_opt_in_and_sanitized_mixed_failure(self):
         # Real TIFF locator and CLI; virtual inputs only, no subprocess or files.
@@ -130,12 +149,23 @@ class TerminalNullTests(unittest.TestCase):
             self.assertEqual(baseline["total_strings"], 1)
             self.assertEqual(baseline["nonempty_all_one_residual_strings"], 1)
         self.assertEqual(default, optional)
-        code, mixed, raw = run(["--fixed-density"] + args +
+        code, full, _ = run(["--fixed-density-lengths"] + args)
+        self.assertEqual(code, 0)
+        for name in ("prefix", "tail"):
+            lengths = full["samples"][0]["windows"][name].pop("fixed_density_lengths")
+            self.assertEqual(lengths["residual_length_strings"][4], 1)
+            self.assertEqual(sum(lengths["residual_length_strings"]), 1)
+        self.assertEqual(full, default)
+        code, mixed, raw = run(["--fixed-density", "--fixed-density-lengths"] + args +
                                ["--sample", "2", "Missing", "missing-private-path"])
         self.assertEqual(code, 1)
         self.assertEqual(len(mixed["samples"]), 1)
         self.assertEqual(mixed["errors"], [{"pixls_id": "2", "error_type": "FileNotFoundError"}])
         self.assertNotIn("missing-private-path", raw)
+        for name in ("prefix", "tail"):
+            window = mixed["samples"][0]["windows"][name]
+            self.assertIn("fixed_density_null", window)
+            self.assertIn("fixed_density_lengths", window)
 
     def test_exhaustive(self):
         for n in range(13):
