@@ -38,6 +38,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.p
 import orf_signature  # noqa: E402
 
 F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
+F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
 F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
 F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
@@ -251,8 +252,9 @@ def decode_file(path, order=None, layout=None):
         # F_FIG8 (Partial for #196) tests the literal Figure 8 category+extend
         # table; it stops at the unused code on E-M1 Mark II High Res files and
         # specifies no decoder step or value mapping.
-        # F_WEAK_TABLE (Partial for #155) measures a weak preview-luma correlate;
-        # it specifies neither sensor values nor a predictor or round-trip decode.
+        # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
+        # preview-luma correlates; they specify neither sensor values nor a
+        # predictor or round-trip decode.
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
@@ -265,7 +267,7 @@ def decode_file(path, order=None, layout=None):
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
         r.update(variant="compressed", status="not yet specified (value assembly remains open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.10, S2.3 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.11, S2.3 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
