@@ -321,6 +321,9 @@ The fixed prefix is 262144 complete tokens; escapes (`q>=17`) are omitted
 without compacting indices, with zero extra escape bits. It requires a single
 in-bounds variable-size strip and prints aggregate JSON with sample hashes,
 measured dimensions, prefix shortfall, source hashes and sanitized failures.
+Exit 1 signals any input failure or nonzero prefix shortfall; short-prefix
+statistics remain visible but do not fulfill the declared fixed-prefix design.
+Complete error-free reports return exit 0.
 Licence-check downloaded samples first. This descriptive metric has no bias
 correction, significance threshold or physical column interpretation; it does
 not reproduce the historical conditional-context gain or private figures.
