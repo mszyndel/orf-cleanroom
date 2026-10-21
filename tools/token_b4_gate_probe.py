@@ -168,7 +168,7 @@ def main(argv=None):
     print(json.dumps({"source_sha256": hashes, "python_version": sys.version.split()[0],
                       "escape_extra_bits": 0, "samples": reports, "failures": failures},
                      indent=2, allow_nan=False))
-    return 1 if failures else 0
+    return 1 if failures or any(s["token_shortfall"] for s in reports) else 0
 
 
 if __name__ == "__main__":

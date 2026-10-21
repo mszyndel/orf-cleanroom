@@ -68,7 +68,7 @@ class GateTests(unittest.TestCase):
         field = probe.measure(tokens, True)["q_stratified_fields"]["low4"]
         self.assertEqual(field["support_q"], [0, 1])
         self.assertEqual(field["equal_weight_mean_b4_0_minus_b4_1"]["numerator"], 1)
-        with patch.object(probe, "report", return_value={"ok": 1}) as mocked:
+        with patch.object(probe, "report", return_value={"ok": 1, "token_shortfall": 0}) as mocked:
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(probe.main(["--q-stratified", "--sample", "1", "a", "hidden"]), 0)
             mocked.assert_called_once_with("1", "a", "hidden", True)
@@ -136,15 +136,50 @@ class GateTests(unittest.TestCase):
             self.assertEqual(result["bits_consumed"], len(bits))
             self.assertEqual(result["statistics"], probe.measure(tokens))
 
+    def test_cli_real_synthetic_shortfall_and_complete_reports(self):
+        def tiff(payload):
+            entries = ((256, 7), (257, 1), (273, 62), (279, len(payload)))
+            data = b"II" + struct.pack("<HIH", 42, 8, len(entries))
+            data += b"".join(struct.pack("<HHII", tag, 4, 1, value)
+                             for tag, value in entries)
+            return data + struct.pack("<I", 0) + payload
+        fixtures = {"short": tiff(bytes([128])),
+                    "complete": tiff(bytes([130, 8, 32]))}
+        original_open = open
+        def sample_open(path, *args, **kwargs):
+            if path in fixtures:
+                return io.BytesIO(fixtures[path])
+            return original_open(path, *args, **kwargs)
+        for stratified in (False, True):
+            for paths, expected_code, expected_counts in (
+                    (["short"], 1, [1]),
+                    (["complete", "short"], 1, [4, 1]),
+                    (["complete"], 0, [4])):
+                with self.subTest(stratified=stratified, paths=paths):
+                    argv = ["--q-stratified"] if stratified else []
+                    for index, path in enumerate(paths):
+                        argv += ["--sample", str(index + 1), "synthetic", path]
+                    output = io.StringIO()
+                    with patch("builtins.open", side_effect=sample_open), \
+                            patch.object(probe, "LIMIT", 4), \
+                            contextlib.redirect_stdout(output):
+                        code = probe.main(argv)
+                    report = json.loads(output.getvalue())
+                    self.assertEqual(code, expected_code)
+                    self.assertEqual(report["failures"], [])
+                    self.assertEqual([s["returned_tokens"] for s in report["samples"]], expected_counts)
+                    self.assertEqual([s["token_shortfall"] for s in report["samples"]],
+                                     [4 - n for n in expected_counts])
+
     def test_cli_mixed_failure_sanitized(self):
-        with patch.object(probe, "report", side_effect=[OSError("private-path"), {"ok": 1}]):
+        with patch.object(probe, "report", side_effect=[OSError("private-path"), {"ok": 1, "token_shortfall": 0}]):
             output = io.StringIO()
             with contextlib.redirect_stdout(output):
                 code = probe.main(["--sample", "1", "a", "hidden", "--sample", "2", "b", "hidden"])
             self.assertEqual(code, 1)
             self.assertNotIn("private-path", output.getvalue())
             self.assertNotIn("hidden", output.getvalue())
-            self.assertEqual(json.loads(output.getvalue())["samples"], [{"ok": 1}])
+            self.assertEqual(json.loads(output.getvalue())["samples"], [{"ok": 1, "token_shortfall": 0}])
         for ids in (("1", "01"), ("0", "2"), ("\u0661", "2")):
             with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                 probe.main(["--sample", ids[0], "a", "x", "--sample", ids[1], "b", "y"])
