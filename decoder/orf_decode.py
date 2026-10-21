@@ -246,6 +246,9 @@ def decode_file(path, order=None, layout=None):
          "strips": len(p.strips), "strip_gaps": p.gaps,
          "packing": "", "order": "", "notes": []}
     if sc == "variable":
+        # F_FIG8 (Partial for #196) tests the literal Figure 8 category+extend
+        # table; it stops at the unused code on E-M1 Mark II High Res files and
+        # specifies no decoder step or value mapping.
         # F_WEAK_TABLE (Partial for #155) measures a weak preview-luma correlate;
         # it specifies neither sensor values nor a predictor or round-trip decode.
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
