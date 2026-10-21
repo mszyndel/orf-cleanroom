@@ -15,7 +15,9 @@ within-token dependence, destroying temporal structure. All comparison MI
 values are reported; these are descriptive comparisons, not p-values.
 Pairwise MI cannot establish the multivariate conditional chain, historical
 held-out/smoothed gains, a deeper law, physical rows or a decoder.
-Licence-check samples separately. Source hashes pin all repository imports.
+Match samples to retained verified licence/hash records before use. An unmet
+fixed-prefix request exits nonzero; retained short-prefix statistics describe
+only observed blocks. Source hashes pin all repository imports.
 """
 import argparse
 import hashlib
@@ -123,7 +125,7 @@ def main():
                       "escape_extra_bits": 0, "block_tokens": BLOCK,
                       "permutation_replicates": REPLICATES, "seed": SEED,
                       "samples": reports, "failures": failures}, indent=2, allow_nan=False))
-    return 1 if failures else 0
+    return 1 if failures or any(r["prefix_shortfall"] for r in reports) else 0
 
 
 if __name__ == "__main__":
