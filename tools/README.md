@@ -401,3 +401,18 @@ Check CC0 licences first. Original scanner, stdlib only, aggregates only.
 
     python -I -B tools/suffix_width_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_suffix_width_probe.py
+
+**`token_affine_probe.py`** supports the untested GF(2) part of lead #29
+item 4, building on #11 and #166/#169. It tests exact affine prediction of
+current b2 and b4 from both bits at lags 1..12, with an intercept. All six
+pooled/even/odd-target systems report context and target-augmented ranks.
+The first 262144 complete candidate tokens use zero extra escape bits;
+any 13-token context-plus-target window containing q>=17 is omitted without
+compacting indices. A rank increase excludes only an exact affine predictor
+of this context on these observed selected rows. It does not exclude noisy,
+nonlinear or longer-context laws, identify a scrambler or physical rows,
+reproduce historical private ranks, or decode. Escape omission cannot repair
+uncertain framing. Check CC0 licences first. Stdlib, aggregate output only.
+
+    python -I -B tools/token_affine_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_affine_probe.py
