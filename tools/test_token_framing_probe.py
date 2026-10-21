@@ -26,6 +26,92 @@ def fixture(endian='<', truncated=False):
 
 
 class FramingTests(unittest.TestCase):
+    def test_window_exact_selection_and_metadata_both_byte_orders(self):
+        for endian in ('<', '>'):
+            source = fixture(endian)[:-8] + bytes(range(8))
+            with patch('builtins.open', return_value=io.BytesIO(source)):
+                measured = probe.measure('fixture', 3, 7, True, 2, offset_bytes=4)
+            expected = probe.compare_prefix(bytes([4, 5, 6]), 7, True, 2)
+            for key, value in expected.items():
+                self.assertEqual(measured[key], value)
+            self.assertEqual(measured['window'], {
+                'offset_bytes': 4, 'start_bit': 32, 'end_bit_exclusive': 56,
+                'requested_bytes': 3, 'actual_bytes': 3, 'parser_origin': 'window_bit_zero'})
+            self.assertEqual(measured['requested_prefix_bytes'], 3)
+
+    def test_window_crosses_logical_strips_in_table_order_without_gap_bytes(self):
+        for endian in ('<', '>'):
+            data = bytearray(94)
+            data[:10] = ((b'II' if endian == '<' else b'MM') +
+                         struct.pack(endian + 'HIH', 42, 8, 4))
+            for index, (tag, count, value) in enumerate(
+                    ((256, 1, 8), (257, 1, 1), (273, 2, 62), (279, 2, 70))):
+                struct.pack_into(endian + 'HHII', data, 10 + 12 * index, tag, 4, count, value)
+            struct.pack_into(endian + 'II', data, 62, 90, 78)
+            struct.pack_into(endian + 'II', data, 70, 4, 4)
+            data[78:82], data[82:90], data[90:94] = b'wxyz', b'GAPBYTES', b'ABCD'
+            # Logical stream is ABCDwxyz, opposite to physical offset order.
+            with patch('builtins.open', return_value=io.BytesIO(data)):
+                measured = probe.measure('fixture', 4, 7, True, 2, offset_bytes=2)
+            expected = probe.compare_prefix(b'CDwx', 7, True, 2)
+            for key, value in expected.items():
+                self.assertEqual(measured[key], value)
+            self.assertEqual(measured['payload_bytes'], 8)
+            self.assertEqual(measured['window']['start_bit'], 16)
+
+    def test_window_exact_end_and_shortfalls_before_statistics(self):
+        for offset, length in ((0, 9), (1, 8), (8, 1), (9, 1), (10**30, 1)):
+            with patch('builtins.open', return_value=io.BytesIO(fixture())):
+                with patch.object(probe, 'compare_prefix') as compare:
+                    with self.assertRaises(ValueError):
+                        probe.measure('fixture', length, 7, offset_bytes=offset)
+                compare.assert_not_called()
+        for offset, length in ((0, 8), (1, 7), (7, 1)):
+            with patch('builtins.open', return_value=io.BytesIO(fixture())):
+                measured = probe.measure('fixture', length, 7, offset_bytes=offset)
+            self.assertEqual(measured['window']['end_bit_exclusive'], 64)
+
+    def test_negative_offset_rejected_before_open(self):
+        with patch('builtins.open') as opened:
+            with self.assertRaises(ValueError):
+                probe.measure('unused', 8, 7, offset_bytes=-1)
+        opened.assert_not_called()
+        with patch.object(probe, 'measure') as measure, contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as failure:
+                probe.main(['--sample', '1', 'public', 'unused', '--offset-bytes', '-1'])
+        self.assertEqual(failure.exception.code, 2)
+        measure.assert_not_called()
+
+    def test_window_cli_forwarding_and_mixed_shortfall_sanitization(self):
+        def open_input(path, mode):
+            self.assertEqual(mode, 'rb')
+            # Same requested window succeeds on one payload, overruns the other.
+            source = fixture()
+            if path == 'PRIVATE_SHORT':
+                source = source[:-8] + b'\x84' * 8
+                # Valid four-byte payload, not a malformed/truncated strip.
+                source = source[:54] + struct.pack('<I', 4) + source[58:66]
+            return io.BytesIO(source)
+
+        output = io.StringIO()
+        with patch('builtins.open', side_effect=open_input), contextlib.redirect_stdout(output):
+            status = probe.main(['--bytes', '4', '--offset-bytes', '4',
+                                 '--sample', '1', 'public-complete', 'PRIVATE_FULL',
+                                 '--sample', '2', 'public-short', 'PRIVATE_SHORT'])
+        report = json.loads(output.getvalue())
+        self.assertEqual(status, 1)
+        self.assertEqual((report['success_count'], report['failure_count']), (1, 1))
+        self.assertFalse(report['complete'])
+        complete, short = report['samples']
+        self.assertIn('models', complete)
+        self.assertEqual(complete['window']['offset_bytes'], 4)
+        self.assertEqual(short['requested_window'], {'offset_bytes': 4, 'bytes': 4})
+        self.assertNotIn('models', short)
+        self.assertEqual(short['window'], {'offset_bytes': 4, 'requested_bytes': 4,
+                                          'actual_bytes': 0, 'payload_bytes': 4,
+                                          'shortfall_bytes': 4})
+        self.assertNotIn('PRIVATE_', output.getvalue())
+
     def test_local_byte_shuffle_preserves_each_histogram_and_short_tail(self):
         source = bytes(range(23))
         for block in (1, 4, 23, 30):
@@ -82,7 +168,7 @@ class FramingTests(unittest.TestCase):
             self.assertEqual(probe.main(['--sample', '1', 'public', 'unused',
                                          '--local-byte-block', '256', '--markov']), 0)
         measure.assert_called_once_with('unused', 131072, 20261021,
-                                        include_markov=True, local_byte_block=256)
+                                        include_markov=True, local_byte_block=256, offset_bytes=0)
         for value in ('0', '-1'):
             with patch.object(probe, 'measure') as measure, contextlib.redirect_stderr(io.StringIO()):
                 with self.assertRaises(SystemExit) as failure:
@@ -150,7 +236,7 @@ class FramingTests(unittest.TestCase):
         with patch.object(probe, 'measure', return_value={}) as measure, contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(probe.main(['--sample', '1', 'public', 'unused', '--markov']), 0)
         measure.assert_called_once_with('unused', 131072, 20261021,
-                                        include_markov=True, local_byte_block=None)
+                                        include_markov=True, local_byte_block=None, offset_bytes=0)
 
     def test_bounded_parser_exact_and_unfinished_tokens(self):
         result = probe.parse_stats(probe.pack_bits([1, 0, 0, 0, 0, 0] * 4))

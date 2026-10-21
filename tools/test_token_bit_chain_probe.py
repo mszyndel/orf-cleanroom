@@ -7,6 +7,7 @@ import json
 import math
 import os
 import random
+import struct
 import sys
 import unittest
 from unittest import mock
@@ -84,6 +85,85 @@ class ChainTests(unittest.TestCase):
         for r in measure([[20] * BLOCK]):
             self.assertEqual(r["plugin_mi_bits"], 0)
             self.assertIsNone(r["pearson"])
+
+    def run_actual_cli(self, counts):
+        # Original in-memory TIFFs; no disk fixtures or child processes.
+        fixtures = {}
+        for index, count in enumerate(counts):
+            if count is None:
+                continue
+            bits = '100000' * count
+            bits += '0' * ((-len(bits)) % 8)
+            payload = (int(bits, 2).to_bytes(len(bits) // 8, 'big')
+                       if bits else b'\x00')
+            data = b'II' + struct.pack('<HIH', 42, 8, 4)
+            for tag, value in ((256, 8), (257, 1), (273, 62), (279, len(payload))):
+                data += struct.pack('<HHII', tag, 4, 1, value)
+            fixtures['fixture-%d' % index] = data + struct.pack('<I', 0) + payload
+        original_open = open
+
+        def read_fixture(path, mode='r', *args, **kwargs):
+            if path in fixtures:
+                self.assertEqual(mode, 'rb')
+                return io.BytesIO(fixtures[path])
+            if path == 'fixture-%d' % (len(counts) - 1) and counts[-1] is None:
+                raise OSError('PRIVATE_INPUT_DETAILS')
+            return original_open(path, mode, *args, **kwargs)
+
+        argv = ['probe']
+        for index in range(len(counts)):
+            argv.extend(['--sample', str(index + 1), 'public-%d' % index,
+                         'fixture-%d' % index])
+        output = io.StringIO()
+        with mock.patch.object(sys, 'argv', argv), mock.patch.object(probe, 'LIMIT', 256):
+            with mock.patch('builtins.open', side_effect=read_fixture):
+                with contextlib.redirect_stdout(output):
+                    status = probe.main()
+        self.assertNotIn('PRIVATE_INPUT_DETAILS', output.getvalue())
+        self.assertNotIn('fixture-', output.getvalue())
+        return status, json.loads(output.getvalue())
+
+    def test_actual_cli_exact_complete_prefix(self):
+        status, result = self.run_actual_cli([256])
+        self.assertEqual(status, 0)
+        sample = result['samples'][0]
+        self.assertEqual((sample['returned_tokens'], sample['prefix_shortfall']), (256, 0))
+        self.assertEqual(sample['bits_consumed'], 1536)
+        self.assertEqual(sample['selection']['retained_blocks'], 2)
+        self.assertEqual(sample['statistics'][0]['pair_count'], 254)
+        self.assertEqual(sample['statistics'][0]['plugin_mi_bits'], 0)
+
+    def test_actual_cli_short_prefix_retains_diagnostics(self):
+        status, result = self.run_actual_cli([255])
+        self.assertEqual(status, 1)
+        sample = result['samples'][0]
+        self.assertEqual((sample['returned_tokens'], sample['prefix_shortfall']), (255, 1))
+        self.assertEqual(sample['bits_consumed'], 1530)
+        self.assertEqual(sample['selection']['tail_tokens'], 127)
+        self.assertEqual(sample['statistics'][0]['pair_count'], 127)
+        self.assertEqual(sample['statistics'][0]['plugin_mi_bits'], 0)
+        self.assertEqual(result['failures'], [])
+
+    def test_actual_cli_empty_prefix(self):
+        status, result = self.run_actual_cli([0])
+        self.assertEqual(status, 1)
+        sample = result['samples'][0]
+        self.assertEqual((sample['returned_tokens'], sample['prefix_shortfall']), (0, 256))
+        self.assertEqual(sample['bits_consumed'], 0)
+        self.assertTrue(all(row['pair_count'] == 0 for row in sample['statistics']))
+        self.assertTrue(all(row['plugin_mi_bits'] is None for row in sample['statistics']))
+
+    def test_actual_cli_mixed_complete_and_short(self):
+        status, result = self.run_actual_cli([256, 255])
+        self.assertEqual(status, 1)
+        self.assertEqual([r['prefix_shortfall'] for r in result['samples']], [0, 1])
+        self.assertEqual(result['failures'], [])
+
+    def test_actual_cli_mixed_input_exception_retains_short_and_complete(self):
+        status, result = self.run_actual_cli([256, 255, None])
+        self.assertEqual(status, 1)
+        self.assertEqual([r['prefix_shortfall'] for r in result['samples']], [0, 1])
+        self.assertEqual(result['failures'], [{'pixls_id': '3', 'error': 'OSError'}])
 
     def test_cli_retains_success_and_sanitizes_failure(self):
         output = io.StringIO()

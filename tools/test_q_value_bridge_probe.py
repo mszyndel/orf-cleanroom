@@ -24,6 +24,19 @@ def oracle(xs):
     return energy, (n + 1) * variance / 6
 
 
+def container(payload, endian='<'):
+    """Original minimal one-strip TIFF fixture, held only in memory."""
+    fields = [(0x100, 4, 1, 8), (0x101, 4, 1, 4),
+              (0x103, 3, 1, 1), (0x111, 4, 1, 128),
+              (0x117, 4, 1, len(payload))]
+    header = (b'II' if endian == '<' else b'MM') + struct.pack(endian + 'HIH', 0x4f52, 8, len(fields))
+    entries = b''
+    for tag, kind, count, value in fields:
+        inline = struct.pack(endian + ('H' if kind == 3 else 'I'), value)
+        entries += struct.pack(endian + 'HHI', tag, kind, count) + inline.ljust(4, b'\0')
+    return (header + entries + bytes(4)).ljust(128, b'\0') + payload
+
+
 class BridgeTests(unittest.TestCase):
     def test_exact_oracle_and_permutation_null(self):
         for xs in ([0, 1], [-1, 0, 2], [-2, -2, 1, 3], [0, 0, 0, 1], [9], [7, 7, 7]):
@@ -113,7 +126,7 @@ class BridgeTests(unittest.TestCase):
                     inline = struct.pack(endian + ('H' if kind == 3 else 'I'), value)
                     entries += struct.pack(endian + 'HHI', tag, kind, count) + inline.ljust(4, b'\0')
                 data = (header + entries + bytes(4)).ljust(128, b'\0') + payload
-                with patch.object(probe, 'open', return_value=io.BytesIO(data), create=True):
+                with patch.object(probe, 'open', return_value=io.BytesIO(data), create=True), patch.object(probe, 'LIMIT', 128):
                     if bad:
                         with self.assertRaises(ValueError):
                             probe.report(1, 'PUBLIC', 'PRIVATE')
@@ -124,6 +137,68 @@ class BridgeTests(unittest.TestCase):
                         self.assertEqual(result['sha256'], probe.hashlib.sha256(data).hexdigest())
                         self.assertEqual(len(result['cells']), 4)
                         self.assertNotIn('PRIVATE', json.dumps(result))
+
+    def test_incomplete_prefix_never_computes_statistics(self):
+        # Four q=0,s=0 tokens occupy 24 bits; three occupy 18 bits.
+        for endian in ('<', '>'):
+            for payload, returned, consumed in ((b'\0', 0, 0), (b'\x01', 0, 0),
+                                                (b'\x80', 1, 6), (b'\x82\x08\0', 3, 18)):
+                with self.subTest(endian=endian, payload=payload):
+                    with patch.object(probe, 'LIMIT', 4), patch.object(probe, 'aggregate') as aggregate:
+                        with patch.object(probe, 'open', return_value=io.BytesIO(container(payload, endian)), create=True):
+                            with self.assertRaises(probe.IncompletePrefix) as caught:
+                                probe.report(1, 'PUBLIC', 'PRIVATE')
+                        self.assertEqual(caught.exception.diagnostic,
+                                         {'reason': 'incomplete_prefix', 'requested_tokens': 4,
+                                          'returned_tokens': returned, 'token_shortfall': 4 - returned,
+                                          'consumed_bits': consumed, 'payload_bits': 8 * len(payload)})
+                        aggregate.assert_not_called()
+            with patch.object(probe, 'LIMIT', 4), patch.object(probe, 'open', return_value=io.BytesIO(container(b'\x82\x08\x20', endian)), create=True):
+                result = probe.report(1, 'PUBLIC', 'PRIVATE')
+            self.assertEqual(result['returned_tokens'], 4)
+            self.assertEqual(result['token_shortfall'], 0)
+            self.assertEqual(result['consumed_bits'], 24)
+            self.assertEqual(len(result['cells']), 4)
+
+    def test_real_report_cli_incomplete_and_mixed_batches(self):
+        fixtures = {'PRIVATE_SHORT': container(b'\x80'),
+                    'PRIVATE_COMPLETE': container(b'\x82\x08\x20')}
+        def read_input(path, mode):
+            return io.BytesIO(fixtures[path]) if path in fixtures else open(path, mode)
+        for complete in (False, True):
+            args = ['--sample', '2', 'PUBLIC_SHORT', 'PRIVATE_SHORT']
+            if complete:
+                args += ['--sample', '1', 'PUBLIC_COMPLETE', 'PRIVATE_COMPLETE']
+            out = io.StringIO()
+            with patch.object(probe, 'LIMIT', 4), patch.object(probe, 'open', side_effect=read_input, create=True), contextlib.redirect_stdout(out):
+                status = probe.main(args)
+            result = json.loads(out.getvalue())
+            self.assertEqual(status, 1)
+            self.assertEqual([sample['pixls_id'] for sample in result['samples']], [1] if complete else [])
+            self.assertEqual(result['failures'], [{'pixls_id': 2, 'category': 'input_or_measurement_error',
+                              'reason': 'incomplete_prefix', 'requested_tokens': 4, 'returned_tokens': 1,
+                              'token_shortfall': 3, 'consumed_bits': 6, 'payload_bits': 8}])
+            self.assertNotIn('PRIVATE', out.getvalue())
+            self.assertNotIn('cells', result['failures'][0])
+            self.assertNotIn('selection', result['failures'][0])
+
+    def test_production_prefix_boundary(self):
+        # Original string encoder, actual 262144-token contract (no patched limit).
+        for count in (probe.LIMIT - 1, probe.LIMIT):
+            bits = '100000' * count
+            padded = bits + '0' * (-len(bits) % 8)
+            payload = int(padded, 2).to_bytes(len(padded) // 8, 'big')
+            with patch.object(probe, 'open', return_value=io.BytesIO(container(payload)), create=True):
+                if count < probe.LIMIT:
+                    with self.assertRaises(probe.IncompletePrefix) as caught:
+                        probe.report(1, 'PUBLIC', 'PRIVATE')
+                    self.assertEqual(caught.exception.diagnostic['returned_tokens'], count)
+                    self.assertEqual(caught.exception.diagnostic['token_shortfall'], 1)
+                else:
+                    result = probe.report(1, 'PUBLIC', 'PRIVATE')
+                    self.assertEqual(result['returned_tokens'], probe.LIMIT)
+                    self.assertEqual(result['selection']['complete_blocks'], 2048)
+                    self.assertEqual(result['consumed_bits'], 6 * probe.LIMIT)
 
     def test_mixed_cli_preserves_success_sanitizes_failure(self):
         out = io.StringIO()

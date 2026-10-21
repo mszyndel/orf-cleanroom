@@ -1,5 +1,18 @@
 # tools
 
+**`e400_boundary_probe.py`** tests the previously excluded boundary words in
+lead #79. Every nonzero-low4 word within two pixels of any stored-raster edge
+is tested with axial-2/diagonal-1 families, available-neighbour renormalization,
+coordinate clamp, and reflection without edge repetition. Remapped duplicates
+remain separate terms. Exact residual numerator ranges and denominator counts,
+and floor/ceiling/nearest-half-up matches are emitted by low nibble. Clamp may
+change CFA parity; none of these arithmetic candidates identifies camera policy.
+No row-layout detection, fit, sensor ground truth, images or decoder change. Verified CC0
+SHA-256 is checked before parsing; failures are sanitized. Stdlib only.
+
+    python -I -B tools/e400_boundary_probe.py FILE --sha256 VERIFIED_SHA256
+    python -I -B tools/test_e400_boundary_probe.py
+
 Analysis scripts, all original code (see RULES.md).
 
 Each script should:
@@ -57,6 +70,19 @@ camera framing. It can be combined with `--markov`.
 
     python -I -B tools/token_framing_probe.py --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
 
+Optional `--offset-bytes 1048576` selects an exact-length window of the
+logical strip payload. The candidate parser restarts at that window's bit zero;
+all null parameters and local-byte blocks use only that window. Reports retain
+requested/actual length and absolute payload byte/bit anchors. A requested
+window beyond the payload fails before statistics, including a short default
+prefix. The old `prefix_bytes` and `requested_prefix_bytes` fields remain length
+aliases for compatibility; `window` gives their offset context. Complete
+zero-offset model statistics remain unchanged. These newly anchored parses are
+not known whole-stream token boundaries and do not establish framing,
+stationarity, significance or a decode. Use fixed offsets before outcomes.
+
+    python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
@@ -68,6 +94,24 @@ verification after matching the exact local hash.
 
     python -I -B tools/terminal_residual_null_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_terminal_residual_null_probe.py
+
+Optional `--fixed-density` adds exact counts for a uniform permutation of the
+N window bits conditional on their K observed ones. For t complete tokens at
+an N-bit boundary, the N-6t unary zeros have `choose(N-5t-1,t-1)` compositions;
+the t stops are ones and the 5t suffix slots have `choose(5t,K-t)` assignments.
+Summing their products over t counts complete-boundary strings. The empty
+boundary contributes one at N=K=0. Nonempty residual count is `choose(N,K)`
+minus the boundary count, including arbitrarily long rejected candidates.
+Nonempty all-one residuals have length r=1..5, so their count is the sum of
+boundary counts at `(N-r,K-r)`. Exact event counts and denominators accompany
+floating joint/conditional probabilities; absent nonempty residuals give a
+null conditional probability. This uses O(N) binomial evaluations per window
+and a constant number of retained big integers, whose sizes grow with N.
+Uniform bit-order exchangeability is a hypothetical control, not established
+for camera data; conditioning density does not calibrate significance or
+identify padding, codec framing or a decoder. Default output is unchanged.
+
+    python -I -B tools/terminal_residual_null_probe.py --fixed-density --sample ID PUBLIC_NAME path/to/file.ORF
 
 **`e400_single_pass_probe.py`** supports the remaining exception in #79.
 It marks nonzero-low4 words and tests connected same-colour neighbour
@@ -321,6 +365,9 @@ The fixed prefix is 262144 complete tokens; escapes (`q>=17`) are omitted
 without compacting indices, with zero extra escape bits. It requires a single
 in-bounds variable-size strip and prints aggregate JSON with sample hashes,
 measured dimensions, prefix shortfall, source hashes and sanitized failures.
+Exit 1 signals any input failure or nonzero prefix shortfall; short-prefix
+statistics remain visible but do not fulfill the declared fixed-prefix design.
+Complete error-free reports return exit 0.
 Licence-check downloaded samples first. This descriptive metric has no bias
 correction, significance threshold or physical column interpretation; it does
 not reproduce the historical conditional-context gain or private figures.
@@ -356,6 +403,10 @@ stationarity, magnitude meaning or a decoder. Check CC0 licences first.
 prediction from lag1 and preceding 8/16-token positive-q counts. It reports
 exact training/test tables, losses, signed gains against frequency and lag1,
 unseen contexts and all sixteen within-block permutation comparisons.
+Requested-prefix completeness is explicit: incomplete inputs retain their
+observed-block diagnostic scores, report `prefix_complete=false` and add an
+`IncompletePrefix` error. Any shortfall or input failure exits nonzero; valid
+reports survive mixed inputs, and failures expose public identity/error class.
 Original even/odd 128-token blocks define the split; escape-containing blocks
 and incomplete tails are omitted. Blocks are not physical rows, adjacent
 split blocks may depend, and omission does not repair unknown framing.
@@ -526,6 +577,14 @@ uncertain framing. Check CC0 licences first. Stdlib, aggregate output only.
     python -I -B tools/token_affine_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_affine_probe.py
 
+Every affine sample now reports `prefix_complete`. Incomplete requests retain
+all selected-row diagnostic ranks/consistency but make the CLI exit nonzero;
+those verdicts cover only observed rows. Failed public identities appear
+in `failures`, with sanitized exception classes, while valid
+reports remain in `samples`. Any input failure also exits nonzero. Every ID
+is validated before reading samples. Existing complete-prefix ranks/counts
+are unchanged. Reuse retained CC0 verification after matching the local hash.
+
 **`suffix_width_lag_probe.py`** follows the neighbour-dependence question after
 the candidate width scan (#29, V1 G8). All k=2..8 and stop=0,1 grammars use
 their first 262144 complete tokens and zero extra escape skip. All lags1..5
@@ -662,6 +721,22 @@ Stdlib only; reads files and prints aggregate JSON, no token/pixel dumps.
 
     python -I -B tools/token_cyclic_phase_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240
     python -I -B tools/test_token_cyclic_phase_probe.py
+
+**`token_phase_holdout_probe.py`** extends #144's cyclic diagnostic (#240)
+with a first-half training phase and a second-half evaluation at the frozen
+phase. Selection maximizes mean capped-q head-minus-rest contrast, with the
+lowest phase breaking ties. Heads wrap within each original absolute r*S
+candidate row. The report retains all training phase contrast moments,
+held-out selected/zero-phase moments, and 99 independently row-rotated
+conditional reference contrast sums, with exact seeds and exceedance counts.
+These references preserve each row's multiset and cyclic shape but remove
+common phase; they are descriptive, without a p-value or physical-row claim.
+Inputs reused from earlier studies remain exploratory. No stride search,
+contiguous-boundary refit, true escape syntax or decoding is established.
+Incomplete requested bands are rejected without phase selection.
+
+    python -I -B tools/token_phase_holdout_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
+    python -I -B tools/test_token_phase_holdout_probe.py
 
 **`token_head_stride_probe.py`** adds a local head-by-stride diagnostic for
 #144's remaining head-sensitive maximum question; Builds on #11/#218/#230.

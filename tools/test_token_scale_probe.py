@@ -7,12 +7,23 @@ import json
 import math
 import os
 import random
+import struct
 import sys
 import unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import token_scale_probe as probe
+
+
+def container(payload):
+    """Original minimal TIFF fixture, in memory only; five inline LONG tags."""
+    offset = 8 + 2 + 12 * 5 + 4
+    tags = ((0x100, 20), (0x101, 20), (0x103, 1),
+            (0x111, offset), (0x117, len(payload)))
+    return (b"II" + struct.pack("<HIH", 42, 8, len(tags))
+            + b"".join(struct.pack("<HHII", tag, 4, 1, value) for tag, value in tags)
+            + bytes(4) + payload)
 
 
 class ScaleTests(unittest.TestCase):
@@ -113,23 +124,75 @@ class ScaleTests(unittest.TestCase):
     def test_cli_rejects_invalid_and_duplicate_ids(self):
         for ids in (("0",), ("\u00b2",), ("\u0662",), ("1", "1"), ("1", "01")):
             args = [value for sid in ids for value in ("--sample", sid, "public", "unused")]
-            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
+            with mock.patch.object(probe, "report") as reader, contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
                 probe.main(args)
             self.assertEqual(caught.exception.code, 2)
+            reader.assert_not_called()
+
+    def test_real_bounded_report_full_short_empty_and_truncated_suffix(self):
+        # This three-byte pattern encodes four q=0,s=0 candidates.
+        payload = bytes([0x82, 0x08, 0x20]) * 100
+        for target, complete in ((400, True), (401, False)):
+            with mock.patch("builtins.open", mock.mock_open(read_data=container(payload))), mock.patch.object(probe, "LIMIT", target):
+                result = probe.report("1", "public", "unused")
+            self.assertEqual(result["prefix_complete"], complete)
+            self.assertEqual(result["returned_tokens"], 400)
+            self.assertEqual(result["shortfall_tokens"], target - 400)
+            self.assertEqual(result["bits_consumed"], 2400)
+            self.assertEqual(result["selection"]["complete_blocks"], 3)
+            self.assertIsNotNone(result["statistics"]["observed"][0]["loss_bits"])
+        for payload, count, endpoint in ((bytes(3), 0, 0), (bytes([0x81]), 1, 6)):
+            with mock.patch("builtins.open", mock.mock_open(read_data=container(payload))):
+                result = probe.report("1", "public", "unused")
+            self.assertFalse(result["prefix_complete"])
+            self.assertEqual(result["returned_tokens"], count)
+            self.assertEqual(result["bits_consumed"], endpoint)
+            self.assertIsNone(result["statistics"]["observed"][0]["loss_bits"])
+
+    def test_cli_full_short_and_mixed_completion(self):
+        for completions, expected_code in (([True], 0), ([False], 1), ([True, False], 1)):
+            results = [{"pixls_id": str(i + 1), "prefix_complete": value,
+                        "statistics": {"observed_diagnostic": True}}
+                       for i, value in enumerate(completions)]
+            args = [value for i in range(len(results)) for value in
+                    ("--sample", str(i + 1), "public", "unused")]
+            output = io.StringIO()
+            with mock.patch.object(probe, "report", side_effect=results), contextlib.redirect_stdout(output):
+                code = probe.main(args)
+            self.assertEqual(code, expected_code)
+            data = json.loads(output.getvalue())
+            self.assertEqual(data["samples"], results)
+            self.assertEqual(data["errors"], [{"pixls_id": str(i + 1), "pixls_name": "public",
+                                              "error_type": "IncompletePrefix"}
+                                             for i, value in enumerate(completions) if not value])
+
+    def test_real_report_cli_rejects_short_and_empty_without_losing_diagnostics(self):
+        for payload, count in ((bytes([0x82, 0x08, 0x20]) * 100, 400),
+                               (bytes(3), 0)):
+            output = io.StringIO()
+            with mock.patch("builtins.open", mock.mock_open(read_data=container(payload))), contextlib.redirect_stdout(output):
+                code = probe.main(["--sample", "1", "public", "unused"])
+            self.assertEqual(code, 1)
+            result = json.loads(output.getvalue())
+            self.assertEqual(result["samples"][0]["returned_tokens"], count)
+            self.assertFalse(result["samples"][0]["prefix_complete"])
+            self.assertEqual(result["errors"][0]["error_type"], "IncompletePrefix")
+            loss = result["samples"][0]["statistics"]["observed"][0]["loss_bits"]
+            self.assertEqual(loss is None, count == 0)
 
     def test_mixed_cli_keeps_success_and_sanitizes_errors(self):
         def fake_report(sid, name, path):
             if sid == "2":
                 raise OSError("private/path/should/not/appear")
-            return {"pixls_id": sid, "statistics": {}}
+            return {"pixls_id": sid, "prefix_complete": True, "statistics": {}}
         output = io.StringIO()
         with mock.patch.object(probe, "report", side_effect=fake_report), contextlib.redirect_stdout(output):
             code = probe.main(["--sample", "1", "public", "unused", "--sample", "2", "public", "unused"])
         self.assertEqual(code, 1)
         self.assertNotIn("private", output.getvalue())
         report = json.loads(output.getvalue())
-        self.assertEqual(report["samples"], [{"pixls_id": "1", "statistics": {}}])
-        self.assertEqual(report["errors"], [{"pixls_id": "2", "error_type": "OSError"}])
+        self.assertEqual(report["samples"], [{"pixls_id": "1", "prefix_complete": True, "statistics": {}}])
+        self.assertEqual(report["errors"], [{"pixls_id": "2", "pixls_name": "public", "error_type": "OSError"}])
         self.assertEqual(len(report["source_sha256"]), 3)
 
 
