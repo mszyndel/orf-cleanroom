@@ -662,3 +662,19 @@ Stdlib only; reads files and prints aggregate JSON, no token/pixel dumps.
 
     python -I -B tools/token_cyclic_phase_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240
     python -I -B tools/test_token_cyclic_phase_probe.py
+
+**`token_phase_holdout_probe.py`** extends #144's cyclic diagnostic (#240)
+with a first-half training phase and a second-half evaluation at the frozen
+phase. Selection maximizes mean capped-q head-minus-rest contrast, with the
+lowest phase breaking ties. Heads wrap within each original absolute r*S
+candidate row. The report retains all training phase contrast moments,
+held-out selected/zero-phase moments, and 99 independently row-rotated
+conditional reference contrast sums, with exact seeds and exceedance counts.
+These references preserve each row's multiset and cyclic shape but remove
+common phase; they are descriptive, without a p-value or physical-row claim.
+Inputs reused from earlier studies remain exploratory. No stride search,
+contiguous-boundary refit, true escape syntax or decoding is established.
+Incomplete requested bands are rejected without phase selection.
+
+    python -I -B tools/token_phase_holdout_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
+    python -I -B tools/test_token_phase_holdout_probe.py
