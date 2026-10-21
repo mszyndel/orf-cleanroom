@@ -38,6 +38,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.p
 import orf_signature  # noqa: E402
 
 F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
+F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
+F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
 F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
@@ -263,7 +265,7 @@ def decode_file(path, order=None, layout=None):
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
         r.update(variant="compressed", status="not yet specified (value assembly remains open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.10 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.10, S2.3 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
