@@ -450,6 +450,11 @@ definitions are explicit because the historical phrase was unspecified.
 No significance, independence, semantic gate or historical-number claim
 follows; omission cannot repair unknown framing. Licence-check inputs first.
 
+The b4-gate probe's optional `--q-stratified` flag adds exact within-q
+low3/low4 contrasts and each file's equal-weight summary over its reported
+support. Sparse strata and differing support limit comparisons. Missing files
+or token-prefix shortfalls exit nonzero while retaining aggregate records.
+
     python -I -B tools/token_b4_gate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_b4_gate_probe.py
 
