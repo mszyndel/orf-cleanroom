@@ -356,6 +356,10 @@ stationarity, magnitude meaning or a decoder. Check CC0 licences first.
 prediction from lag1 and preceding 8/16-token positive-q counts. It reports
 exact training/test tables, losses, signed gains against frequency and lag1,
 unseen contexts and all sixteen within-block permutation comparisons.
+Requested-prefix completeness is explicit: incomplete inputs retain their
+observed-block diagnostic scores, report `prefix_complete=false` and add an
+`IncompletePrefix` error. Any shortfall or input failure exits nonzero; valid
+reports survive mixed inputs, and failures expose public identity/error class.
 Original even/odd 128-token blocks define the split; escape-containing blocks
 and incomplete tails are omitted. Blocks are not physical rows, adjacent
 split blocks may depend, and omission does not repair unknown framing.
