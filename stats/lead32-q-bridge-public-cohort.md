@@ -48,8 +48,8 @@ inferential null test. The 0.5 target is a rough descriptive effect boundary.
 ## Complete primary results
 
 Every one of 24 primary cells exceeds 0.5; the range is
-0.983598044820033 to 3.19820600814722. The four additional files do not
-reach that target under this metric. This does not establish independence,
+0.983598044820033 to 3.19820600814722. All four additional files also have
+every primary ratio above 0.5. This does not establish independence,
 a valid reading, or impossibility of another value map. Values rounded below;
 all exact A/V, E/N and ratio fractions plus every parity pool are in the JSON.
 Individual block A/V arrays are omitted from the committed summary to keep it
@@ -123,7 +123,7 @@ for sample in report["samples"]:
         del cell["blocks"]
 report["summary"] = {"primary_cells": len(ratios), "primary_cells_at_or_below_half": sum(r <= Fraction(1, 2) for r in ratios), "min_ratio_approx": float(min(ratios)), "max_ratio_approx": float(max(ratios))}
 report["reduction"] = "Individual block A/V arrays omitted; every sample, selection count and exact pooled/parity summary retained. Reproduce individual blocks using the unchanged measurement CLI."
-report["_provenance"] = {"measurement_tool": "tools/q_value_bridge_probe.py", "source_commit": `ce39a503cde7cbe669d5eb369c7d18db8ec19147`, "inputs": [{k: s[k] for k in ("pixls_id", "pixls_name", "sha256")} for s in report["samples"]]}
+report["_provenance"] = {"measurement_tool": "tools/q_value_bridge_probe.py", "source_commit": "ce39a503cde7cbe669d5eb369c7d18db8ec19147", "inputs": [{k: s[k] for k in ("pixls_id", "pixls_name", "sha256")} for s in report["samples"]]}
 print(json.dumps(report, indent=2, sort_keys=True, allow_nan=False))
 ```
 
