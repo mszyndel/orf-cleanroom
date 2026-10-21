@@ -752,3 +752,20 @@ Incomplete requested bands are rejected without phase selection.
 
     python -I -B tools/token_phase_holdout_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
     python -I -B tools/test_token_phase_holdout_probe.py
+
+`unit_order_probe.py` supports lead #75 and V0 gap G4 with the original
+central-300-stored-row edge metric. It reports exact within/cross-unit sums,
+selected counts, means and cross/within ratios for emitted and swapped pairs.
+Selection is strictly gradient > THRESHOLD; an empty selection reports null
+means/ratios, and zero within sum reports a null ratio. Every explicit public
+sample identity survives sanitized failures, which make the exit nonzero.
+Legacy directory arguments remain accepted, but output is now aggregate JSON
+instead of formatted text; directory scans process regular files only.
+Unspecified packings are explicitly skipped. Container parsing, byte-order
+selection and unpacking reuse the reference decoder unchanged. The statistic
+does not establish physical pixel order or change conformance hashes. Match
+local hashes to retained verified CC0 records before measurement.
+
+    python -I -B tools/unit_order_probe.py 300 --sample ID PUBLIC_NAME FILE
+    python -I -B tools/unit_order_probe.py 300 SAMPLE_DIR
+    python -I -B tools/test_unit_order_probe.py
