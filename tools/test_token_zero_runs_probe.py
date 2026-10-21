@@ -6,7 +6,7 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from token_zero_runs_probe import measure
+from token_zero_runs_probe import measure, scan_window
 from suffix_joint_probe import scan_prefix
 
 
@@ -69,6 +69,50 @@ class RunTests(unittest.TestCase):
                 self.assertEqual(r["complete_positive_runs"], len(runs))
                 self.assertEqual(r["sum_run_lengths"], sum(runs))
                 self.assertEqual(r["sum_squared_run_lengths"], sum(x*x for x in runs))
+
+    def test_windows_against_independent_encoder(self):
+        expected = [(q, (3*q + i) % 32) for i, q in enumerate((0, 1, 17, 7, 96, 2, 18, 0))]
+        encoded = ["0"*q + "1" + format(s, "05b") for q, s in expected]
+        text = "".join(encoded)
+        padded = text + "0"*((-len(text)) % 8)
+        payload = int(padded, 2).to_bytes(len(padded)//8, "big")
+        for start in range(len(expected)+3):
+            for count in (1, 3, 20):
+                window, meta = scan_window(payload, start, count)
+                end_index = min(start+count, len(expected))
+                skipped = min(start, len(expected))
+                self.assertEqual(window, expected[start:start+count])
+                self.assertEqual(meta["bits_consumed"], sum(map(len, encoded[:end_index])))
+                self.assertEqual(meta["window_start_bit"], sum(map(len, encoded[:skipped])))
+                self.assertEqual(meta["skipped_tokens"], skipped)
+                self.assertEqual(meta["skipped_escape_tokens"], sum(q >= 17 for q, _ in expected[:skipped]))
+                self.assertEqual(meta["start_shortfall"], start-skipped)
+                self.assertEqual(meta["window_bits_consumed"], sum(map(len, encoded[skipped:end_index])))
+        window, meta = scan_window(payload)
+        self.assertEqual((window, meta["bits_consumed"]), scan_prefix(payload))
+
+    def test_window_boundaries_are_censored_independently(self):
+        # The full run has length five. A window containing its middle cannot
+        # inherit either external bounding one, and must not count that run.
+        text = "1000001"
+        encoded = "".join("1" + format(s, "05b") for _, s in tokens(text))
+        payload = int(encoded + "0"*((-len(encoded)) % 8), 2).to_bytes((len(encoded)+7)//8, "big")
+        r = measure(scan_window(payload, 2, 3)[0])
+        self.assertEqual(r["complete_positive_runs"], 0)
+        self.assertEqual(r["all_zero_segment_zeros"], 3)
+        self.assertEqual(measure(scan_window(payload, 0, 4)[0])["trailing_censored_zeros"], 3)
+        self.assertEqual(measure(scan_window(payload, 3, 4)[0])["leading_censored_zeros"], 3)
+
+    def test_window_truncation_and_validation(self):
+        for payload in (b"", bytes([1]), bytes(20), bytes([0x81])):
+            baseline, end = scan_prefix(payload)
+            for start in (0, 1, 2):
+                got, meta = scan_window(payload, start, 3)
+                self.assertEqual(got, baseline[start:])
+                self.assertEqual(meta["bits_consumed"], end)
+        for start, count in ((-1, 1), (0, 0), (0, -1)):
+            with self.assertRaises(ValueError):
+                scan_window(b"", start, count)
 
 
 if __name__ == "__main__":

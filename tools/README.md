@@ -300,6 +300,17 @@ licence-check samples first.
     python -I -B tools/token_zero_runs_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_zero_runs_probe.py
 
+Optional `--start-token N --tokens K` selects K candidate tokens starting at
+absolute token index N, counting escapes. Parsing always starts at payload
+bit zero; only the selected window is retained in memory. Each window censors
+both edges independently. Reports include skipped tokens/escapes, start and
+length shortfalls, absolute start/end bit positions and selected-window bit
+length. `prefix_shortfall` is retained as an alias of `token_shortfall` for
+older consumers. Untouched windows can expose within-file variation but do
+not establish stationarity, representativeness or a geometric law.
+
+    python -I -B tools/token_zero_runs_probe.py --start-token 1048576 --tokens 262144 --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`escape_balance_probe.py`** supports the remaining b1/b0 suffix-balance
 question in lead #11. In the fixed first 262144 complete candidate tokens,
 it splits ordinary tokens strictly before versus after the first q>=17,
