@@ -69,6 +69,24 @@ verification after matching the exact local hash.
     python -I -B tools/terminal_residual_null_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_terminal_residual_null_probe.py
 
+Optional `--fixed-density` adds exact counts for a uniform permutation of the
+N window bits conditional on their K observed ones. For t complete tokens at
+an N-bit boundary, the N-6t unary zeros have `choose(N-5t-1,t-1)` compositions;
+the t stops are ones and the 5t suffix slots have `choose(5t,K-t)` assignments.
+Summing their products over t counts complete-boundary strings. The empty
+boundary contributes one at N=K=0. Nonempty residual count is `choose(N,K)`
+minus the boundary count, including arbitrarily long rejected candidates.
+Nonempty all-one residuals have length r=1..5, so their count is the sum of
+boundary counts at `(N-r,K-r)`. Exact event counts and denominators accompany
+floating joint/conditional probabilities; absent nonempty residuals give a
+null conditional probability. This uses O(N) binomial evaluations per window
+and a constant number of retained big integers, whose sizes grow with N.
+Uniform bit-order exchangeability is a hypothetical control, not established
+for camera data; conditioning density does not calibrate significance or
+identify padding, codec framing or a decoder. Default output is unchanged.
+
+    python -I -B tools/terminal_residual_null_probe.py --fixed-density --sample ID PUBLIC_NAME path/to/file.ORF
+
 **`e400_single_pass_probe.py`** supports the remaining exception in #79.
 It marks nonzero-low4 words and tests connected same-colour neighbour
 components of size one or two, excluding whole components touching a

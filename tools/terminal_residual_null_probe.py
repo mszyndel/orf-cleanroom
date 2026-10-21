@@ -15,6 +15,11 @@ U(N-r)*p^r. These finite distributions are exact mathematically, evaluated
 in floating point. Both fixed p=.5 and in-sample fitted p are descriptive;
 neither supplies calibrated significance, framing or padding evidence.
 
+Optional --fixed-density adds exact counts under a uniform permutation of the
+window's N bits with K ones. This conditions density exactly but assumes
+exchangeable bit order, which is not established for camera payloads. Its
+event probabilities are descriptive baselines, not inferential p-values.
+
 Stdlib Python 3.8+. Reads files and prints aggregates only. Licence/hash
 verification is a separate prerequisite. Repeat --sample ID PUBLIC_NAME FILE.
 """
@@ -30,6 +35,45 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from orf_signature import Tiff, size_class
 
 WINDOW_BITS = 4096
+
+
+def boundary_count(n, ones):
+    """Count N-bit/K-one strings ending at a complete candidate boundary.
+
+    With t tokens, n-6t zeros are distributed over t unary prefixes in
+    choose(n-5t-1,t-1) ways; the t stops are one and the 5t suffix positions
+    contain ones-t ones in choose(5t,ones-t) ways. Every such string has a
+    unique parse, so sum over t. The empty boundary contributes one at (0,0).
+    Uses O(n) binomial evaluations and O(1) retained big integers; binomial
+    arithmetic cost and integer storage grow with n.
+    """
+    if n == 0:
+        return int(ones == 0)
+    if n < 0 or ones < 0 or ones > n:
+        return 0
+    return sum(math.comb(n - 5*t - 1, t - 1) * math.comb(5*t, ones - t)
+               for t in range(1, n // 6 + 1) if 0 <= ones - t <= 5*t)
+
+
+def fixed_density_null(n, ones):
+    """Exact finite uniform-fixed-one-count event counts, including extremes.
+
+    Nonempty residual is the complement of a boundary at N, including long
+    rejected candidates. An all-one residual must have length 1..5; six ones
+    would complete a token. Its prefix must end at a complete boundary.
+    """
+    if type(n) is not int or type(ones) is not int or not 0 <= ones <= n:
+        raise ValueError("require integer n >= 0 and 0 <= ones <= n")
+    total = math.comb(n, ones)
+    empty = boundary_count(n, ones)
+    nonempty = total - empty
+    all_one = sum(boundary_count(n-r, ones-r) for r in range(1, min(n, 5) + 1))
+    return {"window_bits": n, "one_bits": ones, "total_strings": total,
+            "empty_residual_strings": empty, "nonempty_residual_strings": nonempty,
+            "nonempty_all_one_residual_strings": all_one,
+            "nonempty_probability": nonempty / total,
+            "nonempty_all_one_probability": all_one / total,
+            "all_one_given_nonempty": all_one / nonempty if nonempty else None}
 
 
 def residual_null(n, p):
@@ -72,20 +116,23 @@ def scan_window(bits):
             "nonempty_all_one_residual": bool(tail) and all(b == "1" for b in tail)}
 
 
-def window_report(payload, start):
+def window_report(payload, start, fixed_density=False):
     # Windows are byte-aligned and fixed at 512 bytes; never emit their bits.
     bits = "".join(format(b, "08b") for b in payload[start // 8:(start + WINDOW_BITS) // 8])
     if len(bits) != WINDOW_BITS:
         raise ValueError("incomplete window")
     ones = bits.count("1")
-    return {"start_bit": start, "end_bit_exclusive": start + WINDOW_BITS,
+    result = {"start_bit": start, "end_bit_exclusive": start + WINDOW_BITS,
             "window_bits": WINDOW_BITS, "one_bits": ones,
             "candidate_parse": scan_window(bits),
             "fair_null": residual_null(WINDOW_BITS, 0.5),
             "fitted_in_sample_null": residual_null(WINDOW_BITS, ones / WINDOW_BITS)}
+    if fixed_density:
+        result["fixed_density_null"] = fixed_density_null(WINDOW_BITS, ones)
+    return result
 
 
-def report(sid, name, path):
+def report(sid, name, path, fixed_density=False):
     with open(path, "rb") as handle:
         data = handle.read()
     best = max(Tiff(data).all_ifds(), key=lambda d: sum(d.get(0x117) or []))
@@ -104,14 +151,16 @@ def report(sid, name, path):
             "payload_w": w, "payload_h": h, "payload_bytes": count,
             "payload_offset": off, "size_class": "variable",
             "compression_tag": (best.get(0x103) or [None])[0],
-            "windows": {"prefix": window_report(payload, 0),
-                        "tail": window_report(payload, count * 8 - WINDOW_BITS)}}
+            "windows": {"prefix": window_report(payload, 0, fixed_density),
+                        "tail": window_report(payload, count * 8 - WINDOW_BITS, fixed_density)}}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--sample", nargs=3, action="append", required=True,
                         metavar=("ID", "PUBLIC_NAME", "FILE"))
+    parser.add_argument("--fixed-density", action="store_true",
+                        help="Add exact uniform-fixed-one-count event probabilities")
     args = parser.parse_args(argv)
     ids = [sid for sid, _, _ in args.sample]
     if any(not sid.isascii() or not sid.isdecimal() or int(sid) <= 0 for sid in ids):
@@ -121,7 +170,7 @@ def main(argv=None):
     samples, errors = [], []
     for sid, name, path in args.sample:
         try:
-            samples.append(report(sid, name, path))
+            samples.append(report(sid, name, path, args.fixed_density))
         except (OSError, ValueError, KeyError, IndexError, TypeError, struct.error) as exc:
             errors.append({"pixls_id": sid, "error_type": type(exc).__name__})
     sources = {}
