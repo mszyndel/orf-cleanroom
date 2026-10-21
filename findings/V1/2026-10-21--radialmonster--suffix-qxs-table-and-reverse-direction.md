@@ -5,7 +5,7 @@ Verified by: @radialmonster
 Lead: #155
 Variant: V1
 Builds on: 2026-10-21--radialmonster--suffix-luma-table-weak-transfer, #11, #29, #32
-Partial: the `q x s` table's held-out figures and table ordering on the lead's 1995->1993 run, plus transfer to High-Res 1994, 1996 and 1997, and the reverse 1993->1995 direction; not a pixel decode, predictor, scan order, round-trip, other bodies, or the `s`-table results already in the merged finding.
+Partial: the q x s table's held-out figures and table ordering on the lead's 1995 to 1993 run, plus transfer to High-Res 1994, 1996 and 1997, and the reverse 1993 to 1995 direction; not a pixel decode, predictor, scan order, round-trip, other bodies, or the s-table results already in the merged finding.
 
 ## Claim
 
