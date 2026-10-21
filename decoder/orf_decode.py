@@ -42,6 +42,7 @@ F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
 F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
 F_FIXED = "2026-10-19--radialmonster--fixed-size-payloads-exact-else-compressed"
 F_ROWLAYOUT = "2026-10-21--radialmonster--two-field-row-layout-reproduction"
+F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
 
 # what the evidence is for each layout
 STATUS = {
@@ -245,9 +246,10 @@ def decode_file(path, order=None, layout=None):
     if sc == "variable":
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
-        # (Partial, unassigned 87-file cohort) specifies neither tokens nor padding.
+        # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
+        # specify neither tokens nor padding.
         r.update(variant="compressed", status="not yet specified")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet, see specs/V1.md S1.7 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet, see specs/V1.md S1.7-S1.8 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
