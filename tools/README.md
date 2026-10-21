@@ -86,6 +86,18 @@ a low-frequency luma proxy, not a full pixel decode. Test:
     python -I tools/token_luma_probe.py path/to/file.ORF --rows 300 --window 63 --perms 20
     python -I tools/token_luma_probe.py --self-test
 
+**`token_value_probe.py`** supports leads #11 and #32 with band-wise
+b2+b4 correlations, nominal versus whole-preview scale comparisons, column
+statistics and fixed suffix-table transfer against numeric embedded-preview
+luma DC. Rows are candidate token blocks at the payload width; physical row
+boundaries and escape framing remain unresolved. The table measures a weak
+statistical correlate, not sensor values, a predictor or a round-trip decode.
+Within-row shuffles are descriptive; a four-shuffle z is not calibrated
+significance. Licence-check the public training and test inputs first.
+
+    python -I -B tools/token_value_probe.py --self-test
+    python -I -B tools/token_value_probe.py table --train PUBLIC_TRAIN --test PUBLIC_TEST --rows 600 --mode s --lam 1 --smooth 10 --perms 4
+
 **`value_map_probe.py`** (by @mtakemoto) measures suffix bridge energies under the three candidate suffix mappings from lead #32, against an exact permutation null, in 128-token blocks of the #11 parse. It is a frozen, pre-registered experiment: the sample IDs per phase (`discovery`, `validation`) and the settings are fixed on purpose, so it reruns that one design rather than measuring arbitrary files. It prints aggregate JSON only. `--self-test` runs its tests.
 
     python tools/value_map_probe.py --phase discovery --measured-by @yourhandle --sample 1993 NAME path/to/file.ORF
