@@ -11,6 +11,12 @@ with a causal predictor (raster or same-colour lag 2), block-averages the result
 to the preview's luma DC grid, and correlates it after row-centring. The null
 shuffles whole tokens within each row and reconstructs with the same predictor.
 
+The natural sign-magnitude readings `sig0`, `sig0_32`, `sig1`, `sig3`, `sig4`
+take bit b0/b1/b3/b4 as the sign and the other four suffix bits plus q as the
+magnitude. They follow the adjacent-pixel-difference plus Huffman description in
+public Olympus patent US8218885B2 (not decoder code); the patent does not give
+the table in text, so these are candidate readings, not the camera's table.
+
 Re-encoding a reconstruction with the same predictor is exact by construction,
 so it is not evidence for the camera's model; this tool scores the reconstruction
 against the embedded preview instead. No round-trip is claimed.
@@ -31,7 +37,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import jpeg_dc  # noqa: E402
 import orf_tokens as T  # noqa: E402
 
-KINDS = ("zz32", "m16b2", "m16b2f", "m32b2", "u32", "s16")
+KINDS = ("zz32", "m16b2", "m16b2f", "m32b2", "u32", "s16",
+         "sig0", "sig0_32", "sig1", "sig3", "sig4")
 PREDS = ("left", "up", "avg", "grad", "paeth", "med", "left2", "up2", "avg2")
 
 
@@ -75,6 +82,21 @@ def value(q, s, kind):
         return -m if b2 else m
     if kind == "s16":
         return s - 16
+    if kind == "sig0":
+        m = (q << 4) | (s >> 1)
+        return -m if b0 else m
+    if kind == "sig0_32":
+        m = (q << 5) | (s >> 1)
+        return -m if b0 else m
+    if kind == "sig1":
+        m = (q << 4) | ((b4 << 3) | (b3 << 2) | (b2 << 1) | b0)
+        return -m if b1 else m
+    if kind == "sig3":
+        m = (q << 4) | ((b4 << 3) | (b2 << 2) | (b1 << 1) | b0)
+        return -m if b3 else m
+    if kind == "sig4":
+        m = (q << 4) | ((b3 << 3) | (b2 << 2) | (b1 << 1) | b0)
+        return -m if b4 else m
     raise ValueError(kind)
 
 
