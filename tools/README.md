@@ -416,3 +416,18 @@ uncertain framing. Check CC0 licences first. Stdlib, aggregate output only.
 
     python -I -B tools/token_affine_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_affine_probe.py
+
+**`suffix_width_lag_probe.py`** follows the neighbour-dependence question after
+the candidate width scan (#29, V1 G8). All k=2..8 and stop=0,1 grammars use
+their first 262144 complete tokens and zero extra escape skip. All lags1..5
+report exact q-positive 2x2 and fixed low-two-suffix-bit 4x4 tables and
+unsmoothed plug-in MI, omitting only q>=17 endpoints without compacting
+indices. Intervening escapes remain; omission cannot repair unknown framing.
+Reports include endpoints, shortfalls, omissions, public/source hashes and
+sanitized failures. Equal alphabets do not remove finite-sample, marginal
+or selection bias: MI does not rank/select grammars. No null, significance,
+physical rows, historical private-value reproduction or decode is claimed.
+Licence-check public inputs first. Stdlib, reads files/prints aggregates only.
+
+    python -I -B tools/suffix_width_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_suffix_width_lag_probe.py
