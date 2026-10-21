@@ -151,6 +151,19 @@ three flags shown below.
 
 All of them use the standard library only (Python 3.8+). Contributions of new tools are welcome. Follow the rules above and RULES.md.
 
+**`token_bit_chain_probe.py`** supports lead #29 item 4 and builds on #11.
+It reports all four ordered b2/b4 bit-pair tables at lags 1..5, plug-in MI,
+Pearson correlations and every fixed-seed within-block whole-token permutation
+comparison. The fixed prefix contains at most 262144 complete tokens; whole
+128-token blocks containing escapes and incomplete tails are omitted. Pairs
+stay within retained blocks, which are not established camera rows. This is
+descriptive pairwise dependence, not the historical multivariate conditional
+chain, held-out gains, significance, a deeper law or a decoder. Licence-check
+samples first; failures are sanitized and other sample reports retained.
+
+    python -I -B tools/token_bit_chain_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_bit_chain_probe.py
+
 **`v0_spec_check.py`** is an independent, aggregate-only implementation of
 `specs/V0.md` at `bf56d39`, supporting lead #75. Original payload logic and
 synthetic tests were written without target files, reference code, or output
