@@ -624,3 +624,23 @@ reads files/prints aggregates only.
 
     python -I -B tools/token_tail_distribution_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
     python -I -B tools/test_token_tail_distribution_probe.py
+
+**`token_cyclic_phase_probe.py`** supports the fixed-stride phase question in
+lead #144 and builds on #11/#218. For each original S-token candidate row,
+the head at phase p uses positions `(p+j) mod S` for j=0..head-1; the rest is
+its complement. Every phase therefore uses identical tokens, including wraps
+within the original row, rather than shifting contiguous row boundaries.
+All phases report exact capped-q sums and contrast moments, signed mean/SE,
+and all minimum/maximum ties. Phase zero equals `token_band_profile.py`.
+Defaults are head 32, 300 candidate rows, ordinal starts 0/1000/2000.
+Candidate unary-plus-five parsing retains q>=17, caps q40, and skips zero
+extra escape bits. Reports retain shortfalls, sanitized failures, hashes and
+public identities; any sample failure/shortfall gives a nonzero exit. Reuse
+retained CC0 provenance after matching local SHA-256; new content requires
+first verification. Selected phase extrema are descriptive, with no null,
+calibrated significance, true-framing, physical-row or decoder inference.
+They do not estimate later best strides or separate scene from framing.
+Stdlib only; reads files and prints aggregate JSON, no token/pixel dumps.
+
+    python -I -B tools/token_cyclic_phase_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240
+    python -I -B tools/test_token_cyclic_phase_probe.py
