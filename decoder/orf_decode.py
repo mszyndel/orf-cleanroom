@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Reference decoder (library + CLI) for the uncompressed V0 ORF packings.
 
-Supports: ROADMAP.md, specs/V0.md; findings/V0/ (packed-12 and packed-12.8), lead #71
-(packed-16), findings/container/ (payload location and
+Supports: ROADMAP.md, specs/V0.md; findings/V0/ (packed-12, packed-12.8 and
+packed-16), findings/container/ (payload location and
 the fixed-size rule). Standard library only (Python 3.8+). Released under CC0 1.0.
 
 Handles the exact fixed-size payloads of VARIANTS.md V0:
   packed-12    verified (findings/V0/2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes)
   packed-12.8  verified (findings/V0/2026-10-20--radialmonster--packed-12-8-groups-of-ten-values)
-  packed-16    UNVERIFIED (lead #71)
+  packed-16    verified (findings/V0/2026-10-21--radialmonster--packed16-whole-frame-word-layout)
 Two-field row-layout evidence is verified on the measured cohort (F_ROWLAYOUT,
 partial verification of lead #77); general layout selection remains unverified.
 Compressed payloads (V1, V2, ...) are detected and reported as "not yet specified".
@@ -39,6 +39,7 @@ import orf_signature  # noqa: E402
 
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
+F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
 F_FIXED = "2026-10-19--radialmonster--fixed-size-payloads-exact-else-compressed"
 F_ROWLAYOUT = "2026-10-21--radialmonster--two-field-row-layout-reproduction"
 F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
@@ -47,7 +48,7 @@ F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
 STATUS = {
     "packed-12": "verified (%s, self-verified)" % F_PACKED12,
     "packed-12.8": "verified (%s, self-verified)" % F_PACKED128,
-    "packed-16": "UNVERIFIED (lead #71)",
+    "packed-16": "verified (%s, self-verified)" % F_PACKED16,
 }
 # the order choices per packing; the first one wins a tie
 ORDERS = {
@@ -113,8 +114,11 @@ def unpack_row(packing, order, raw, w):
             out[2 * k + 1::10] = array("H", [y >> 4 | z << 4 for y, z in zip(b1, b2)])
         pad = sum(1 for p in raw[15::16] if p)   # F_PACKED128: byte 15 is 0 on all 5 CC0 files
     elif packing == "packed-16":
-        # lead #71 (unverified): one 16-bit word per pixel (12-bit value << 4 in the three
-        # CC0 files); byte order per body (finding 2026-10-21--radialmonster--iiro-packed12-and-packed16-whole-frame-byte-order, Partial: the smoother order matches the TIFF mark on those 3 files; still autodetected by smoothness). Values are the stored words, not shifted back.
+        # F_PACKED16: one 16-bit word per pixel (12-bit value << 4 on the three CC0
+        # files); byte order per body follows the TIFF mark on 3 of 3 (F_PACKED16;
+        # also measured whole-frame in 2026-10-21--radialmonster--iiro-packed12-and-packed16-whole-frame-byte-order,
+        # Partial), still autodetected by smoothness. Values are the stored words,
+        # not shifted back.
         out = array("H")
         out.frombytes(raw)
         if (order == "be") != (sys.byteorder == "big"):
@@ -173,7 +177,7 @@ def _score(rows):
 
 def detect_order(f, p, packing, w, h, rb):
     """Pick the order with the lowest roughness on a window (3 bands x 16 rows x up to 1200
-    columns, bands spread through the frame): the method of finding F_PACKED12 and lead #71
+    columns, bands spread through the frame): the method of findings F_PACKED12 and F_PACKED16
     (smoothness at same-colour distance 2). Ties go to the first order in ORDERS.
     Returns (order, margin), margin = second-best score / best score."""
     choices = ORDERS[packing]
@@ -259,7 +263,7 @@ def decode_file(path, order=None, layout=None):
     digest = hashlib.sha256()
     lo, hi, bad, smooth_n, pad = 1 << 30, -1, 0, 0, 0
     # out of range: a value above 4095 for packed-12 and packed-12.8 (12-bit data); for packed-16
-    # (lead #71: 12-bit value << 4) a word with any of its low 4 bits set
+    # (F_PACKED16: 12-bit value << 4) a word with any of its low 4 bits set
     with open(path, "rb") as f:
         margin = None
         if order is None:
@@ -286,7 +290,9 @@ def decode_file(path, order=None, layout=None):
              pad_nonzero=pad if packing == "packed-12.8" else "")
     if packing == "packed-12.8" and pad:
         r["notes"].append("%d group padding bytes are not zero (finding for lead #70 found zero)" % pad)
-    if packing != "packed-12":
+    if packing == "packed-16":
+        r["notes"].append("layout is %s" % STATUS[packing])
+    elif packing != "packed-12":
         r["notes"].append("layout is UNVERIFIED (%s); pixel order inside a unit is undecided" % STATUS[packing].split("(")[1].rstrip(")"))
     else:
         r["notes"].append("pixel order inside a two-pixel unit is undecided by the evidence")
