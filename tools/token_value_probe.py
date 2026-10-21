@@ -19,6 +19,11 @@ scale
     -> all preview rows). A stream that starts with a small base image would
     score higher under the second.
 
+columns
+    Print per-column q, b4 and b2 in small windows around chosen columns and,
+    optionally, per-column-modulo-B means. This tests for a repeated row header
+    or a field boundary (for example at W/2).
+
 table
     Fit a value table f(q, s) on one file, then predict the preview's luma DC
     grid on a held-out file. The block mean of the fitted value is a linear
@@ -36,6 +41,8 @@ Usage
 -----
     python -I tools/token_value_probe.py bands FILE [--band 300] [--max-rows 3900]
     python -I tools/token_value_probe.py scale FILE [--rows 300]
+    python -I tools/token_value_probe.py columns FILE [--rows 300]
+        [--at 0,1310,2620,3930] [--mod 64]
     python -I tools/token_value_probe.py table --train FILE --test FILE
         [--rows 600] [--mode s|qs] [--lam 1] [--smooth 10] [--perms 4]
     python -I tools/token_value_probe.py --self-test
@@ -182,6 +189,40 @@ def proxy_scale(path, rows):
         grid = block_mean(boxed, rows, w, nd, wb)
         print("  %-13s nd=%3d  r=%+.5f" % (
             label, nd, corr_rows(grid, target_all[:nd])))
+
+
+# -------------------------------------------------------------------- columns
+
+def column_stats(path, rows, at, mod):
+    w, h, qa, sa, rows = read_tokens(path, rows)
+    if at is None:
+        at = [0, w // 4, w // 2, 3 * w // 4, w - 1]
+    print("%s  token rows %d  payload width %d" % (
+        os.path.basename(path), rows, w))
+    for center in at:
+        if not (0 <= center < w):
+            continue
+        print("around c=%d (q, b4, b2 over %d rows):" % (center, rows))
+        for c in range(max(0, center - 6), min(w, center + 7)):
+            q = sum(qa[r * w + c] for r in range(rows)) / rows
+            b4 = sum((sa[r * w + c] >> 4) & 1 for r in range(rows)) / rows
+            b2 = sum((sa[r * w + c] >> 2) & 1 for r in range(rows)) / rows
+            print("  c=%5d  q=%.4f  b4=%.4f  b2=%.4f" % (c, q, b4, b2))
+    if mod:
+        print("column modulo %d:" % mod)
+        for res in range(mod):
+            n = q = b4 = b2 = 0
+            for r in range(rows):
+                base = r * w
+                for c in range(res, w, mod):
+                    i = base + c
+                    n += 1
+                    q += qa[i]
+                    b4 += (sa[i] >> 4) & 1
+                    b2 += (sa[i] >> 2) & 1
+            if n:
+                print("  r=%4d  q=%.4f  b4=%.4f  b2=%.4f" % (
+                    res, q / n, b4 / n, b2 / n))
 
 
 # ---------------------------------------------------------------------- table
@@ -416,6 +457,12 @@ def main():
     s.add_argument("file")
     s.add_argument("--rows", type=int, default=300)
 
+    c = sub.add_parser("columns", help="per-column and modulo-B token stats")
+    c.add_argument("file")
+    c.add_argument("--rows", type=int, default=300)
+    c.add_argument("--at", default="", help="comma-separated column centres")
+    c.add_argument("--mod", type=int, default=0, help="column modulo to summarise")
+
     t = sub.add_parser("table", help="fit a value table, test on another file")
     t.add_argument("--train", required=True)
     t.add_argument("--test", required=True)
@@ -437,6 +484,9 @@ def main():
             proxy_bands(a.file, a.band, a.max_rows, a.window)
         elif a.cmd == "scale":
             proxy_scale(a.file, a.rows)
+        elif a.cmd == "columns":
+            at = [int(x) for x in a.at.split(",") if x.strip()] if a.at else None
+            column_stats(a.file, a.rows, at, a.mod)
         elif a.cmd == "table":
             table(a.train, a.test, a.rows, a.mode, a.lam, a.smooth, a.perms)
     except (ValueError, IndexError, KeyError, OSError) as exc:
