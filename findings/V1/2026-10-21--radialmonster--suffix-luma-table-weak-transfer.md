@@ -5,7 +5,7 @@ Verified by: @radialmonster
 Lead: #155
 Variant: V1
 Builds on: 2026-10-21--radialmonster--b2b4-local-luma-proxy, #11, #29, #32
-Partial: the 32-entry suffix table's held-out transfer on E-M1 Mark II files 1993, 1997, 1998 and High-Res 1994; not the q x s table, the 1993 -> 1995 direction, or any pixel decode/round-trip.
+Partial: the 32-entry suffix table's held-out transfer on E-M1 Mark II files 1993, 1997, 1998 and High-Res 1994; not the q x s table, the 1993 to 1995 direction, or any pixel decode/round-trip.
 
 ## Claim
 
