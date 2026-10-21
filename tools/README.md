@@ -46,7 +46,7 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     q= 2  share=0.13019
     q= 3  share=0.06272
 
-**`orf_tokens.py`** parses the token stream described in lead #11 (q zero bits, stop bit, 5-bit suffix; escape at q >= 17) and prints aggregate statistics per file: tokens against width x height, bit alignment at multiples of the width, q histogram and escapes, suffix bit balance, H/L bit-group shares, the ones-density with the tokens per pixel a Bernoulli (independent-bits) null predicts next to the measured value, correlation of min(q,8) at token lags 1, 2, 3, 6 and the row stride, and mutual information at token lags 1-3 (H->L, L->H, L->L, H->H), the b2 context gain and vertical lag 2, each with a baseline that shows the estimator bias. Numbers are printed as measured, whether or not they match that lead. It parses a prefix by default (`--max-tokens`, `--rows`, `--all`).
+**`orf_tokens.py`** parses the token stream described in lead #11 (q zero bits, stop bit, 5-bit suffix; escape at q >= 17) and prints aggregate statistics per file: tokens against width x height, bit alignment at multiples of the width, q histogram and escapes, suffix bit balance, H/L bit-group shares, the ones-density with the tokens per pixel a Bernoulli (independent-bits) null predicts next to the measured value, correlation of min(q,8) at token lags 1, 2, 3, 6 and the row stride, and mutual information at token lags 1-3 (H->L, L->H, L->L, H->H), the b2 context gain and vertical lag 2, each with a baseline that shows the estimator bias. Numbers are printed as measured, whether or not they match that lead. It parses a prefix by default (`--max-tokens`, `--rows`); `--all` parses the whole payload. `--escape-landing` tabulates, per escape q, where the stream re-synchronises (distance modulo 6) after each escape. H = b4b3 and L = b2b1b0 are only labels for bit groups; no signed or other meaning is assumed.
 
     python tools/orf_tokens.py path/to/file.ORF --rows 400
     python tools/orf_tokens.py path/to/file.ORF --all
@@ -99,6 +99,7 @@ three flags shown below.
     python -I tools/trailing_ones_probe.py --help
     python -I tools/trailing_ones_probe.py --self-test
     python -I tools/trailing_ones_probe.py --cohort tools/cohorts/lead87-trailing-ones-v1-full.json --sample-dir /path/to/samples --measured-by @yourhandle
+
 All of them use the standard library only (Python 3.8+). Contributions of new tools are welcome. Follow the rules above and RULES.md.
 
 **`v0_spec_check.py`** is an independent, aggregate-only implementation of
