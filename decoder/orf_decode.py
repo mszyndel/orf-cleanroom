@@ -291,6 +291,9 @@ def decode_file(path, order=None, layout=None):
         # F_PRED31 (Partial for #31): a fixed 11-reading x 9-predictor probe
         # finds no cross-file preview-luma transfer on E-M1 Mark III 3800/3801
         # and OM-5 6343; it specifies no predictor, values or decode step (V1 G2).
+        # F_RUN31 (Partial for #31): a plain per-row running-sum test on five
+        # public files stays inside a predeclared 0.5..1.5 within-row-null band
+        # in 15/15 cells; it specifies no values, predictor or decode (V1 G2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
         r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
