@@ -8,6 +8,18 @@ Each script should:
 - run on CPU, with GPU acceleration optional;
 - state at the top which finding (an ID from `findings/`), lead issue (`#n`) or spec Gap (`specs/V<n>.md`) it supports.
 
+**`suffix_window_probe.py`** supports lead #11's remaining local-extent question.
+Four consecutive 262144-candidate-token windows report all H/L pair tables and
+plug-in MI at lags 1..3, with endpoint escape omissions preserving indices.
+Pairs stay inside windows; intervening escapes remain. Every cell and the
+strict alternating-order criterion are reported, including null/short windows.
+These descriptive token-index windows are not physical rows, a stationarity
+test, historical reproduction or decoder. Unknown framing remains unresolved.
+Reuse retained CC0 provenance after verifying the exact input hash.
+
+    python -I -B tools/suffix_window_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_suffix_window_probe.py
+
 ## Example tools
 
 **`e400_exception_probe.py`** supports lead #79 and `specs/V0.md` G3.
