@@ -1,0 +1,439 @@
+{
+  "reference_training_pixls_id": "1993",
+  "reference_split": "even-original-blocks",
+  "target_split": "odd-original-blocks",
+  "results": [
+    {
+      "pixls_id": "1993",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 0.9063604782484481,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9063604782484481,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 0.8269746369332102,
+          "gain_vs_frozen_empty_bits": 0.07938584131523796,
+          "gain_vs_previous_frozen_bits": 0.07938584131523796,
+          "within_file_refit_loss_bits": 0.8269746369332102,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 0.8002423700673572,
+          "gain_vs_frozen_empty_bits": 0.10611810818109091,
+          "gain_vs_previous_frozen_bits": 0.02673226686585295,
+          "within_file_refit_loss_bits": 0.8002423700673572,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 0.8620100625325521,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.8620100625325521,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 0.8536385254722347,
+          "gain_vs_frozen_empty_bits": 0.008371537060317347,
+          "gain_vs_previous_frozen_bits": 0.008371537060317347,
+          "within_file_refit_loss_bits": 0.8536385254722347,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 0.8430789743921191,
+          "gain_vs_frozen_empty_bits": 0.018931088140432983,
+          "gain_vs_previous_frozen_bits": 0.010559551080115637,
+          "within_file_refit_loss_bits": 0.8430789743921191,
+          "frozen_minus_refit_loss_bits": 0.0,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": true
+    },
+    {
+      "pixls_id": "1995",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 0.9054949878441941,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9054951736997704,
+          "frozen_minus_refit_loss_bits": -1.858555762623837e-07,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 0.8248263372135075,
+          "gain_vs_frozen_empty_bits": 0.08066865063068662,
+          "gain_vs_previous_frozen_bits": 0.08066865063068662,
+          "within_file_refit_loss_bits": 0.8248679985849954,
+          "frozen_minus_refit_loss_bits": -4.166137148786664e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 0.7962080014907723,
+          "gain_vs_frozen_empty_bits": 0.10928698635342182,
+          "gain_vs_previous_frozen_bits": 0.0286183357227352,
+          "within_file_refit_loss_bits": 0.7962040344593669,
+          "frozen_minus_refit_loss_bits": 3.9670314053719125e-06,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 0.8668222506492242,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.8668372099601726,
+          "frozen_minus_refit_loss_bits": -1.4959310948303717e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 0.8579250992775538,
+          "gain_vs_frozen_empty_bits": 0.008897151371670464,
+          "gain_vs_previous_frozen_bits": 0.008897151371670464,
+          "within_file_refit_loss_bits": 0.8579367202509872,
+          "frozen_minus_refit_loss_bits": -1.1620973433434933e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 0.8480221676989644,
+          "gain_vs_frozen_empty_bits": 0.01880008295025981,
+          "gain_vs_previous_frozen_bits": 0.009902931578589347,
+          "within_file_refit_loss_bits": 0.8479896392414921,
+          "frozen_minus_refit_loss_bits": 3.252845747236943e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": true
+    },
+    {
+      "pixls_id": "1997",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 0.9057349257780467,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9057362176492778,
+          "frozen_minus_refit_loss_bits": -1.2918712311016378e-06,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 0.8273748358544358,
+          "gain_vs_frozen_empty_bits": 0.07836008992361088,
+          "gain_vs_previous_frozen_bits": 0.07836008992361088,
+          "within_file_refit_loss_bits": 0.8273426989729372,
+          "frozen_minus_refit_loss_bits": 3.213688149861227e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 0.7980687596909736,
+          "gain_vs_frozen_empty_bits": 0.10766616608707313,
+          "gain_vs_previous_frozen_bits": 0.029306076163462258,
+          "within_file_refit_loss_bits": 0.7979263092308948,
+          "frozen_minus_refit_loss_bits": 0.00014245046007876905,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 0.8680535141332343,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.8680532815473211,
+          "frozen_minus_refit_loss_bits": 2.3258591319574862e-07,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 0.8586956187737785,
+          "gain_vs_frozen_empty_bits": 0.009357895359455748,
+          "gain_vs_previous_frozen_bits": 0.009357895359455748,
+          "within_file_refit_loss_bits": 0.8587008973464652,
+          "frozen_minus_refit_loss_bits": -5.2785726866177995e-06,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 0.8485383932160618,
+          "gain_vs_frozen_empty_bits": 0.019515120917172446,
+          "gain_vs_previous_frozen_bits": 0.010157225557716698,
+          "within_file_refit_loss_bits": 0.8484566553694887,
+          "frozen_minus_refit_loss_bits": 8.173784657317107e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": true
+    },
+    {
+      "pixls_id": "1998",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 0.9055549723276574,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9055592585043428,
+          "frozen_minus_refit_loss_bits": -4.286176685464049e-06,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 0.828086622773257,
+          "gain_vs_frozen_empty_bits": 0.0774683495544004,
+          "gain_vs_previous_frozen_bits": 0.0774683495544004,
+          "within_file_refit_loss_bits": 0.8280507086754822,
+          "frozen_minus_refit_loss_bits": 3.5914097774703e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 0.8008285790985354,
+          "gain_vs_frozen_empty_bits": 0.10472639322912192,
+          "gain_vs_previous_frozen_bits": 0.02725804367472151,
+          "within_file_refit_loss_bits": 0.8009193517363264,
+          "frozen_minus_refit_loss_bits": -9.077263779100342e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 0.8653960371135794,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.8653753764522835,
+          "frozen_minus_refit_loss_bits": 2.0660661295912597e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 0.8573132735071852,
+          "gain_vs_frozen_empty_bits": 0.00808276360639415,
+          "gain_vs_previous_frozen_bits": 0.00808276360639415,
+          "within_file_refit_loss_bits": 0.8572890210105056,
+          "frozen_minus_refit_loss_bits": 2.425249667958873e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 0.8473561160772403,
+          "gain_vs_frozen_empty_bits": 0.018039921036339113,
+          "gain_vs_previous_frozen_bits": 0.009957157429944963,
+          "within_file_refit_loss_bits": 0.8472998888919577,
+          "frozen_minus_refit_loss_bits": 5.6227185282531345e-05,
+          "reference_training_targets": 125829,
+          "test_targets": 125952,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": true
+    },
+    {
+      "pixls_id": "6343",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 1.015736130987441,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9829150992290441,
+          "frozen_minus_refit_loss_bits": 0.03282103175839701,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 1.0976751586914846,
+          "gain_vs_frozen_empty_bits": -0.08193902770404349,
+          "gain_vs_previous_frozen_bits": -0.08193902770404349,
+          "within_file_refit_loss_bits": 0.9769054224456458,
+          "frozen_minus_refit_loss_bits": 0.12076973624583875,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 1.101058808232712,
+          "gain_vs_frozen_empty_bits": -0.08532267724527087,
+          "gain_vs_previous_frozen_bits": -0.003383649541227385,
+          "within_file_refit_loss_bits": 0.9718227862588524,
+          "frozen_minus_refit_loss_bits": 0.12923602197385953,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 1.0275596268482188,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9780183574704656,
+          "frozen_minus_refit_loss_bits": 0.04954126937775316,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 1.0502478769317065,
+          "gain_vs_frozen_empty_bits": -0.022688250083487738,
+          "gain_vs_previous_frozen_bits": -0.022688250083487738,
+          "within_file_refit_loss_bits": 0.9780159088111873,
+          "frozen_minus_refit_loss_bits": 0.07223196812051924,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 1.044265896619638,
+          "gain_vs_frozen_empty_bits": -0.016706269771419313,
+          "gain_vs_previous_frozen_bits": 0.0059819803120684245,
+          "within_file_refit_loss_bits": 0.9761306027953311,
+          "frozen_minus_refit_loss_bits": 0.06813529382430694,
+          "reference_training_targets": 125829,
+          "test_targets": 123984,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": false
+    },
+    {
+      "pixls_id": "5283",
+      "models": [
+        {
+          "name": "b2_empty",
+          "frozen_fit_loss_bits": 1.0593904487534658,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.996208806240413,
+          "frozen_minus_refit_loss_bits": 0.0631816425130528,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_two",
+          "frozen_fit_loss_bits": 1.1745174498513418,
+          "gain_vs_frozen_empty_bits": -0.11512700109787599,
+          "gain_vs_previous_frozen_bits": -0.11512700109787599,
+          "within_file_refit_loss_bits": 0.9953588602482212,
+          "frozen_minus_refit_loss_bits": 0.1791585896031206,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b2_five",
+          "frozen_fit_loss_bits": 1.1789709733685354,
+          "gain_vs_frozen_empty_bits": -0.11958052461506963,
+          "gain_vs_previous_frozen_bits": -0.004453523517193636,
+          "within_file_refit_loss_bits": 0.9954263979683932,
+          "frozen_minus_refit_loss_bits": 0.18354457540014224,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_empty",
+          "frozen_fit_loss_bits": 1.0853344461796122,
+          "gain_vs_frozen_empty_bits": 0.0,
+          "gain_vs_previous_frozen_bits": null,
+          "within_file_refit_loss_bits": 0.9948099428832629,
+          "frozen_minus_refit_loss_bits": 0.09052450329634931,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_one",
+          "frozen_fit_loss_bits": 1.1168969587481055,
+          "gain_vs_frozen_empty_bits": -0.031562512568493295,
+          "gain_vs_previous_frozen_bits": -0.031562512568493295,
+          "within_file_refit_loss_bits": 0.9947975749389221,
+          "frozen_minus_refit_loss_bits": 0.12209938380918339,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        },
+        {
+          "name": "b4_two",
+          "frozen_fit_loss_bits": 1.1104152898784394,
+          "gain_vs_frozen_empty_bits": -0.025080843698827238,
+          "gain_vs_previous_frozen_bits": 0.006481668869666057,
+          "within_file_refit_loss_bits": 0.9946817156708868,
+          "frozen_minus_refit_loss_bits": 0.11573357420755259,
+          "reference_training_targets": 125829,
+          "test_targets": 110331,
+          "test_targets_in_unseen_reference_contexts": 0
+        }
+      ],
+      "primary_both_frozen_gains_positive": false
+    }
+  ]
+}
