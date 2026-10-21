@@ -1,17 +1,115 @@
 #!/usr/bin/env python3
 """Synthetic tests for complete runs, censoring, escapes and exact moments."""
 import itertools
+import contextlib
+import io
+import json
 import os
+import struct
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from token_zero_runs_probe import measure, scan_window
 from suffix_joint_probe import scan_prefix
+import token_zero_runs_probe as probe
 
 
 def tokens(bits):
     return [(0, 4 * int(bit)) for bit in bits]
+
+
+def synthetic_tiff(payload):
+    """An in-memory, single-strip TIFF; no sample or fixture files written."""
+    entries = [(0x100, 8), (0x101, 8), (0x103, 1),
+               (0x111, 74), (0x117, len(payload))]
+    return (b"II" + struct.pack("<HIH", 42, 8, len(entries))
+            + b"".join(struct.pack("<HHII", tag, 4, 1, value)
+                       for tag, value in entries)
+            + struct.pack("<I", 0) + payload)
+
+
+class CliTests(unittest.TestCase):
+    def run_cli(self, samples, start=0, count=4):
+        # Each token is q=0 plus five suffix bits. Full input has b2=1001;
+        # short input has b2=10 followed by four zero pad bits (not a token).
+        fixtures = {"complete.orf": synthetic_tiff(bytes([0x92, 0x08, 0x24])),
+                    "short.orf": synthetic_tiff(bytes([0x92, 0x00]))}
+        real_open = open
+
+        def read_input(path, *args, **kwargs):
+            if path in fixtures:
+                self.assertEqual(args, ("rb",))
+                return io.BytesIO(fixtures[path])
+            if path == "missing.orf":
+                raise FileNotFoundError("private fixture diagnostic")
+            return real_open(path, *args, **kwargs)
+
+        argv = [probe.__file__, "--start-token", str(start), "--tokens", str(count)]
+        for sample_id, path in samples:
+            argv.extend(["--sample", sample_id, "synthetic", path])
+        output = io.StringIO()
+        with patch.object(sys, "argv", argv), patch("builtins.open", side_effect=read_input):
+            with contextlib.redirect_stdout(output):
+                status = probe.main()
+        text = output.getvalue()
+        self.assertNotIn("private fixture diagnostic", text)
+        return status, json.loads(text)
+
+    def test_complete_window_exit_zero(self):
+        status, result = self.run_cli([("1", "complete.orf")])
+        self.assertEqual(status, 0)
+        sample = result["samples"][0]
+        self.assertEqual(sample["returned_tokens"], 4)
+        self.assertEqual(sample["bits_consumed"], 24)
+        self.assertEqual(sample["statistics"]["histogram"], [{"length": 2, "count": 1}])
+        self.assertEqual(result["failures"], [])
+
+    def test_count_shortfall_exit_one_preserves_aggregates(self):
+        status, result = self.run_cli([("1", "complete.orf")], count=5)
+        self.assertEqual(status, 1)
+        sample = result["samples"][0]
+        self.assertEqual(sample["start_shortfall"], 0)
+        self.assertEqual(sample["token_shortfall"], 1)
+        self.assertEqual(sample["prefix_shortfall"], 1)
+        self.assertEqual(sample["returned_tokens"], 4)
+        self.assertEqual(sample["statistics"]["sum_run_lengths"], 2)
+        self.assertEqual(result["failures"], [])
+
+    def test_start_shortfall_exit_one(self):
+        status, result = self.run_cli([("1", "complete.orf")], start=5, count=1)
+        self.assertEqual(status, 1)
+        sample = result["samples"][0]
+        self.assertEqual(sample["start_shortfall"], 1)
+        self.assertEqual(sample["skipped_tokens"], 4)
+        self.assertEqual(sample["token_shortfall"], 1)
+        self.assertEqual(sample["returned_tokens"], 0)
+        self.assertEqual(sample["statistics"]["histogram"], [])
+
+    def test_reached_start_but_short_window_exit_one(self):
+        status, result = self.run_cli([("1", "complete.orf")], start=2, count=3)
+        self.assertEqual(status, 1)
+        sample = result["samples"][0]
+        self.assertEqual(sample["start_shortfall"], 0)
+        self.assertEqual(sample["returned_tokens"], 2)
+        self.assertEqual(sample["token_shortfall"], 1)
+
+    def test_mixed_complete_shortfall_and_exception(self):
+        status, result = self.run_cli([("1", "complete.orf"), ("2", "short.orf"),
+                                       ("3", "missing.orf")])
+        self.assertEqual(status, 1)
+        self.assertEqual([s["pixls_id"] for s in result["samples"]], ["1", "2"])
+        self.assertEqual([s["returned_tokens"] for s in result["samples"]], [4, 2])
+        self.assertEqual([s["token_shortfall"] for s in result["samples"]], [0, 2])
+        self.assertEqual(result["samples"][0]["statistics"]["sum_run_lengths"], 2)
+        self.assertEqual(result["failures"], [{"pixls_id": "3", "error": "FileNotFoundError"}])
+
+    def test_mixed_complete_and_shortfall_exit_one(self):
+        status, result = self.run_cli([("1", "complete.orf"), ("2", "short.orf")])
+        self.assertEqual(status, 1)
+        self.assertEqual(len(result["samples"]), 2)
+        self.assertEqual(result["failures"], [])
 
 
 class RunTests(unittest.TestCase):
