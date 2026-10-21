@@ -357,3 +357,18 @@ sanitized; successful reports survive and any failure makes the exit nonzero.
 
     python -I -B tools/q_value_bridge_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_q_value_bridge_probe.py
+
+**`suffix_width_probe.py`** supports the committed candidate k-scan requested
+in V1 G8 and relates to lead #29 item 1. For each whole payload it reports
+all k=2..8 and both stop-bit conventions: q opposite bits, one stop bit,
+then k skipped suffix bits. Only complete tokens count; q>=17 has no extra
+skip. Exact q histograms, escape counts, consumed/unconsumed lengths and
+tokens per measured payload pixel are emitted. There are no row delimiters
+or neighbour-dependence measures. Small residuals or near-one token ratios
+do not establish the correct grammar, padding or a decoder. Single-strip
+variable-size inputs with compression tag 1 are required; input size is
+limited to 512 MiB. Failures are sanitized and successful samples retained.
+Check CC0 licences first. Original scanner, stdlib only, aggregates only.
+
+    python -I -B tools/suffix_width_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_suffix_width_probe.py
