@@ -338,3 +338,22 @@ structure, parity invariance, significance or a decoder. Check CC0 licences firs
 
     python -I -B tools/token_width_lag_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_width_lag_probe.py
+
+**`q_value_bridge_probe.py`** supports lead #32 with a preview-free bridge
+metric for the q-inclusive readings `u=32*q+s` and `zigzag(u)`. It builds on
+@mtakemoto's exact permutation-mean bridge design (#64) and #11's candidate
+parse; PR #159 tests the same readings with a different predictor/preview
+score. All four mapping/lane-count cells, exact block A/V terms, pooled
+energies, separate absolute-parity pools and omissions are emitted. The fixed
+262144-token prefix uses complete 128-token blocks, omitting whole blocks
+containing q>=17 and the incomplete tail. No escape skip is added. Ratios
+are sums of energies divided by sums of observed-multiset permutation means,
+not averages of ratios or significance tests. Degenerate ratios are null.
+Blocks and token parity are not physical rows/channels; omission cannot
+repair unknown framing. Detrending removes drift, so these measurements
+cannot establish a bounded reconstruction or reproduce historical private
+growth figures. Licence-check public inputs first. Failed samples are
+sanitized; successful reports survive and any failure makes the exit nonzero.
+
+    python -I -B tools/q_value_bridge_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_q_value_bridge_probe.py
