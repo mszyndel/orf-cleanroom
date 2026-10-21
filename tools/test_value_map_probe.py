@@ -257,7 +257,7 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(list(zip(qs, ss)), tokens[:count])
             self.assertEqual(bits, sum(q + 6 for q, s in tokens[:count]))
         with self.assertRaises(probe.ProbeError):
-            probe.guarded_parse(b"\x01", 1)  # parser would consume padded suffix bits
+            probe.guarded_parse(b"\x01", 1)  # no complete token; suffix would be in padding
         for count in (0, -1, probe.MAX_TOKENS + 1, True, 1.0):
             with self.assertRaises(probe.ProbeError):
                 probe.guarded_parse(b"", count)
