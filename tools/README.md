@@ -357,3 +357,18 @@ sanitized; successful reports survive and any failure makes the exit nonzero.
 
     python -I -B tools/q_value_bridge_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_q_value_bridge_probe.py
+
+**`token_position_probe.py`** supports the still-open item 9 of lead #29,
+building on #11 and `suffix_joint_probe.py`. It reports ordinary-q (0..16)
+and unsigned-suffix (0..31) histograms at nominal positions 0..23 and the
+remainder, plus pooled first10/first24/remainder counts, sums and means.
+Only complete payload-width W-token rows from token0 contribute; q>=17
+symbols are omitted without compacting indices. All escape omissions and
+incomplete nominal-tail counts are explicit. W and origin are hypotheses,
+not established physical rows; omission cannot repair unknown escape framing.
+The historical row-start statistic did not specify its field/estimator, so
+these new explicit metrics do not reproduce its values. No elevation criterion,
+null model, significance or decoder is supplied. Check CC0 licences first.
+
+    python -I -B tools/token_position_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_position_probe.py
