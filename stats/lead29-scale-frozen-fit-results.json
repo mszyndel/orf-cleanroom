@@ -1,0 +1,449 @@
+{
+  "reference_fit_id": "1993",
+  "samples": [
+    {
+      "pixls_id": "1993",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+      "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.4077153950893884,
+          "target_refit_loss_bits": 0.4077153950893884,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": -0.00020523535611494115
+        },
+        {
+          "model": "lag1",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.4075101597332735,
+          "target_refit_loss_bits": 0.4075101597332735,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.00020523535611494115,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3844023628810095,
+          "target_refit_loss_bits": 0.3844023628810095,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.023313032208378937,
+          "frozen_gain_vs_lag1_bits": 0.023107796852263995
+        },
+        {
+          "model": "count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3890884437038419,
+          "target_refit_loss_bits": 0.3890884437038419,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.018626951385546542,
+          "frozen_gain_vs_lag1_bits": 0.0184217160294316
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3803446664408711,
+          "target_refit_loss_bits": 0.3803446664408711,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.027370728648517306,
+          "frozen_gain_vs_lag1_bits": 0.027165493292402365
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3861643183222192,
+          "target_refit_loss_bits": 0.3861643183222192,
+          "frozen_minus_target_refit_loss_bits": 0.0,
+          "frozen_gain_vs_frequency_bits": 0.02155107676716922,
+          "frozen_gain_vs_lag1_bits": 0.021345841411054278
+        }
+      ]
+    },
+    {
+      "pixls_id": "1995",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "sha256": "8af918366ed969c6dddf5a48b8810fec1024858d22c75c5f1ac1a5c750a57a1f",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.39749627679253147,
+          "target_refit_loss_bits": 0.3974762758454963,
+          "frozen_minus_target_refit_loss_bits": 2.0000947035192507e-05,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": -6.668144017385469e-05
+        },
+        {
+          "model": "lag1",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3974295953523576,
+          "target_refit_loss_bits": 0.3974348353919376,
+          "frozen_minus_target_refit_loss_bits": -5.240039579967881e-06,
+          "frozen_gain_vs_frequency_bits": 6.668144017385469e-05,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3747472666250063,
+          "target_refit_loss_bits": 0.3747083023938411,
+          "frozen_minus_target_refit_loss_bits": 3.896423116517278e-05,
+          "frozen_gain_vs_frequency_bits": 0.022749010167525174,
+          "frozen_gain_vs_lag1_bits": 0.02268232872735132
+        },
+        {
+          "model": "count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3797022658113699,
+          "target_refit_loss_bits": 0.37960816732016917,
+          "frozen_minus_target_refit_loss_bits": 9.409849120073366e-05,
+          "frozen_gain_vs_frequency_bits": 0.017794010981161568,
+          "frozen_gain_vs_lag1_bits": 0.017727329540987713
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.37129555496772554,
+          "target_refit_loss_bits": 0.3713157222251183,
+          "frozen_minus_target_refit_loss_bits": -2.016725739278913e-05,
+          "frozen_gain_vs_frequency_bits": 0.026200721824805928,
+          "frozen_gain_vs_lag1_bits": 0.026134040384632073
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3771674938208468,
+          "target_refit_loss_bits": 0.37710434701341505,
+          "frozen_minus_target_refit_loss_bits": 6.31468074317465e-05,
+          "frozen_gain_vs_frequency_bits": 0.020328782971684667,
+          "frozen_gain_vs_lag1_bits": 0.020262101531510812
+        }
+      ]
+    },
+    {
+      "pixls_id": "1997",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "sha256": "89138ccc958509ca1beb7028452400ab7f42061c0fc56e35c8a7d7a4a808dd0a",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.40542753278412186,
+          "target_refit_loss_bits": 0.40542631804709073,
+          "frozen_minus_target_refit_loss_bits": 1.2147370311299532e-06,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": -4.4319062511066765e-05
+        },
+        {
+          "model": "lag1",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.4053832137216108,
+          "target_refit_loss_bits": 0.40536474987570587,
+          "frozen_minus_target_refit_loss_bits": 1.846384590492578e-05,
+          "frozen_gain_vs_frequency_bits": 4.4319062511066765e-05,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3825518402092948,
+          "target_refit_loss_bits": 0.382537157653838,
+          "frozen_minus_target_refit_loss_bits": 1.4682555456779767e-05,
+          "frozen_gain_vs_frequency_bits": 0.022875692574827078,
+          "frozen_gain_vs_lag1_bits": 0.02283137351231601
+        },
+        {
+          "model": "count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3874081130786239,
+          "target_refit_loss_bits": 0.38725743604060175,
+          "frozen_minus_target_refit_loss_bits": 0.00015067703802212895,
+          "frozen_gain_vs_frequency_bits": 0.018019419705497974,
+          "frozen_gain_vs_lag1_bits": 0.017975100642986908
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.37888142465669133,
+          "target_refit_loss_bits": 0.37875747919425834,
+          "frozen_minus_target_refit_loss_bits": 0.00012394546243299498,
+          "frozen_gain_vs_frequency_bits": 0.026546108127430523,
+          "frozen_gain_vs_lag1_bits": 0.026501789064919457
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.3846881990300702,
+          "target_refit_loss_bits": 0.38447776075419016,
+          "frozen_minus_target_refit_loss_bits": 0.0002104382758800205,
+          "frozen_gain_vs_frequency_bits": 0.02073933375405168,
+          "frozen_gain_vs_lag1_bits": 0.020695014691540614
+        }
+      ]
+    },
+    {
+      "pixls_id": "1998",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+      "sha256": "4bc52d99e4fbf2f09335a3301a4634bc261a98441edb824434ec069f7026cd71",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.4060681342295966,
+          "target_refit_loss_bits": 0.40606870409405343,
+          "frozen_minus_target_refit_loss_bits": -5.698644568452593e-07,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": -9.996641643716941e-05
+        },
+        {
+          "model": "lag1",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.4059681678131594,
+          "target_refit_loss_bits": 0.4059671081302797,
+          "frozen_minus_target_refit_loss_bits": 1.0596828797226898e-06,
+          "frozen_gain_vs_frequency_bits": 9.996641643716941e-05,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.38410028753999587,
+          "target_refit_loss_bits": 0.3841668575863723,
+          "frozen_minus_target_refit_loss_bits": -6.657004637644626e-05,
+          "frozen_gain_vs_frequency_bits": 0.021967846689600723,
+          "frozen_gain_vs_lag1_bits": 0.021867880273163554
+        },
+        {
+          "model": "count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.38810406722223967,
+          "target_refit_loss_bits": 0.38801458971324515,
+          "frozen_minus_target_refit_loss_bits": 8.947750899451767e-05,
+          "frozen_gain_vs_frequency_bits": 0.01796406700735692,
+          "frozen_gain_vs_lag1_bits": 0.01786410059091975
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.38059595335258123,
+          "target_refit_loss_bits": 0.38065469166699745,
+          "frozen_minus_target_refit_loss_bits": -5.873831441621791e-05,
+          "frozen_gain_vs_frequency_bits": 0.02547218087701536,
+          "frozen_gain_vs_lag1_bits": 0.02537221446057819
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 114688,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 0.38532896110348397,
+          "target_refit_loss_bits": 0.385130931287081,
+          "frozen_minus_target_refit_loss_bits": 0.00019802981640298922,
+          "frozen_gain_vs_frequency_bits": 0.02073917312611262,
+          "frozen_gain_vs_lag1_bits": 0.02063920670967545
+        }
+      ]
+    },
+    {
+      "pixls_id": "6343",
+      "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+      "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 1.3229823365189288,
+          "target_refit_loss_bits": 0.9278573036461113,
+          "frozen_minus_target_refit_loss_bits": 0.3951250328728175,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": 0.029133858039016136
+        },
+        {
+          "model": "lag1",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 1.352116194557945,
+          "target_refit_loss_bits": 0.9156466415489868,
+          "frozen_minus_target_refit_loss_bits": 0.4364695530089582,
+          "frozen_gain_vs_frequency_bits": -0.029133858039016136,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 234,
+          "frozen_loss_bits": 1.100382818724067,
+          "target_refit_loss_bits": 0.8545558635907592,
+          "frozen_minus_target_refit_loss_bits": 0.24582695513330777,
+          "frozen_gain_vs_frequency_bits": 0.22259951779486187,
+          "frozen_gain_vs_lag1_bits": 0.251733375833878
+        },
+        {
+          "model": "count16",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 5176,
+          "frozen_loss_bits": 1.1332873485373185,
+          "target_refit_loss_bits": 0.8547477507882798,
+          "frozen_minus_target_refit_loss_bits": 0.2785395977490387,
+          "frozen_gain_vs_frequency_bits": 0.18969498798161033,
+          "frozen_gain_vs_lag1_bits": 0.21882884602062647
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 234,
+          "frozen_loss_bits": 1.1019809456486047,
+          "target_refit_loss_bits": 0.8546038253205807,
+          "frozen_minus_target_refit_loss_bits": 0.24737712032802406,
+          "frozen_gain_vs_frequency_bits": 0.2210013908703241,
+          "frozen_gain_vs_lag1_bits": 0.25013524890934025
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 112896,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 7701,
+          "frozen_loss_bits": 1.1555625716245574,
+          "target_refit_loss_bits": 0.8544548599319851,
+          "frozen_minus_target_refit_loss_bits": 0.30110771169257233,
+          "frozen_gain_vs_frequency_bits": 0.16741976489437138,
+          "frozen_gain_vs_lag1_bits": 0.19655362293338752
+        }
+      ]
+    },
+    {
+      "pixls_id": "5283",
+      "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+      "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+      "both_joint_frozen_gains_vs_lag1_positive": true,
+      "models": [
+        {
+          "model": "frequency",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 1.7502551007695688,
+          "target_refit_loss_bits": 0.9965425924565743,
+          "frozen_minus_target_refit_loss_bits": 0.7537125083129945,
+          "frozen_gain_vs_frequency_bits": 0.0,
+          "frozen_gain_vs_lag1_bits": 0.04591239148336945
+        },
+        {
+          "model": "lag1",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 0,
+          "frozen_loss_bits": 1.7961674922529383,
+          "target_refit_loss_bits": 0.9958258005065711,
+          "frozen_minus_target_refit_loss_bits": 0.8003416917463672,
+          "frozen_gain_vs_frequency_bits": -0.04591239148336945,
+          "frozen_gain_vs_lag1_bits": 0.0
+        },
+        {
+          "model": "count8",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 326,
+          "frozen_loss_bits": 1.4094594901886002,
+          "target_refit_loss_bits": 0.9838894710230328,
+          "frozen_minus_target_refit_loss_bits": 0.42557001916556736,
+          "frozen_gain_vs_frequency_bits": 0.34079561058096863,
+          "frozen_gain_vs_lag1_bits": 0.3867080020643381
+        },
+        {
+          "model": "count16",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 9367,
+          "frozen_loss_bits": 1.4101327757421758,
+          "target_refit_loss_bits": 0.9819079781209611,
+          "frozen_minus_target_refit_loss_bits": 0.4282247976212147,
+          "frozen_gain_vs_frequency_bits": 0.34012232502739304,
+          "frozen_gain_vs_lag1_bits": 0.3860347165107625
+        },
+        {
+          "model": "lag1_count8",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 326,
+          "frozen_loss_bits": 1.4047067412708307,
+          "target_refit_loss_bits": 0.9838652363627749,
+          "frozen_minus_target_refit_loss_bits": 0.42084150490805583,
+          "frozen_gain_vs_frequency_bits": 0.3455483594987381,
+          "frozen_gain_vs_lag1_bits": 0.39146075098210753
+        },
+        {
+          "model": "lag1_count16",
+          "test_targets": 100464,
+          "reference_train_targets": 114576,
+          "reference_unseen_test_targets": 13391,
+          "frozen_loss_bits": 1.4422893622568151,
+          "target_refit_loss_bits": 0.982088430605012,
+          "frozen_minus_target_refit_loss_bits": 0.4602009316518031,
+          "frozen_gain_vs_frequency_bits": 0.30796573851275366,
+          "frozen_gain_vs_lag1_bits": 0.3538781299961231
+        }
+      ]
+    }
+  ]
+}
