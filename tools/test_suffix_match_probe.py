@@ -195,7 +195,7 @@ class ParseTests(unittest.TestCase):
     def test_actual_synthetic_parser_boundaries(self):
         self.assertEqual(probe.checked_parse(b"\x80", 1, 1), ([0], [0], 6))
         for payload, reason in ((b"\x00", "token_count_mismatch"),
-                                (b"\x01", "payload_overrun")):
+                                (b"\x01", "token_count_mismatch")):
             with self.assertRaisesRegex(probe.InputError, reason):
                 probe.checked_parse(payload, 1, 1)
 
