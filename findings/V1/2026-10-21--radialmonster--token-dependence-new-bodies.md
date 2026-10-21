@@ -5,7 +5,7 @@ Verified by: @radialmonster
 Lead: #11
 Variant: V1
 Builds on: 2026-10-20--radialmonster--em1mk2-b4-next-b2-share-provenance
-Partial: the cross-field/same-field structure, H/L independence and b1/b0 fairness on whole E-M1 Mark III 3800/3802 and E-M5 Mark III 3588 payloads; not the lead's ~0.12/0.07 MI magnitudes, the strict "cross-field only" equality at lag 1, the one-token-per-pixel row stride, or preview geometry.
+Partial: the cross-field/same-field structure, H/L independence and b1/b0 fairness on whole E-M1 Mark III 3800/3802 and E-M5 Mark III 3588 payloads; not the lead's about 0.12/0.07 MI magnitudes, the strict "cross-field only" equality at lag 1, the one-token-per-pixel row stride, or preview geometry.
 
 ## Claim
 
