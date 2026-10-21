@@ -1,0 +1,3271 @@
+{
+  "source_sha256": {
+    "token_width_lag_probe.py": "0beeb854261e16e3729c371ffc692b9f9d4a70616e5a635b587e8fa117b8e0a3",
+    "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18",
+    "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+  },
+  "python_version": "3.13.15",
+  "escape_extra_bits": 0,
+  "pair_selection": "both endpoint q<17; original indices",
+  "samples": [
+    {
+      "pixls_id": "241",
+      "pixls_name": "Olympus - E-P3 - 16bit (4:3).ORF",
+      "sha256": "540edabdd9d4e6ef8602f56443730cc3133d714dc4d3d2c607e2f0aa6be5cbcd",
+      "variant": "unassigned",
+      "payload_w": 4080,
+      "payload_h": 3040,
+      "payload_offset": 1436160,
+      "payload_bytes": 10427128,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1737004,
+      "parsed_escapes": 3,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 4080,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63751,
+              "past_by_current_counts": [
+                [
+                  17791,
+                  15522
+                ],
+                [
+                  16355,
+                  14083
+                ]
+              ],
+              "pearson": -0.0032709806091250648
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63751,
+              "past_by_current_counts": [
+                [
+                  17922,
+                  15878
+                ],
+                [
+                  16146,
+                  13805
+                ]
+              ],
+              "pearson": -0.00884863514567035
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 65280,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 65278,
+              "past_by_current_counts": [
+                [
+                  18327,
+                  16664
+                ],
+                [
+                  15819,
+                  14468
+                ]
+              ],
+              "pearson": 0.0014577140370859703
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 65280,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 65279,
+              "past_by_current_counts": [
+                [
+                  18434,
+                  16471
+                ],
+                [
+                  16172,
+                  14202
+                ]
+              ],
+              "pearson": -0.004307300885357015
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 258064,
+              "escape_endpoint_omitted_pairs": 5,
+              "retained_pairs": 258059,
+              "past_by_current_counts": [
+                [
+                  72474,
+                  64535
+                ],
+                [
+                  64492,
+                  56558
+                ]
+              ],
+              "pearson": -0.0037989543600065764
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 8160,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63751,
+              "past_by_current_counts": [
+                [
+                  18323,
+                  15861
+                ],
+                [
+                  15823,
+                  13744
+                ]
+              ],
+              "pearson": 0.0008534867975508723
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63750,
+              "past_by_current_counts": [
+                [
+                  18148,
+                  15935
+                ],
+                [
+                  15919,
+                  13748
+                ]
+              ],
+              "pearson": -0.004124467761466152
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63239,
+              "past_by_current_counts": [
+                [
+                  17307,
+                  15731
+                ],
+                [
+                  15787,
+                  14414
+                ]
+              ],
+              "pearson": 0.0011203782837954203
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63240,
+              "past_by_current_counts": [
+                [
+                  17764,
+                  15757
+                ],
+                [
+                  15780,
+                  13939
+                ]
+              ],
+              "pearson": -0.0010370393758244772
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253984,
+              "escape_endpoint_omitted_pairs": 4,
+              "retained_pairs": 253980,
+              "past_by_current_counts": [
+                [
+                  71542,
+                  63284
+                ],
+                [
+                  63309,
+                  55845
+                ]
+              ],
+              "pearson": -0.0006961632600961541
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 8158,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63752,
+              "past_by_current_counts": [
+                [
+                  18366,
+                  15825
+                ],
+                [
+                  15781,
+                  13780
+                ]
+              ],
+              "pearson": 0.003313301637194792
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63750,
+              "past_by_current_counts": [
+                [
+                  18302,
+                  15776
+                ],
+                [
+                  15766,
+                  13906
+                ]
+              ],
+              "pearson": 0.005719229869688631
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63239,
+              "past_by_current_counts": [
+                [
+                  17289,
+                  15742
+                ],
+                [
+                  15805,
+                  14403
+                ]
+              ],
+              "pearson": 0.00021164175806938807
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63241,
+              "past_by_current_counts": [
+                [
+                  17760,
+                  15767
+                ],
+                [
+                  15784,
+                  13930
+                ]
+              ],
+              "pearson": -0.0014751502068395665
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253986,
+              "escape_endpoint_omitted_pairs": 4,
+              "retained_pairs": 253982,
+              "past_by_current_counts": [
+                [
+                  71717,
+                  63110
+                ],
+                [
+                  63136,
+                  56019
+                ]
+              ],
+              "pearson": 0.002054244816087529
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 8162,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63751,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63750,
+              "past_by_current_counts": [
+                [
+                  18301,
+                  15886
+                ],
+                [
+                  15844,
+                  13719
+                ]
+              ],
+              "pearson": -0.0006196930754819546
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63751,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63749,
+              "past_by_current_counts": [
+                [
+                  18209,
+                  15879
+                ],
+                [
+                  15857,
+                  13804
+                ]
+              ],
+              "pearson": -0.00043146367803517823
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63239,
+              "past_by_current_counts": [
+                [
+                  17296,
+                  15738
+                ],
+                [
+                  15799,
+                  14406
+                ]
+              ],
+              "pearson": 0.0005227142454177705
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63240,
+              "past_by_current_counts": [
+                [
+                  17718,
+                  15798
+                ],
+                [
+                  15826,
+                  13898
+                ]
+              ],
+              "pearson": -0.0037888722589144693
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253982,
+              "escape_endpoint_omitted_pairs": 4,
+              "retained_pairs": 253978,
+              "past_by_current_counts": [
+                [
+                  71524,
+                  63301
+                ],
+                [
+                  63326,
+                  55827
+                ]
+              ],
+              "pearson": -0.0009728702351078292
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 8159,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63751,
+              "past_by_current_counts": [
+                [
+                  18452,
+                  16040
+                ],
+                [
+                  15694,
+                  13565
+                ]
+              ],
+              "pearson": -0.001416152587398579
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63751,
+              "past_by_current_counts": [
+                [
+                  18476,
+                  16060
+                ],
+                [
+                  15592,
+                  13623
+                ]
+              ],
+              "pearson": 0.0012781136790931875
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63240,
+              "past_by_current_counts": [
+                [
+                  17668,
+                  15986
+                ],
+                [
+                  15427,
+                  14159
+                ]
+              ],
+              "pearson": 0.0035570437524729496
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63239,
+              "past_by_current_counts": [
+                [
+                  18096,
+                  15908
+                ],
+                [
+                  15447,
+                  13788
+                ]
+              ],
+              "pearson": 0.003795371451007517
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253985,
+              "escape_endpoint_omitted_pairs": 4,
+              "retained_pairs": 253981,
+              "past_by_current_counts": [
+                [
+                  72692,
+                  63994
+                ],
+                [
+                  62160,
+                  55135
+                ]
+              ],
+              "pearson": 0.0018697106154608998
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "1079",
+      "pixls_name": "Olympus - E-PM1 - 16bit (4:3).ORF",
+      "sha256": "db8a564def35efaadf72cf74de92fa3959b2ab44bee4e0ec7876305830c59765",
+      "variant": "unassigned",
+      "payload_w": 4080,
+      "payload_h": 3040,
+      "payload_offset": 1436160,
+      "payload_bytes": 10527133,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1756598,
+      "parsed_escapes": 55,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 4080,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 29,
+              "retained_pairs": 63723,
+              "past_by_current_counts": [
+                [
+                  17962,
+                  15668
+                ],
+                [
+                  16115,
+                  13978
+                ]
+              ],
+              "pearson": -0.0014013771791526123
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 24,
+              "retained_pairs": 63728,
+              "past_by_current_counts": [
+                [
+                  17959,
+                  15881
+                ],
+                [
+                  15851,
+                  14037
+                ]
+              ],
+              "pearson": 0.00035666153858950067
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 65280,
+              "escape_endpoint_omitted_pairs": 30,
+              "retained_pairs": 65250,
+              "past_by_current_counts": [
+                [
+                  18436,
+                  16432
+                ],
+                [
+                  15953,
+                  14429
+                ]
+              ],
+              "pearson": 0.0036530031661147597
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 65280,
+              "escape_endpoint_omitted_pairs": 25,
+              "retained_pairs": 65255,
+              "past_by_current_counts": [
+                [
+                  18416,
+                  16187
+                ],
+                [
+                  16199,
+                  14453
+                ]
+              ],
+              "pearson": 0.003727260942903412
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 258064,
+              "escape_endpoint_omitted_pairs": 108,
+              "retained_pairs": 257956,
+              "past_by_current_counts": [
+                [
+                  72773,
+                  64168
+                ],
+                [
+                  64118,
+                  56897
+                ]
+              ],
+              "pearson": 0.0015834578170972151
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 8160,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 24,
+              "retained_pairs": 63728,
+              "past_by_current_counts": [
+                [
+                  18216,
+                  15889
+                ],
+                [
+                  15860,
+                  13763
+                ]
+              ],
+              "pearson": -0.0012794804447845882
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 26,
+              "retained_pairs": 63726,
+              "past_by_current_counts": [
+                [
+                  17947,
+                  15851
+                ],
+                [
+                  15863,
+                  14065
+                ]
+              ],
+              "pearson": 0.0009690145618544254
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 32,
+              "retained_pairs": 63208,
+              "past_by_current_counts": [
+                [
+                  17524,
+                  15821
+                ],
+                [
+                  15784,
+                  14079
+                ]
+              ],
+              "pearson": -0.0030107763744379777
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 21,
+              "retained_pairs": 63219,
+              "past_by_current_counts": [
+                [
+                  17837,
+                  15728
+                ],
+                [
+                  15683,
+                  13971
+                ]
+              ],
+              "pearson": 0.0025501738932655607
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253984,
+              "escape_endpoint_omitted_pairs": 103,
+              "retained_pairs": 253881,
+              "past_by_current_counts": [
+                [
+                  71524,
+                  63289
+                ],
+                [
+                  63190,
+                  55878
+                ]
+              ],
+              "pearson": -0.00016282867262663154
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 8158,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 23,
+              "retained_pairs": 63729,
+              "past_by_current_counts": [
+                [
+                  18309,
+                  15790
+                ],
+                [
+                  15765,
+                  13865
+                ]
+              ],
+              "pearson": 0.004874199851128527
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 26,
+              "retained_pairs": 63726,
+              "past_by_current_counts": [
+                [
+                  17928,
+                  15879
+                ],
+                [
+                  15880,
+                  14039
+                ]
+              ],
+              "pearson": -0.00046202867502031283
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 33,
+              "retained_pairs": 63208,
+              "past_by_current_counts": [
+                [
+                  17546,
+                  15799
+                ],
+                [
+                  15758,
+                  14105
+                ]
+              ],
+              "pearson": -0.0014804525128573438
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 21,
+              "retained_pairs": 63220,
+              "past_by_current_counts": [
+                [
+                  17659,
+                  15904
+                ],
+                [
+                  15864,
+                  13793
+                ]
+              ],
+              "pearson": -0.008770328318001923
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253986,
+              "escape_endpoint_omitted_pairs": 103,
+              "retained_pairs": 253883,
+              "past_by_current_counts": [
+                [
+                  71442,
+                  63372
+                ],
+                [
+                  63267,
+                  55802
+                ]
+              ],
+              "pearson": -0.0014171715717734602
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 8162,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63751,
+              "escape_endpoint_omitted_pairs": 24,
+              "retained_pairs": 63727,
+              "past_by_current_counts": [
+                [
+                  18283,
+                  15818
+                ],
+                [
+                  15790,
+                  13836
+                ]
+              ],
+              "pearson": 0.0031646503193779423
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63751,
+              "escape_endpoint_omitted_pairs": 26,
+              "retained_pairs": 63725,
+              "past_by_current_counts": [
+                [
+                  17937,
+                  15863
+                ],
+                [
+                  15872,
+                  14053
+                ]
+              ],
+              "pearson": 0.0002878300591095478
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 32,
+              "retained_pairs": 63208,
+              "past_by_current_counts": [
+                [
+                  17579,
+                  15769
+                ],
+                [
+                  15728,
+                  14132
+                ]
+              ],
+              "pearson": 0.00041331458643890386
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 21,
+              "retained_pairs": 63219,
+              "past_by_current_counts": [
+                [
+                  17756,
+                  15804
+                ],
+                [
+                  15762,
+                  13897
+                ]
+              ],
+              "pearson": -0.0023582766377735808
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253982,
+              "escape_endpoint_omitted_pairs": 103,
+              "retained_pairs": 253879,
+              "past_by_current_counts": [
+                [
+                  71555,
+                  63254
+                ],
+                [
+                  63152,
+                  55918
+                ]
+              ],
+              "pearson": 0.0004108942473504914
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 8159,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 24,
+              "retained_pairs": 63728,
+              "past_by_current_counts": [
+                [
+                  18752,
+                  16264
+                ],
+                [
+                  15324,
+                  13388
+                ]
+              ],
+              "pearson": 0.0018079619477888828
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63752,
+              "escape_endpoint_omitted_pairs": 25,
+              "retained_pairs": 63727,
+              "past_by_current_counts": [
+                [
+                  18493,
+                  16307
+                ],
+                [
+                  15318,
+                  13609
+                ]
+              ],
+              "pearson": 0.0018637037631572572
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 63240,
+              "escape_endpoint_omitted_pairs": 25,
+              "retained_pairs": 63215,
+              "past_by_current_counts": [
+                [
+                  18058,
+                  16221
+                ],
+                [
+                  15252,
+                  13684
+                ]
+              ],
+              "pearson": -0.00029880864224643547
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 63241,
+              "escape_endpoint_omitted_pairs": 29,
+              "retained_pairs": 63212,
+              "past_by_current_counts": [
+                [
+                  18102,
+                  16160
+                ],
+                [
+                  15414,
+                  13536
+                ]
+              ],
+              "pearson": -0.004087784769159669
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 253985,
+              "escape_endpoint_omitted_pairs": 103,
+              "retained_pairs": 253882,
+              "past_by_current_counts": [
+                [
+                  73405,
+                  64952
+                ],
+                [
+                  61308,
+                  54217
+                ]
+              ],
+              "pearson": -0.0001422302132212034
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "1051",
+      "pixls_name": "Olympus - E-M1 - 16bit (4:3).orf",
+      "sha256": "19ba17e778ae802d4039f0e88bb1cd68825780788b8058c479067e32b9a63eda",
+      "variant": "unassigned",
+      "payload_w": 4640,
+      "payload_h": 3472,
+      "payload_offset": 1491456,
+      "payload_bytes": 13919144,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1775448,
+      "parsed_escapes": 3,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 4640,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 63790,
+              "past_by_current_counts": [
+                [
+                  15979,
+                  15986
+                ],
+                [
+                  15876,
+                  15949
+                ]
+              ],
+              "pearson": 0.0010374006509626917
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  15918,
+                  15976
+                ],
+                [
+                  16179,
+                  15719
+                ]
+              ],
+              "pearson": -0.008119906559758623
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 64960,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 64957,
+              "past_by_current_counts": [
+                [
+                  16293,
+                  16170
+                ],
+                [
+                  16273,
+                  16221
+                ]
+              ],
+              "pearson": 0.0010943205944041693
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 64960,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 64960,
+              "past_by_current_counts": [
+                [
+                  16208,
+                  16446
+                ],
+                [
+                  16282,
+                  16024
+                ]
+              ],
+              "pearson": -0.007637227300006013
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 257504,
+              "escape_endpoint_omitted_pairs": 5,
+              "retained_pairs": 257499,
+              "past_by_current_counts": [
+                [
+                  64398,
+                  64578
+                ],
+                [
+                  64610,
+                  63913
+                ]
+              ],
+              "pearson": -0.0034093827548986803
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 9280,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63791,
+              "past_by_current_counts": [
+                [
+                  15877,
+                  16003
+                ],
+                [
+                  15979,
+                  15932
+                ]
+              ],
+              "pearson": -0.0027125855390415917
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  16179,
+                  15928
+                ],
+                [
+                  15918,
+                  15767
+                ]
+              ],
+              "pearson": 0.001525970850912533
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62640,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 62638,
+              "past_by_current_counts": [
+                [
+                  15673,
+                  15756
+                ],
+                [
+                  15720,
+                  15489
+                ]
+              ],
+              "pearson": -0.005021275107126732
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62640,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62640,
+              "past_by_current_counts": [
+                [
+                  15764,
+                  15560
+                ],
+                [
+                  15599,
+                  15717
+                ]
+              ],
+              "pearson": 0.005140314857779422
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 252864,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 252861,
+              "past_by_current_counts": [
+                [
+                  63493,
+                  63247
+                ],
+                [
+                  63216,
+                  62905
+                ]
+              ],
+              "pearson": -0.0002624520493218367
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 9278,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  15831,
+                  16054
+                ],
+                [
+                  16025,
+                  15882
+                ]
+              ],
+              "pearson": -0.005737833886076184
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  16043,
+                  16064
+                ],
+                [
+                  16054,
+                  15631
+                ]
+              ],
+              "pearson": -0.007002100156362108
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62641,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 62638,
+              "past_by_current_counts": [
+                [
+                  15791,
+                  15633
+                ],
+                [
+                  15603,
+                  15611
+                ]
+              ],
+              "pearson": 0.00264214238981042
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62641,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62641,
+              "past_by_current_counts": [
+                [
+                  15625,
+                  15700
+                ],
+                [
+                  15738,
+                  15578
+                ]
+              ],
+              "pearson": -0.0037517349856585015
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 252866,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 252863,
+              "past_by_current_counts": [
+                [
+                  63290,
+                  63451
+                ],
+                [
+                  63420,
+                  62702
+                ]
+              ],
+              "pearson": -0.003481601858279974
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 9282,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63791,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63790,
+              "past_by_current_counts": [
+                [
+                  15957,
+                  15928
+                ],
+                [
+                  15898,
+                  16007
+                ]
+              ],
+              "pearson": 0.0021629570933392704
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63791,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63791,
+              "past_by_current_counts": [
+                [
+                  16117,
+                  15996
+                ],
+                [
+                  15980,
+                  15698
+                ]
+              ],
+              "pearson": -0.002567057893944675
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62640,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 62638,
+              "past_by_current_counts": [
+                [
+                  15698,
+                  15726
+                ],
+                [
+                  15694,
+                  15520
+                ]
+              ],
+              "pearson": -0.0032327208288392686
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62640,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62640,
+              "past_by_current_counts": [
+                [
+                  15727,
+                  15591
+                ],
+                [
+                  15636,
+                  15686
+                ]
+              ],
+              "pearson": 0.002969439134435056
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 252862,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 252859,
+              "past_by_current_counts": [
+                [
+                  63499,
+                  63241
+                ],
+                [
+                  63208,
+                  62911
+                ]
+              ],
+              "pearson": -0.00015962750510886638
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 9279,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  16936,
+                  16782
+                ],
+                [
+                  14920,
+                  15154
+                ]
+              ],
+              "pearson": 0.006163973873353928
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63792,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63792,
+              "past_by_current_counts": [
+                [
+                  16823,
+                  16611
+                ],
+                [
+                  15274,
+                  15084
+                ]
+              ],
+              "pearson": 4.105491272305059e-05
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62640,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62640,
+              "past_by_current_counts": [
+                [
+                  16572,
+                  16336
+                ],
+                [
+                  14822,
+                  14910
+                ]
+              ],
+              "pearson": 0.005059139932095532
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62641,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 62638,
+              "past_by_current_counts": [
+                [
+                  16455,
+                  16445
+                ],
+                [
+                  14906,
+                  14832
+                ]
+              ],
+              "pearson": -0.0010908321016985128
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 252865,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 252862,
+              "past_by_current_counts": [
+                [
+                  66786,
+                  66174
+                ],
+                [
+                  59922,
+                  59980
+                ]
+              ],
+              "pearson": 0.0025399208504932286
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "4126",
+      "pixls_name": "Olympus - E-M10 Mark IV - 16bit (4:3).ORF",
+      "sha256": "ce03e936cb2e8131343e7045a3249f78477bd2ae944e121ace72058b89fef509",
+      "variant": "unassigned",
+      "payload_w": 5200,
+      "payload_h": 3904,
+      "payload_offset": 1523712,
+      "payload_bytes": 17235346,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1737857,
+      "parsed_escapes": 1,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 5200,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18281,
+                  15595
+                ],
+                [
+                  15942,
+                  13654
+                ]
+              ],
+              "pearson": 0.0009915082188491477
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18430,
+                  15681
+                ],
+                [
+                  15921,
+                  13440
+                ]
+              ],
+              "pearson": -0.0019561737539676304
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 65000,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 64999,
+              "past_by_current_counts": [
+                [
+                  18695,
+                  16319
+                ],
+                [
+                  15949,
+                  14036
+                ]
+              ],
+              "pearson": 0.002028337965285345
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 65000,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 65000,
+              "past_by_current_counts": [
+                [
+                  18914,
+                  16259
+                ],
+                [
+                  16019,
+                  13808
+                ]
+              ],
+              "pearson": 0.0006778880260222946
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 256944,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 256943,
+              "past_by_current_counts": [
+                [
+                  74320,
+                  63854
+                ],
+                [
+                  63831,
+                  54938
+                ]
+              ],
+              "pearson": 0.00043431121528009914
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 10400,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  18484,
+                  15710
+                ],
+                [
+                  15738,
+                  13539
+                ]
+              ],
+              "pearson": 0.00300780245830969
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18624,
+                  15735
+                ],
+                [
+                  15727,
+                  13386
+                ]
+              ],
+              "pearson": 0.001835941561898743
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  17759,
+                  15549
+                ],
+                [
+                  15542,
+                  13550
+                ]
+              ],
+              "pearson": -0.0010609868499967445
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  18113,
+                  15407
+                ],
+                [
+                  15427,
+                  13453
+                ]
+              ],
+              "pearson": 0.006188359436970489
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251744,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 251743,
+              "past_by_current_counts": [
+                [
+                  72980,
+                  62401
+                ],
+                [
+                  62434,
+                  53928
+                ]
+              ],
+              "pearson": 0.002521531421046978
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 10398,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18461,
+                  15739
+                ],
+                [
+                  15762,
+                  13510
+                ]
+              ],
+              "pearson": 0.0013286029962127292
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18737,
+                  15628
+                ],
+                [
+                  15614,
+                  13493
+                ]
+              ],
+              "pearson": 0.008800119855718755
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  17895,
+                  15407
+                ],
+                [
+                  15406,
+                  13692
+                ]
+              ],
+              "pearson": 0.007902900640897905
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62401,
+              "past_by_current_counts": [
+                [
+                  18152,
+                  15362
+                ],
+                [
+                  15389,
+                  13498
+                ]
+              ],
+              "pearson": 0.008893986738958153
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251746,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 251745,
+              "past_by_current_counts": [
+                [
+                  73245,
+                  62136
+                ],
+                [
+                  62171,
+                  54193
+                ]
+              ],
+              "pearson": 0.006748433672671334
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 10402,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63471,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63470,
+              "past_by_current_counts": [
+                [
+                  18506,
+                  15685
+                ],
+                [
+                  15715,
+                  13564
+                ]
+              ],
+              "pearson": 0.00452106914014306
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63471,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  18798,
+                  15560
+                ],
+                [
+                  15553,
+                  13560
+                ]
+              ],
+              "pearson": 0.012892554155454015
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  17783,
+                  15527
+                ],
+                [
+                  15518,
+                  13572
+                ]
+              ],
+              "pearson": 0.00041577621487910526
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  18049,
+                  15471
+                ],
+                [
+                  15491,
+                  13389
+                ]
+              ],
+              "pearson": 0.002062786478990163
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251742,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 251741,
+              "past_by_current_counts": [
+                [
+                  73136,
+                  62243
+                ],
+                [
+                  62277,
+                  54085
+                ]
+              ],
+              "pearson": 0.005031106667435234
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 10399,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18777,
+                  15900
+                ],
+                [
+                  15446,
+                  13349
+                ]
+              ],
+              "pearson": 0.005064010584884735
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  18956,
+                  15867
+                ],
+                [
+                  15395,
+                  13254
+                ]
+              ],
+              "pearson": 0.006977413914371089
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  18076,
+                  15696
+                ],
+                [
+                  15225,
+                  13403
+                ]
+              ],
+              "pearson": 0.003410418250255274
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  18284,
+                  15639
+                ],
+                [
+                  15256,
+                  13221
+                ]
+              ],
+              "pearson": 0.003251497800225374
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251745,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 251744,
+              "past_by_current_counts": [
+                [
+                  74093,
+                  63102
+                ],
+                [
+                  61322,
+                  53227
+                ]
+              ],
+              "pearson": 0.004716330810912308
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "4132",
+      "pixls_name": "Olympus - E-M10 Mark IV - 16bit (4:3).ORF",
+      "sha256": "77b67d898f85d3d738cb16daf9740c0fcf078ce9662c381994604ac540ce36b4",
+      "variant": "unassigned",
+      "payload_w": 5200,
+      "payload_h": 3904,
+      "payload_offset": 1523712,
+      "payload_bytes": 16429562,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1788524,
+      "parsed_escapes": 3,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 5200,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  20459,
+                  15392
+                ],
+                [
+                  15226,
+                  12395
+                ]
+              ],
+              "pearson": 0.019407132432022453
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  19828,
+                  15446
+                ],
+                [
+                  15612,
+                  12585
+                ]
+              ],
+              "pearson": 0.008442919807880736
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 65000,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 64999,
+              "past_by_current_counts": [
+                [
+                  20853,
+                  15783
+                ],
+                [
+                  15810,
+                  12553
+                ]
+              ],
+              "pearson": 0.011779153138345664
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 65000,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 64998,
+              "past_by_current_counts": [
+                [
+                  20186,
+                  15837
+                ],
+                [
+                  15884,
+                  13091
+                ]
+              ],
+              "pearson": 0.012169434557481488
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 256944,
+              "escape_endpoint_omitted_pairs": 4,
+              "retained_pairs": 256940,
+              "past_by_current_counts": [
+                [
+                  81326,
+                  62458
+                ],
+                [
+                  62532,
+                  50624
+                ]
+              ],
+              "pearson": 0.012995589509131485
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 10400,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  20319,
+                  15482
+                ],
+                [
+                  15365,
+                  12305
+                ]
+              ],
+              "pearson": 0.012253638313185761
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  19847,
+                  15413
+                ],
+                [
+                  15593,
+                  12618
+                ]
+              ],
+              "pearson": 0.010154764531791965
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  19996,
+                  15165
+                ],
+                [
+                  15178,
+                  12061
+                ]
+              ],
+              "pearson": 0.011483135251302762
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62399,
+              "past_by_current_counts": [
+                [
+                  19413,
+                  15299
+                ],
+                [
+                  15317,
+                  12370
+                ]
+              ],
+              "pearson": 0.006039521502660905
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251744,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 251741,
+              "past_by_current_counts": [
+                [
+                  79575,
+                  61359
+                ],
+                [
+                  61453,
+                  49354
+                ]
+              ],
+              "pearson": 0.010031981327687556
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 10398,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  20245,
+                  15557
+                ],
+                [
+                  15440,
+                  12230
+                ]
+              ],
+              "pearson": 0.007462611823665263
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  19774,
+                  15487
+                ],
+                [
+                  15667,
+                  12544
+                ]
+              ],
+              "pearson": 0.0054423523458004405
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  19980,
+                  15180
+                ],
+                [
+                  15194,
+                  12046
+                ]
+              ],
+              "pearson": 0.010477320696230865
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 2,
+              "retained_pairs": 62399,
+              "past_by_current_counts": [
+                [
+                  19432,
+                  15280
+                ],
+                [
+                  15298,
+                  12389
+                ]
+              ],
+              "pearson": 0.007273206656545651
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251746,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 251743,
+              "past_by_current_counts": [
+                [
+                  79431,
+                  61504
+                ],
+                [
+                  61599,
+                  49209
+                ]
+              ],
+              "pearson": 0.007693432783363873
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 10402,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63471,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63470,
+              "past_by_current_counts": [
+                [
+                  20307,
+                  15492
+                ],
+                [
+                  15377,
+                  12294
+                ]
+              ],
+              "pearson": 0.011536974900940444
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63471,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63470,
+              "past_by_current_counts": [
+                [
+                  19895,
+                  15363
+                ],
+                [
+                  15544,
+                  12668
+                ]
+              ],
+              "pearson": 0.01330663650761973
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  19957,
+                  15206
+                ],
+                [
+                  15217,
+                  12020
+                ]
+              ],
+              "pearson": 0.008868662447875573
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62399,
+              "past_by_current_counts": [
+                [
+                  19449,
+                  15264
+                ],
+                [
+                  15282,
+                  12404
+                ]
+              ],
+              "pearson": 0.008304830484939473
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251742,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 251739,
+              "past_by_current_counts": [
+                [
+                  79608,
+                  61325
+                ],
+                [
+                  61420,
+                  49386
+                ]
+              ],
+              "pearson": 0.010563012769562868
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 10399,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 63471,
+              "past_by_current_counts": [
+                [
+                  24502,
+                  18544
+                ],
+                [
+                  11182,
+                  9243
+                ]
+              ],
+              "pearson": 0.020470258676496586
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 63472,
+              "escape_endpoint_omitted_pairs": 0,
+              "retained_pairs": 63472,
+              "past_by_current_counts": [
+                [
+                  22949,
+                  17580
+                ],
+                [
+                  12492,
+                  10451
+                ]
+              ],
+              "pearson": 0.021048893678824846
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62400,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62399,
+              "past_by_current_counts": [
+                [
+                  23745,
+                  17871
+                ],
+                [
+                  11429,
+                  9354
+                ]
+              ],
+              "pearson": 0.01962804361486617
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62401,
+              "escape_endpoint_omitted_pairs": 1,
+              "retained_pairs": 62400,
+              "past_by_current_counts": [
+                [
+                  22854,
+                  17725
+                ],
+                [
+                  11877,
+                  9944
+                ]
+              ],
+              "pearson": 0.018147683197053104
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 251745,
+              "escape_endpoint_omitted_pairs": 3,
+              "retained_pairs": 251742,
+              "past_by_current_counts": [
+                [
+                  94050,
+                  71720
+                ],
+                [
+                  46980,
+                  38992
+                ]
+              ],
+              "pearson": 0.019963121117066485
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "6946",
+      "pixls_name": "OM System - TG-7 - 16bit (4:3).ORF",
+      "sha256": "4f7344c67bfcfcfec45f754195ba612fc2ad6312f5fab87812bf04b9e9e7d46a",
+      "variant": "unassigned",
+      "payload_w": 4040,
+      "payload_h": 3016,
+      "payload_offset": 1514496,
+      "payload_bytes": 12300700,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "shortfall_tokens": 0,
+      "bits_consumed": 1946399,
+      "parsed_escapes": 2235,
+      "measurements": [
+        {
+          "lag_label": "W",
+          "lag_tokens": 4040,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1110,
+              "retained_pairs": 63302,
+              "past_by_current_counts": [
+                [
+                  17928,
+                  15811
+                ],
+                [
+                  15656,
+                  13907
+                ]
+              ],
+              "pearson": 0.001791733553787015
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1050,
+              "retained_pairs": 63362,
+              "past_by_current_counts": [
+                [
+                  17914,
+                  15788
+                ],
+                [
+                  15662,
+                  13998
+                ]
+              ],
+              "pearson": 0.0034890463435471807
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 64640,
+              "escape_endpoint_omitted_pairs": 1128,
+              "retained_pairs": 63512,
+              "past_by_current_counts": [
+                [
+                  18004,
+                  15734
+                ],
+                [
+                  15857,
+                  13917
+                ]
+              ],
+              "pearson": 0.0010630971344965637
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 64640,
+              "escape_endpoint_omitted_pairs": 1072,
+              "retained_pairs": 63568,
+              "past_by_current_counts": [
+                [
+                  17999,
+                  15708
+                ],
+                [
+                  15852,
+                  14009
+                ]
+              ],
+              "pearson": 0.003125281351375706
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 258104,
+              "escape_endpoint_omitted_pairs": 4360,
+              "retained_pairs": 253744,
+              "past_by_current_counts": [
+                [
+                  71845,
+                  63041
+                ],
+                [
+                  63027,
+                  55831
+                ]
+              ],
+              "pearson": 0.002363532985281037
+            }
+          ]
+        },
+        {
+          "lag_label": "2W",
+          "lag_tokens": 8080,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1167,
+              "retained_pairs": 63245,
+              "past_by_current_counts": [
+                [
+                  17941,
+                  15658
+                ],
+                [
+                  15615,
+                  14031
+                ]
+              ],
+              "pearson": 0.00725837304031176
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1085,
+              "retained_pairs": 63327,
+              "past_by_current_counts": [
+                [
+                  17751,
+                  15831
+                ],
+                [
+                  15782,
+                  13963
+                ]
+              ],
+              "pearson": -0.00198963974646334
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62620,
+              "escape_endpoint_omitted_pairs": 1058,
+              "retained_pairs": 61562,
+              "past_by_current_counts": [
+                [
+                  17415,
+                  15406
+                ],
+                [
+                  15411,
+                  13330
+                ]
+              ],
+              "pearson": -0.005597292869391687
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62620,
+              "escape_endpoint_omitted_pairs": 1021,
+              "retained_pairs": 61599,
+              "past_by_current_counts": [
+                [
+                  17501,
+                  15334
+                ],
+                [
+                  15294,
+                  13470
+                ]
+              ],
+              "pearson": 0.001291915143330725
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 254064,
+              "escape_endpoint_omitted_pairs": 4331,
+              "retained_pairs": 249733,
+              "past_by_current_counts": [
+                [
+                  70608,
+                  62229
+                ],
+                [
+                  62102,
+                  54794
+                ]
+              ],
+              "pearson": 0.0002800799098572332
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-2",
+          "lag_tokens": 8078,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1168,
+              "retained_pairs": 63244,
+              "past_by_current_counts": [
+                [
+                  17762,
+                  15816
+                ],
+                [
+                  15767,
+                  13899
+                ]
+              ],
+              "pearson": -0.0025063088826712677
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1084,
+              "retained_pairs": 63328,
+              "past_by_current_counts": [
+                [
+                  17717,
+                  15879
+                ],
+                [
+                  15828,
+                  13904
+                ]
+              ],
+              "pearson": -0.0050007773040627755
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62621,
+              "escape_endpoint_omitted_pairs": 1057,
+              "retained_pairs": 61564,
+              "past_by_current_counts": [
+                [
+                  17466,
+                  15345
+                ],
+                [
+                  15343,
+                  13410
+                ]
+              ],
+              "pearson": -0.001292400659015602
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62621,
+              "escape_endpoint_omitted_pairs": 1023,
+              "retained_pairs": 61598,
+              "past_by_current_counts": [
+                [
+                  17524,
+                  15310
+                ],
+                [
+                  15270,
+                  13494
+                ]
+              ],
+              "pearson": 0.002842885626936717
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 254066,
+              "escape_endpoint_omitted_pairs": 4332,
+              "retained_pairs": 249734,
+              "past_by_current_counts": [
+                [
+                  70469,
+                  62350
+                ],
+                [
+                  62208,
+                  54707
+                ]
+              ],
+              "pearson": -0.0015146003479963445
+            }
+          ]
+        },
+        {
+          "lag_label": "2W+2",
+          "lag_tokens": 8082,
+          "past_bit": 2,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 64411,
+              "escape_endpoint_omitted_pairs": 1165,
+              "retained_pairs": 63246,
+              "past_by_current_counts": [
+                [
+                  17819,
+                  15752
+                ],
+                [
+                  15725,
+                  13950
+                ]
+              ],
+              "pearson": 0.0008781239489194487
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 64411,
+              "escape_endpoint_omitted_pairs": 1086,
+              "retained_pairs": 63325,
+              "past_by_current_counts": [
+                [
+                  17869,
+                  15746
+                ],
+                [
+                  15676,
+                  14034
+                ]
+              ],
+              "pearson": 0.003943841159658206
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62620,
+              "escape_endpoint_omitted_pairs": 1055,
+              "retained_pairs": 61565,
+              "past_by_current_counts": [
+                [
+                  17592,
+                  15230
+                ],
+                [
+                  15221,
+                  13522
+                ]
+              ],
+              "pearson": 0.006426816457452976
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62620,
+              "escape_endpoint_omitted_pairs": 1023,
+              "retained_pairs": 61597,
+              "past_by_current_counts": [
+                [
+                  17448,
+                  15370
+                ],
+                [
+                  15343,
+                  13436
+                ]
+              ],
+              "pearson": -0.0014722578877796064
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 254062,
+              "escape_endpoint_omitted_pairs": 4329,
+              "retained_pairs": 249733,
+              "past_by_current_counts": [
+                [
+                  70728,
+                  62098
+                ],
+                [
+                  61965,
+                  54942
+                ]
+              ],
+              "pearson": 0.002449248239536575
+            }
+          ]
+        },
+        {
+          "lag_label": "2W-1",
+          "lag_tokens": 8079,
+          "past_bit": 4,
+          "current_bit": 2,
+          "strata_then_pooled": [
+            {
+              "target_nominal_parity": [
+                0,
+                0
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1130,
+              "retained_pairs": 63282,
+              "past_by_current_counts": [
+                [
+                  18056,
+                  15978
+                ],
+                [
+                  15517,
+                  13731
+                ]
+              ],
+              "pearson": -3.7032470858708324e-06
+            },
+            {
+              "target_nominal_parity": [
+                0,
+                1
+              ],
+              "candidate_pairs": 64412,
+              "escape_endpoint_omitted_pairs": 1122,
+              "retained_pairs": 63290,
+              "past_by_current_counts": [
+                [
+                  18001,
+                  15939
+                ],
+                [
+                  15548,
+                  13802
+                ]
+              ],
+              "pearson": 0.000632152016147781
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                0
+              ],
+              "candidate_pairs": 62620,
+              "escape_endpoint_omitted_pairs": 1047,
+              "retained_pairs": 61573,
+              "past_by_current_counts": [
+                [
+                  17659,
+                  15401
+                ],
+                [
+                  15179,
+                  13334
+                ]
+              ],
+              "pearson": 0.0017954528370936894
+            },
+            {
+              "target_nominal_parity": [
+                1,
+                1
+              ],
+              "candidate_pairs": 62621,
+              "escape_endpoint_omitted_pairs": 1035,
+              "retained_pairs": 61586,
+              "past_by_current_counts": [
+                [
+                  17518,
+                  15547
+                ],
+                [
+                  15272,
+                  13249
+                ]
+              ],
+              "pearson": -0.005656646397943449
+            },
+            {
+              "target_nominal_parity": null,
+              "candidate_pairs": 254065,
+              "escape_endpoint_omitted_pairs": 4334,
+              "retained_pairs": 249731,
+              "past_by_current_counts": [
+                [
+                  71234,
+                  62865
+                ],
+                [
+                  61516,
+                  54116
+                ]
+              ],
+              "pearson": -0.0007929147972194033
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}
