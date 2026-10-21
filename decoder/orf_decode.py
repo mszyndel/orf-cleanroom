@@ -256,8 +256,11 @@ def decode_file(path, order=None, layout=None):
         # it establishes no value assembly or compressed decode step (V1 S1.9).
         # 2026-10-21--radialmonster--em1mk2-full-payload-suffix-dependence
         # (Partial for #11) measures sequential association, not values or a predictor.
+        # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
+        # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
+        # or values (V1 S1.10).
         r.update(variant="compressed", status="not yet specified (value assembly remains open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.2, S1.7-S1.8 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.10 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
