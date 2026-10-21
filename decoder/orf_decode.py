@@ -51,6 +51,7 @@ F_NULL_BPP = "2026-10-21--radialmonster--null-distance-tracks-bpp-within-body"
 F_NULL_BPP_2 = "2026-10-21--radialmonster--remaining-om1-family-null-distance"
 F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and-separation"
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
+F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
 
 # what the evidence is for each layout
 STATUS = {
@@ -258,6 +259,9 @@ def decode_file(path, order=None, layout=None):
         # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
         # preview-luma correlates; they specify neither sensor values nor a
         # predictor or round-trip decode.
+        # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
+        # correlate from b2/b4; they specify no sensor values or decode step
+        # (V1 S1.15).
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
@@ -269,6 +273,9 @@ def decode_file(path, order=None, layout=None):
         # F_BALANCE (Partial for #11) measures within-token H/L MI and b0/b1
         # marginals within a predeclared tolerance on four further bodies; it
         # establishes neither exact independence nor values (V1 S1.14).
+        # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
+        # prefix and whole payload pass that tolerance, not exact independence,
+        # population generality, framing or values (V1 S1.16).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
@@ -282,7 +289,7 @@ def decode_file(path, order=None, layout=None):
         # it specifies no value assembly, decode step or variant assignment
         # (V1 S1.13, V2 S1.2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.14, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
