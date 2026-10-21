@@ -358,6 +358,35 @@ sanitized; successful reports survive and any failure makes the exit nonzero.
     python -I -B tools/q_value_bridge_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_q_value_bridge_probe.py
 
+**`token_position_probe.py`** supports the still-open item 9 of lead #29,
+building on #11 and `suffix_joint_probe.py`. It reports ordinary-q (0..16)
+and unsigned-suffix (0..31) histograms at nominal positions 0..23 and the
+remainder, plus pooled first10/first24/remainder counts, sums and means.
+Only complete payload-width W-token rows from token0 contribute; q>=17
+symbols are omitted without compacting indices. All escape omissions and
+incomplete nominal-tail counts are explicit. W and origin are hypotheses,
+not established physical rows; omission cannot repair unknown escape framing.
+The historical row-start statistic did not specify its field/estimator, so
+these new explicit metrics do not reproduce its values. No elevation criterion,
+null model, significance or decoder is supplied. Check CC0 licences first.
+
+    python -I -B tools/token_position_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_position_probe.py
+
+**`token_b4_gate_probe.py`** supports the b4 significance-gate question in
+lead #32 and builds on candidate parser #11. It emits complete low3/low4
+unsigned histograms by b4, current-q/current-b4 and previous-q/current-b4
+17-by-2 count tables, conditional probabilities and unsmoothed plug-in MI.
+The first 262144 complete tokens use zero extra escape bits; q>=17 tokens
+are omitted, with both endpoints required ordinary for lag1 pairs. Original
+indices are preserved; omitted tokens are never joined. Both low-bit field
+definitions are explicit because the historical phrase was unspecified.
+No significance, independence, semantic gate or historical-number claim
+follows; omission cannot repair unknown framing. Licence-check inputs first.
+
+    python -I -B tools/token_b4_gate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_b4_gate_probe.py
+
 **`suffix_width_probe.py`** supports the committed candidate k-scan requested
 in V1 G8 and relates to lead #29 item 1. For each whole payload it reports
 all k=2..8 and both stop-bit conventions: q opposite bits, one stop bit,
