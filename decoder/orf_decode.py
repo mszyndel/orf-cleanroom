@@ -288,8 +288,11 @@ def decode_file(path, order=None, layout=None):
         # 83 variable-size CC0 files and q=47/suffix 0 on four large-sensor files;
         # it specifies no value assembly, decode step or variant assignment
         # (V1 S1.13, V2 S1.2).
+        # F_PRED31 (Partial for #31): a fixed 11-reading x 9-predictor probe
+        # finds no cross-file preview-luma transfer on E-M1 Mark III 3800/3801
+        # and OM-5 6343; it specifies no predictor, values or decode step (V1 G2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
