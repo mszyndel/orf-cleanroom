@@ -67,6 +67,20 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
 
     python tools/value_map_probe.py --phase discovery --measured-by @yourhandle --sample 1993 NAME path/to/file.ORF
 
+**`value_map_window_probe.py`** supports the later-window control in lead #32.
+It reuses @mtakemoto's suffix bridge-energy arithmetic and the original #11
+candidate scanner, scanning from payload bit zero while retaining only the
+requested window. Start tokens must be multiples of 128; reported block indices
+and lane parity are absolute. Each window holds at most 262144 tokens, and the
+scan ends by token 100000000. It emits explicitly exploratory aggregate JSON,
+source hashes, measured signature, absolute token/bit boundaries and escape
+omissions. Licence-check samples first. The frozen six-file prefix experiment
+is unchanged; later windows do not repair potential escape misalignment or
+establish a decoder, physical row boundaries, or content/code causation.
+
+    python -I -B tools/value_map_window_probe.py --sample ID PUBLIC_NAME path/to/file.ORF --measured-by @yourhandle --start-token 1048576
+    python -I -B tools/test_value_map_window_probe.py
+
 **`orf_v0_unpack.py`** scores candidate bit layouts for the uncompressed V0 files (`packed-12`, `packed-12.8`, `packed-16`, lead #28) on a small window of each file: value range, smoothness at same-colour horizontal and vertical distance 2 against distance 1, row correlation, and a row-stride test for the chosen layout. Text statistics only; it prints the layout with the lowest roughness and the margin to the next one.
 
     python tools/orf_v0_unpack.py path/to/file.ORF
