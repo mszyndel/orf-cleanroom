@@ -63,6 +63,29 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     python tools/orf_tokens.py path/to/file.ORF --rows 400
     python tools/orf_tokens.py path/to/file.ORF --all
 
+**`jpeg_dc.py`** decodes only the DC coefficient of each 8x8 block of a
+baseline JPEG, for the first (luma) component. For an ORF it finds the largest
+embedded preview (width and height at least 1000). On the E-M1 Mark II files the
+3200x2400 preview gives a 400x300 luma grid. AC coefficients are skipped; no
+image or pixel data is written. Standard library only. Supports the P0
+token-to-luma probe and the geometry part of lead #11.
+
+    python -I tools/jpeg_dc.py path/to/file.ORF
+
+**`token_luma_probe.py`** tests a fixed token-field to low-resolution luma
+mapping against a within-row shuffle null. For each token it takes
+`v = b2 + b4`, box-averages `v` over `--window` tokens within each row,
+block-averages to the preview's luma DC grid, and correlates the row-centred
+grids. The target comes from `jpeg_dc.py`; the null permutes the suffix tokens
+within each row. It prints one aggregate line per file (`r`, shuffle mean and
+sd, z, escape count). The default `--rows 300` is the top token band; a
+full-frame reshape is not used because the token row stride can drift. This is
+a low-frequency luma proxy, not a full pixel decode. Test:
+`python -I tools/token_luma_probe.py --self-test`.
+
+    python -I tools/token_luma_probe.py path/to/file.ORF --rows 300 --window 63 --perms 20
+    python -I tools/token_luma_probe.py --self-test
+
 **`value_map_probe.py`** (by @mtakemoto) measures suffix bridge energies under the three candidate suffix mappings from lead #32, against an exact permutation null, in 128-token blocks of the #11 parse. It is a frozen, pre-registered experiment: the sample IDs per phase (`discovery`, `validation`) and the settings are fixed on purpose, so it reruns that one design rather than measuring arbitrary files. It prints aggregate JSON only. `--self-test` runs its tests.
 
     python tools/value_map_probe.py --phase discovery --measured-by @yourhandle --sample 1993 NAME path/to/file.ORF

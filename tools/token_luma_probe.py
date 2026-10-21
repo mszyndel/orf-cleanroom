@@ -1,0 +1,202 @@
+#!/usr/bin/env python3
+"""Test a fixed token-field -> low-resolution luma mapping against a shuffle null.
+
+Supports: the P0 token-to-value probe, lead #11 (geometry) and the b2/b4
+statistics of leads #11/#29. Standard library only; reads sample files and
+prints aggregate numbers. No images or pixel data are written.
+
+Mapping (fixed, no fitting): v = b2 + b4 for every token; v is box-averaged
+over `--window` tokens within each row and block-averaged to the preview's
+luma DC grid. The target is the embedded preview's luma DC from
+tools/jpeg_dc.py. The score is the Pearson correlation after subtracting each
+row's mean. The null is the same measure after permuting the suffix tokens
+within each row.
+
+This is a low-resolution luma proxy, not a full pixel decode. The default
+`--rows 300` compares the top 300 token rows with the top part of the preview;
+a full-frame reshape is not used because the token row stride can drift.
+
+Usage:
+    python -I tools/token_luma_probe.py FILE [FILE ...] [--rows 300]
+        [--window 63] [--perms 20] [--seed 1]
+    python -I tools/token_luma_probe.py --self-test
+
+Escape tokens (q >= 17) are treated as 0 for b2/b4; their rate is printed.
+"""
+import argparse
+import array
+import math
+import os
+import random
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import jpeg_dc  # noqa: E402
+import orf_tokens as T  # noqa: E402
+
+DENSITY = bytes((((v >> 2) & 1) + ((v >> 4) & 1)) if v < 32 else 0 for v in range(256))
+
+
+def box_mean_rows(v, rows, w, window):
+    """Centered box mean within each row, clamped at the row edges."""
+    out = array.array("f", [0.0]) * (rows * w)
+    half = window // 2
+    for r in range(rows):
+        base = r * w
+        prefix = [0] * (w + 1)
+        s = 0
+        for c in range(w):
+            s += v[base + c]
+            prefix[c + 1] = s
+        for c in range(w):
+            a = c - half
+            if a < 0:
+                a = 0
+            b = c + half + 1
+            if b > w:
+                b = w
+            out[base + c] = (prefix[b] - prefix[a]) / (b - a)
+    return out
+
+
+def block_mean(v, rows, w, nd, wb):
+    """Block-average a rows x w float sequence to nd x wb."""
+    out = []
+    for r in range(nd):
+        r0 = r * rows // nd
+        r1 = max(r0 + 1, (r + 1) * rows // nd)
+        acc = [0.0] * w
+        for tr in range(r0, min(r1, rows)):
+            base = tr * w
+            for c in range(w):
+                acc[c] += v[base + c]
+        prefix = [0.0] * (w + 1)
+        s = 0.0
+        for c in range(w):
+            s += acc[c]
+            prefix[c + 1] = s
+        row = []
+        for c in range(wb):
+            c0 = c * w // wb
+            c1 = max(c0 + 1, (c + 1) * w // wb)
+            row.append((prefix[c1] - prefix[c0]) / ((r1 - r0) * (c1 - c0)))
+        out.append(row)
+    return out
+
+
+def corr_rows(a, b):
+    """Pearson correlation of two nd x wb grids after subtracting row means."""
+    n = len(a)
+    sa = sb = saa = sbb = sab = 0.0
+    for ra, rb in zip(a, b):
+        ma = sum(ra) / len(ra)
+        mb = sum(rb) / len(rb)
+        for x, y in zip(ra, rb):
+            x -= ma
+            y -= mb
+            sa += x
+            sb += y
+            saa += x * x
+            sbb += y * y
+            sab += x * y
+    if saa <= 0 or sbb <= 0:
+        return float("nan")
+    return sab / math.sqrt(saa * sbb)
+
+
+def score(sa, rows, w, window, nd, target):
+    v = sa.translate(DENSITY)
+    boxed = box_mean_rows(v, rows, w, window)
+    grid = block_mean(boxed, rows, w, nd, len(target[0]))
+    return corr_rows(grid, target)
+
+
+def shuffle_rows(sa, rows, w, rng):
+    buf = bytearray(sa)
+    for r in range(rows):
+        base = r * w
+        part = buf[base:base + w]
+        rng.shuffle(part)
+        buf[base:base + w] = part
+    return buf
+
+
+def run_file(path, rows, window, perms, seed):
+    w, h, buf = T.locate(path)
+    qa, sa = array.array("B"), array.array("B")
+    T.scan(buf, rows * w, w, 0, None, qa, sa, 40, None, 32)
+    n = min(len(sa), rows * w)
+    rows = n // w
+    if rows < 2:
+        raise ValueError("not enough tokens")
+    sa = sa[:rows * w].tobytes()
+    best = jpeg_dc.find_preview(open(path, "rb").read())
+    if best is None:
+        raise ValueError("no embedded baseline preview")
+    wb, hb, dc = jpeg_dc.decode(open(path, "rb").read(), best[1])
+    nd = max(1, min(hb, round(rows * hb / h)))
+    target = [dc[r * wb:(r + 1) * wb] for r in range(nd)]
+    real = score(sa, rows, w, window, nd, target)
+    rng = random.Random(seed)
+    null = [score(shuffle_rows(sa, rows, w, rng), rows, w, window, nd, target)
+            for _ in range(perms)]
+    mean = sum(null) / len(null)
+    var = sum((x - mean) ** 2 for x in null) / (len(null) - 1) if len(null) > 1 else 0.0
+    sd = math.sqrt(var) if var > 0 else 0.0
+    z = (real - mean) / sd if sd else 0.0
+    escapes = sum(1 for b in sa if b >= 32)
+    print("%s  payload %dx%d  rows %d  window %d  dc %dx%d  used %dx%d" % (
+        os.path.basename(path), w, h, rows, window, wb, hb, nd, wb))
+    print("  r=%+.5f  shuffle=%+.5f +/- %.5f  z=%+.2f  escapes=%d (treated as 0)" % (
+        real, mean, sd, z, escapes))
+
+
+def self_test():
+    rows, w, window, nd, wb = 40, 64, 9, 4, 8
+    sa = bytearray(rows * w)
+    for r in range(rows):
+        for c in range(w):
+            # b2 and b4 form a smooth diagonal ramp
+            v = (r * w + c) % 97
+            if v < 48:
+                b2 = 1
+            else:
+                b2 = 0
+            b4 = 1 if (r + c) % 7 < 3 else 0
+            sa[r * w + c] = (b4 << 4) | (b2 << 2)
+    v = sa.translate(DENSITY)
+    boxed = box_mean_rows(v, rows, w, window)
+    target = block_mean(boxed, rows, w, nd, wb)
+    real = score(sa, rows, w, window, nd, target)
+    assert real > 0.99, real
+    rng = random.Random(1)
+    shuffled = score(shuffle_rows(sa, rows, w, rng), rows, w, window, nd, target)
+    assert shuffled < 0.5, shuffled
+    print("self-test ok: r=%.4f on the matched grid, r=%.4f after a row shuffle" % (real, shuffled))
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0],
+                                 formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog=__doc__.split("\n\n", 1)[1])
+    ap.add_argument("files", nargs="*")
+    ap.add_argument("--rows", type=int, default=300, help="token rows to use")
+    ap.add_argument("--window", type=int, default=63, help="box window in tokens")
+    ap.add_argument("--perms", type=int, default=20, help="within-row shuffles")
+    ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--self-test", action="store_true")
+    a = ap.parse_args()
+    if a.self_test:
+        self_test()
+        return
+    if not a.files:
+        ap.error("no files (or use --self-test)")
+    for p in a.files:
+        try:
+            run_file(p, a.rows, a.window, a.perms, a.seed)
+        except (ValueError, IndexError, KeyError, OSError) as exc:
+            print("%s: %s" % (p, exc), file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
