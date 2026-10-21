@@ -7,14 +7,13 @@ verified decoder specification. The patent says adjacent-pixel differences are
 Huffman coded with one of two tables; the figure does not give a full residual
 mapping, so this tool tests the natural category-plus-magnitude-bit convention.
 
-The transcription is a complete-looking Huffman table except that the 9-bit
-code 111111111 is unassigned (Kraft sum 0.998047). The figure also prints a
-code-length column: rows 1-6 match their visible codewords, but rows 7-12 are
-listed one bit longer than the visible codeword (for example 11111110 at length
-9 and 111111110 at length 10). The figure is therefore internally inconsistent
-from row 7. This tool uses the literal visible codewords; the stated lengths do
-not form a valid prefix code for those strings, so the result applies to that
-literal reading only, not to every interpretation of Figure 8.
+The JP family member JP4869149B2's Figure 8 is internally consistent: every
+printed codeword length equals the visible string length (1110 is 4 bits,
+111111110 is 9 bits). The US8218885B2 printing has a length column that is one
+greater from row 7; that column is erroneous and is kept only for comparison.
+The 12-row code is incomplete: Kraft 0.998047, with 111111111 unused. It is not
+a 13-row table. This tool uses the literal 12 visible codewords; the parse
+result applies to that table under the assumed category-plus-magnitude-bit rule.
 
 Standard library only. Prints aggregate numbers; writes nothing.
 
@@ -45,9 +44,15 @@ TABLE2 = {
     "1110": 5, "11110": 4, "111110": 3, "1111110": 2,
     "11111110": 1, "111111110": 0,
 }
-# Code-length column printed in Figure 8. Rows 7-12 are one greater than the
-# visible codeword length; the figure is internally inconsistent from row 7.
+# JP4869149B2 Figure 8: length == len(codeword), 12 rows.
 LENGTHS = {
+    "00": 2, "01": 2, "100": 3, "101": 3, "1100": 4, "1101": 4,
+    "1110": 4, "11110": 5, "111110": 6, "1111110": 7,
+    "11111110": 8, "111111110": 9,
+}
+# US8218885B2 printed length column: one greater from row 7; erroneous,
+# kept only to document the discrepancy against the JP figure.
+US_LENGTHS = {
     "00": 2, "01": 2, "100": 3, "101": 3, "1100": 4, "1101": 4,
     "1110": 5, "11110": 6, "111110": 7, "1111110": 8,
     "11111110": 9, "111111110": 10,
@@ -192,7 +197,10 @@ def run(path, rows, start, missing, sign, reset):
             name, pf, kraft, len(codes)))
         lk = sum(2.0 ** -LENGTHS[c] for c in codes)
         mis = sum(1 for c in codes if LENGTHS[c] != len(c))
-        print("    stated length column: kraft=%.6f mismatched_codes=%d" % (lk, mis))
+        print("    jp_lengths: kraft=%.6f mismatched_codes=%d" % (lk, mis))
+        ulk = sum(2.0 ** -US_LENGTHS[c] for c in codes)
+        umis = sum(1 for c in codes if US_LENGTHS[c] != len(c))
+        print("    us_printed_lengths: kraft=%.6f mismatched_codes=%d" % (ulk, umis))
         vals, marks, cats, inv, end = parse_rows(
             buf, start, codes, rows, w, sign, None)
         print("    transcribed: values=%d invalid=%d endbit=%d categories=%s" % (
@@ -213,6 +221,9 @@ def self_test():
         pf, kraft = prefix_stats(codes)
         assert pf
         assert abs(kraft - 0.998046875) < 1e-9
+        assert all(LENGTHS[c] == len(c) for c in codes)
+        assert abs(sum(2.0 ** -LENGTHS[c] for c in codes) - 0.998046875) < 1e-9
+        assert sum(1 for c in codes if US_LENGTHS[c] != len(c)) == 6
     # encode a short known sequence with Table 1 and decode it
     rev = {v: k for k, v in TABLE1.items()}
     seq = [(0, 0), (1, 1), (1, -1), (2, 3), (2, -3), (3, 4)]
@@ -244,7 +255,9 @@ def main():
     ap.add_argument("files", nargs="*")
     ap.add_argument("--rows", type=int, default=156)
     ap.add_argument("--start", type=int, default=45)
-    ap.add_argument("--missing-category", type=int, default=5)
+    ap.add_argument("--missing-category", type=int, default=5,
+                    help="ad hoc completion of the unused 111111111 code; "
+                         "not part of the 12-row JP table")
     ap.add_argument("--sign", default="extend", choices=["extend", "separate"])
     ap.add_argument("--reset", action="store_true")
     ap.add_argument("--self-test", action="store_true")
