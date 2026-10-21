@@ -1,0 +1,1845 @@
+{
+  "measured_by": "radialmonster",
+  "measured_utc": "2026-10-21",
+  "builds_on": [
+    "#11",
+    "#30",
+    "#170",
+    "#175",
+    "#184"
+  ],
+  "design_comment": "https://github.com/radialmonster/orf-cleanroom/issues/30#issuecomment-6321155507",
+  "method_commit": "31a9dc84d43bb0ea108fd87b599f20870f502986",
+  "reports": [
+    {
+      "source_sha256": {
+        "token_zero_runs_probe.py": "9a058711c50e717dd9789cf505ed5524fe6e752d1a014e87531e3864bbf50481",
+        "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18",
+        "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+      },
+      "python_version": "3.13.15",
+      "escape_extra_bits": 0,
+      "suffix_bit": 2,
+      "samples": [
+        {
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 20003129,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 0,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 1822446,
+          "window_start_bit": 0,
+          "window_bits_consumed": 1822446,
+          "skipped_tokens": 0,
+          "skipped_escape_tokens": 0,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261831,
+            "omitted_escape_tokens": 313,
+            "segments": 312,
+            "zero_tokens": 139881,
+            "one_tokens": 121950,
+            "leading_censored_zeros": 345,
+            "trailing_censored_zeros": 399,
+            "all_zero_segment_zeros": 7,
+            "complete_positive_runs": 62872,
+            "sum_run_lengths": 139130,
+            "sum_squared_run_lengths": 482208,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 28504
+              },
+              {
+                "length": 2,
+                "count": 15798
+              },
+              {
+                "length": 3,
+                "count": 8231
+              },
+              {
+                "length": 4,
+                "count": 4674
+              },
+              {
+                "length": 5,
+                "count": 2477
+              },
+              {
+                "length": 6,
+                "count": 1420
+              },
+              {
+                "length": 7,
+                "count": 788
+              },
+              {
+                "length": 8,
+                "count": 393
+              },
+              {
+                "length": 9,
+                "count": 238
+              },
+              {
+                "length": 10,
+                "count": 153
+              },
+              {
+                "length": 11,
+                "count": 99
+              },
+              {
+                "length": 12,
+                "count": 37
+              },
+              {
+                "length": 13,
+                "count": 26
+              },
+              {
+                "length": 14,
+                "count": 13
+              },
+              {
+                "length": 15,
+                "count": 12
+              },
+              {
+                "length": 16,
+                "count": 1
+              },
+              {
+                "length": 17,
+                "count": 2
+              },
+              {
+                "length": 18,
+                "count": 2
+              },
+              {
+                "length": 19,
+                "count": 2
+              },
+              {
+                "length": 22,
+                "count": 1
+              },
+              {
+                "length": 25,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.2129087670187046,
+            "population_variance": 2.772712864942862,
+            "fitted_positive_geometric_variance": 2.684056444129539,
+            "variance_ratio": 1.0330307587261174
+          }
+        },
+        {
+          "pixls_id": "5284",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "f0301e1b49a4ffbb366ec9800ebe9210f421fb25e75dcdf7d63e4b05bc063caf",
+          "variant": "unassigned",
+          "payload_w": 8180,
+          "payload_h": 6132,
+          "payload_offset": 1817600,
+          "payload_bytes": 43559951,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 0,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 1727504,
+          "window_start_bit": 0,
+          "window_bits_consumed": 1727504,
+          "skipped_tokens": 0,
+          "skipped_escape_tokens": 0,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 262061,
+            "omitted_escape_tokens": 83,
+            "segments": 83,
+            "zero_tokens": 156160,
+            "one_tokens": 105901,
+            "leading_censored_zeros": 114,
+            "trailing_censored_zeros": 110,
+            "all_zero_segment_zeros": 1,
+            "complete_positive_runs": 55755,
+            "sum_run_lengths": 155935,
+            "sum_squared_run_lengths": 862853,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 22058
+              },
+              {
+                "length": 2,
+                "count": 12929
+              },
+              {
+                "length": 3,
+                "count": 7218
+              },
+              {
+                "length": 4,
+                "count": 4707
+              },
+              {
+                "length": 5,
+                "count": 2899
+              },
+              {
+                "length": 6,
+                "count": 1757
+              },
+              {
+                "length": 7,
+                "count": 1207
+              },
+              {
+                "length": 8,
+                "count": 744
+              },
+              {
+                "length": 9,
+                "count": 631
+              },
+              {
+                "length": 10,
+                "count": 360
+              },
+              {
+                "length": 11,
+                "count": 269
+              },
+              {
+                "length": 12,
+                "count": 184
+              },
+              {
+                "length": 13,
+                "count": 191
+              },
+              {
+                "length": 14,
+                "count": 128
+              },
+              {
+                "length": 15,
+                "count": 98
+              },
+              {
+                "length": 16,
+                "count": 56
+              },
+              {
+                "length": 17,
+                "count": 76
+              },
+              {
+                "length": 18,
+                "count": 40
+              },
+              {
+                "length": 19,
+                "count": 36
+              },
+              {
+                "length": 20,
+                "count": 28
+              },
+              {
+                "length": 21,
+                "count": 29
+              },
+              {
+                "length": 22,
+                "count": 15
+              },
+              {
+                "length": 23,
+                "count": 9
+              },
+              {
+                "length": 24,
+                "count": 12
+              },
+              {
+                "length": 25,
+                "count": 8
+              },
+              {
+                "length": 26,
+                "count": 7
+              },
+              {
+                "length": 27,
+                "count": 12
+              },
+              {
+                "length": 28,
+                "count": 2
+              },
+              {
+                "length": 29,
+                "count": 7
+              },
+              {
+                "length": 30,
+                "count": 5
+              },
+              {
+                "length": 31,
+                "count": 7
+              },
+              {
+                "length": 32,
+                "count": 1
+              },
+              {
+                "length": 33,
+                "count": 6
+              },
+              {
+                "length": 34,
+                "count": 2
+              },
+              {
+                "length": 36,
+                "count": 2
+              },
+              {
+                "length": 37,
+                "count": 5
+              },
+              {
+                "length": 38,
+                "count": 1
+              },
+              {
+                "length": 39,
+                "count": 1
+              },
+              {
+                "length": 40,
+                "count": 1
+              },
+              {
+                "length": 41,
+                "count": 1
+              },
+              {
+                "length": 42,
+                "count": 1
+              },
+              {
+                "length": 43,
+                "count": 1
+              },
+              {
+                "length": 44,
+                "count": 1
+              },
+              {
+                "length": 48,
+                "count": 1
+              },
+              {
+                "length": 50,
+                "count": 2
+              }
+            ],
+            "population_mean": 2.796789525603085,
+            "population_variance": 7.653764242221916,
+            "fitted_positive_geometric_variance": 5.0252421249200445,
+            "variance_ratio": 1.5230637752292768
+          }
+        },
+        {
+          "pixls_id": "5285",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "862dda54644400335633578ea3a37912fbe56429f755499fdbcab9e993543874",
+          "variant": "unassigned",
+          "payload_w": 10400,
+          "payload_h": 7792,
+          "payload_offset": 1817600,
+          "payload_bytes": 63641088,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 0,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 1679127,
+          "window_start_bit": 0,
+          "window_bits_consumed": 1679127,
+          "skipped_tokens": 0,
+          "skipped_escape_tokens": 0,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 262120,
+            "omitted_escape_tokens": 24,
+            "segments": 24,
+            "zero_tokens": 165916,
+            "one_tokens": 96204,
+            "leading_censored_zeros": 16,
+            "trailing_censored_zeros": 38,
+            "all_zero_segment_zeros": 8,
+            "complete_positive_runs": 51682,
+            "sum_run_lengths": 165854,
+            "sum_squared_run_lengths": 1394944,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 20709
+              },
+              {
+                "length": 2,
+                "count": 10909
+              },
+              {
+                "length": 3,
+                "count": 5811
+              },
+              {
+                "length": 4,
+                "count": 3904
+              },
+              {
+                "length": 5,
+                "count": 3010
+              },
+              {
+                "length": 6,
+                "count": 1816
+              },
+              {
+                "length": 7,
+                "count": 1401
+              },
+              {
+                "length": 8,
+                "count": 920
+              },
+              {
+                "length": 9,
+                "count": 805
+              },
+              {
+                "length": 10,
+                "count": 397
+              },
+              {
+                "length": 11,
+                "count": 392
+              },
+              {
+                "length": 12,
+                "count": 216
+              },
+              {
+                "length": 13,
+                "count": 248
+              },
+              {
+                "length": 14,
+                "count": 126
+              },
+              {
+                "length": 15,
+                "count": 186
+              },
+              {
+                "length": 16,
+                "count": 80
+              },
+              {
+                "length": 17,
+                "count": 104
+              },
+              {
+                "length": 18,
+                "count": 55
+              },
+              {
+                "length": 19,
+                "count": 79
+              },
+              {
+                "length": 20,
+                "count": 47
+              },
+              {
+                "length": 21,
+                "count": 60
+              },
+              {
+                "length": 22,
+                "count": 29
+              },
+              {
+                "length": 23,
+                "count": 50
+              },
+              {
+                "length": 24,
+                "count": 32
+              },
+              {
+                "length": 25,
+                "count": 27
+              },
+              {
+                "length": 26,
+                "count": 21
+              },
+              {
+                "length": 27,
+                "count": 17
+              },
+              {
+                "length": 28,
+                "count": 13
+              },
+              {
+                "length": 29,
+                "count": 28
+              },
+              {
+                "length": 30,
+                "count": 8
+              },
+              {
+                "length": 31,
+                "count": 15
+              },
+              {
+                "length": 32,
+                "count": 3
+              },
+              {
+                "length": 33,
+                "count": 20
+              },
+              {
+                "length": 34,
+                "count": 11
+              },
+              {
+                "length": 35,
+                "count": 14
+              },
+              {
+                "length": 36,
+                "count": 9
+              },
+              {
+                "length": 37,
+                "count": 8
+              },
+              {
+                "length": 38,
+                "count": 6
+              },
+              {
+                "length": 39,
+                "count": 7
+              },
+              {
+                "length": 40,
+                "count": 4
+              },
+              {
+                "length": 41,
+                "count": 5
+              },
+              {
+                "length": 42,
+                "count": 4
+              },
+              {
+                "length": 43,
+                "count": 5
+              },
+              {
+                "length": 44,
+                "count": 5
+              },
+              {
+                "length": 45,
+                "count": 13
+              },
+              {
+                "length": 46,
+                "count": 5
+              },
+              {
+                "length": 47,
+                "count": 5
+              },
+              {
+                "length": 49,
+                "count": 4
+              },
+              {
+                "length": 50,
+                "count": 1
+              },
+              {
+                "length": 51,
+                "count": 2
+              },
+              {
+                "length": 52,
+                "count": 1
+              },
+              {
+                "length": 53,
+                "count": 7
+              },
+              {
+                "length": 54,
+                "count": 1
+              },
+              {
+                "length": 55,
+                "count": 2
+              },
+              {
+                "length": 57,
+                "count": 4
+              },
+              {
+                "length": 59,
+                "count": 2
+              },
+              {
+                "length": 60,
+                "count": 1
+              },
+              {
+                "length": 61,
+                "count": 2
+              },
+              {
+                "length": 64,
+                "count": 1
+              },
+              {
+                "length": 65,
+                "count": 4
+              },
+              {
+                "length": 68,
+                "count": 3
+              },
+              {
+                "length": 69,
+                "count": 1
+              },
+              {
+                "length": 71,
+                "count": 1
+              },
+              {
+                "length": 73,
+                "count": 1
+              },
+              {
+                "length": 77,
+                "count": 2
+              },
+              {
+                "length": 95,
+                "count": 1
+              },
+              {
+                "length": 98,
+                "count": 1
+              },
+              {
+                "length": 102,
+                "count": 1
+              }
+            ],
+            "population_mean": 3.2091250338609187,
+            "population_variance": 16.692422441740476,
+            "fitted_positive_geometric_variance": 7.089358449091924,
+            "variance_ratio": 2.3545744740666352
+          }
+        },
+        {
+          "pixls_id": "5286",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORI",
+          "sha256": "2fd8bd46e2644fe28092fd921d9647007afd6d1e879c5ff19b1e3df50c578df1",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 19942944,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 0,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 1821991,
+          "window_start_bit": 0,
+          "window_bits_consumed": 1821991,
+          "skipped_tokens": 0,
+          "skipped_escape_tokens": 0,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261832,
+            "omitted_escape_tokens": 312,
+            "segments": 312,
+            "zero_tokens": 139872,
+            "one_tokens": 121960,
+            "leading_censored_zeros": 418,
+            "trailing_censored_zeros": 370,
+            "all_zero_segment_zeros": 5,
+            "complete_positive_runs": 62984,
+            "sum_run_lengths": 139079,
+            "sum_squared_run_lengths": 476013,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 28380
+              },
+              {
+                "length": 2,
+                "count": 15908
+              },
+              {
+                "length": 3,
+                "count": 8427
+              },
+              {
+                "length": 4,
+                "count": 4628
+              },
+              {
+                "length": 5,
+                "count": 2570
+              },
+              {
+                "length": 6,
+                "count": 1389
+              },
+              {
+                "length": 7,
+                "count": 728
+              },
+              {
+                "length": 8,
+                "count": 448
+              },
+              {
+                "length": 9,
+                "count": 209
+              },
+              {
+                "length": 10,
+                "count": 133
+              },
+              {
+                "length": 11,
+                "count": 73
+              },
+              {
+                "length": 12,
+                "count": 39
+              },
+              {
+                "length": 13,
+                "count": 22
+              },
+              {
+                "length": 14,
+                "count": 13
+              },
+              {
+                "length": 15,
+                "count": 10
+              },
+              {
+                "length": 16,
+                "count": 3
+              },
+              {
+                "length": 17,
+                "count": 1
+              },
+              {
+                "length": 18,
+                "count": 1
+              },
+              {
+                "length": 19,
+                "count": 1
+              },
+              {
+                "length": 24,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.208163978153182,
+            "population_variance": 2.6816931614764643,
+            "fitted_positive_geometric_variance": 2.667824176260104,
+            "variance_ratio": 1.0051986129145147
+          }
+        },
+        {
+          "pixls_id": "5287",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORI",
+          "sha256": "dcbc06ba28c641197b65d931c203c5dd697fd34ae79b649a9a6d9cfc84e4bca2",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 19242578,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 0,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 1814095,
+          "window_start_bit": 0,
+          "window_bits_consumed": 1814095,
+          "skipped_tokens": 0,
+          "skipped_escape_tokens": 0,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261851,
+            "omitted_escape_tokens": 293,
+            "segments": 291,
+            "zero_tokens": 140805,
+            "one_tokens": 121046,
+            "leading_censored_zeros": 319,
+            "trailing_censored_zeros": 425,
+            "all_zero_segment_zeros": 5,
+            "complete_positive_runs": 62691,
+            "sum_run_lengths": 140056,
+            "sum_squared_run_lengths": 484860,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 27836
+              },
+              {
+                "length": 2,
+                "count": 15811
+              },
+              {
+                "length": 3,
+                "count": 8611
+              },
+              {
+                "length": 4,
+                "count": 4610
+              },
+              {
+                "length": 5,
+                "count": 2577
+              },
+              {
+                "length": 6,
+                "count": 1454
+              },
+              {
+                "length": 7,
+                "count": 815
+              },
+              {
+                "length": 8,
+                "count": 442
+              },
+              {
+                "length": 9,
+                "count": 236
+              },
+              {
+                "length": 10,
+                "count": 141
+              },
+              {
+                "length": 11,
+                "count": 70
+              },
+              {
+                "length": 12,
+                "count": 40
+              },
+              {
+                "length": 13,
+                "count": 22
+              },
+              {
+                "length": 14,
+                "count": 7
+              },
+              {
+                "length": 15,
+                "count": 6
+              },
+              {
+                "length": 16,
+                "count": 9
+              },
+              {
+                "length": 17,
+                "count": 2
+              },
+              {
+                "length": 19,
+                "count": 1
+              },
+              {
+                "length": 20,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.2340686860952927,
+            "population_variance": 2.743061621289143,
+            "fitted_positive_geometric_variance": 2.756994208096255,
+            "variance_ratio": 0.9949464577160891
+          }
+        }
+      ],
+      "failures": []
+    },
+    {
+      "source_sha256": {
+        "token_zero_runs_probe.py": "9a058711c50e717dd9789cf505ed5524fe6e752d1a014e87531e3864bbf50481",
+        "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18",
+        "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+      },
+      "python_version": "3.13.15",
+      "escape_extra_bits": 0,
+      "suffix_bit": 2,
+      "samples": [
+        {
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 20003129,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 1048576,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 9122248,
+          "window_start_bit": 7299000,
+          "window_bits_consumed": 1823248,
+          "skipped_tokens": 1048576,
+          "skipped_escape_tokens": 1298,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261826,
+            "omitted_escape_tokens": 318,
+            "segments": 319,
+            "zero_tokens": 140199,
+            "one_tokens": 121627,
+            "leading_censored_zeros": 339,
+            "trailing_censored_zeros": 394,
+            "all_zero_segment_zeros": 8,
+            "complete_positive_runs": 63039,
+            "sum_run_lengths": 139458,
+            "sum_squared_run_lengths": 480256,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 28476
+              },
+              {
+                "length": 2,
+                "count": 15888
+              },
+              {
+                "length": 3,
+                "count": 8351
+              },
+              {
+                "length": 4,
+                "count": 4609
+              },
+              {
+                "length": 5,
+                "count": 2570
+              },
+              {
+                "length": 6,
+                "count": 1389
+              },
+              {
+                "length": 7,
+                "count": 760
+              },
+              {
+                "length": 8,
+                "count": 424
+              },
+              {
+                "length": 9,
+                "count": 264
+              },
+              {
+                "length": 10,
+                "count": 152
+              },
+              {
+                "length": 11,
+                "count": 63
+              },
+              {
+                "length": 12,
+                "count": 36
+              },
+              {
+                "length": 13,
+                "count": 26
+              },
+              {
+                "length": 14,
+                "count": 13
+              },
+              {
+                "length": 15,
+                "count": 9
+              },
+              {
+                "length": 16,
+                "count": 8
+              },
+              {
+                "length": 17,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.2122495597963168,
+            "population_variance": 2.724346847030018,
+            "fitted_positive_geometric_variance": 2.6817985550226804,
+            "variance_ratio": 1.0158655809280117
+          }
+        },
+        {
+          "pixls_id": "5284",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "f0301e1b49a4ffbb366ec9800ebe9210f421fb25e75dcdf7d63e4b05bc063caf",
+          "variant": "unassigned",
+          "payload_w": 8180,
+          "payload_h": 6132,
+          "payload_offset": 1817600,
+          "payload_bytes": 43559951,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 1048576,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 8636528,
+          "window_start_bit": 6905491,
+          "window_bits_consumed": 1731037,
+          "skipped_tokens": 1048576,
+          "skipped_escape_tokens": 365,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 262050,
+            "omitted_escape_tokens": 94,
+            "segments": 95,
+            "zero_tokens": 155416,
+            "one_tokens": 106634,
+            "leading_censored_zeros": 87,
+            "trailing_censored_zeros": 138,
+            "all_zero_segment_zeros": 2,
+            "complete_positive_runs": 56426,
+            "sum_run_lengths": 155189,
+            "sum_squared_run_lengths": 804445,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 22295
+              },
+              {
+                "length": 2,
+                "count": 13238
+              },
+              {
+                "length": 3,
+                "count": 7416
+              },
+              {
+                "length": 4,
+                "count": 4603
+              },
+              {
+                "length": 5,
+                "count": 2938
+              },
+              {
+                "length": 6,
+                "count": 1812
+              },
+              {
+                "length": 7,
+                "count": 1265
+              },
+              {
+                "length": 8,
+                "count": 749
+              },
+              {
+                "length": 9,
+                "count": 630
+              },
+              {
+                "length": 10,
+                "count": 379
+              },
+              {
+                "length": 11,
+                "count": 308
+              },
+              {
+                "length": 12,
+                "count": 180
+              },
+              {
+                "length": 13,
+                "count": 147
+              },
+              {
+                "length": 14,
+                "count": 97
+              },
+              {
+                "length": 15,
+                "count": 81
+              },
+              {
+                "length": 16,
+                "count": 51
+              },
+              {
+                "length": 17,
+                "count": 47
+              },
+              {
+                "length": 18,
+                "count": 30
+              },
+              {
+                "length": 19,
+                "count": 36
+              },
+              {
+                "length": 20,
+                "count": 26
+              },
+              {
+                "length": 21,
+                "count": 21
+              },
+              {
+                "length": 22,
+                "count": 13
+              },
+              {
+                "length": 23,
+                "count": 18
+              },
+              {
+                "length": 24,
+                "count": 4
+              },
+              {
+                "length": 25,
+                "count": 9
+              },
+              {
+                "length": 26,
+                "count": 3
+              },
+              {
+                "length": 27,
+                "count": 6
+              },
+              {
+                "length": 28,
+                "count": 2
+              },
+              {
+                "length": 29,
+                "count": 4
+              },
+              {
+                "length": 30,
+                "count": 2
+              },
+              {
+                "length": 31,
+                "count": 4
+              },
+              {
+                "length": 32,
+                "count": 1
+              },
+              {
+                "length": 33,
+                "count": 3
+              },
+              {
+                "length": 35,
+                "count": 1
+              },
+              {
+                "length": 36,
+                "count": 1
+              },
+              {
+                "length": 37,
+                "count": 1
+              },
+              {
+                "length": 39,
+                "count": 2
+              },
+              {
+                "length": 40,
+                "count": 1
+              },
+              {
+                "length": 41,
+                "count": 1
+              },
+              {
+                "length": 42,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.750310140715273,
+            "population_variance": 6.692431141185579,
+            "fitted_positive_geometric_variance": 4.813895729405992,
+            "variance_ratio": 1.3902318449285123
+          }
+        },
+        {
+          "pixls_id": "5285",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "sha256": "862dda54644400335633578ea3a37912fbe56429f755499fdbcab9e993543874",
+          "variant": "unassigned",
+          "payload_w": 10400,
+          "payload_h": 7792,
+          "payload_offset": 1817600,
+          "payload_bytes": 63641088,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 1048576,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 8366171,
+          "window_start_bit": 6695134,
+          "window_bits_consumed": 1671037,
+          "skipped_tokens": 1048576,
+          "skipped_escape_tokens": 93,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 262123,
+            "omitted_escape_tokens": 21,
+            "segments": 22,
+            "zero_tokens": 168549,
+            "one_tokens": 93574,
+            "leading_censored_zeros": 19,
+            "trailing_censored_zeros": 47,
+            "all_zero_segment_zeros": 4,
+            "complete_positive_runs": 50387,
+            "sum_run_lengths": 168479,
+            "sum_squared_run_lengths": 1543637,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 20001
+              },
+              {
+                "length": 2,
+                "count": 10468
+              },
+              {
+                "length": 3,
+                "count": 5360
+              },
+              {
+                "length": 4,
+                "count": 3943
+              },
+              {
+                "length": 5,
+                "count": 2981
+              },
+              {
+                "length": 6,
+                "count": 1856
+              },
+              {
+                "length": 7,
+                "count": 1487
+              },
+              {
+                "length": 8,
+                "count": 866
+              },
+              {
+                "length": 9,
+                "count": 816
+              },
+              {
+                "length": 10,
+                "count": 428
+              },
+              {
+                "length": 11,
+                "count": 421
+              },
+              {
+                "length": 12,
+                "count": 205
+              },
+              {
+                "length": 13,
+                "count": 240
+              },
+              {
+                "length": 14,
+                "count": 132
+              },
+              {
+                "length": 15,
+                "count": 171
+              },
+              {
+                "length": 16,
+                "count": 92
+              },
+              {
+                "length": 17,
+                "count": 142
+              },
+              {
+                "length": 18,
+                "count": 52
+              },
+              {
+                "length": 19,
+                "count": 92
+              },
+              {
+                "length": 20,
+                "count": 46
+              },
+              {
+                "length": 21,
+                "count": 65
+              },
+              {
+                "length": 22,
+                "count": 31
+              },
+              {
+                "length": 23,
+                "count": 62
+              },
+              {
+                "length": 24,
+                "count": 37
+              },
+              {
+                "length": 25,
+                "count": 34
+              },
+              {
+                "length": 26,
+                "count": 29
+              },
+              {
+                "length": 27,
+                "count": 40
+              },
+              {
+                "length": 28,
+                "count": 13
+              },
+              {
+                "length": 29,
+                "count": 44
+              },
+              {
+                "length": 30,
+                "count": 18
+              },
+              {
+                "length": 31,
+                "count": 23
+              },
+              {
+                "length": 32,
+                "count": 9
+              },
+              {
+                "length": 33,
+                "count": 12
+              },
+              {
+                "length": 34,
+                "count": 7
+              },
+              {
+                "length": 35,
+                "count": 16
+              },
+              {
+                "length": 36,
+                "count": 8
+              },
+              {
+                "length": 37,
+                "count": 19
+              },
+              {
+                "length": 38,
+                "count": 8
+              },
+              {
+                "length": 39,
+                "count": 10
+              },
+              {
+                "length": 41,
+                "count": 10
+              },
+              {
+                "length": 42,
+                "count": 2
+              },
+              {
+                "length": 43,
+                "count": 6
+              },
+              {
+                "length": 44,
+                "count": 4
+              },
+              {
+                "length": 45,
+                "count": 8
+              },
+              {
+                "length": 46,
+                "count": 2
+              },
+              {
+                "length": 47,
+                "count": 10
+              },
+              {
+                "length": 48,
+                "count": 3
+              },
+              {
+                "length": 49,
+                "count": 8
+              },
+              {
+                "length": 50,
+                "count": 2
+              },
+              {
+                "length": 51,
+                "count": 7
+              },
+              {
+                "length": 52,
+                "count": 2
+              },
+              {
+                "length": 53,
+                "count": 5
+              },
+              {
+                "length": 54,
+                "count": 1
+              },
+              {
+                "length": 55,
+                "count": 6
+              },
+              {
+                "length": 56,
+                "count": 1
+              },
+              {
+                "length": 57,
+                "count": 3
+              },
+              {
+                "length": 59,
+                "count": 3
+              },
+              {
+                "length": 60,
+                "count": 3
+              },
+              {
+                "length": 61,
+                "count": 2
+              },
+              {
+                "length": 63,
+                "count": 1
+              },
+              {
+                "length": 65,
+                "count": 3
+              },
+              {
+                "length": 67,
+                "count": 2
+              },
+              {
+                "length": 72,
+                "count": 1
+              },
+              {
+                "length": 76,
+                "count": 1
+              },
+              {
+                "length": 77,
+                "count": 1
+              },
+              {
+                "length": 80,
+                "count": 2
+              },
+              {
+                "length": 88,
+                "count": 1
+              },
+              {
+                "length": 89,
+                "count": 1
+              },
+              {
+                "length": 94,
+                "count": 1
+              },
+              {
+                "length": 119,
+                "count": 1
+              }
+            ],
+            "population_mean": 3.3436997638279715,
+            "population_variance": 19.455292188263385,
+            "fitted_positive_geometric_variance": 7.836628346795261,
+            "variance_ratio": 2.482610036779338
+          }
+        },
+        {
+          "pixls_id": "5286",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORI",
+          "sha256": "2fd8bd46e2644fe28092fd921d9647007afd6d1e879c5ff19b1e3df50c578df1",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 19942944,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 1048576,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 9119268,
+          "window_start_bit": 7298266,
+          "window_bits_consumed": 1821002,
+          "skipped_tokens": 1048576,
+          "skipped_escape_tokens": 1407,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261852,
+            "omitted_escape_tokens": 292,
+            "segments": 293,
+            "zero_tokens": 139883,
+            "one_tokens": 121969,
+            "leading_censored_zeros": 401,
+            "trailing_censored_zeros": 369,
+            "all_zero_segment_zeros": 6,
+            "complete_positive_runs": 62756,
+            "sum_run_lengths": 139107,
+            "sum_squared_run_lengths": 482209,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 28443
+              },
+              {
+                "length": 2,
+                "count": 15480
+              },
+              {
+                "length": 3,
+                "count": 8561
+              },
+              {
+                "length": 4,
+                "count": 4577
+              },
+              {
+                "length": 5,
+                "count": 2504
+              },
+              {
+                "length": 6,
+                "count": 1472
+              },
+              {
+                "length": 7,
+                "count": 743
+              },
+              {
+                "length": 8,
+                "count": 412
+              },
+              {
+                "length": 9,
+                "count": 240
+              },
+              {
+                "length": 10,
+                "count": 132
+              },
+              {
+                "length": 11,
+                "count": 94
+              },
+              {
+                "length": 12,
+                "count": 36
+              },
+              {
+                "length": 13,
+                "count": 25
+              },
+              {
+                "length": 14,
+                "count": 15
+              },
+              {
+                "length": 15,
+                "count": 6
+              },
+              {
+                "length": 16,
+                "count": 4
+              },
+              {
+                "length": 17,
+                "count": 5
+              },
+              {
+                "length": 18,
+                "count": 2
+              },
+              {
+                "length": 19,
+                "count": 2
+              },
+              {
+                "length": 21,
+                "count": 1
+              },
+              {
+                "length": 23,
+                "count": 1
+              },
+              {
+                "length": 26,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.2166326725731405,
+            "population_variance": 2.770410459818474,
+            "fitted_positive_geometric_variance": 2.6968277325456027,
+            "variance_ratio": 1.027284919383195
+          }
+        },
+        {
+          "pixls_id": "5287",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORI",
+          "sha256": "dcbc06ba28c641197b65d931c203c5dd697fd34ae79b649a9a6d9cfc84e4bca2",
+          "variant": "unassigned",
+          "payload_w": 5220,
+          "payload_h": 3912,
+          "payload_offset": 1817600,
+          "payload_bytes": 19242578,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_start_token": 1048576,
+          "requested_tokens": 262144,
+          "returned_tokens": 262144,
+          "prefix_shortfall": 0,
+          "token_shortfall": 0,
+          "bits_consumed": 9053571,
+          "window_start_bit": 7246317,
+          "window_bits_consumed": 1807254,
+          "skipped_tokens": 1048576,
+          "skipped_escape_tokens": 1160,
+          "start_shortfall": 0,
+          "statistics": {
+            "retained_tokens": 261881,
+            "omitted_escape_tokens": 263,
+            "segments": 264,
+            "zero_tokens": 141113,
+            "one_tokens": 120768,
+            "leading_censored_zeros": 354,
+            "trailing_censored_zeros": 367,
+            "all_zero_segment_zeros": 8,
+            "complete_positive_runs": 62739,
+            "sum_run_lengths": 140384,
+            "sum_squared_run_lengths": 488134,
+            "histogram": [
+              {
+                "length": 1,
+                "count": 27896
+              },
+              {
+                "length": 2,
+                "count": 15830
+              },
+              {
+                "length": 3,
+                "count": 8406
+              },
+              {
+                "length": 4,
+                "count": 4746
+              },
+              {
+                "length": 5,
+                "count": 2612
+              },
+              {
+                "length": 6,
+                "count": 1434
+              },
+              {
+                "length": 7,
+                "count": 792
+              },
+              {
+                "length": 8,
+                "count": 464
+              },
+              {
+                "length": 9,
+                "count": 266
+              },
+              {
+                "length": 10,
+                "count": 127
+              },
+              {
+                "length": 11,
+                "count": 78
+              },
+              {
+                "length": 12,
+                "count": 31
+              },
+              {
+                "length": 13,
+                "count": 26
+              },
+              {
+                "length": 14,
+                "count": 13
+              },
+              {
+                "length": 15,
+                "count": 10
+              },
+              {
+                "length": 16,
+                "count": 3
+              },
+              {
+                "length": 17,
+                "count": 3
+              },
+              {
+                "length": 21,
+                "count": 1
+              },
+              {
+                "length": 22,
+                "count": 1
+              }
+            ],
+            "population_mean": 2.2375874655318064,
+            "population_variance": 2.7735941159212434,
+            "fitted_positive_geometric_variance": 2.7692102003732466,
+            "variance_ratio": 1.0015830923731994
+          }
+        }
+      ],
+      "failures": []
+    }
+  ]
+}

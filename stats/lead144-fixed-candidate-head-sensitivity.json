@@ -1,0 +1,643 @@
+{
+  "study": "lead144-fixed-candidate-head-sensitivity",
+  "measured_by": "@radialmonster",
+  "tool_commit": "9f731ea9614d790c3d95f0e594b085b8116502bb",
+  "reports": [
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 1,
+              "sum_head_q_capped40": 60,
+              "sum_rest_q_capped40": 142576,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": 171764,
+              "sum_squared_contrast_numerator": 42028351928,
+              "contrast_denominator": 5239,
+              "mean_head_minus_rest": 0.10928548705223644,
+              "signed_mean_over_se": 0.8374225169020864,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 1,
+              "sum_head_q_capped40": 217,
+              "sum_rest_q_capped40": 892661,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": 244202,
+              "sum_squared_contrast_numerator": 48924997846,
+              "contrast_denominator": 5239,
+              "mean_head_minus_rest": 0.15537443532480752,
+              "signed_mean_over_se": 1.1044418154447462,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 1,
+              "sum_head_q_capped40": 222,
+              "sum_rest_q_capped40": 931968,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 282594,
+              "sum_squared_contrast_numerator": 52721724452,
+              "contrast_denominator": 5471,
+              "mean_head_minus_rest": 0.1721769329190276,
+              "signed_mean_over_se": 1.2318058948193156,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 8,
+              "sum_head_q_capped40": 182,
+              "sum_rest_q_capped40": 142454,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": -187408,
+              "sum_squared_contrast_numerator": 102345030272,
+              "contrast_denominator": 41856,
+              "mean_head_minus_rest": -0.014924821610601427,
+              "signed_mean_over_se": -0.5851648763505035,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 8,
+              "sum_head_q_capped40": 1442,
+              "sum_rest_q_capped40": 891436,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": 413056,
+              "sum_squared_contrast_numerator": 207963912704,
+              "contrast_denominator": 41856,
+              "mean_head_minus_rest": 0.03289500509683996,
+              "signed_mean_over_se": 0.9054918724841814,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 8,
+              "sum_head_q_capped40": 1788,
+              "sum_rest_q_capped40": 930402,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 2326416,
+              "sum_squared_contrast_numerator": 217218986240,
+              "contrast_denominator": 43712,
+              "mean_head_minus_rest": 0.17740483162518303,
+              "signed_mean_over_se": 5.204048702813086,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 16,
+              "sum_head_q_capped40": 756,
+              "sum_rest_q_capped40": 141880,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": 1679264,
+              "sum_squared_contrast_numerator": 207624191488,
+              "contrast_denominator": 83584,
+              "mean_head_minus_rest": 0.0669691168963757,
+              "signed_mean_over_se": 3.765436711502405,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 16,
+              "sum_head_q_capped40": 2737,
+              "sum_rest_q_capped40": 890141,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": 55832,
+              "sum_squared_contrast_numerator": 506895374016,
+              "contrast_denominator": 83584,
+              "mean_head_minus_rest": 0.0022265824400204185,
+              "signed_mean_over_se": 0.07828948559063088,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 16,
+              "sum_head_q_capped40": 3566,
+              "sum_rest_q_capped40": 928624,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 4598112,
+              "sum_squared_contrast_numerator": 488404370432,
+              "contrast_denominator": 87296,
+              "mean_head_minus_rest": 0.17557551319648093,
+              "signed_mean_over_se": 7.100734884599277,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 2048,
+              "sum_rest_q_capped40": 140588,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": 6167168,
+              "sum_squared_contrast_numerator": 505687107712,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 0.12335125448028673,
+              "signed_mean_over_se": 10.002171475893865,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 5453,
+              "sum_rest_q_capped40": 887425,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": 1624,
+              "sum_squared_contrast_numerator": 1315903350464,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 3.2482078853046595E-05,
+              "signed_mean_over_se": 0.0014133476359385238,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7136,
+              "sum_rest_q_capped40": 925054,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 9218112,
+              "sum_squared_contrast_numerator": 1038690326528,
+              "contrast_denominator": 174080,
+              "mean_head_minus_rest": 0.17651102941176472,
+              "signed_mean_over_se": 10.588038529334492,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 64,
+              "sum_head_q_capped40": 3710,
+              "sum_rest_q_capped40": 138926,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": 10311696,
+              "sum_squared_contrast_numerator": 908941073408,
+              "contrast_denominator": 331264,
+              "mean_head_minus_rest": 0.10376110896445132,
+              "signed_mean_over_se": 13.82460285563337,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 64,
+              "sum_head_q_capped40": 10845,
+              "sum_rest_q_capped40": 882033,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": -316392,
+              "sum_squared_contrast_numerator": 3759871276736,
+              "contrast_denominator": 331264,
+              "mean_head_minus_rest": -0.003183684312210201,
+              "signed_mean_over_se": -0.1629045612172345,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 64,
+              "sum_head_q_capped40": 14461,
+              "sum_rest_q_capped40": 917729,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 19470432,
+              "sum_squared_contrast_numerator": 2925048464384,
+              "contrast_denominator": 346112,
+              "mean_head_minus_rest": 0.1875157174556213,
+              "signed_mean_over_se": 15.080468644628429,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 15760125,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1572000,
+          "parsed_tokens": 1572000,
+          "consumed_bits": 9574636,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 128,
+              "sum_head_q_capped40": 5502,
+              "sum_rest_q_capped40": 137134,
+              "escape_tokens": 1,
+              "sum_contrast_numerator": 10573072,
+              "sum_squared_contrast_numerator": 1349166797312,
+              "contrast_denominator": 654336,
+              "mean_head_minus_rest": 0.05386158385498174,
+              "signed_mean_over_se": 10.681505814361708,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 17772487,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 1641600,
+          "parsed_tokens": 1641600,
+          "consumed_bits": 10781790,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 128,
+              "sum_head_q_capped40": 21858,
+              "sum_rest_q_capped40": 871020,
+              "escape_tokens": 200,
+              "sum_contrast_numerator": 247536,
+              "sum_squared_contrast_numerator": 11244884359424,
+              "contrast_denominator": 654336,
+              "mean_head_minus_rest": 0.0012610035211267606,
+              "signed_mean_over_se": 0.0736952986197335,
+              "score_defined": true
+            },
+            {
+              "stride": 5472,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 128,
+              "sum_head_q_capped40": 28839,
+              "sum_rest_q_capped40": 903351,
+              "escape_tokens": 211,
+              "sum_contrast_numerator": 38486688,
+              "sum_squared_contrast_numerator": 8758095223808,
+              "contrast_denominator": 684032,
+              "mean_head_minus_rest": 0.18754818488023953,
+              "signed_mean_over_se": 19.656911596624088,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    }
+  ]
+}

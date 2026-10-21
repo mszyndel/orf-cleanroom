@@ -14,6 +14,11 @@ or pseudocounts, starts with measured ones probability p and falls back to p for
 a state without outgoing observations. Its finite generated counts, density and
 run histograms are not preserved exactly; no stationarity assumption is made.
 
+Optional --local-byte-block shuffles bytes independently inside consecutive
+fixed-size prefix blocks (including the final short block). This preserves each
+block's exact byte histogram and ones density, but not within-block ordering,
+bit adjacency or maximal runs. Blocks are diagnostic windows, not camera rows.
+
 Read-only, stdlib, aggregate JSON only; no paths or exception text are emitted.
 Every input has an explicit success/failure record. Any failure exits nonzero
 and the enclosing report is marked incomplete. Each model resets the seeded
@@ -65,6 +70,13 @@ def byte_shuffle(buf, rng):
     out = bytearray(buf)
     rng.shuffle(out)
     return bytes(out)
+
+
+def local_byte_shuffle(buf, block_bytes, rng):
+    if block_bytes <= 0:
+        raise ValueError('nonpositive byte block size')
+    return b''.join(byte_shuffle(buf[start:start + block_bytes], rng)
+                    for start in range(0, len(buf), block_bytes))
 
 
 def run_shuffle(buf, rng):
@@ -126,7 +138,7 @@ def parse_stats(buf):
             'consumed_bits': pos, 'residual_bits': nbits - pos}
 
 
-def compare_prefix(prefix, seed, include_markov=False):
+def compare_prefix(prefix, seed, include_markov=False, local_byte_block=None):
     if not prefix:
         raise ValueError('empty payload prefix')
     p = sum(bin(byte).count('1') for byte in prefix) / (len(prefix) * 8)
@@ -142,10 +154,17 @@ def compare_prefix(prefix, seed, include_markov=False):
         fit = fit_markov(prefix)
         result['markov_fit'] = fit
         result['models']['markov'] = parse_stats(markov_bytes(len(prefix), fit, random.Random(seed)))
+    if local_byte_block is not None:
+        result['models']['local_byte_shuffle'] = parse_stats(
+            local_byte_shuffle(prefix, local_byte_block, random.Random(seed)))
+        result['local_byte_shuffle'] = {
+            'block_bytes': local_byte_block,
+            'complete_blocks': len(prefix) // local_byte_block,
+            'tail_bytes': len(prefix) % local_byte_block}
     return result
 
 
-def measure(path, nbytes, seed, include_markov=False):
+def measure(path, nbytes, seed, include_markov=False, local_byte_block=None):
     if nbytes <= 0:
         raise ValueError('nonpositive prefix length')
     with open(path, 'rb') as source:
@@ -165,7 +184,8 @@ def measure(path, nbytes, seed, include_markov=False):
         if i and ranges[i - 1][0] + ranges[i - 1][1] > offset:
             raise ValueError('overlapping strips')
     payload = b''.join(data[offset:offset + count] for offset, count in zip(offsets, counts))
-    result = compare_prefix(payload[:nbytes], seed, include_markov=include_markov)
+    result = compare_prefix(payload[:nbytes], seed, include_markov=include_markov,
+                            local_byte_block=local_byte_block)
     result.update({'input_sha256': hashlib.sha256(data).hexdigest(),
                    'width': width, 'height': height, 'payload_bytes': len(payload),
                    'compression_tag': first(best, 0x103),
@@ -182,9 +202,13 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, default=20261021)
     parser.add_argument('--markov', action='store_true',
                         help='also compare a fitted first-order binary Markov null')
+    parser.add_argument('--local-byte-block', type=int,
+                        help='also shuffle bytes within fixed-size prefix blocks')
     args = parser.parse_args(argv)
     if args.bytes <= 0:
         parser.error('--bytes must be positive')
+    if args.local_byte_block is not None and args.local_byte_block <= 0:
+        parser.error('--local-byte-block must be positive')
     ids = [sid for sid, _, _ in args.sample]
     if any(not sid.isascii() or not sid.isdigit() or int(sid) <= 0 for sid in ids):
         parser.error('sample IDs must be positive ASCII integers')
@@ -194,7 +218,8 @@ def main(argv=None):
     for sid, name, path in args.sample:
         record = {'pixls_id': sid, 'pixls_name': name}
         try:
-            record.update(measure(path, args.bytes, args.seed, include_markov=args.markov))
+            record.update(measure(path, args.bytes, args.seed, include_markov=args.markov,
+                                  local_byte_block=args.local_byte_block))
             record['status'] = 'ok'
         except (OSError, ValueError, TypeError, IndexError, KeyError, struct.error):
             failures += 1

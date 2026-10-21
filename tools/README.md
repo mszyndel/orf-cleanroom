@@ -46,6 +46,17 @@ The default four-model report is unchanged.
 
     python -I -B tools/token_framing_probe.py --markov --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
 
+Optional `--local-byte-block 256` adds byte shuffling separately inside
+consecutive fixed-size prefix blocks, including any short final block. A fresh
+seeded generator is consumed in block order. Each block's exact byte histogram
+and density are preserved, while within-block order, bit adjacency and maximal
+runs are not. Output includes block size, complete-block count and tail bytes.
+The default report is unchanged. These diagnostic blocks are not physical rows;
+the assumed local permutation model does not calibrate significance or identify
+camera framing. It can be combined with `--markov`.
+
+    python -I -B tools/token_framing_probe.py --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
+
 **`terminal_residual_null_probe.py`** supports lead #87 with finite iid
 Bernoulli residual-length distributions for independently anchored first/last
 4096-bit payload windows. It reports the complete PMFs, nonempty all-one
@@ -450,6 +461,11 @@ definitions are explicit because the historical phrase was unspecified.
 No significance, independence, semantic gate or historical-number claim
 follows; omission cannot repair unknown framing. Licence-check inputs first.
 
+The b4-gate probe's optional `--q-stratified` flag adds exact within-q
+low3/low4 contrasts and each file's equal-weight summary over its reported
+support. Sparse strata and differing support limit comparisons. Missing files
+or token-prefix shortfalls exit nonzero while retaining aggregate records.
+
     python -I -B tools/token_b4_gate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_b4_gate_probe.py
 
@@ -562,6 +578,52 @@ with a nonzero exit for any failure or shortfall. Reads/prints aggregates only.
 
     python -I -B tools/token_band_profile.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240 --stride 5472
     python -I -B tools/test_token_band_profile.py
+
+**`token_phase_surrogate_probe.py`** adds a separate conditional phase-offset
+comparison for #30, Builds on #11/#203/#211. It preserves the fixed 262144
+candidate-token prefix, 128-token whole-block escape selection, original
+even-block training/odd-block test split, local targets 2..127, context
+C=2*b4(t-1)+b2(t-2), and target Y=b2(t). Every modulus 2..8 gets sixteen
+surrogates: independently add a uniform offset 0..m-1 to all phase labels
+in each retained block, leaving context/target ordering and split fixed.
+Random(20261021+replicate) is restarted for each modulus and consumed in
+retained original-block order, including both splits. Full observed and
+surrogate train/test tables, offset histograms, Jeffreys losses, signed
+gains, and rank counts (<, =, > observed) are emitted. There is no inferential
+p-value: exchangeability of these offsets is assumed for this diagnostic,
+not established for actual ORFs. Adjacent blocks can depend and within-block
+phase structure remains. The comparison does not repair framing, reproduce
+historical private gains, establish physical columns or decode. Known-profile
+smoke inputs are tool validation rather than untouched confirmation. Reuse
+retained CC0 records only after matching the local SHA-256. Stdlib, reads
+samples and prints aggregates only; missing inputs and shortfalls exit nonzero.
+
+    python -I -B tools/token_phase_surrogate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_phase_surrogate_probe.py
+
+**`token_tail_distribution_probe.py`** supports #144's candidate extra-token
+question, Builds on #11/#218/#234. At a fixed supplied stride S and measured
+width W, T=S-W defines tail positions [W,S). Every complete candidate row
+contributes exact uncapped q and five-bit suffix histograms to the tail,
+first-width [0,W), preceding [W-T,W), and middle [S//2,S//2+T) regions.
+Both comparison windows have T tokens and fit inside first-width; they can
+overlap each other for some geometries. Histograms include q>=17, with zero
+extra escape skip. Reports retain region counts, q sums, localized escapes,
+entropies, tail-versus-comparison total-variation distances, all band
+shortfalls, endpoints and source/input hashes. Incomplete final candidate
+rows contribute no region statistics. Defaults are 300 candidate rows at
+ordinal starts 0/1000/2000, with absolute r*S boundaries and no phase/stride
+fit. Position comparisons are descriptive and not exchangeable nulls;
+differences cannot identify padding, headers, a field, physical rows or an
+actual entropy grammar. Unknown post-escape framing remains unresolved.
+No significance, historical private-number reproduction or decode is
+claimed. Reuse retained CC0 verification after matching the supplied hash,
+which the tool checks before TIFF parsing. Every sample identity survives
+sanitized failures; any failure or shortfall returns nonzero. Stdlib,
+reads files/prints aggregates only.
+
+    python -I -B tools/token_tail_distribution_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5472
+    python -I -B tools/test_token_tail_distribution_probe.py
 
 **`token_cyclic_phase_probe.py`** supports the fixed-stride phase question in
 lead #144 and builds on #11/#218. For each original S-token candidate row,
