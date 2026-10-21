@@ -52,6 +52,8 @@ On Windows, run these in Git Bash, or in PowerShell/cmd use a folder path like `
 
 `download` fetches CC0 files only, verifies each SHA-256, and refuses to save inside the repo. `check` looks files up by SHA-256 and tells you if one is not CC0 or not a raw.pixls.us file. Run it on files you got from elsewhere.
 
+Licence verification is done once for each exact file hash. Retain the verified licence, public identity and SHA-256 from the download or first successful check. Later measurements and reviews reuse that record after checking the local hash; copied or renamed identical files need no new online lookup. `check` makes a live catalogue request, so do not run it before every measurement on already verified files. A catalogue outage does not prevent using those unchanged inputs. New or changed content without a verified record still needs its first licence check. Do not infer licence from a filename or camera model.
+
 Record each file you use in `samples/manifest.csv` (see samples/README.md).
 
 **Have an Olympus or OM System camera?** Please upload a few varied ORFs (daylight, indoor, high ISO, and High Res Shot if your body has it) to raw.pixls.us as CC0. That's the most useful single contribution, because then everyone can test on them. Don't attach raw files to this repo or its issues.
