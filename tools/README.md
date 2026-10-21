@@ -35,6 +35,21 @@ Reuse retained CC0 provenance after verifying the exact input hash.
 
 ## Example tools
 
+**`token_donor_comb_probe.py`** supports the remaining donor-comb question in
+lead #30, building on #11. First 262144 complete candidate tokens, payload
+bit zero, no extra escape skip. Count b2(t-lag) by b2(t) for every lag
+2W-2, 2W, 2W+2, separately for all four nominal target row/column parity
+classes. W is payload width, not established token row length. Omit pairs
+with q>=17 at either endpoint without compacting indices; intervening
+escapes remain. Emit every 2x2 table, pair/omission count and binary Pearson.
+Short prefixes and input errors fail the CLI while retaining available
+reports. This is a descriptive nominal lattice, not physical rows,
+serpentine inference, significance or reproduction of the unspecified
+historical donor metric. Reuse retained CC0 records after local hash checks.
+
+    python -I -B tools/token_donor_comb_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_donor_comb_probe.py
+
 **`token_framing_probe.py`** is the corrected null comparison for lead #197,
 building on the superseded probe in #198. Bernoulli bits use the measured ones
 fraction as their success probability; density is preserved in expectation.
