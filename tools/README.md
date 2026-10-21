@@ -562,3 +562,25 @@ with a nonzero exit for any failure or shortfall. Reads/prints aggregates only.
 
     python -I -B tools/token_band_profile.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240 --stride 5472
     python -I -B tools/test_token_band_profile.py
+
+**`token_phase_surrogate_probe.py`** adds a separate conditional phase-offset
+comparison for #30, Builds on #11/#203/#211. It preserves the fixed 262144
+candidate-token prefix, 128-token whole-block escape selection, original
+even-block training/odd-block test split, local targets 2..127, context
+C=2*b4(t-1)+b2(t-2), and target Y=b2(t). Every modulus 2..8 gets sixteen
+surrogates: independently add a uniform offset 0..m-1 to all phase labels
+in each retained block, leaving context/target ordering and split fixed.
+Random(20261021+replicate) is restarted for each modulus and consumed in
+retained original-block order, including both splits. Full observed and
+surrogate train/test tables, offset histograms, Jeffreys losses, signed
+gains, and rank counts (<, =, > observed) are emitted. There is no inferential
+p-value: exchangeability of these offsets is assumed for this diagnostic,
+not established for actual ORFs. Adjacent blocks can depend and within-block
+phase structure remains. The comparison does not repair framing, reproduce
+historical private gains, establish physical columns or decode. Known-profile
+smoke inputs are tool validation rather than untouched confirmation. Reuse
+retained CC0 records only after matching the local SHA-256. Stdlib, reads
+samples and prints aggregates only; missing inputs and shortfalls exit nonzero.
+
+    python -I -B tools/token_phase_surrogate_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_phase_surrogate_probe.py
