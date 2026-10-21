@@ -207,3 +207,13 @@ not reproduce the historical conditional-context gain or private figures.
 
     python -I -B tools/token_phase_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_phase_probe.py
+
+**`exif_sensitivity_probe.py`** supports the remaining ISO-setting question in
+lead #106. It reports raw numeric Exif PhotographicSensitivity (0x8827) values
+from the primary IFD's ExifIFD pointer alongside measured signatures. Missing
+values remain absent; 65535 is flagged as a possible sentinel requiring extended
+tags. It reads no maker notes, GPS, serials or preview pixels. It does not test
+ISO/bpp correlation, scene content, or causality. Licence-check inputs first.
+
+    python -I -B tools/exif_sensitivity_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_exif_sensitivity_probe.py
