@@ -504,3 +504,19 @@ licence verification.
 
     python -I -B tools/token_phase_context_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_phase_context_probe.py
+
+**`token_band_profile.py`** supports lead #144's later-band question with
+fixed candidate strides and absolute boundaries r*S from token zero. Each
+300-row band reports exact capped-q contrast moments, signed mean/SE,
+escape counts and incomplete-band accounting. Zero variance gives a null
+score, retaining its signed mean. No stride search or phase refit occurs.
+The default starts are candidate-row ordinals 0, 1000 and 2000, not physical
+rows. Changing profiles can reflect content, phase or framing; they do not
+establish stride drift, significance or a decoder. Candidate unary-plus-five
+parsing keeps q>=17 with zero extra skip and caps q at 40. Reuse retained CC0
+verification only after matching the supplied public SHA-256; the hash is
+checked before parsing. Every supplied sample identity survives failures,
+with a nonzero exit for any failure or shortfall. Reads/prints aggregates only.
+
+    python -I -B tools/token_band_profile.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240 --stride 5472
+    python -I -B tools/test_token_band_profile.py
