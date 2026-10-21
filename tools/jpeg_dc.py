@@ -195,8 +195,13 @@ def decode(data, start):
     return wb, hb, out
 
 
-def find_preview(data):
-    """Return (area, offset, length, width, height) of the largest baseline JPEG."""
+def find_preview(data, max_dim=12000, max_area=100_000_000):
+    """Return (area, offset, length, width, height) of the largest baseline JPEG.
+
+    Candidates larger than `max_dim` in either direction or `max_area` pixels
+    are rejected: a byte pattern inside a thumbnail or maker note can otherwise
+    look like a huge JPEG.
+    """
     best = None
     i = data.find(b"\xff\xd8\xff")
     while i >= 0:
@@ -225,7 +230,8 @@ def find_preview(data):
             if m == 0xDA:
                 break
             j += L
-        if dims and dims[0] >= 1000 and dims[1] >= 1000:
+        if dims and 1000 <= dims[0] <= max_dim and 1000 <= dims[1] <= max_dim \
+                and dims[0] * dims[1] <= max_area:
             e = data.find(b"\xff\xd9", i)
             length = (e + 2 - i) if e > 0 else (len(data) - i)
             if best is None or dims[0] * dims[1] > best[0]:
