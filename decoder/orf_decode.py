@@ -258,6 +258,9 @@ def decode_file(path, order=None, layout=None):
         # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
         # preview-luma correlates; they specify neither sensor values nor a
         # predictor or round-trip decode.
+        # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
+        # correlate from b2/b4; they specify no sensor values or decode step
+        # (V1 S1.15).
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
@@ -282,7 +285,7 @@ def decode_file(path, order=None, layout=None):
         # it specifies no value assembly, decode step or variant assignment
         # (V1 S1.13, V2 S1.2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.14, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.15, S2.3, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
