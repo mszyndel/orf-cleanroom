@@ -26,6 +26,67 @@ def fixture(endian='<', truncated=False):
 
 
 class FramingTests(unittest.TestCase):
+    def test_markov_fit_exact_adjacent_counts_without_wraparound(self):
+        fit = probe.fit_markov(b'\x39\xc7')  # 0011100111000111
+        self.assertEqual(fit['transition_counts'], [[4, 3], [2, 6]])
+        self.assertEqual(fit['initial_one_probability'], 9 / 16)
+        self.assertEqual(fit['next_one_probabilities'], [3 / 7, 6 / 8])
+        self.assertEqual(fit['fallback_states'], [])
+
+    def test_markov_generator_conditions_on_previous_generated_bit(self):
+        class Draws:
+            def __init__(self):
+                self.draws = iter([0.1, 0.2, 0.9, 0.3, 0.1, 0.9, 0.1, 0.9])
+
+            def random(self):
+                return next(self.draws)
+
+        fit = {'initial_one_probability': 0.5, 'next_one_probabilities': [0.2, 0.8]}
+        self.assertEqual(probe.markov_bytes(1, fit, Draws()), b'\xca')
+
+    def test_markov_distinguishes_equal_density_alternation_and_persistence(self):
+        alternating = probe.fit_markov(b'\x55' * 8)
+        persistent = probe.fit_markov(b'\x00' * 4 + b'\xff' * 4)
+        self.assertEqual(alternating['initial_one_probability'], persistent['initial_one_probability'])
+        self.assertEqual(alternating['next_one_probabilities'], [1, 0])
+        self.assertEqual(persistent['next_one_probabilities'], [1 / 32, 1])
+        self.assertIn(probe.markov_bytes(8, alternating, random.Random(7)), (b'\x55' * 8, b'\xaa' * 8))
+
+    def test_markov_equal_transition_rows_reduce_to_iid(self):
+        fit = {'initial_one_probability': 0.3, 'next_one_probabilities': [0.3, 0.3]}
+        self.assertEqual(probe.markov_bytes(256, fit, random.Random(7)),
+                         probe.bernoulli_bytes(256, 0.3, random.Random(7)))
+
+    def test_markov_degenerate_short_empty_and_length_edges(self):
+        for source, state in ((b'\x00', 0), (b'\xff', 1)):
+            fit = probe.fit_markov(source)
+            self.assertEqual(fit['fallback_states'], [1 - state])
+            self.assertEqual(fit['next_one_probabilities'], [state, state])
+            self.assertEqual(probe.markov_bytes(3, fit, random.Random(7)), source * 3)
+            self.assertEqual(probe.markov_bytes(0, fit, random.Random(7)), b'')
+            with self.assertRaises(ValueError):
+                probe.markov_bytes(-1, fit, random.Random(7))
+        # State 1 is seen only at the final bit; its outgoing row falls back to p.
+        self.assertEqual(probe.fit_markov(b'\x01')['next_one_probabilities'], [1 / 7, 1 / 8])
+        with self.assertRaises(ValueError):
+            probe.fit_markov(b'')
+
+    def test_markov_opt_in_retains_all_legacy_model_results(self):
+        source = bytes(range(64))
+        default = probe.compare_prefix(source, 7)
+        extended = probe.compare_prefix(source, 7, include_markov=True)
+        self.assertEqual(set(default['models']), {'real', 'bernoulli', 'byte_shuffle', 'run_shuffle'})
+        self.assertNotIn('markov_fit', default)
+        self.assertEqual(extended['models'].pop('markov'),
+                         probe.parse_stats(probe.markov_bytes(len(source), extended['markov_fit'], random.Random(7))))
+        extended.pop('markov_fit')
+        self.assertEqual(default, extended)
+
+    def test_markov_cli_option_forwarded(self):
+        with patch.object(probe, 'measure', return_value={}) as measure, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(probe.main(['--sample', '1', 'public', 'unused', '--markov']), 0)
+        measure.assert_called_once_with('unused', 131072, 20261021, include_markov=True)
+
     def test_bounded_parser_exact_and_unfinished_tokens(self):
         result = probe.parse_stats(probe.pack_bits([1, 0, 0, 0, 0, 0] * 4))
         self.assertEqual((result['tokens'], result['q0_count'], result['residual_bits']), (4, 4, 0))

@@ -9,6 +9,11 @@ permutes zero-run and one-run lengths, retaining their alternating value order,
 first/last values and exact per-value maximal-run length multisets. Neither null
 preserves all local statistics or proves entropy-code boundaries.
 
+Optional --markov fits adjacent-bit transition probabilities without wraparound
+or pseudocounts, starts with measured ones probability p and falls back to p for
+a state without outgoing observations. Its finite generated counts, density and
+run histograms are not preserved exactly; no stationarity assumption is made.
+
 Read-only, stdlib, aggregate JSON only; no paths or exception text are emitted.
 Every input has an explicit success/failure record. Any failure exits nonzero
 and the enclosing report is marked incomplete. Each model resets the seeded
@@ -75,6 +80,33 @@ def run_shuffle(buf, rng):
     return pack_bits(out)
 
 
+def fit_markov(buf):
+    bits = bit_list(buf)
+    if not bits:
+        raise ValueError('empty Markov input')
+    counts = [[0, 0], [0, 0]]
+    for previous, following in zip(bits, bits[1:]):
+        counts[previous][following] += 1
+    p = sum(bits) / len(bits)
+    outgoing = [sum(row) for row in counts]
+    return {'transition_counts': counts, 'initial_one_probability': p,
+            'next_one_probabilities': [counts[v][1] / outgoing[v] if outgoing[v] else p
+                                       for v in (0, 1)],
+            'fallback_states': [v for v in (0, 1) if not outgoing[v]]}
+
+
+def markov_bytes(nbytes, fit, rng):
+    if nbytes < 0:
+        raise ValueError('negative Markov output length')
+    if not nbytes:
+        return b''
+    bits = [int(rng.random() < fit['initial_one_probability'])]
+    for _ in range(nbytes * 8 - 1):
+        p = fit['next_one_probabilities'][bits[-1]]
+        bits.append(int(rng.random() < p))
+    return pack_bits(bits)
+
+
 def parse_stats(buf):
     nbits, pos, tokens, q0 = len(buf) * 8, 0, 0, 0
     while pos + 6 <= nbits:
@@ -94,7 +126,7 @@ def parse_stats(buf):
             'consumed_bits': pos, 'residual_bits': nbits - pos}
 
 
-def compare_prefix(prefix, seed):
+def compare_prefix(prefix, seed, include_markov=False):
     if not prefix:
         raise ValueError('empty payload prefix')
     p = sum(bin(byte).count('1') for byte in prefix) / (len(prefix) * 8)
@@ -103,12 +135,17 @@ def compare_prefix(prefix, seed):
         ('bernoulli', lambda rng: bernoulli_bytes(len(prefix), p, rng)),
         ('byte_shuffle', lambda rng: byte_shuffle(prefix, rng)),
         ('run_shuffle', lambda rng: run_shuffle(prefix, rng)))
-    return {'bernoulli_p': p, 'prefix_bytes': len(prefix),
-            'models': {name: parse_stats(make(random.Random(seed)))
-                       for name, make in generators}}
+    result = {'bernoulli_p': p, 'prefix_bytes': len(prefix),
+              'models': {name: parse_stats(make(random.Random(seed)))
+                         for name, make in generators}}
+    if include_markov:
+        fit = fit_markov(prefix)
+        result['markov_fit'] = fit
+        result['models']['markov'] = parse_stats(markov_bytes(len(prefix), fit, random.Random(seed)))
+    return result
 
 
-def measure(path, nbytes, seed):
+def measure(path, nbytes, seed, include_markov=False):
     if nbytes <= 0:
         raise ValueError('nonpositive prefix length')
     with open(path, 'rb') as source:
@@ -128,7 +165,7 @@ def measure(path, nbytes, seed):
         if i and ranges[i - 1][0] + ranges[i - 1][1] > offset:
             raise ValueError('overlapping strips')
     payload = b''.join(data[offset:offset + count] for offset, count in zip(offsets, counts))
-    result = compare_prefix(payload[:nbytes], seed)
+    result = compare_prefix(payload[:nbytes], seed, include_markov=include_markov)
     result.update({'input_sha256': hashlib.sha256(data).hexdigest(),
                    'width': width, 'height': height, 'payload_bytes': len(payload),
                    'compression_tag': first(best, 0x103),
@@ -143,6 +180,8 @@ def main(argv=None):
                         metavar=('ID', 'PUBLIC_NAME', 'PATH'))
     parser.add_argument('--bytes', type=int, default=131072)
     parser.add_argument('--seed', type=int, default=20261021)
+    parser.add_argument('--markov', action='store_true',
+                        help='also compare a fitted first-order binary Markov null')
     args = parser.parse_args(argv)
     if args.bytes <= 0:
         parser.error('--bytes must be positive')
@@ -155,7 +194,7 @@ def main(argv=None):
     for sid, name, path in args.sample:
         record = {'pixls_id': sid, 'pixls_name': name}
         try:
-            record.update(measure(path, args.bytes, args.seed))
+            record.update(measure(path, args.bytes, args.seed, include_markov=args.markov))
             record['status'] = 'ok'
         except (OSError, ValueError, TypeError, IndexError, KeyError, struct.error):
             failures += 1
