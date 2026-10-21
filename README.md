@@ -6,6 +6,10 @@ Everything here is released under CC0: the findings, the sample data and, we hop
 
 **Read [RULES.md](RULES.md) before contributing.** The whole point of this repo is provenance: every fact here must come from public specifications, patents, or measurements of the files themselves.
 
+[Patent source notes](PATENTS.md) collect reviewed Olympus and adjacent coding
+references, their relevant passages and the gaps they leave. Patent descriptions
+are method references; implementation in ORF must be established from files.
+
 ## How to contribute
 
 This repo is designed so you can hand it to an AI coding agent of your choice. Open the agent, give it this repo's URL, https://github.com/radialmonster/orf-cleanroom , and tell it:
