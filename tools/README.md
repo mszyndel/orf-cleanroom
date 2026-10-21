@@ -23,7 +23,7 @@ Reuse retained CC0 provenance after verifying the exact input hash.
 ## Example tools
 
 **`token_framing_probe.py`** is the corrected null comparison for lead #197,
-building on the unmerged probe in #198. Bernoulli bits use the measured ones
+building on the superseded probe in #198. Bernoulli bits use the measured ones
 fraction as their success probability; density is preserved in expectation.
 Byte shuffling preserves the exact byte histogram. Separate zero/one run-length
 shuffles retain alternating values and exact per-value maximal-run multisets.
@@ -40,11 +40,23 @@ uses its measured ones fraction; each following bit uses the fitted conditional
 probability given the previous generated bit. An unobserved outgoing state falls
 back to the measured ones fraction. Exact fit counts and fitted probability
 estimates are reported.
-This is a fitted probabilistic control, without exact preservation of finite
-density, transitions or run histograms, stationarity or calibrated significance.
+This fitted probabilistic control does not exactly preserve finite density,
+transitions or run histograms, or establish input stationarity or calibrated significance.
 The default four-model report is unchanged.
 
     python -I -B tools/token_framing_probe.py --markov --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
+
+**`terminal_residual_null_probe.py`** supports lead #87 with finite iid
+Bernoulli residual-length distributions for independently anchored first/last
+4096-bit payload windows. It reports the complete PMFs, nonempty all-one
+residual probabilities, observed candidate counts and every input failure.
+The fair and in-sample fitted baselines are descriptive, not calibrated
+significance tests. Tail-window anchors do not reproduce whole-payload
+endpoints or decide padding versus a truncated token. Reuse retained CC0
+verification after matching the exact local hash.
+
+    python -I -B tools/terminal_residual_null_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_terminal_residual_null_probe.py
 
 **`e400_single_pass_probe.py`** supports the remaining exception in #79.
 It marks nonzero-low4 words and tests connected same-colour neighbour
