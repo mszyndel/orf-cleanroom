@@ -6,6 +6,7 @@ import os
 import random
 import sys
 import unittest
+from unittest.mock import mock_open, patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import token_luma_probe as p  # noqa: E402
@@ -76,6 +77,72 @@ class MappingTests(unittest.TestCase):
             self.assertEqual(exc.exception.code, 2)
         finally:
             sys.argv = old_argv
+
+
+class CliStatusTests(unittest.TestCase):
+    def test_mixed_failures_preserve_later_inputs_and_hide_paths(self):
+        for mapping in ("sum", "b2", "b4"):
+            for error in (OSError("private-path"), ValueError("private-path")):
+                stderr = io.StringIO()
+                argv = ["probe", "first", "private-path", "last", "--map", mapping]
+                with patch.object(sys, "argv", argv), patch.object(
+                        p, "run_file", side_effect=[None, error, None]) as run:
+                    with contextlib.redirect_stderr(stderr):
+                        code = p.main()
+                self.assertEqual(code, 1)
+                self.assertEqual(run.call_count, 3)
+                self.assertEqual(run.call_args.args[-1], mapping)
+                self.assertEqual(stderr.getvalue(), "input 2: %s\n" % type(error).__name__)
+
+    def test_complete_batch_and_self_test_succeed(self):
+        with patch.object(sys, "argv", ["probe", "first", "second"]):
+            with patch.object(p, "run_file") as run:
+                self.assertEqual(p.main(), 0)
+                self.assertEqual(run.call_count, 2)
+        with patch.object(sys, "argv", ["probe", "--self-test"]):
+            with patch.object(p, "self_test") as test:
+                self.assertEqual(p.main(), 0)
+                test.assert_called_once_with()
+
+    def test_invalid_measurement_sizes_reject_before_reads(self):
+        for option, value in (("--rows", "1"), ("--window", "0"), ("--perms", "0")):
+            with patch.object(sys, "argv", ["probe", "missing", option, value]):
+                with patch.object(p, "run_file") as run:
+                    with contextlib.redirect_stderr(io.StringIO()):
+                        with self.assertRaises(SystemExit) as raised:
+                            p.main()
+                    self.assertEqual(raised.exception.code, 2)
+                    run.assert_not_called()
+
+    def test_short_token_rows_reject_before_preview_read(self):
+        for mapping in ("sum", "b2", "b4"):
+            for count in (0, 7, 13):
+                def scan(*args):
+                    args[6].extend([0] * count)
+                with patch.object(p.T, "locate", return_value=(7, 2, b"")):
+                    with patch.object(p.T, "scan", side_effect=scan):
+                        with patch.object(p.jpeg_dc, "find_preview") as preview:
+                            with self.assertRaisesRegex(ValueError, "requested rows"):
+                                p.run_file("unused", 2, 1, 2, 1, mapping)
+                            preview.assert_not_called()
+
+    def test_exact_requested_rows_keep_complete_output(self):
+        for mapping in ("sum", "b2", "b4"):
+            def scan(*args):
+                args[6].extend([0] * 14)
+            output = io.StringIO()
+            with contextlib.ExitStack() as stack:
+                stack.enter_context(patch.object(p.T, "locate", return_value=(7, 2, b"")))
+                stack.enter_context(patch.object(p.T, "scan", side_effect=scan))
+                stack.enter_context(patch("builtins.open", mock_open(read_data=b"synthetic")))
+                stack.enter_context(patch.object(p.jpeg_dc, "find_preview", return_value=(None, 0)))
+                stack.enter_context(patch.object(p.jpeg_dc, "decode", return_value=(2, 2, [0, 1, 1, 0])))
+                stack.enter_context(patch.object(p, "score", side_effect=[0.3, 0.1, 0.2]))
+                stack.enter_context(contextlib.redirect_stdout(output))
+                p.run_file("unused", 2, 1, 2, 1, mapping)
+            self.assertIn("rows 2", output.getvalue())
+            self.assertIn("r=+0.30000", output.getvalue())
+            self.assertEqual("mapping=" in output.getvalue(), mapping != "sum")
 
 
 class SelfTest(unittest.TestCase):

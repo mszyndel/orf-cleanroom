@@ -23,12 +23,15 @@ Usage:
     python -I tools/token_luma_probe.py --self-test
 
 Escape tokens (q >= 17) are treated as 0 for b2/b4; their rate is printed.
+Every requested token row must be complete. Any input failure exits nonzero;
+errors identify the input ordinal and exception type, without local paths.
 """
 import argparse
 import array
 import math
 import os
 import random
+import struct
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -126,13 +129,13 @@ def shuffle_rows(sa, rows, w, rng):
 
 
 def run_file(path, rows, window, perms, seed, mapping="sum"):
+    if rows < 2 or window < 1 or perms < 1:
+        raise ValueError("require rows>=2, window>=1, perms>=1")
     w, h, buf = T.locate(path)
     qa, sa = array.array("B"), array.array("B")
     T.scan(buf, rows * w, w, 0, None, qa, sa, 40, None, 32)
-    n = min(len(sa), rows * w)
-    rows = n // w
-    if rows < 2:
-        raise ValueError("not enough tokens")
+    if len(sa) < rows * w:
+        raise ValueError("not enough tokens for requested rows")
     sa = sa[:rows * w].tobytes()
     best = jpeg_dc.find_preview(open(path, "rb").read())
     if best is None:
@@ -196,15 +199,20 @@ def main():
     a = ap.parse_args()
     if a.self_test:
         self_test()
-        return
+        return 0
     if not a.files:
         ap.error("no files (or use --self-test)")
-    for p in a.files:
+    if a.rows < 2 or a.window < 1 or a.perms < 1:
+        ap.error("require rows>=2, window>=1, perms>=1")
+    failed = False
+    for index, p in enumerate(a.files, 1):
         try:
             run_file(p, a.rows, a.window, a.perms, a.seed, a.mapping)
-        except (ValueError, IndexError, KeyError, OSError) as exc:
-            print("%s: %s" % (p, exc), file=sys.stderr)
+        except (ValueError, IndexError, KeyError, OSError, struct.error) as exc:
+            failed = True
+            print("input %d: %s" % (index, type(exc).__name__), file=sys.stderr)
+    return int(failed)
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
