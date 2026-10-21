@@ -562,3 +562,16 @@ with a nonzero exit for any failure or shortfall. Reads/prints aggregates only.
 
     python -I -B tools/token_band_profile.py --sample ID PUBLIC_NAME VERIFIED_SHA256 path/to/file.ORF --stride 5240 --stride 5472
     python -I -B tools/test_token_band_profile.py
+
+**`token_width_context_probe.py`** supports lead #29 item 5 with held-out
+b2 prediction beyond five fixed local alternating taps. It adds nominal-width
+remote bits separately/jointly and compares deterministic +128-lag controls.
+All eleven models share target eligibility, original target-block train/test
+splits, Jeffreys smoothing, exact tables, signed gains and unseen counts.
+Contexts cross blocks; reused donors and adjacent splits remain dependent.
+Shifted controls may retain width structure and are not exchangeable nulls.
+This is descriptive tooling, not the historical feature search, physical
+rows, significance or decoding. Hash-match retained verified CC0 inputs first.
+
+    python -I -B tools/token_width_context_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
+    python -I -B tools/test_token_width_context_probe.py
