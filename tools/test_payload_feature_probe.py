@@ -15,7 +15,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from payload_feature_probe import features, main, report, window_starts
+from payload_feature_probe import features, main, report, strip_extents, window_starts
 
 
 def direct(buf):
@@ -91,12 +91,67 @@ class FeatureTests(unittest.TestCase):
             with patch("builtins.open", return_value=io.BytesIO(data)):
                 with self.assertRaises(ValueError):
                     report("1", "synthetic", hashlib.sha256(data).hexdigest(), "unused", 1, 3)
-        tags = {0x100: [2], 0x101: [2], 0x111: [0, 2], 0x117: [2, 2]}
+        tags = {0x100: [2], 0x101: [2], 0x111: [0, 1], 0x117: [2, 2]}
         with patch("builtins.open", return_value=io.BytesIO(b"1234")):
             with patch("payload_feature_probe.Tiff") as tiff:
                 tiff.return_value.all_ifds.return_value = [tags]
                 with self.assertRaises(ValueError):
                     report("1", "synthetic", hashlib.sha256(b"1234").hexdigest(), "unused", 1, 3)
+
+    def test_strip_validation_and_order(self):
+        for offsets, counts in (([], []), ([0], [1, 1]), ([0], [0]),
+                                ([-1], [2]), ([0], [11]), ([0, 1], [2, 2]),
+                                ([0, 0], [2, 2]), (["0"], [2])):
+            with self.assertRaises(ValueError):
+                strip_extents(offsets, counts, 10)
+        self.assertEqual(strip_extents([7, 1], [3, 4], 10), [
+            {"strip_index": 0, "file_byte_start": 7, "payload_byte_start": 0, "bytes": 3},
+            {"strip_index": 1, "file_byte_start": 1, "payload_byte_start": 3, "bytes": 4}])
+
+    def test_real_multistrip_table_gap_and_reversed_physical_order(self):
+        # Two 10-byte strips, table arrays at 74 and 82; bytes 90..99
+        # form a gap. Table order deliberately reverses physical order.
+        for order in ("<", ">"):
+            data = (b"II" if order == "<" else b"MM") + struct.pack(order + "HIH", 0x4f52, 8, 5)
+            for tag, count, value in ((0x100, 1, 5), (0x101, 1, 4), (0x103, 1, 1),
+                                      (0x111, 2, 74), (0x117, 2, 82)):
+                data += struct.pack(order + "HHII", tag, 4, count, value)
+            data += struct.pack(order + "I", 0)
+            data += struct.pack(order + "4I", 110, 100, 10, 10)
+            data += b"G" * 10 + b"\xff" * 10 + b"\x00" * 10
+            with patch("builtins.open", return_value=io.BytesIO(data)):
+                row = report("1", "synthetic", hashlib.sha256(data).hexdigest(), "unused", 4, 3)
+            self.assertEqual(row["payload_bytes"], 20)
+            self.assertEqual([s["file_byte_start"] for s in row["strips"]], [110, 100])
+            self.assertEqual(row["omitted_windows"], [
+                {"payload_byte_start": 8, "reason": "crosses_strip_boundary"}])
+            self.assertEqual([w["file_byte_start"] for w in row["windows"]], [110, 106])
+            self.assertEqual([w["features"]["ones"] for w in row["windows"]], [0, 32])
+
+    def test_boundary_exact_fit_and_adjacent_strips(self):
+        data = bytes(range(20))
+        tags = {0x100: [5], 0x101: [4], 0x111: [0, 10], 0x117: [10, 10]}
+        for size, windows, accepted, omitted in ((10, 2, [0, 10], []),
+                                                (4, 3, [0, 16], [8])):
+            with patch("builtins.open", return_value=io.BytesIO(data)):
+                with patch("payload_feature_probe.Tiff") as tiff:
+                    tiff.return_value.all_ifds.return_value = [tags]
+                    row = report("1", "synthetic", hashlib.sha256(data).hexdigest(), "unused", size, windows)
+            self.assertEqual([w["payload_byte_start"] for w in row["windows"]], accepted)
+            self.assertEqual([w["payload_byte_start"] for w in row["omitted_windows"]], omitted)
+
+    def test_every_planned_window_omitted(self):
+        data = bytes(range(20))
+        tags = {0x100: [5], 0x101: [4], 0x111: list(range(20)), 0x117: [1] * 20}
+        with patch("builtins.open", return_value=io.BytesIO(data)):
+            with patch("payload_feature_probe.Tiff") as tiff:
+                tiff.return_value.all_ifds.return_value = [tags]
+                row = report("1", "synthetic", hashlib.sha256(data).hexdigest(), "unused", 4, 3)
+        self.assertEqual(row["windows"], [])
+        self.assertEqual(row["omitted_windows"], [
+            {"payload_byte_start": start, "reason": "crosses_strip_boundary"}
+            for start in (0, 8, 16)])
+        self.assertEqual(len(row["strips"]), 20)
 
     def test_cli_sanitized_errors_and_validation(self):
         output = io.StringIO()
