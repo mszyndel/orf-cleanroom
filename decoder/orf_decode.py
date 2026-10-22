@@ -41,6 +41,7 @@ F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
 F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
 F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
 F_EXTRA = "2026-10-22--radialmonster--extra-token-fields-not-fixed"
+F_STRIDE_LATER = "2026-10-22--radialmonster--later-band-row-stride-drift"
 F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
@@ -53,6 +54,7 @@ F_NULL_BPP_2 = "2026-10-21--radialmonster--remaining-om1-family-null-distance"
 F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and-separation"
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
 F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
+F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
 
 # what the evidence is for each layout
 STATUS = {
@@ -277,12 +279,19 @@ def decode_file(path, order=None, layout=None):
         # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
         # prefix and whole payload pass that tolerance, not exact independence,
         # population generality, framing or values (V1 S1.16).
+        # F_DEP (Partial for #11): the cross-field/same-field token-dependence
+        # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
+        # at lower MI; it establishes no values, row stride, geometry or decode
+        # (V1 S1.17).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
         # F_EXTRA (Partial for #144): at the measured strides the extra S-W tokens are
         # not a fixed header or constant pad on five public files and three bands; their
         # origin, physical rows and any values remain open (V1 S1.10, G3).
+        # F_STRIDE_LATER (self-verified, Partial for #144): later 300-row bands
+        # move the candidate peak and the fixed prefix S loses the contrast; it
+        # establishes no physical rows or whole-frame constant (V1 S1.10, G3).
         # F_NULL_BPP and F_NULL_BPP_2 (Partial for #106) measure only the k=5
         # tokens-per-pixel distance from a Bernoulli null and its bpp/body relation;
         # they specify no value assembly or compressed decode step (V2 S1.1).
@@ -299,7 +308,7 @@ def decode_file(path, order=None, layout=None):
         # public files stays inside a predeclared 0.5..1.5 within-row-null band
         # in 15/15 cells; it specifies no values, predictor or decode (V1 G2).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.16, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.17, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])

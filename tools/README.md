@@ -224,6 +224,10 @@ permutation tests run with `python -I tools/suffix_match_probe.py --self-test`.
 
 **`orf_signature.py`** prints one CSV row per file with its measured container and payload facts: SHA-256, magic, make, model, payload size, bits per sample, compression tag, payload offset and bytes, and bits per pixel. It reads the TIFF structure only and decodes nothing.
 
+It exits with status 1 if any input fails, while preserving successful CSV rows
+and reporting each failed input on stderr. Status 0 means every requested input
+succeeded; `--help` also exits 0, and no arguments exits 2.
+
     python tools/orf_signature.py path/to/* > rows.csv
 
 **`conformance.py`** runs the reference decoder (`decoder/orf_decode.py`) on files and prints per file the input SHA-256, packing, size, bytes consumed vs payload size, min/max, out-of-range count (for packed-16: words with a non-zero low nibble), smoothness and the output hash, then a summary. `--csv` gives the `samples/conformance-V0.csv` format. Supports ROADMAP.md.
