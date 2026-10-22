@@ -38,6 +38,11 @@ All issues: https://github.com/radialmonster/orf-cleanroom/issues
 - **Analysis:** pick a gap from a variant's spec in [specs/](specs/) or a lead, say you're working on it, and publish the numbers and a way to reproduce them as a lead issue.
 - **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when it is reproduced in a second run and the file is added by PR.
 
+For camera owners planning a controlled experiment, see the proposed
+[controlled capture protocol](CAPTURE_PROTOCOL.md): repeated scene controls,
+settings contrasts and a preregistered numeric-only analysis plan. It reports no
+measurements and does not authorize capture or sample release.
+
 ## Getting test files
 
 **Your own ORFs are welcome**: run the tools on them and publish the numbers (never the files). See RULES.md, "Data".
