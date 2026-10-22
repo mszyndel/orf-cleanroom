@@ -863,3 +863,22 @@ read-only packed16 strips, aggregate JSON, sanitized failures return 1.
 
     python -I -B tools/e400_zero_low4_probe.py FILE2151 --sha256 VERIFIED_SHA256
     python -I -B tools/test_e400_zero_low4_probe.py
+
+**`payload_band_lag.py`** adds parser-independent raw-bit lag screening for
+#296 (Builds on #144/#29/#30). It checks a required full-file SHA-256 before
+reading a caller-declared contiguous payload extent. Supply ordered disjoint
+byte-window starts and a frozen bit-lag grid. The first band selects the maximum
+signed binary Pearson phi (lowest lag breaks exact ties); that lag is retained
+unchanged on validation bands. Every lag cell retains exact pair/marginal/joint
+counts. Absolute and payload-relative bit extents, uncovered bytes, all ties,
+range-boundary winners and undefined constant windows are explicit. Each local
+byte-shuffle replicate reruns the whole supplied lag search; maxima and the
+frozen-lag scores are both printed. The null preserves each block's byte
+histogram and within-byte structure, not arbitrary camera dependence. Results
+are descriptive: sparse windows, coarse grids, overlapping pairs, no calibrated
+p-values, no phase/change-point model, and no physical-row or decoder claim.
+Establish the extent and retained CC0 provenance separately; a hash proves
+identity, not licence. Stdlib CPU only; aggregate JSON and sanitized failures.
+
+    python -I -B tools/payload_band_lag.py FILE --sha256 HASH --sample-id ID --sample-name PUBLIC_NAME --offset OFFSET --length LENGTH --starts 0 START2 START3 --window-bytes 65536 --lag-min 32768 --lag-max 65536 --lag-step 1024
+    python -I -B tools/test_payload_band_lag.py
