@@ -12,7 +12,9 @@ packet size: no arithmetic coder, packet framing, padding or termination is
 implemented, and there is no claimed round trip or sensor reconstruction.
 
 Default windows: 65536 bytes starting at logical strip byte 65536, fixed before
-measurement. Concatenate declared raw strips in tag order; reject invalid
+measurement. --validation-offset can move only the heldout windows, keeping
+discovery fitting and selection at --offset for frozen-table band transfer.
+Choose both offsets before examining results. Concatenate raw strips in tag order; reject invalid
 strip bounds/count tables, short windows and duplicate input hashes. Files
 must match CC0 entries in the supplied public manifest. External retained
 licence verification remains required. Signature fields are copied prior
@@ -137,15 +139,19 @@ def main():
     parser.add_argument('--discovery', nargs='+', required=True)
     parser.add_argument('--validation', nargs='+', required=True)
     parser.add_argument('--offset', type=int, default=65536)
+    parser.add_argument('--validation-offset', type=int, default=None,
+                        help='heldout logical-strip byte offset; defaults to --offset')
     parser.add_argument('--bytes', type=int, default=65536, dest='size')
     args = parser.parse_args()
-    if args.offset < 0 or not 1 <= args.size <= 1048576:
-        parser.error('offset >= 0 and bytes 1..1048576 required')
+    validation_offset = args.offset if args.validation_offset is None else args.validation_offset
+    if args.offset < 0 or validation_offset < 0 or not 1 <= args.size <= 1048576:
+        parser.error('offsets >= 0 and bytes 1..1048576 required')
     with open(args.manifest, newline='', encoding='utf-8') as stream:
         manifest = list(csv.DictReader(stream))
     started = time.perf_counter()
-    loaded = [load_window(path, manifest, args.offset, args.size)
-              for path in args.discovery + args.validation]
+    loaded = ([load_window(path, manifest, args.offset, args.size) for path in args.discovery]
+              + [load_window(path, manifest, validation_offset, args.size)
+                 for path in args.validation])
     identities = [identity for _, identity in loaded]
     if len({row['sha256'] for row in identities}) != len(identities):
         parser.error('duplicate content or train/test overlap')

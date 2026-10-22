@@ -102,6 +102,28 @@ class ContextTests(unittest.TestCase):
                         probe.main()
                     self.assertEqual(error.exception.code, 2)
 
+    def test_cli_validation_offset_routing_and_default(self):
+        argv = ['probe', '--manifest', 'synthetic.csv', '--discovery', 'a', 'b',
+                '--validation', 'c', 'd', '--offset', '20', '--bytes', '2']
+        for extra, expected in (([], [20, 20, 20, 20]),
+                                (['--validation-offset', '40'], [20, 20, 40, 40]),
+                                (['--validation-offset', '0'], [20, 20, 0, 0])):
+            def window(path, manifest, offset, size):
+                return [0, 1], {'sha256': path, 'window_offset': offset}
+            with patch.object(sys, 'argv', argv + extra), patch('builtins.open', return_value=io.StringIO('sha256,licence\n')):
+                with patch.object(probe, 'load_window', side_effect=window) as loader:
+                    with patch.object(sys, 'stdout', io.StringIO()) as output:
+                        probe.main()
+                    self.assertEqual([call.args[2] for call in loader.call_args_list], expected)
+                    self.assertIn('"window_offset": %d' % expected[-1], output.getvalue())
+        for flag in ('--offset', '--validation-offset'):
+            with patch.object(sys, 'argv', argv + [flag, '-1']):
+                with patch.object(sys, 'stderr', io.StringIO()), patch.object(probe, 'load_window') as loader:
+                    with self.assertRaises(SystemExit) as error:
+                        probe.main()
+                    self.assertEqual(error.exception.code, 2)
+                    loader.assert_not_called()
+
     def test_invalid_inputs(self):
         for discovery, validation in (([], [[1]]), ([[1]], []), ([[]], [[1]])):
             with self.assertRaises(ValueError):
