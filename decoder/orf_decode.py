@@ -40,6 +40,7 @@ import orf_signature  # noqa: E402
 F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
 F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
 F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
+F_EXTRA = "2026-10-22--radialmonster--extra-token-fields-not-fixed"
 F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
@@ -279,6 +280,9 @@ def decode_file(path, order=None, layout=None):
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
+        # F_EXTRA (Partial for #144): at the measured strides the extra S-W tokens are
+        # not a fixed header or constant pad on five public files and three bands; their
+        # origin, physical rows and any values remain open (V1 S1.10, G3).
         # F_NULL_BPP and F_NULL_BPP_2 (Partial for #106) measure only the k=5
         # tokens-per-pixel distance from a Bernoulli null and its bpp/body relation;
         # they specify no value assembly or compressed decode step (V2 S1.1).
