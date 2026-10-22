@@ -15,6 +15,20 @@ SHA-256 is checked before parsing; failures are sanitized. Stdlib only.
 
 Analysis scripts, all original code (see RULES.md).
 
+**`synthetic_resync_classify.py`** supports research plan #300 with frozen
+nearest-centroid source-generator classification on disjoint synthetic LCG
+seeds. Recovery indicators, censored distances and length/density are separate
+feature ablations. Real and exact-length/popcount-preserving bit-shuffle
+training/evaluation groups are crossed; complete confusion matrices and exact
+rational scores retain every held-out trial. Shuffle labels refer to source
+generators, not shuffle codec identity. Length/density can retain perfect
+source-label classification without any coding structure. No camera files,
+significance, generator identification in general or finding is asserted.
+CPU stdlib only, aggregates only; no input files or image data.
+
+    python -I -B tools/synthetic_resync_classify.py --self-test
+    python -I -B tools/synthetic_resync_classify.py
+
 Each script should:
 - take raw.pixls.us file paths as arguments and not download anything itself (`pixls_samples.py` is the one exception);
 - print or write aggregate statistics only, with no images or pixel dumps;
