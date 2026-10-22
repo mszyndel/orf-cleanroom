@@ -5,7 +5,7 @@ Verified by: @radialmonster
 Lead: #11
 Variant: V1
 Corrects: 2026-10-21--radialmonster--token-dependence-new-bodies
-Partial: the within-token H/L MI and b0/b1 marginals on the original four files plus new E-M1 Mark II 1998, and the correction of the "independent" wording; the original lag-order tables, cross-field/same-field structure, b4->b2 share, prefix sensitivity and all non-tested limits are retained; not a pixel decode, predictor, geometry, physical rows, values or round-trip.
+Partial: the within-token H/L MI and b0/b1 marginals on the original four files plus new E-M1 Mark II 1998, and the correction of the "independent" wording; the original lag-order tables, cross-field/same-field structure, b4 to b2 share, prefix sensitivity and all non-tested limits are retained; not a pixel decode, predictor, geometry, physical rows, values or round-trip.
 
 ## Claim
 
