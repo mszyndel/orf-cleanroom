@@ -54,6 +54,7 @@ F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
 F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
 F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
+F_DEP_CORR = "2026-10-22--radialmonster--token-dependence-independence-wording-correction"
 
 # what the evidence is for each layout
 STATUS = {
@@ -281,7 +282,9 @@ def decode_file(path, order=None, layout=None):
         # F_DEP (Partial for #11): the cross-field/same-field token-dependence
         # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
         # at lower MI; it establishes no values, row stride, geometry or decode
-        # (V1 S1.17).
+        # (V1 S1.17). F_DEP_CORR (Partial correction for #11, corrects F_DEP):
+        # the measured within-token H/L MI is small but nonzero; exact
+        # independence is not established (V1 S1.17).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
