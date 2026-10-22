@@ -872,8 +872,11 @@ noise scales define an illustrative upper-envelope rule; new seeds from the
 same families receive full per-trial and scene/noise/mapping confusion reports.
 The non-identity mappings are reversible by construction, not empirically
 impossible sensor arrays. Complement can retain every feature, and valid toy
-controls can exceed development maxima. No universal thresholds, held-out
-scene/body validation, V0/ORF evidence, effective precision, black level, CFA
+controls can exceed development maxima. With the strict binary64 comparison,
+one of the 31 development non-identity rejections is a rounding-level tie
+(lane spread exceeds its limit by about 4.55e-13), not discriminating evidence.
+No universal thresholds, held-out scene/body validation, V0/ORF evidence,
+effective precision, black level, CFA
 or sensor truth is established. No files are read or written. CPU stdlib only;
 `--benchmark` optionally includes experiment wall time, excluding JSON output.
 

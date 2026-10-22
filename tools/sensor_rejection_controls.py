@@ -6,6 +6,10 @@ The fixed held-out seeds test implementation behavior, not new scene families.
 Noise levels, 12-bit bounds and coordinate lanes are synthetic assumptions.
 The wrong label means non-identity relative to the generator, not a physically
 impossible sensor array: complement or offset can describe other scenes.
+Complement preserves these features in exact arithmetic. The strict binary64
+envelope comparison can reject a rounding-level tie: one of the 31 development
+non-identity rejections exceeds lane_mean_spread by about 4.55e-13. It is not
+discriminating evidence; the report retains the implemented comparison/counts.
 Only aggregate features are printed; arrays stay in memory. Stdlib only.
 """
 import argparse
