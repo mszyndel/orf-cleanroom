@@ -8,6 +8,9 @@ content identity, not licence: the caller must establish provenance separately.
 Windows are disjoint, byte-aligned, equal-sized and evenly spaced including both
 payload endpoints. Run spectra include window-clipped edge runs, capped at 16.
 Transitions count adjacent MSB-first bits inside each window, never across gaps.
+Multi-strip coordinates follow TIFF strip-table order, excluding physical gaps.
+Any planned window crossing a strip boundary is omitted and reported, including
+physically adjacent strips. Windows are never moved to obtain replacement data.
 Use file/capture counts, not windows or bits, as independent replication.
 """
 import argparse
@@ -73,6 +76,26 @@ def window_starts(payload_bytes, window_bytes, windows):
             for i in range(windows)]
 
 
+def strip_extents(offsets, lengths, file_bytes):
+    """Validate physical extents; retain table order for logical coordinates."""
+    if (not isinstance(offsets, list) or not isinstance(lengths, list)
+            or not offsets or len(offsets) != len(lengths)):
+        raise ValueError("missing or mismatched strip geometry")
+    strips, logical = [], 0
+    for index, (offset, count) in enumerate(zip(offsets, lengths)):
+        if (not isinstance(offset, int) or not isinstance(count, int)
+                or offset < 0 or count < 1 or offset + count > file_bytes):
+            raise ValueError("invalid strip extent")
+        strips.append({"strip_index": index, "file_byte_start": offset,
+                       "payload_byte_start": logical, "bytes": count})
+        logical += count
+    physical = sorted((s["file_byte_start"], s["file_byte_start"] + s["bytes"])
+                      for s in strips)
+    if any(right[0] < left[1] for left, right in zip(physical, physical[1:])):
+        raise ValueError("overlapping strips")
+    return strips
+
+
 def report(sample_id, name, expected_sha256, path, window_bytes, windows):
     with open(path, "rb") as stream:
         data = stream.read()
@@ -84,26 +107,30 @@ def report(sample_id, name, expected_sha256, path, window_bytes, windows):
         raise ValueError("no image IFD")
     best = max(ifds, key=lambda tags: sum(tags.get(0x117) or [0]))
     offsets, lengths = best.get(0x111), best.get(0x117)
-    if not isinstance(offsets, list) or not isinstance(lengths, list):
-        raise ValueError("missing strip geometry")
-    if len(offsets) != 1 or len(lengths) != 1:
-        raise ValueError("only one contiguous strip supported")
-    offset, count = offsets[0], lengths[0]
+    strips = strip_extents(offsets, lengths, len(data))
+    offset, count = offsets[0], sum(lengths)
     width, height = first(best, 0x100), first(best, 0x101)
     if not isinstance(width, int) or not isinstance(height, int) or min(width, height) < 1:
         raise ValueError("invalid dimensions")
-    if offset < 0 or count < 1 or offset + count > len(data):
-        raise ValueError("invalid strip extent")
     starts = window_starts(count, window_bytes, windows)
+    accepted, omitted = [], []
+    for start in starts:
+        strip = next((s for s in strips if s["payload_byte_start"] <= start
+                      and start + window_bytes <= s["payload_byte_start"] + s["bytes"]), None)
+        if strip is None:
+            omitted.append({"payload_byte_start": start, "reason": "crosses_strip_boundary"})
+            continue
+        file_start = strip["file_byte_start"] + start - strip["payload_byte_start"]
+        accepted.append({"payload_byte_start": start, "strip_index": strip["strip_index"],
+                         "file_byte_start": file_start,
+                         "features": features(data[file_start:file_start + window_bytes])})
     return {
         "pixls_id": sample_id, "pixls_name": name, "sha256": digest,
         "payload_width": width, "payload_height": height,
         "payload_bytes": count, "payload_offset": offset,
         "payload_bits_per_pixel": count * 8 / (width * height),
         "size_class": size_class(count, width, height),
-        "windows": [{"payload_byte_start": start,
-                     "features": features(data[offset + start:offset + start + window_bytes])}
-                    for start in starts],
+        "strips": strips, "windows": accepted, "omitted_windows": omitted,
     }
 
 
@@ -137,7 +164,8 @@ def main(argv=None):
     for filename in ("payload_feature_probe.py", "orf_signature.py"):
         with open(os.path.join(os.path.dirname(__file__), filename), "rb") as stream:
             sources[filename] = hashlib.sha256(stream.read()).hexdigest()
-    print(json.dumps({"schema": "raw-bit-window-features-v1", "sources_sha256": sources,
+    print(json.dumps({"schema": "raw-bit-window-features-v2", "sources_sha256": sources,
+                      "boundary_policy": "omit_cross_strip_windows_without_replacement",
                       "window_bytes": args.window_bytes, "window_count": args.windows,
                       "samples": rows, "errors": errors}, sort_keys=True, indent=2))
     return int(bool(errors))
