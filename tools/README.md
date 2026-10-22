@@ -896,3 +896,67 @@ or sensor truth is established. No files are read or written. CPU stdlib only;
 
     python -I -B tools/sensor_rejection_controls.py
     python -I -B tools/test_sensor_rejection_controls.py
+
+**`cohort_design_audit.py`** supports #299/#318 with exact categorical design
+rank, nullspace and conditional rank increments over explicit public manifest
+IDs. The recorded mode is a width proxy; algebraic support does not establish
+independent captures or causal effects. No raw files are read.
+
+    python -I -B tools/cohort_design_audit.py --manifest samples/manifest.csv --ids 1993 1994 1995 1996
+    python -I -B tools/test_cohort_design_audit.py
+
+**`payload_feature_probe.py`** supports #299 with fixed raw-bit windows and
+aggregate density, transitions, byte entropy and run spectra. Schema v2 follows
+TIFF strip-table order, excludes physical gaps and explicitly omits planned
+cross-strip windows without replacement, including adjacent strips. Zero usable
+windows are reported, not replaced. This does not assign variants or clusters.
+Match supplied hashes to retained CC0 records before using any sample tool.
+
+    python -I -B tools/payload_feature_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE --window-bytes 65536 --windows 3
+    python -I -B tools/test_payload_feature_probe.py
+
+**`body_label_holdout.py`** supports #299/#329 using the aggregate feature
+report and public manifest. File-held-out body centroids compare bitrate,
+raw-bit means and their union with training-fold scaling; every fold and
+failure remains visible. File holdout is not capture/scene holdout, causal
+attribution or variant discovery. No raw files are read by this diagnostic.
+
+    python -I -B tools/body_label_holdout.py --features FEATURES_JSON --manifest samples/manifest.csv --ids ID_A ID_B ID_C
+    python -I -B tools/test_body_label_holdout.py
+
+**`run_reorder_search.py`** supports #322 and the closed #297 protocol with a
+complete frozen width/phase/window search under run-order surrogates. Exact
+global run multisets, endpoints, density and transitions are preserved; local
+window density and byte histograms are not. Complete candidate/maxima ledgers,
+ties and boundary winners remain visible. Surrogate tail diagnostics do not
+establish camera exchangeability, significance or framing.
+
+    python -I -B tools/run_reorder_search.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_run_reorder_search.py
+
+**`synthetic_adaptive_resync.py`** supports #300 with original state-dependent
+Rice grammars, explicit edit coordinates, incomplete tails and censored
+recovery. State selects k injectively, so aligned-interval state/value equality
+and coincident boundary/state recovery follow structurally. No camera inference,
+generator classifier or matched null is supplied.
+
+    python -I -B tools/synthetic_adaptive_resync.py --self-test
+    python -I -B tools/synthetic_adaptive_resync.py
+
+**`v0_sensor_controls.py`** supports #301/#325 with fixed packed-16 V0 windows
+and the unchanged synthetic rejection envelope. Stored words are separate and
+unclassified; floor(word/16) is an explicit diagnostic scale assumption. Both
+identity rejection and nonidentity acceptance are retained. General layout
+selectors, physical precision, black level, CFA and sensor truth remain open.
+
+    python -I -B tools/v0_sensor_controls.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_v0_sensor_controls.py
+
+**`frozen_bit_context.py`** supports #298/#332 with discovery-selected binary
+contexts, quantized probabilities, explicit model cost and file holdout. It
+prints the complete order ledger and exact-count shuffled-bit control. Scores
+are normalized predictive log loss plus parameter cost; no serialized coder,
+framing/termination/padding cost, round trip or reconstruction is implemented.
+
+    python -I -B tools/frozen_bit_context.py --manifest samples/manifest.csv --discovery DISCOVERY_FILE --validation VALIDATION_FILE
+    python -I -B tools/test_frozen_bit_context.py
