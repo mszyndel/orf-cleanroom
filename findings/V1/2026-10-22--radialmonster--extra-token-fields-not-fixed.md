@@ -160,11 +160,12 @@ Run from the repository root with the merged tool at `428926b` and the file path
         comparisons = {k: dict(q_tv=tv(tail["q_hist"], r["q_hist"]),
                                suffix_tv=tv(tail["s_hist"], r["s_hist"]))
                        for k, r in regions.items() if k != "tail"}
-        for r in regions.values():
-            del r["q_hist"], r["s_hist"]
+        public = {k: {name: value for name, value in r.items()
+                      if name not in ("q_hist", "s_hist")}
+                  for k, r in regions.items()}
         print(json.dumps(dict(pixls_sha256=actual, payload_width=W, payload_height=H,
                               stride=S, window=T, start_row=a.start_row, rows=a.rows,
-                              regions=regions, tail_comparisons=comparisons),
+                              regions=public, tail_comparisons=comparisons),
                          indent=2, sort_keys=True))
 
     if __name__ == "__main__":
