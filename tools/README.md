@@ -863,3 +863,19 @@ read-only packed16 strips, aggregate JSON, sanitized failures return 1.
 
     python -I -B tools/e400_zero_low4_probe.py FILE2151 --sha256 VERIFIED_SHA256
     python -I -B tools/test_e400_zero_low4_probe.py
+
+**`sensor_rejection_controls.py`** is a synthetic-only rejection-control
+baseline for research plan #301. It prints exact aggregate range, lag-2,
+coordinate-parity-lane and fixed-central-seam counts, with scalar features.
+Development maxima from smooth, checker-textured and dark toy controls at two
+noise scales define an illustrative upper-envelope rule; new seeds from the
+same families receive full per-trial and scene/noise/mapping confusion reports.
+The non-identity mappings are reversible by construction, not empirically
+impossible sensor arrays. Complement can retain every feature, and valid toy
+controls can exceed development maxima. No universal thresholds, held-out
+scene/body validation, V0/ORF evidence, effective precision, black level, CFA
+or sensor truth is established. No files are read or written. CPU stdlib only;
+`--benchmark` optionally includes experiment wall time, excluding JSON output.
+
+    python -I -B tools/sensor_rejection_controls.py
+    python -I -B tools/test_sensor_rejection_controls.py
