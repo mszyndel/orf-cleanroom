@@ -61,7 +61,8 @@ A pilot is excluded from confirmatory analysis and must be identified as such.
 - **T, texture:** a fixed stationary textured physical scene under the same
   stable source. Record the setup so it can be restored without publishing images.
 
-Collect three distinct exposures per scene in each of two separated sessions:
+Collect three separate captures per scene in each of two separated sessions,
+keeping the registered exposure settings fixed:
 4 scenes x 3 repetitions x 2 sessions = **24 capture events**. These are planned
 counts, not measured numbers. Files per event depend on camera mode and settings.
 Use the following fixed reordered schedule, restoring each setup carefully:
@@ -90,8 +91,9 @@ the four scene conditions, collect **A B B A** in each of two sessions, reversin
 the scene order in session 2. This adds 4 scenes x 4 events x 2 sessions = **32
 capture events**, with 16 A and 16 B. Do not reuse the core captures as paired A
 controls: the bracketing captures control temporal drift more directly. Treat
-ABBA as two paired contrasts, not four independent files. Both pairs share a
-scene/session and remain grouped in uncertainty calculations.
+ABBA as two paired contrasts (events 1 with 2, and 4 with 3), not four independent
+files. Both pairs share a scene/session and remain grouped in uncertainty
+calculations.
 
 Candidate contrasts, with their confounds recorded:
 
