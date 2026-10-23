@@ -1,0 +1,292 @@
+{
+  "tool": "tools/token_band_profile.py",
+  "tool_commit": "f3ab6f0d7247cc4f4be6daa84cc0b69b92c0c750",
+  "measured_by": "@radialmonster",
+  "date_utc": "2026-10-21",
+  "builds_on": [
+    "#144",
+    "#11",
+    "#218"
+  ],
+  "public_samples": [
+    {
+      "pixls_id": "6345",
+      "sha256": "c8277d133c7ac86c7e4af5787fa06515fef8fe044c1b22209c62704537c48e02"
+    },
+    {
+      "pixls_id": "6347",
+      "sha256": "062c4934ae9ab7595a45b56e2ad36a5ca05d75a8bed64f6d18cc88f9006ac9a9"
+    }
+  ],
+  "licence_basis": "Retained CC0 download/check verification reused after local SHA-256 match; both inputs have existing manifest rows.",
+  "runs": [
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6345",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORI",
+          "sha256": "c8277d133c7ac86c7e4af5787fa06515fef8fe044c1b22209c62704537c48e02",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 18317443,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 12725900,
+          "parsed_tokens": 12725900,
+          "consumed_bits": 85375333,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 6395,
+              "sum_rest_q_capped40": 1001527,
+              "escape_tokens": 743,
+              "sum_contrast_numerator": 1256296,
+              "sum_squared_contrast_numerator": 1599590431040,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 0.025127528161802356,
+              "signed_mean_over_se": 0.9932942077882135,
+              "score_defined": true
+            },
+            {
+              "stride": 5240,
+              "start_candidate_row": 1000,
+              "start_token": 5240000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 6652,
+              "sum_rest_q_capped40": 1134824,
+              "escape_tokens": 695,
+              "sum_contrast_numerator": -1670752,
+              "sum_squared_contrast_numerator": 1074405108992,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": -0.033417178699436764,
+              "signed_mean_over_se": -1.6161872721661856,
+              "score_defined": true
+            },
+            {
+              "stride": 5240,
+              "start_candidate_row": 2000,
+              "start_token": 10480000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7085,
+              "sum_rest_q_capped40": 1137753,
+              "escape_tokens": 703,
+              "sum_contrast_numerator": 490584,
+              "sum_squared_contrast_numerator": 794918362432,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 0.009812307987711214,
+              "signed_mean_over_se": 0.5495995148514505,
+              "score_defined": true
+            },
+            {
+              "stride": 5533,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 8428,
+              "sum_rest_q_capped40": 1056795,
+              "escape_tokens": 792,
+              "sum_contrast_numerator": 12544988,
+              "sum_squared_contrast_numerator": 1292105921920,
+              "contrast_denominator": 176032,
+              "mean_head_minus_rest": 0.23755127855541416,
+              "signed_mean_over_se": 14.295562871374482,
+              "score_defined": true
+            },
+            {
+              "stride": 5533,
+              "start_candidate_row": 1000,
+              "start_token": 5533000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 6802,
+              "sum_rest_q_capped40": 1187667,
+              "escape_tokens": 689,
+              "sum_contrast_numerator": -587542,
+              "sum_squared_contrast_numerator": 972118244112,
+              "contrast_denominator": 176032,
+              "mean_head_minus_rest": -0.01112566654547658,
+              "signed_mean_over_se": -0.5952666121770528,
+              "score_defined": true
+            },
+            {
+              "stride": 5533,
+              "start_candidate_row": 2000,
+              "start_token": 11066000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7336,
+              "sum_rest_q_capped40": 1224624,
+              "escape_tokens": 805,
+              "sum_contrast_numerator": 1167368,
+              "sum_squared_contrast_numerator": 1011411565588,
+              "contrast_denominator": 176032,
+              "mean_head_minus_rest": 0.022105223292734653,
+              "signed_mean_over_se": 1.1614385866805894,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "method": "fixed-absolute-token-phase-q40",
+      "escape_extra_bits": 0,
+      "samples": [
+        {
+          "pixls_id": "6347",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORI",
+          "sha256": "062c4934ae9ab7595a45b56e2ad36a5ca05d75a8bed64f6d18cc88f9006ac9a9",
+          "payload_width": 5240,
+          "payload_height": 3912,
+          "payload_bytes": 18379515,
+          "size_class": "variable",
+          "compression_tag": [
+            1
+          ],
+          "requested_tokens": 12742000,
+          "parsed_tokens": 12742000,
+          "consumed_bits": 85607407,
+          "token_shortfall": 0,
+          "bands": [
+            {
+              "stride": 5240,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 6209,
+              "sum_rest_q_capped40": 1012401,
+              "escape_tokens": 846,
+              "sum_contrast_numerator": -60360,
+              "sum_squared_contrast_numerator": 1529696890560,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": -0.0012072772657450077,
+              "signed_mean_over_se": -0.04872178936838587,
+              "score_defined": true
+            },
+            {
+              "stride": 5240,
+              "start_candidate_row": 1000,
+              "start_token": 5240000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7290,
+              "sum_rest_q_capped40": 1149086,
+              "escape_tokens": 728,
+              "sum_contrast_numerator": 1195568,
+              "sum_squared_contrast_numerator": 940781157376,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 0.0239128904249872,
+              "signed_mean_over_se": 1.233694094510683,
+              "score_defined": true
+            },
+            {
+              "stride": 5240,
+              "start_candidate_row": 2000,
+              "start_token": 10480000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7262,
+              "sum_rest_q_capped40": 1159258,
+              "escape_tokens": 720,
+              "sum_contrast_numerator": 724240,
+              "sum_squared_contrast_numerator": 794773008384,
+              "contrast_denominator": 166656,
+              "mean_head_minus_rest": 0.014485727086533538,
+              "signed_mean_over_se": 0.8119216935224449,
+              "score_defined": true
+            },
+            {
+              "stride": 5540,
+              "start_candidate_row": 0,
+              "start_token": 0,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 8507,
+              "sum_rest_q_capped40": 1069142,
+              "escape_tokens": 894,
+              "sum_contrast_numerator": 12644012,
+              "sum_squared_contrast_numerator": 1484036823248,
+              "contrast_denominator": 176256,
+              "mean_head_minus_rest": 0.23912211026385863,
+              "signed_mean_over_se": 12.943125413581546,
+              "score_defined": true
+            },
+            {
+              "stride": 5540,
+              "start_candidate_row": 1000,
+              "start_token": 5540000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7337,
+              "sum_rest_q_capped40": 1205876,
+              "escape_tokens": 744,
+              "sum_contrast_numerator": 1824164,
+              "sum_squared_contrast_numerator": 1135481618736,
+              "contrast_denominator": 176256,
+              "mean_head_minus_rest": 0.03449838114258049,
+              "signed_mean_over_se": 1.717435427337324,
+              "score_defined": true
+            },
+            {
+              "stride": 5540,
+              "start_candidate_row": 2000,
+              "start_token": 11080000,
+              "requested_rows": 300,
+              "complete_rows": 300,
+              "complete": true,
+              "head": 32,
+              "sum_head_q_capped40": 7511,
+              "sum_rest_q_capped40": 1245277,
+              "escape_tokens": 789,
+              "sum_contrast_numerator": 1521724,
+              "sum_squared_contrast_numerator": 1032033404400,
+              "contrast_denominator": 176256,
+              "mean_head_minus_rest": 0.028778670418784798,
+              "signed_mean_over_se": 1.5010466077075046,
+              "score_defined": true
+            }
+          ],
+          "ok": true
+        }
+      ]
+    }
+  ]
+}

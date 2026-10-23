@@ -1,0 +1,6505 @@
+{
+  "source_sha256": {
+    "suffix_width_lag_probe.py": "ae129185145f3865a141141d61cbd6ab9d31c88784a8c8f9c89307e14d52356d",
+    "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+  },
+  "requested_tokens": 262144,
+  "python_version": "3.13.15",
+  "samples": [
+    {
+      "pixls_id": "6946",
+      "pixls_name": "OM System - TG-7 - 16bit (4:3).ORF",
+      "sha256": "4f7344c67bfcfcfec45f754195ba612fc2ad6312f5fab87812bf04b9e9e7d46a",
+      "variant": "unassigned",
+      "size_class": "variable",
+      "compression_tag": 1,
+      "payload_w": 4040,
+      "payload_h": 3016,
+      "payload_bytes": 12300700,
+      "cells": [
+        {
+          "k": 2,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1003718,
+          "remaining_payload_bits": 97401882,
+          "q_ge_17": 3,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  86270,
+                  61306
+                ],
+                [
+                  61305,
+                  53256
+                ]
+              ],
+              "q_positive_mi_bits": 0.0017628727033222255,
+              "suffix_low2_table": [
+                [
+                  34725,
+                  17652,
+                  17566,
+                  14746
+                ],
+                [
+                  17307,
+                  15122,
+                  15245,
+                  13432
+                ],
+                [
+                  17845,
+                  14781,
+                  15651,
+                  13712
+                ],
+                [
+                  14811,
+                  13551,
+                  13527,
+                  12464
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.011968340449273517
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  85356,
+                  62218
+                ],
+                [
+                  62218,
+                  52344
+                ]
+              ],
+              "q_positive_mi_bits": 0.0008983926858087358,
+              "suffix_low2_table": [
+                [
+                  32762,
+                  18181,
+                  17794,
+                  15951
+                ],
+                [
+                  17720,
+                  15013,
+                  15144,
+                  13228
+                ],
+                [
+                  18413,
+                  14831,
+                  15473,
+                  13271
+                ],
+                [
+                  15792,
+                  13081,
+                  13578,
+                  11904
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0064017155316267215
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  84862,
+                  62711
+                ],
+                [
+                  62709,
+                  51853
+                ]
+              ],
+              "q_positive_mi_bits": 0.0005520549192182204,
+              "suffix_low2_table": [
+                [
+                  30818,
+                  18862,
+                  18627,
+                  16381
+                ],
+                [
+                  18739,
+                  14474,
+                  14988,
+                  12903
+                ],
+                [
+                  19081,
+                  14811,
+                  14940,
+                  13156
+                ],
+                [
+                  16047,
+                  12959,
+                  13434,
+                  11915
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0027236336634940198
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  84882,
+                  62690
+                ],
+                [
+                  62689,
+                  51873
+                ]
+              ],
+              "q_positive_mi_bits": 0.000564654453983458,
+              "suffix_low2_table": [
+                [
+                  31283,
+                  18585,
+                  18555,
+                  16265
+                ],
+                [
+                  18725,
+                  14767,
+                  14696,
+                  12916
+                ],
+                [
+                  18712,
+                  14616,
+                  15490,
+                  13171
+                ],
+                [
+                  15965,
+                  13135,
+                  13249,
+                  12004
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0034831488861142095
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  84534,
+                  63040
+                ],
+                [
+                  63037,
+                  51522
+                ]
+              ],
+              "q_positive_mi_bits": 0.00036720010962403536,
+              "suffix_low2_table": [
+                [
+                  29457,
+                  19382,
+                  18938,
+                  16910
+                ],
+                [
+                  19304,
+                  14142,
+                  14915,
+                  12743
+                ],
+                [
+                  19483,
+                  14639,
+                  14909,
+                  12957
+                ],
+                [
+                  16439,
+                  12942,
+                  13227,
+                  11746
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0011162255207148803
+            }
+          ]
+        },
+        {
+          "k": 3,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1267790,
+          "remaining_payload_bits": 97137810,
+          "q_ge_17": 4,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  85341,
+                  61663
+                ],
+                [
+                  61662,
+                  53469
+                ]
+              ],
+              "q_positive_mi_bits": 0.0014569799702385516,
+              "suffix_low2_table": [
+                [
+                  33457,
+                  18219,
+                  17301,
+                  15223
+                ],
+                [
+                  17764,
+                  14696,
+                  15282,
+                  13697
+                ],
+                [
+                  17925,
+                  15079,
+                  15205,
+                  13583
+                ],
+                [
+                  15051,
+                  13446,
+                  14004,
+                  12203
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.009219587725117485
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  84225,
+                  62778
+                ],
+                [
+                  62777,
+                  52354
+                ]
+              ],
+              "q_positive_mi_bits": 0.0005525221017837582,
+              "suffix_low2_table": [
+                [
+                  30623,
+                  18815,
+                  18325,
+                  16436
+                ],
+                [
+                  18785,
+                  14717,
+                  14795,
+                  13144
+                ],
+                [
+                  18825,
+                  14775,
+                  15236,
+                  12955
+                ],
+                [
+                  15964,
+                  13133,
+                  13437,
+                  12169
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0029738924695959764
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  83767,
+                  63236
+                ],
+                [
+                  63235,
+                  51895
+                ]
+              ],
+              "q_positive_mi_bits": 0.0003055106787659585,
+              "suffix_low2_table": [
+                [
+                  30271,
+                  18660,
+                  18960,
+                  16308
+                ],
+                [
+                  18742,
+                  14889,
+                  14690,
+                  13120
+                ],
+                [
+                  18975,
+                  14591,
+                  14935,
+                  13290
+                ],
+                [
+                  16209,
+                  13299,
+                  13208,
+                  11986
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.002374582231076029
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262132,
+              "q_positive_table": [
+                [
+                  83247,
+                  63754
+                ],
+                [
+                  63751,
+                  51380
+                ]
+              ],
+              "q_positive_mi_bits": 0.00011406863617201887,
+              "suffix_low2_table": [
+                [
+                  28686,
+                  19312,
+                  19127,
+                  17073
+                ],
+                [
+                  19106,
+                  14665,
+                  14592,
+                  13076
+                ],
+                [
+                  19575,
+                  14490,
+                  14871,
+                  12856
+                ],
+                [
+                  16828,
+                  12972,
+                  13203,
+                  11700
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006510272636066304
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262131,
+              "q_positive_table": [
+                [
+                  83372,
+                  63629
+                ],
+                [
+                  63627,
+                  51503
+                ]
+              ],
+              "q_positive_mi_bits": 0.00015160552557811485,
+              "suffix_low2_table": [
+                [
+                  28000,
+                  19371,
+                  19393,
+                  17434
+                ],
+                [
+                  19619,
+                  14511,
+                  14642,
+                  12666
+                ],
+                [
+                  19664,
+                  14444,
+                  14717,
+                  12968
+                ],
+                [
+                  16910,
+                  13114,
+                  13040,
+                  11638
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00027057513838403877
+            }
+          ]
+        },
+        {
+          "k": 4,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1533365,
+          "remaining_payload_bits": 96872235,
+          "q_ge_17": 6,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 12,
+              "retained_pairs": 262131,
+              "q_positive_table": [
+                [
+                  82321,
+                  62574
+                ],
+                [
+                  62575,
+                  54661
+                ]
+              ],
+              "q_positive_mi_bits": 0.0008528624511033346,
+              "suffix_low2_table": [
+                [
+                  33073,
+                  18566,
+                  17601,
+                  15613
+                ],
+                [
+                  17928,
+                  15201,
+                  15119,
+                  13487
+                ],
+                [
+                  18013,
+                  14676,
+                  15019,
+                  13357
+                ],
+                [
+                  15839,
+                  13291,
+                  13327,
+                  12021
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.006898478062149554
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 12,
+              "retained_pairs": 262130,
+              "q_positive_table": [
+                [
+                  81356,
+                  63542
+                ],
+                [
+                  63539,
+                  53693
+                ]
+              ],
+              "q_positive_mi_bits": 0.00027358810883436075,
+              "suffix_low2_table": [
+                [
+                  30651,
+                  18849,
+                  18774,
+                  16580
+                ],
+                [
+                  19265,
+                  14835,
+                  14685,
+                  12947
+                ],
+                [
+                  18915,
+                  14727,
+                  14437,
+                  12986
+                ],
+                [
+                  16023,
+                  13324,
+                  13166,
+                  11966
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0023546820650203926
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 12,
+              "retained_pairs": 262129,
+              "q_positive_table": [
+                [
+                  81166,
+                  63727
+                ],
+                [
+                  63727,
+                  53509
+                ]
+              ],
+              "q_positive_mi_bits": 0.0001987379757634935,
+              "suffix_low2_table": [
+                [
+                  29479,
+                  19387,
+                  18995,
+                  16990
+                ],
+                [
+                  19378,
+                  14796,
+                  14542,
+                  13018
+                ],
+                [
+                  19301,
+                  14440,
+                  14446,
+                  12879
+                ],
+                [
+                  16692,
+                  13111,
+                  13084,
+                  11591
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0009278622250404764
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 12,
+              "retained_pairs": 262128,
+              "q_positive_table": [
+                [
+                  80787,
+                  64108
+                ],
+                [
+                  64106,
+                  53127
+                ]
+              ],
+              "q_positive_mi_bits": 8.30376624236023e-05,
+              "suffix_low2_table": [
+                [
+                  29083,
+                  19479,
+                  19056,
+                  17232
+                ],
+                [
+                  19809,
+                  14683,
+                  14435,
+                  12806
+                ],
+                [
+                  19325,
+                  14481,
+                  14513,
+                  12747
+                ],
+                [
+                  16634,
+                  13091,
+                  13062,
+                  11692
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006796605508896343
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 12,
+              "retained_pairs": 262127,
+              "q_positive_table": [
+                [
+                  80749,
+                  64145
+                ],
+                [
+                  64142,
+                  53091
+                ]
+              ],
+              "q_positive_mi_bits": 7.451607363188374e-05,
+              "suffix_low2_table": [
+                [
+                  29512,
+                  19473,
+                  19021,
+                  16846
+                ],
+                [
+                  19408,
+                  14700,
+                  14618,
+                  13007
+                ],
+                [
+                  19077,
+                  14660,
+                  14337,
+                  12990
+                ],
+                [
+                  16852,
+                  12901,
+                  13090,
+                  11635
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0009497861560453554
+            }
+          ]
+        },
+        {
+          "k": 5,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1795516,
+          "remaining_payload_bits": 96610084,
+          "q_ge_17": 2,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  82416,
+                  62723
+                ],
+                [
+                  62725,
+                  54275
+                ]
+              ],
+              "q_positive_mi_bits": 0.0007260592166867547,
+              "suffix_low2_table": [
+                [
+                  31420,
+                  18713,
+                  17836,
+                  16146
+                ],
+                [
+                  18012,
+                  15265,
+                  15046,
+                  13599
+                ],
+                [
+                  18384,
+                  14742,
+                  14651,
+                  13164
+                ],
+                [
+                  16298,
+                  13203,
+                  13409,
+                  12251
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.004397638396170321
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  81776,
+                  63364
+                ],
+                [
+                  63362,
+                  53636
+                ]
+              ],
+              "q_positive_mi_bits": 0.00034472811138032845,
+              "suffix_low2_table": [
+                [
+                  30108,
+                  18999,
+                  18559,
+                  16448
+                ],
+                [
+                  18899,
+                  15011,
+                  14646,
+                  13367
+                ],
+                [
+                  18580,
+                  14534,
+                  14580,
+                  13247
+                ],
+                [
+                  16525,
+                  13379,
+                  13157,
+                  12099
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.002184225564898366
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  81158,
+                  63982
+                ],
+                [
+                  63981,
+                  53016
+                ]
+              ],
+              "q_positive_mi_bits": 0.00010929708546386033,
+              "suffix_low2_table": [
+                [
+                  28232,
+                  19467,
+                  19175,
+                  17240
+                ],
+                [
+                  19513,
+                  14878,
+                  14564,
+                  12967
+                ],
+                [
+                  19263,
+                  14438,
+                  14280,
+                  12960
+                ],
+                [
+                  17104,
+                  13140,
+                  12922,
+                  11994
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003810155233805819
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  81472,
+                  63668
+                ],
+                [
+                  63666,
+                  53330
+                ]
+              ],
+              "q_positive_mi_bits": 0.00021240155704820886,
+              "suffix_low2_table": [
+                [
+                  28932,
+                  19186,
+                  19118,
+                  16878
+                ],
+                [
+                  19408,
+                  14816,
+                  14476,
+                  13221
+                ],
+                [
+                  18944,
+                  14516,
+                  14370,
+                  13112
+                ],
+                [
+                  16827,
+                  13405,
+                  12977,
+                  11950
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.000883809292308265
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  80986,
+                  64154
+                ],
+                [
+                  64150,
+                  52845
+                ]
+              ],
+              "q_positive_mi_bits": 6.746198800714788e-05,
+              "suffix_low2_table": [
+                [
+                  28740,
+                  19354,
+                  19045,
+                  16974
+                ],
+                [
+                  19381,
+                  14890,
+                  14523,
+                  13127
+                ],
+                [
+                  19024,
+                  14714,
+                  14145,
+                  13058
+                ],
+                [
+                  16965,
+                  12964,
+                  13229,
+                  12002
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007424665428580122
+            }
+          ]
+        },
+        {
+          "k": 6,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2060068,
+          "remaining_payload_bits": 96345532,
+          "q_ge_17": 3,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  80039,
+                  62995
+                ],
+                [
+                  62993,
+                  56110
+                ]
+              ],
+              "q_positive_mi_bits": 0.0006790804796238462,
+              "suffix_low2_table": [
+                [
+                  30588,
+                  18233,
+                  18341,
+                  16174
+                ],
+                [
+                  17949,
+                  15056,
+                  15241,
+                  13542
+                ],
+                [
+                  18685,
+                  15077,
+                  14932,
+                  13247
+                ],
+                [
+                  16112,
+                  13421,
+                  13429,
+                  12110
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0037672094271398835
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  79399,
+                  63632
+                ],
+                [
+                  63633,
+                  55472
+                ]
+              ],
+              "q_positive_mi_bits": 0.00031377011088153627,
+              "suffix_low2_table": [
+                [
+                  29127,
+                  19037,
+                  18487,
+                  16685
+                ],
+                [
+                  18784,
+                  14845,
+                  14952,
+                  13206
+                ],
+                [
+                  19173,
+                  14607,
+                  14956,
+                  13206
+                ],
+                [
+                  16251,
+                  13298,
+                  13546,
+                  11976
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0016569614676005678
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  78730,
+                  64299
+                ],
+                [
+                  64300,
+                  54806
+                ]
+              ],
+              "q_positive_mi_bits": 8.092894201097711e-05,
+              "suffix_low2_table": [
+                [
+                  28026,
+                  19042,
+                  19271,
+                  16997
+                ],
+                [
+                  19151,
+                  14647,
+                  14698,
+                  13291
+                ],
+                [
+                  19353,
+                  14730,
+                  14866,
+                  12991
+                ],
+                [
+                  16803,
+                  13368,
+                  13107,
+                  11794
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0005680297096281379
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  79168,
+                  63862
+                ],
+                [
+                  63862,
+                  55242
+                ]
+              ],
+              "q_positive_mi_bits": 0.00021634602232575677,
+              "suffix_low2_table": [
+                [
+                  28122,
+                  19194,
+                  19214,
+                  16807
+                ],
+                [
+                  19014,
+                  14834,
+                  14684,
+                  13252
+                ],
+                [
+                  19440,
+                  14576,
+                  14876,
+                  13049
+                ],
+                [
+                  16756,
+                  13184,
+                  13169,
+                  11963
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006557683825930379
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  78709,
+                  64321
+                ],
+                [
+                  64319,
+                  54784
+                ]
+              ],
+              "q_positive_mi_bits": 7.605673317950595e-05,
+              "suffix_low2_table": [
+                [
+                  27920,
+                  19359,
+                  19026,
+                  17032
+                ],
+                [
+                  19342,
+                  14525,
+                  14772,
+                  13146
+                ],
+                [
+                  19124,
+                  14679,
+                  14953,
+                  13183
+                ],
+                [
+                  16946,
+                  13225,
+                  13190,
+                  11711
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0004874569928080308
+            }
+          ]
+        },
+        {
+          "k": 7,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2319943,
+          "remaining_payload_bits": 96085657,
+          "q_ge_17": 3,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  82533,
+                  63401
+                ],
+                [
+                  63399,
+                  52804
+                ]
+              ],
+              "q_positive_mi_bits": 0.0002873598610163529,
+              "suffix_low2_table": [
+                [
+                  29463,
+                  19035,
+                  17777,
+                  16124
+                ],
+                [
+                  18749,
+                  15527,
+                  14999,
+                  13690
+                ],
+                [
+                  18169,
+                  14703,
+                  15119,
+                  13220
+                ],
+                [
+                  16016,
+                  13701,
+                  13317,
+                  12528
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0030292055417385205
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  81939,
+                  63995
+                ],
+                [
+                  63994,
+                  52208
+                ]
+              ],
+              "q_positive_mi_bits": 8.360179287842263e-05,
+              "suffix_low2_table": [
+                [
+                  27613,
+                  19393,
+                  18458,
+                  16935
+                ],
+                [
+                  19168,
+                  15290,
+                  14990,
+                  13517
+                ],
+                [
+                  19057,
+                  14591,
+                  14481,
+                  13082
+                ],
+                [
+                  16560,
+                  13690,
+                  13282,
+                  12029
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.000748413805897414
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  82174,
+                  63761
+                ],
+                [
+                  63756,
+                  52444
+                ]
+              ],
+              "q_positive_mi_bits": 0.00014978675263720674,
+              "suffix_low2_table": [
+                [
+                  27812,
+                  19159,
+                  18791,
+                  16636
+                ],
+                [
+                  19260,
+                  15506,
+                  14582,
+                  13616
+                ],
+                [
+                  18695,
+                  14786,
+                  14557,
+                  13174
+                ],
+                [
+                  16628,
+                  13515,
+                  13282,
+                  12136
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0008920302122391504
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  81800,
+                  64132
+                ],
+                [
+                  64129,
+                  52073
+                ]
+              ],
+              "q_positive_mi_bits": 5.408847731664312e-05,
+              "suffix_low2_table": [
+                [
+                  27372,
+                  19598,
+                  18613,
+                  16814
+                ],
+                [
+                  19306,
+                  15308,
+                  14697,
+                  13654
+                ],
+                [
+                  18886,
+                  14632,
+                  14641,
+                  13053
+                ],
+                [
+                  16832,
+                  13427,
+                  13261,
+                  12040
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0005564069127945809
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  82021,
+                  63911
+                ],
+                [
+                  63907,
+                  52294
+                ]
+              ],
+              "q_positive_mi_bits": 0.0001052436191417783,
+              "suffix_low2_table": [
+                [
+                  27232,
+                  19359,
+                  18936,
+                  16871
+                ],
+                [
+                  19407,
+                  15242,
+                  14765,
+                  13551
+                ],
+                [
+                  18822,
+                  14928,
+                  14385,
+                  13076
+                ],
+                [
+                  16933,
+                  13435,
+                  13126,
+                  12065
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00042296575886853157
+            }
+          ]
+        },
+        {
+          "k": 8,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2583784,
+          "remaining_payload_bits": 95821816,
+          "q_ge_17": 5,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 10,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  80498,
+                  63701
+                ],
+                [
+                  63702,
+                  54232
+                ]
+              ],
+              "q_positive_mi_bits": 0.0002360906066000883,
+              "suffix_low2_table": [
+                [
+                  28612,
+                  18230,
+                  18574,
+                  16913
+                ],
+                [
+                  18394,
+                  14548,
+                  15051,
+                  13192
+                ],
+                [
+                  19086,
+                  15029,
+                  15272,
+                  13396
+                ],
+                [
+                  16235,
+                  13379,
+                  13885,
+                  12337
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0018055838513974297
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 10,
+              "retained_pairs": 262132,
+              "q_positive_table": [
+                [
+                  79829,
+                  64367
+                ],
+                [
+                  64369,
+                  53567
+                ]
+              ],
+              "q_positive_mi_bits": 4.4091169240036924e-05,
+              "suffix_low2_table": [
+                [
+                  26942,
+                  18758,
+                  19197,
+                  17432
+                ],
+                [
+                  18941,
+                  14621,
+                  14665,
+                  12958
+                ],
+                [
+                  19406,
+                  14669,
+                  15279,
+                  13429
+                ],
+                [
+                  17039,
+                  13139,
+                  13640,
+                  12017
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003127610022645711
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 10,
+              "retained_pairs": 262131,
+              "q_positive_table": [
+                [
+                  80071,
+                  64126
+                ],
+                [
+                  64124,
+                  53810
+                ]
+              ],
+              "q_positive_mi_bits": 9.640152330208079e-05,
+              "suffix_low2_table": [
+                [
+                  27491,
+                  18871,
+                  19011,
+                  16952
+                ],
+                [
+                  18763,
+                  14431,
+                  14872,
+                  13120
+                ],
+                [
+                  19246,
+                  14643,
+                  15144,
+                  13750
+                ],
+                [
+                  16827,
+                  13241,
+                  13755,
+                  12014
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.000649569290189987
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 10,
+              "retained_pairs": 262130,
+              "q_positive_table": [
+                [
+                  79802,
+                  64396
+                ],
+                [
+                  64395,
+                  53537
+                ]
+              ],
+              "q_positive_mi_bits": 3.933315394204998e-05,
+              "suffix_low2_table": [
+                [
+                  27025,
+                  18937,
+                  19257,
+                  17110
+                ],
+                [
+                  18828,
+                  14611,
+                  14590,
+                  13153
+                ],
+                [
+                  19352,
+                  14586,
+                  15271,
+                  13573
+                ],
+                [
+                  17121,
+                  13051,
+                  13663,
+                  12002
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003444820396732494
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 10,
+              "retained_pairs": 262129,
+              "q_positive_table": [
+                [
+                  79874,
+                  64323
+                ],
+                [
+                  64320,
+                  53612
+                ]
+              ],
+              "q_positive_mi_bits": 5.240298273492773e-05,
+              "suffix_low2_table": [
+                [
+                  26940,
+                  18810,
+                  19417,
+                  17160
+                ],
+                [
+                  18875,
+                  14409,
+                  14786,
+                  13116
+                ],
+                [
+                  19409,
+                  14812,
+                  15078,
+                  13483
+                ],
+                [
+                  17101,
+                  13156,
+                  13499,
+                  12078
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00027187277025698275
+            }
+          ]
+        },
+        {
+          "k": 2,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1133161,
+          "remaining_payload_bits": 97272439,
+          "q_ge_17": 2323,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4645,
+              "retained_pairs": 257498,
+              "q_positive_table": [
+                [
+                  58935,
+                  63404
+                ],
+                [
+                  63603,
+                  71556
+                ]
+              ],
+              "q_positive_mi_bits": 8.976264967318695e-05,
+              "suffix_low2_table": [
+                [
+                  22127,
+                  18092,
+                  17170,
+                  15554
+                ],
+                [
+                  18043,
+                  16284,
+                  15846,
+                  14580
+                ],
+                [
+                  17507,
+                  15736,
+                  15124,
+                  13952
+                ],
+                [
+                  16016,
+                  14439,
+                  14133,
+                  12895
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0004384513827263251
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4628,
+              "retained_pairs": 257514,
+              "q_positive_table": [
+                [
+                  58370,
+                  64116
+                ],
+                [
+                  63955,
+                  71073
+                ]
+              ],
+              "q_positive_mi_bits": 6.074577254834004e-06,
+              "suffix_low2_table": [
+                [
+                  22165,
+                  17807,
+                  17746,
+                  15543
+                ],
+                [
+                  18022,
+                  16554,
+                  15568,
+                  14432
+                ],
+                [
+                  17441,
+                  15621,
+                  15244,
+                  14116
+                ],
+                [
+                  15672,
+                  14558,
+                  13866,
+                  13159
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0005638368678267279
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4509,
+              "retained_pairs": 257632,
+              "q_positive_table": [
+                [
+                  58833,
+                  63893
+                ],
+                [
+                  63674,
+                  71232
+                ]
+              ],
+              "q_positive_mi_bits": 3.947563957800229e-05,
+              "suffix_low2_table": [
+                [
+                  22500,
+                  17690,
+                  17496,
+                  15480
+                ],
+                [
+                  17797,
+                  16615,
+                  15577,
+                  14643
+                ],
+                [
+                  17381,
+                  15563,
+                  15306,
+                  14199
+                ],
+                [
+                  15443,
+                  14773,
+                  14098,
+                  13071
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0008952865579085309
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4490,
+              "retained_pairs": 257650,
+              "q_positive_table": [
+                [
+                  58520,
+                  64026
+                ],
+                [
+                  64128,
+                  70976
+                ]
+              ],
+              "q_positive_mi_bits": 5.976018084259986e-06,
+              "suffix_low2_table": [
+                [
+                  22103,
+                  18005,
+                  17160,
+                  15848
+                ],
+                [
+                  17694,
+                  16542,
+                  15819,
+                  14580
+                ],
+                [
+                  17535,
+                  15565,
+                  15413,
+                  13971
+                ],
+                [
+                  16034,
+                  14394,
+                  14080,
+                  12907
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.000475933987682891
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4641,
+              "retained_pairs": 257498,
+              "q_positive_table": [
+                [
+                  58430,
+                  64051
+                ],
+                [
+                  64004,
+                  71013
+                ]
+              ],
+              "q_positive_mi_bits": 6.533814231090293e-06,
+              "suffix_low2_table": [
+                [
+                  21883,
+                  17795,
+                  17473,
+                  15948
+                ],
+                [
+                  18170,
+                  16215,
+                  15832,
+                  14368
+                ],
+                [
+                  17442,
+                  15758,
+                  15167,
+                  14083
+                ],
+                [
+                  15837,
+                  14763,
+                  13936,
+                  12828
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00033394028547249267
+            }
+          ]
+        },
+        {
+          "k": 3,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1403943,
+          "remaining_payload_bits": 97001657,
+          "q_ge_17": 2560,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 5119,
+              "retained_pairs": 257024,
+              "q_positive_table": [
+                [
+                  59353,
+                  63293
+                ],
+                [
+                  62838,
+                  71540
+                ]
+              ],
+              "q_positive_mi_bits": 0.0001921027781717358,
+              "suffix_low2_table": [
+                [
+                  21365,
+                  17441,
+                  17589,
+                  15329
+                ],
+                [
+                  17538,
+                  15811,
+                  16061,
+                  14315
+                ],
+                [
+                  17688,
+                  16079,
+                  16122,
+                  14369
+                ],
+                [
+                  15583,
+                  14166,
+                  14538,
+                  13030
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00043277289942634704
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 5075,
+              "retained_pairs": 257067,
+              "q_positive_table": [
+                [
+                  59929,
+                  63241
+                ],
+                [
+                  62808,
+                  71089
+                ]
+              ],
+              "q_positive_mi_bits": 0.0002204286896185818,
+              "suffix_low2_table": [
+                [
+                  21500,
+                  17506,
+                  17572,
+                  15526
+                ],
+                [
+                  17797,
+                  15837,
+                  15755,
+                  14045
+                ],
+                [
+                  17318,
+                  16143,
+                  16461,
+                  14490
+                ],
+                [
+                  15282,
+                  14101,
+                  14562,
+                  13172
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006054488489204556
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4886,
+              "retained_pairs": 257255,
+              "q_positive_table": [
+                [
+                  59243,
+                  63714
+                ],
+                [
+                  63871,
+                  70427
+                ]
+              ],
+              "q_positive_mi_bits": 2.796966913857623e-05,
+              "suffix_low2_table": [
+                [
+                  21346,
+                  17640,
+                  17382,
+                  15383
+                ],
+                [
+                  17613,
+                  15748,
+                  16113,
+                  14162
+                ],
+                [
+                  17668,
+                  15924,
+                  16398,
+                  14505
+                ],
+                [
+                  15474,
+                  14168,
+                  14572,
+                  13159
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00048535612415007585
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 5116,
+              "retained_pairs": 257024,
+              "q_positive_table": [
+                [
+                  59286,
+                  63596
+                ],
+                [
+                  63425,
+                  70717
+                ]
+              ],
+              "q_positive_mi_bits": 6.708360850732516e-05,
+              "suffix_low2_table": [
+                [
+                  20947,
+                  17619,
+                  17744,
+                  15617
+                ],
+                [
+                  17629,
+                  15757,
+                  15844,
+                  14243
+                ],
+                [
+                  17779,
+                  15845,
+                  16321,
+                  14456
+                ],
+                [
+                  15737,
+                  14246,
+                  14408,
+                  12832
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0001782569434975889
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 5110,
+              "retained_pairs": 257029,
+              "q_positive_table": [
+                [
+                  59161,
+                  63652
+                ],
+                [
+                  63639,
+                  70577
+                ]
+              ],
+              "q_positive_mi_bits": 4.12548476305904e-05,
+              "suffix_low2_table": [
+                [
+                  21028,
+                  17515,
+                  17811,
+                  15593
+                ],
+                [
+                  17763,
+                  15619,
+                  15756,
+                  14308
+                ],
+                [
+                  17821,
+                  16033,
+                  16124,
+                  14440
+                ],
+                [
+                  15491,
+                  14266,
+                  14640,
+                  12821
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002505124405518631
+            }
+          ]
+        },
+        {
+          "k": 4,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1673385,
+          "remaining_payload_bits": 96732215,
+          "q_ge_17": 2143,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4281,
+              "retained_pairs": 257862,
+              "q_positive_table": [
+                [
+                  57692,
+                  64534
+                ],
+                [
+                  64220,
+                  71416
+                ]
+              ],
+              "q_positive_mi_bits": 1.542786086370252e-06,
+              "suffix_low2_table": [
+                [
+                  21990,
+                  17795,
+                  17470,
+                  15839
+                ],
+                [
+                  17532,
+                  15447,
+                  15795,
+                  14412
+                ],
+                [
+                  17863,
+                  15569,
+                  16076,
+                  14438
+                ],
+                [
+                  16256,
+                  14134,
+                  14553,
+                  12693
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003980385675672899
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4158,
+              "retained_pairs": 257984,
+              "q_positive_table": [
+                [
+                  60243,
+                  62455
+                ],
+                [
+                  62167,
+                  73119
+                ]
+              ],
+              "q_positive_mi_bits": 0.0007142910703050644,
+              "suffix_low2_table": [
+                [
+                  23227,
+                  17197,
+                  17528,
+                  15696
+                ],
+                [
+                  17263,
+                  15592,
+                  15868,
+                  14218
+                ],
+                [
+                  17673,
+                  15856,
+                  16114,
+                  14309
+                ],
+                [
+                  15216,
+                  14387,
+                  14477,
+                  13363
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0014209918727399347
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4261,
+              "retained_pairs": 257880,
+              "q_positive_table": [
+                [
+                  58347,
+                  64006
+                ],
+                [
+                  64131,
+                  71396
+                ]
+              ],
+              "q_positive_mi_bits": 9.752153071113535e-06,
+              "suffix_low2_table": [
+                [
+                  21791,
+                  17600,
+                  17825,
+                  16027
+                ],
+                [
+                  17773,
+                  15513,
+                  15687,
+                  14078
+                ],
+                [
+                  17863,
+                  15570,
+                  16129,
+                  14432
+                ],
+                [
+                  16216,
+                  14235,
+                  14273,
+                  12868
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002170710965796326
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4276,
+              "retained_pairs": 257864,
+              "q_positive_table": [
+                [
+                  58622,
+                  63826
+                ],
+                [
+                  63710,
+                  71706
+                ]
+              ],
+              "q_positive_mi_bits": 4.938648596944503e-05,
+              "suffix_low2_table": [
+                [
+                  22126,
+                  17576,
+                  17932,
+                  15937
+                ],
+                [
+                  17541,
+                  15514,
+                  15670,
+                  14212
+                ],
+                [
+                  17972,
+                  15700,
+                  15969,
+                  14255
+                ],
+                [
+                  15936,
+                  14121,
+                  14343,
+                  13060
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003504510209936901
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4273,
+              "retained_pairs": 257866,
+              "q_positive_table": [
+                [
+                  58335,
+                  64143
+                ],
+                [
+                  64003,
+                  71385
+                ]
+              ],
+              "q_positive_mi_bits": 9.101970516973068e-06,
+              "suffix_low2_table": [
+                [
+                  21737,
+                  17624,
+                  18050,
+                  16126
+                ],
+                [
+                  17695,
+                  15523,
+                  15516,
+                  14213
+                ],
+                [
+                  18023,
+                  15684,
+                  15973,
+                  14232
+                ],
+                [
+                  16107,
+                  14141,
+                  14351,
+                  12871
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0001633767985512415
+            }
+          ]
+        },
+        {
+          "k": 5,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1946399,
+          "remaining_payload_bits": 96459201,
+          "q_ge_17": 2235,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4459,
+              "retained_pairs": 257684,
+              "q_positive_table": [
+                [
+                  57885,
+                  64684
+                ],
+                [
+                  64576,
+                  70539
+                ]
+              ],
+              "q_positive_mi_bits": 2.318489621366002e-05,
+              "suffix_low2_table": [
+                [
+                  21237,
+                  18005,
+                  17370,
+                  16494
+                ],
+                [
+                  17839,
+                  15700,
+                  15856,
+                  14295
+                ],
+                [
+                  17987,
+                  15643,
+                  15778,
+                  13832
+                ],
+                [
+                  16085,
+                  14314,
+                  14270,
+                  12979
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00015617018481381835
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4215,
+              "retained_pairs": 257927,
+              "q_positive_table": [
+                [
+                  59643,
+                  63133
+                ],
+                [
+                  63277,
+                  71874
+                ]
+              ],
+              "q_positive_mi_bits": 0.00022322512422129955,
+              "suffix_low2_table": [
+                [
+                  23296,
+                  17372,
+                  17337,
+                  15290
+                ],
+                [
+                  17389,
+                  15857,
+                  15746,
+                  14634
+                ],
+                [
+                  17394,
+                  15826,
+                  15896,
+                  14278
+                ],
+                [
+                  15345,
+                  14518,
+                  14419,
+                  13330
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.001606148781787183
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4462,
+              "retained_pairs": 257679,
+              "q_positive_table": [
+                [
+                  58764,
+                  63809
+                ],
+                [
+                  63851,
+                  71255
+                ]
+              ],
+              "q_positive_mi_bits": 3.356125190489938e-05,
+              "suffix_low2_table": [
+                [
+                  21552,
+                  17760,
+                  17692,
+                  16013
+                ],
+                [
+                  17905,
+                  15713,
+                  15655,
+                  14362
+                ],
+                [
+                  17953,
+                  15621,
+                  15695,
+                  14107
+                ],
+                [
+                  15915,
+                  14409,
+                  14291,
+                  13036
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00018626359728798772
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4455,
+              "retained_pairs": 257685,
+              "q_positive_table": [
+                [
+                  58498,
+                  64109
+                ],
+                [
+                  64134,
+                  70944
+                ]
+              ],
+              "q_positive_mi_bits": 3.901261609241921e-06,
+              "suffix_low2_table": [
+                [
+                  21748,
+                  17812,
+                  17499,
+                  16113
+                ],
+                [
+                  17833,
+                  15593,
+                  15800,
+                  14351
+                ],
+                [
+                  17802,
+                  15817,
+                  15609,
+                  14114
+                ],
+                [
+                  15929,
+                  14348,
+                  14410,
+                  12907
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.000258365964152363
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4421,
+              "retained_pairs": 257718,
+              "q_positive_table": [
+                [
+                  58710,
+                  63942
+                ],
+                [
+                  63937,
+                  71129
+                ]
+              ],
+              "q_positive_mi_bits": 2.022720960930869e-05,
+              "suffix_low2_table": [
+                [
+                  21768,
+                  17956,
+                  17543,
+                  15925
+                ],
+                [
+                  17755,
+                  15782,
+                  15812,
+                  14241
+                ],
+                [
+                  17791,
+                  15664,
+                  15499,
+                  14377
+                ],
+                [
+                  15915,
+                  14196,
+                  14466,
+                  13028
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002896396439879815
+            }
+          ]
+        },
+        {
+          "k": 6,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2221651,
+          "remaining_payload_bits": 96183949,
+          "q_ge_17": 2451,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4884,
+              "retained_pairs": 257259,
+              "q_positive_table": [
+                [
+                  56795,
+                  63935
+                ],
+                [
+                  63634,
+                  72895
+                ]
+              ],
+              "q_positive_mi_bits": 1.3626818918182921e-05,
+              "suffix_low2_table": [
+                [
+                  20271,
+                  17785,
+                  17699,
+                  16460
+                ],
+                [
+                  18397,
+                  16218,
+                  15321,
+                  13744
+                ],
+                [
+                  17489,
+                  15316,
+                  15522,
+                  14527
+                ],
+                [
+                  15887,
+                  14317,
+                  14477,
+                  13829
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003441773269553069
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4781,
+              "retained_pairs": 257361,
+              "q_positive_table": [
+                [
+                  57091,
+                  63540
+                ],
+                [
+                  63796,
+                  72934
+                ]
+              ],
+              "q_positive_mi_bits": 3.22368049142205e-05,
+              "suffix_low2_table": [
+                [
+                  21965,
+                  17425,
+                  17243,
+                  15728
+                ],
+                [
+                  17294,
+                  16058,
+                  15487,
+                  14645
+                ],
+                [
+                  17435,
+                  15548,
+                  15562,
+                  14469
+                ],
+                [
+                  16007,
+                  14479,
+                  14624,
+                  13392
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006579329616686897
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4891,
+              "retained_pairs": 257250,
+              "q_positive_table": [
+                [
+                  56653,
+                  63935
+                ],
+                [
+                  63832,
+                  72830
+                ]
+              ],
+              "q_positive_mi_bits": 5.3644743681453486e-06,
+              "suffix_low2_table": [
+                [
+                  20700,
+                  17830,
+                  17737,
+                  16139
+                ],
+                [
+                  17810,
+                  15877,
+                  15401,
+                  14378
+                ],
+                [
+                  17928,
+                  15469,
+                  15290,
+                  14311
+                ],
+                [
+                  16091,
+                  14286,
+                  14508,
+                  13495
+                ]
+              ],
+              "suffix_low2_mi_bits": 9.542173615955398e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4868,
+              "retained_pairs": 257272,
+              "q_positive_table": [
+                [
+                  56825,
+                  63874
+                ],
+                [
+                  63657,
+                  72916
+                ]
+              ],
+              "q_positive_mi_bits": 1.5916482210420182e-05,
+              "suffix_low2_table": [
+                [
+                  20724,
+                  17797,
+                  17673,
+                  16348
+                ],
+                [
+                  17807,
+                  15721,
+                  15474,
+                  14384
+                ],
+                [
+                  17630,
+                  15468,
+                  15387,
+                  14472
+                ],
+                [
+                  16243,
+                  14517,
+                  14438,
+                  13189
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.1838784665509476e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4869,
+              "retained_pairs": 257270,
+              "q_positive_table": [
+                [
+                  56998,
+                  63672
+                ],
+                [
+                  63608,
+                  72992
+                ]
+              ],
+              "q_positive_mi_bits": 3.232957984129628e-05,
+              "suffix_low2_table": [
+                [
+                  20793,
+                  17789,
+                  17562,
+                  16326
+                ],
+                [
+                  17805,
+                  15698,
+                  15565,
+                  14334
+                ],
+                [
+                  17540,
+                  15459,
+                  15560,
+                  14424
+                ],
+                [
+                  16358,
+                  14541,
+                  14252,
+                  13264
+                ]
+              ],
+              "suffix_low2_mi_bits": 5.009467909565827e-05
+            }
+          ]
+        },
+        {
+          "k": 7,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2501891,
+          "remaining_payload_bits": 95903709,
+          "q_ge_17": 3401,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6759,
+              "retained_pairs": 255384,
+              "q_positive_table": [
+                [
+                  60792,
+                  61475
+                ],
+                [
+                  60765,
+                  72352
+                ]
+              ],
+              "q_positive_mi_bits": 0.001197403739697414,
+              "suffix_low2_table": [
+                [
+                  19896,
+                  16648,
+                  17878,
+                  16073
+                ],
+                [
+                  16880,
+                  15013,
+                  15349,
+                  14204
+                ],
+                [
+                  17578,
+                  15553,
+                  17068,
+                  14612
+                ],
+                [
+                  15587,
+                  14237,
+                  14838,
+                  13970
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002658728433461244
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6794,
+              "retained_pairs": 255348,
+              "q_positive_table": [
+                [
+                  59736,
+                  61829
+                ],
+                [
+                  62256,
+                  71527
+                ]
+              ],
+              "q_positive_mi_bits": 0.0004890322949813123,
+              "suffix_low2_table": [
+                [
+                  20240,
+                  16666,
+                  17457,
+                  15895
+                ],
+                [
+                  16887,
+                  14661,
+                  15608,
+                  14247
+                ],
+                [
+                  17686,
+                  15638,
+                  16757,
+                  14840
+                ],
+                [
+                  15976,
+                  14269,
+                  15004,
+                  13517
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00018425570088654818
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6780,
+              "retained_pairs": 255361,
+              "q_positive_table": [
+                [
+                  58439,
+                  63168
+                ],
+                [
+                  63135,
+                  70619
+                ]
+              ],
+              "q_positive_mi_bits": 5.252280571283732e-05,
+              "suffix_low2_table": [
+                [
+                  19863,
+                  16766,
+                  17807,
+                  16231
+                ],
+                [
+                  16825,
+                  14819,
+                  15407,
+                  14210
+                ],
+                [
+                  17934,
+                  15519,
+                  16603,
+                  14703
+                ],
+                [
+                  16010,
+                  14170,
+                  15046,
+                  13448
+                ]
+              ],
+              "suffix_low2_mi_bits": 6.0682102642128845e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6736,
+              "retained_pairs": 255404,
+              "q_positive_table": [
+                [
+                  58474,
+                  63111
+                ],
+                [
+                  63155,
+                  70664
+                ]
+              ],
+              "q_positive_mi_bits": 5.8265408127810246e-05,
+              "suffix_low2_table": [
+                [
+                  19955,
+                  16734,
+                  17988,
+                  16012
+                ],
+                [
+                  16764,
+                  14850,
+                  15372,
+                  14270
+                ],
+                [
+                  17971,
+                  15538,
+                  16523,
+                  14776
+                ],
+                [
+                  15921,
+                  14172,
+                  15022,
+                  13536
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.974594060144702e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6730,
+              "retained_pairs": 255409,
+              "q_positive_table": [
+                [
+                  58063,
+                  63621
+                ],
+                [
+                  63646,
+                  70079
+                ]
+              ],
+              "q_positive_mi_bits": 1.0652893578290564e-06,
+              "suffix_low2_table": [
+                [
+                  20027,
+                  16771,
+                  17789,
+                  16039
+                ],
+                [
+                  16786,
+                  14717,
+                  15546,
+                  14290
+                ],
+                [
+                  17792,
+                  15607,
+                  16631,
+                  14772
+                ],
+                [
+                  16031,
+                  14261,
+                  14865,
+                  13485
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.683478190484678e-05
+            }
+          ]
+        },
+        {
+          "k": 8,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2778389,
+          "remaining_payload_bits": 95627211,
+          "q_ge_17": 3330,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6592,
+              "retained_pairs": 255551,
+              "q_positive_table": [
+                [
+                  53769,
+                  62731
+                ],
+                [
+                  61813,
+                  77238
+                ]
+              ],
+              "q_positive_mi_bits": 0.00020876036522192096,
+              "suffix_low2_table": [
+                [
+                  22352,
+                  17363,
+                  19146,
+                  15576
+                ],
+                [
+                  18364,
+                  15624,
+                  15112,
+                  13380
+                ],
+                [
+                  18366,
+                  15293,
+                  15990,
+                  13655
+                ],
+                [
+                  15495,
+                  13787,
+                  13628,
+                  12420
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0004767118844918984
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6649,
+              "retained_pairs": 255493,
+              "q_positive_table": [
+                [
+                  53391,
+                  62478
+                ],
+                [
+                  62575,
+                  77049
+                ]
+              ],
+              "q_positive_mi_bits": 0.00011484934999092707,
+              "suffix_low2_table": [
+                [
+                  22562,
+                  17638,
+                  18579,
+                  15472
+                ],
+                [
+                  18224,
+                  15336,
+                  15263,
+                  13469
+                ],
+                [
+                  18506,
+                  15399,
+                  16108,
+                  13684
+                ],
+                [
+                  15789,
+                  13603,
+                  13655,
+                  12206
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00024850856090062265
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6627,
+              "retained_pairs": 255514,
+              "q_positive_table": [
+                [
+                  52953,
+                  62978
+                ],
+                [
+                  62813,
+                  76770
+                ]
+              ],
+              "q_positive_mi_bits": 3.2954091343104924e-05,
+              "suffix_low2_table": [
+                [
+                  22422,
+                  17822,
+                  18879,
+                  15867
+                ],
+                [
+                  18117,
+                  15094,
+                  15331,
+                  13349
+                ],
+                [
+                  18388,
+                  15459,
+                  16026,
+                  13775
+                ],
+                [
+                  15880,
+                  13684,
+                  13472,
+                  11949
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00013313871049933294
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6597,
+              "retained_pairs": 255543,
+              "q_positive_table": [
+                [
+                  53196,
+                  62758
+                ],
+                [
+                  62810,
+                  76779
+                ]
+              ],
+              "q_positive_mi_bits": 5.590678014754432e-05,
+              "suffix_low2_table": [
+                [
+                  22670,
+                  17829,
+                  18614,
+                  15748
+                ],
+                [
+                  18102,
+                  15216,
+                  15299,
+                  13389
+                ],
+                [
+                  18427,
+                  15406,
+                  16131,
+                  13716
+                ],
+                [
+                  15769,
+                  13521,
+                  13646,
+                  12060
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00018094424075294492
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6574,
+              "retained_pairs": 255565,
+              "q_positive_table": [
+                [
+                  53055,
+                  62879
+                ],
+                [
+                  62870,
+                  76761
+                ]
+              ],
+              "q_positive_mi_bits": 3.9209598656502094e-05,
+              "suffix_low2_table": [
+                [
+                  22445,
+                  17984,
+                  18502,
+                  15969
+                ],
+                [
+                  17985,
+                  15040,
+                  15585,
+                  13399
+                ],
+                [
+                  18710,
+                  15506,
+                  15793,
+                  13682
+                ],
+                [
+                  15783,
+                  13475,
+                  13781,
+                  11926
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.243639049763058e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "4126",
+      "pixls_name": "Olympus - E-M10 Mark IV - 16bit (4:3).ORF",
+      "sha256": "ce03e936cb2e8131343e7045a3249f78477bd2ae944e121ace72058b89fef509",
+      "variant": "unassigned",
+      "size_class": "variable",
+      "compression_tag": 1,
+      "payload_w": 5200,
+      "payload_h": 3904,
+      "payload_bytes": 17235346,
+      "cells": [
+        {
+          "k": 2,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1040946,
+          "remaining_payload_bits": 136841822,
+          "q_ge_17": 2,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  67459,
+                  65026
+                ],
+                [
+                  65026,
+                  64628
+                ]
+              ],
+              "q_positive_mi_bits": 4.2185818499389065e-05,
+              "suffix_low2_table": [
+                [
+                  10052,
+                  13958,
+                  16579,
+                  14523
+                ],
+                [
+                  14378,
+                  16966,
+                  19037,
+                  16468
+                ],
+                [
+                  16216,
+                  19192,
+                  20499,
+                  18702
+                ],
+                [
+                  14467,
+                  16732,
+                  18494,
+                  15876
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0011300645579966342
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  67110,
+                  65374
+                ],
+                [
+                  65372,
+                  64282
+                ]
+              ],
+              "q_positive_mi_bits": 3.977674752719796e-06,
+              "suffix_low2_table": [
+                [
+                  12455,
+                  14299,
+                  14962,
+                  13396
+                ],
+                [
+                  13832,
+                  17427,
+                  18382,
+                  17207
+                ],
+                [
+                  15501,
+                  18340,
+                  22329,
+                  18439
+                ],
+                [
+                  13324,
+                  16783,
+                  18937,
+                  16525
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007344138303939931
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  67168,
+                  65316
+                ],
+                [
+                  65315,
+                  64338
+                ]
+              ],
+              "q_positive_mi_bits": 7.48747079017272e-06,
+              "suffix_low2_table": [
+                [
+                  10312,
+                  14113,
+                  16005,
+                  14682
+                ],
+                [
+                  14245,
+                  17081,
+                  19080,
+                  16443
+                ],
+                [
+                  15798,
+                  19178,
+                  20872,
+                  18760
+                ],
+                [
+                  14756,
+                  16476,
+                  18653,
+                  15683
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0009026255943015315
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  67347,
+                  65136
+                ],
+                [
+                  65134,
+                  64519
+                ]
+              ],
+              "q_positive_mi_bits": 2.5733300056716892e-05,
+              "suffix_low2_table": [
+                [
+                  11146,
+                  14436,
+                  15360,
+                  14169
+                ],
+                [
+                  14027,
+                  16854,
+                  19214,
+                  16752
+                ],
+                [
+                  15565,
+                  19020,
+                  21377,
+                  18647
+                ],
+                [
+                  14372,
+                  16538,
+                  18659,
+                  16000
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00024002902827628187
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  67213,
+                  65270
+                ],
+                [
+                  65267,
+                  64385
+                ]
+              ],
+              "q_positive_mi_bits": 1.1150248980860587e-05,
+              "suffix_low2_table": [
+                [
+                  11375,
+                  14051,
+                  15816,
+                  13868
+                ],
+                [
+                  14410,
+                  16957,
+                  18970,
+                  16510
+                ],
+                [
+                  15624,
+                  19148,
+                  21178,
+                  18659
+                ],
+                [
+                  13700,
+                  16692,
+                  18645,
+                  16532
+                ]
+              ],
+              "suffix_low2_mi_bits": 5.649135321631081e-05
+            }
+          ]
+        },
+        {
+          "k": 3,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1309259,
+          "remaining_payload_bits": 136573509,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  63147,
+                  64488
+                ],
+                [
+                  64489,
+                  70017
+                ]
+              ],
+              "q_positive_mi_bits": 0.0001687763187099593,
+              "suffix_low2_table": [
+                [
+                  14331,
+                  16870,
+                  16657,
+                  15270
+                ],
+                [
+                  16872,
+                  18383,
+                  17879,
+                  16559
+                ],
+                [
+                  16356,
+                  18076,
+                  16939,
+                  15980
+                ],
+                [
+                  15568,
+                  16364,
+                  15875,
+                  14162
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003539780239146731
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  61076,
+                  66558
+                ],
+                [
+                  66559,
+                  67947
+                ]
+              ],
+              "q_positive_mi_bits": 0.00019203904305424829,
+              "suffix_low2_table": [
+                [
+                  14707,
+                  16891,
+                  15939,
+                  15590
+                ],
+                [
+                  16586,
+                  18447,
+                  18102,
+                  16558
+                ],
+                [
+                  16869,
+                  17937,
+                  17154,
+                  15391
+                ],
+                [
+                  14964,
+                  16418,
+                  16156,
+                  14431
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00029833868583048175
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  61884,
+                  65751
+                ],
+                [
+                  65749,
+                  68755
+                ]
+              ],
+              "q_positive_mi_bits": 1.139367808056799e-05,
+              "suffix_low2_table": [
+                [
+                  14982,
+                  16471,
+                  16520,
+                  15154
+                ],
+                [
+                  16256,
+                  18516,
+                  18047,
+                  16874
+                ],
+                [
+                  16482,
+                  17863,
+                  17374,
+                  15631
+                ],
+                [
+                  15405,
+                  16843,
+                  15410,
+                  14311
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002849685852836357
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  62594,
+                  65040
+                ],
+                [
+                  65038,
+                  69466
+                ]
+              ],
+              "q_positive_mi_bits": 3.412866344257347e-05,
+              "suffix_low2_table": [
+                [
+                  15284,
+                  16778,
+                  16451,
+                  14612
+                ],
+                [
+                  16903,
+                  18299,
+                  17790,
+                  16701
+                ],
+                [
+                  16111,
+                  17794,
+                  17424,
+                  16022
+                ],
+                [
+                  14826,
+                  16821,
+                  15686,
+                  14636
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.821833492055924e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  62300,
+                  65333
+                ],
+                [
+                  65332,
+                  69172
+                ]
+              ],
+              "q_positive_mi_bits": 4.130566575348028e-06,
+              "suffix_low2_table": [
+                [
+                  15113,
+                  16946,
+                  16140,
+                  14926
+                ],
+                [
+                  16869,
+                  18520,
+                  17849,
+                  16455
+                ],
+                [
+                  16152,
+                  17849,
+                  17511,
+                  15838
+                ],
+                [
+                  14988,
+                  16378,
+                  15851,
+                  14752
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.306075921209176e-05
+            }
+          ]
+        },
+        {
+          "k": 4,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1573374,
+          "remaining_payload_bits": 136309394,
+          "q_ge_17": 2,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  57599,
+                  63411
+                ],
+                [
+                  63413,
+                  77716
+                ]
+              ],
+              "q_positive_mi_bits": 0.00051261592226832,
+              "suffix_low2_table": [
+                [
+                  14142,
+                  15891,
+                  16305,
+                  14353
+                ],
+                [
+                  17061,
+                  19126,
+                  17611,
+                  17086
+                ],
+                [
+                  14433,
+                  18167,
+                  16548,
+                  16836
+                ],
+                [
+                  15055,
+                  17699,
+                  15521,
+                  16305
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007356712854376548
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  55948,
+                  65063
+                ],
+                [
+                  65063,
+                  76064
+                ]
+              ],
+              "q_positive_mi_bits": 1.2448324422976195e-06,
+              "suffix_low2_table": [
+                [
+                  13413,
+                  16675,
+                  15458,
+                  15143
+                ],
+                [
+                  16768,
+                  19241,
+                  17574,
+                  17301
+                ],
+                [
+                  14981,
+                  17745,
+                  16687,
+                  16571
+                ],
+                [
+                  15528,
+                  17222,
+                  16265,
+                  15566
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0002677106368306495
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  56363,
+                  64648
+                ],
+                [
+                  64646,
+                  76480
+                ]
+              ],
+              "q_positive_mi_bits": 4.270719745173889e-05,
+              "suffix_low2_table": [
+                [
+                  14037,
+                  16418,
+                  15279,
+                  14956
+                ],
+                [
+                  16642,
+                  19301,
+                  17750,
+                  17190
+                ],
+                [
+                  15159,
+                  17669,
+                  16736,
+                  16420
+                ],
+                [
+                  14851,
+                  17495,
+                  16220,
+                  16014
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.31093776279551e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  56002,
+                  65008
+                ],
+                [
+                  65006,
+                  76120
+                ]
+              ],
+              "q_positive_mi_bits": 3.379071231694123e-06,
+              "suffix_low2_table": [
+                [
+                  14284,
+                  16511,
+                  15213,
+                  14683
+                ],
+                [
+                  16329,
+                  19163,
+                  17953,
+                  17438
+                ],
+                [
+                  15254,
+                  17730,
+                  16566,
+                  16432
+                ],
+                [
+                  14821,
+                  17479,
+                  16252,
+                  16028
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.263671379960044e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  55974,
+                  65035
+                ],
+                [
+                  65034,
+                  76092
+                ]
+              ],
+              "q_positive_mi_bits": 2.17989093811077e-06,
+              "suffix_low2_table": [
+                [
+                  13998,
+                  16464,
+                  15265,
+                  14963
+                ],
+                [
+                  16198,
+                  19162,
+                  17981,
+                  17540
+                ],
+                [
+                  15411,
+                  17729,
+                  16574,
+                  16269
+                ],
+                [
+                  15079,
+                  17528,
+                  16165,
+                  15809
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.487877862129893e-05
+            }
+          ]
+        },
+        {
+          "k": 5,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1819178,
+          "remaining_payload_bits": 136063590,
+          "q_ge_17": 2,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  67805,
+                  65501
+                ],
+                [
+                  65501,
+                  63332
+                ]
+              ],
+              "q_positive_mi_bits": 3.616113635676458e-08,
+              "suffix_low2_table": [
+                [
+                  12794,
+                  14545,
+                  13707,
+                  12895
+                ],
+                [
+                  14550,
+                  20184,
+                  17166,
+                  19513
+                ],
+                [
+                  13414,
+                  17859,
+                  19514,
+                  17732
+                ],
+                [
+                  13185,
+                  18824,
+                  18132,
+                  18125
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.002285853232592878
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  67104,
+                  66202
+                ],
+                [
+                  66203,
+                  62629
+                ]
+              ],
+              "q_positive_mi_bits": 7.934239445707338e-05,
+              "suffix_low2_table": [
+                [
+                  11141,
+                  14863,
+                  14152,
+                  13786
+                ],
+                [
+                  14462,
+                  19623,
+                  18277,
+                  19050
+                ],
+                [
+                  14032,
+                  18336,
+                  18440,
+                  17711
+                ],
+                [
+                  14305,
+                  18591,
+                  17650,
+                  17719
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00016830454480213974
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  68388,
+                  64919
+                ],
+                [
+                  64917,
+                  63913
+                ]
+              ],
+              "q_positive_mi_bits": 5.992867674872032e-05,
+              "suffix_low2_table": [
+                [
+                  11764,
+                  14428,
+                  14127,
+                  13623
+                ],
+                [
+                  14636,
+                  19710,
+                  18404,
+                  18661
+                ],
+                [
+                  14120,
+                  18441,
+                  18043,
+                  17914
+                ],
+                [
+                  13421,
+                  18834,
+                  17944,
+                  18067
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00028888734352269996
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  67895,
+                  65410
+                ],
+                [
+                  65409,
+                  63422
+                ]
+              ],
+              "q_positive_mi_bits": 1.867661726563533e-06,
+              "suffix_low2_table": [
+                [
+                  11331,
+                  14670,
+                  14011,
+                  13927
+                ],
+                [
+                  14717,
+                  19607,
+                  18445,
+                  18644
+                ],
+                [
+                  13935,
+                  18696,
+                  18248,
+                  17639
+                ],
+                [
+                  13957,
+                  18439,
+                  17814,
+                  18056
+                ]
+              ],
+              "suffix_low2_mi_bits": 7.534939978707039e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 4,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  67783,
+                  65520
+                ],
+                [
+                  65520,
+                  63312
+                ]
+              ],
+              "q_positive_mi_bits": 4.746618069227632e-09,
+              "suffix_low2_table": [
+                [
+                  11284,
+                  14598,
+                  14093,
+                  13965
+                ],
+                [
+                  14656,
+                  19565,
+                  18598,
+                  18594
+                ],
+                [
+                  14041,
+                  18730,
+                  17780,
+                  17965
+                ],
+                [
+                  13957,
+                  18520,
+                  18047,
+                  17742
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.933237393394706e-05
+            }
+          ]
+        },
+        {
+          "k": 6,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2090548,
+          "remaining_payload_bits": 135792220,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  65021,
+                  65246
+                ],
+                [
+                  65246,
+                  66628
+                ]
+              ],
+              "q_positive_mi_bits": 1.3814906574905438e-05,
+              "suffix_low2_table": [
+                [
+                  14618,
+                  14977,
+                  16423,
+                  13792
+                ],
+                [
+                  14094,
+                  16751,
+                  19544,
+                  15922
+                ],
+                [
+                  17564,
+                  18933,
+                  21470,
+                  16936
+                ],
+                [
+                  13533,
+                  15650,
+                  17467,
+                  14467
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0006859255317839361
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  64529,
+                  65738
+                ],
+                [
+                  65738,
+                  66135
+                ]
+              ],
+              "q_positive_mi_bits": 7.0906327451002e-06,
+              "suffix_low2_table": [
+                [
+                  13231,
+                  15127,
+                  17017,
+                  14435
+                ],
+                [
+                  14924,
+                  16853,
+                  19236,
+                  15297
+                ],
+                [
+                  17565,
+                  18732,
+                  21185,
+                  17420
+                ],
+                [
+                  14088,
+                  15598,
+                  17466,
+                  13966
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00018064777438828882
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  64477,
+                  65791
+                ],
+                [
+                  65789,
+                  66082
+                ]
+              ],
+              "q_positive_mi_bits": 1.1155435853846393e-05,
+              "suffix_low2_table": [
+                [
+                  13540,
+                  15130,
+                  17009,
+                  14131
+                ],
+                [
+                  14722,
+                  16762,
+                  19168,
+                  15656
+                ],
+                [
+                  17411,
+                  19044,
+                  21172,
+                  17276
+                ],
+                [
+                  14134,
+                  15375,
+                  17554,
+                  14055
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00010173054077632136
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  64696,
+                  65571
+                ],
+                [
+                  65569,
+                  66302
+                ]
+              ],
+              "q_positive_mi_bits": 2.4203886968716124e-07,
+              "suffix_low2_table": [
+                [
+                  13540,
+                  14956,
+                  17322,
+                  13992
+                ],
+                [
+                  14812,
+                  16970,
+                  19097,
+                  15430
+                ],
+                [
+                  17328,
+                  18776,
+                  21280,
+                  17518
+                ],
+                [
+                  14125,
+                  15609,
+                  17205,
+                  14178
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.266449065308325e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 2,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  64813,
+                  65453
+                ],
+                [
+                  65450,
+                  66421
+                ]
+              ],
+              "q_positive_mi_bits": 1.0826779979397605e-06,
+              "suffix_low2_table": [
+                [
+                  13628,
+                  15083,
+                  17079,
+                  14018
+                ],
+                [
+                  14942,
+                  16783,
+                  19029,
+                  15555
+                ],
+                [
+                  17228,
+                  18847,
+                  21437,
+                  17391
+                ],
+                [
+                  14007,
+                  15598,
+                  17358,
+                  14154
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.3701917524684846e-05
+            }
+          ]
+        },
+        {
+          "k": 7,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2351487,
+          "remaining_payload_bits": 135531281,
+          "q_ge_17": 4,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  63623,
+                  67261
+                ],
+                [
+                  67261,
+                  63990
+                ]
+              ],
+              "q_positive_mi_bits": 0.0005012351669039222,
+              "suffix_low2_table": [
+                [
+                  15360,
+                  17241,
+                  15176,
+                  15350
+                ],
+                [
+                  16677,
+                  19008,
+                  18014,
+                  16849
+                ],
+                [
+                  16646,
+                  17701,
+                  16448,
+                  15309
+                ],
+                [
+                  14444,
+                  16598,
+                  16468,
+                  14846
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0004478309769661774
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  65591,
+                  65292
+                ],
+                [
+                  65292,
+                  65959
+                ]
+              ],
+              "q_positive_mi_bits": 9.785660102959058e-06,
+              "suffix_low2_table": [
+                [
+                  14784,
+                  17180,
+                  15990,
+                  15174
+                ],
+                [
+                  17245,
+                  19066,
+                  17642,
+                  16594
+                ],
+                [
+                  15790,
+                  17690,
+                  16863,
+                  15761
+                ],
+                [
+                  15308,
+                  16611,
+                  15609,
+                  14827
+                ]
+              ],
+              "suffix_low2_mi_bits": 9.73386337268409e-05
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  65600,
+                  65282
+                ],
+                [
+                  65279,
+                  65972
+                ]
+              ],
+              "q_positive_mi_bits": 1.0718959698810494e-05,
+              "suffix_low2_table": [
+                [
+                  15268,
+                  16856,
+                  15994,
+                  15010
+                ],
+                [
+                  17097,
+                  18893,
+                  17925,
+                  16633
+                ],
+                [
+                  15851,
+                  17905,
+                  16553,
+                  15795
+                ],
+                [
+                  14910,
+                  16892,
+                  15633,
+                  14918
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.7049055280357682e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262132,
+              "q_positive_table": [
+                [
+                  65334,
+                  65548
+                ],
+                [
+                  65546,
+                  65704
+                ]
+              ],
+              "q_positive_mi_bits": 3.353860042451854e-08,
+              "suffix_low2_table": [
+                [
+                  15304,
+                  17052,
+                  15859,
+                  14914
+                ],
+                [
+                  17018,
+                  19072,
+                  17788,
+                  16668
+                ],
+                [
+                  15944,
+                  17765,
+                  16706,
+                  15687
+                ],
+                [
+                  14858,
+                  16657,
+                  15752,
+                  15088
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.8351891828500907e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 8,
+              "retained_pairs": 262131,
+              "q_positive_table": [
+                [
+                  65132,
+                  65749
+                ],
+                [
+                  65748,
+                  65502
+                ]
+              ],
+              "q_positive_mi_bits": 7.828117997388641e-06,
+              "suffix_low2_table": [
+                [
+                  15251,
+                  16955,
+                  16024,
+                  14897
+                ],
+                [
+                  16952,
+                  19038,
+                  17728,
+                  16829
+                ],
+                [
+                  15983,
+                  17743,
+                  16707,
+                  15670
+                ],
+                [
+                  14938,
+                  16809,
+                  15646,
+                  14961
+                ]
+              ],
+              "suffix_low2_mi_bits": 1.3891794767148909e-05
+            }
+          ]
+        },
+        {
+          "k": 8,
+          "stop_bit": 0,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2613871,
+          "remaining_payload_bits": 135268897,
+          "q_ge_17": 3,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262137,
+              "q_positive_table": [
+                [
+                  62819,
+                  67319
+                ],
+                [
+                  67318,
+                  64681
+                ]
+              ],
+              "q_positive_mi_bits": 0.0005368166247498168,
+              "suffix_low2_table": [
+                [
+                  13064,
+                  16476,
+                  16254,
+                  15959
+                ],
+                [
+                  16265,
+                  17625,
+                  18266,
+                  16052
+                ],
+                [
+                  16987,
+                  18124,
+                  18302,
+                  16353
+                ],
+                [
+                  15435,
+                  15984,
+                  16944,
+                  14047
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0010940174796626942
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262136,
+              "q_positive_table": [
+                [
+                  65510,
+                  64629
+                ],
+                [
+                  64627,
+                  67370
+                ]
+              ],
+              "q_positive_mi_bits": 0.00013688494824150733,
+              "suffix_low2_table": [
+                [
+                  15010,
+                  15879,
+                  16705,
+                  14158
+                ],
+                [
+                  16305,
+                  17861,
+                  17674,
+                  16367
+                ],
+                [
+                  16121,
+                  18170,
+                  18819,
+                  16656
+                ],
+                [
+                  14315,
+                  16298,
+                  16569,
+                  15229
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00024459072009983636
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262135,
+              "q_positive_table": [
+                [
+                  64211,
+                  65928
+                ],
+                [
+                  65925,
+                  66071
+                ]
+              ],
+              "q_positive_mi_bits": 2.6348740229335983e-05,
+              "suffix_low2_table": [
+                [
+                  14575,
+                  16058,
+                  16468,
+                  14652
+                ],
+                [
+                  16006,
+                  17671,
+                  18230,
+                  16300
+                ],
+                [
+                  16403,
+                  18318,
+                  18477,
+                  16566
+                ],
+                [
+                  14766,
+                  16162,
+                  16591,
+                  14892
+                ]
+              ],
+              "suffix_low2_mi_bits": 1.177211438891757e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262134,
+              "q_positive_table": [
+                [
+                  64718,
+                  65419
+                ],
+                [
+                  65416,
+                  66581
+                ]
+              ],
+              "q_positive_mi_bits": 2.1332012726803544e-06,
+              "suffix_low2_table": [
+                [
+                  14570,
+                  16117,
+                  16246,
+                  14820
+                ],
+                [
+                  15998,
+                  17567,
+                  18346,
+                  16293
+                ],
+                [
+                  16561,
+                  18225,
+                  18484,
+                  16496
+                ],
+                [
+                  14620,
+                  16300,
+                  16689,
+                  14802
+                ]
+              ],
+              "suffix_low2_mi_bits": 3.129366415159608e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 6,
+              "retained_pairs": 262133,
+              "q_positive_table": [
+                [
+                  64493,
+                  65643
+                ],
+                [
+                  65639,
+                  66358
+                ]
+              ],
+              "q_positive_mi_bits": 2.07222611459969e-06,
+              "suffix_low2_table": [
+                [
+                  14581,
+                  16092,
+                  16403,
+                  14678
+                ],
+                [
+                  16230,
+                  17848,
+                  18003,
+                  16124
+                ],
+                [
+                  16263,
+                  18089,
+                  18592,
+                  16821
+                ],
+                [
+                  14675,
+                  16180,
+                  16768,
+                  14786
+                ]
+              ],
+              "suffix_low2_mi_bits": 3.116402325979351e-05
+            }
+          ]
+        },
+        {
+          "k": 2,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1020558,
+          "remaining_payload_bits": 136862210,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  71920,
+                  63887
+                ],
+                [
+                  63887,
+                  62448
+                ]
+              ],
+              "q_positive_mi_bits": 0.00041136995377315765,
+              "suffix_low2_table": [
+                [
+                  16909,
+                  18794,
+                  15900,
+                  15455
+                ],
+                [
+                  18350,
+                  20114,
+                  17443,
+                  17020
+                ],
+                [
+                  16304,
+                  17488,
+                  14888,
+                  13846
+                ],
+                [
+                  15494,
+                  16532,
+                  14295,
+                  13310
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00014087580260054619
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  69460,
+                  66347
+                ],
+                [
+                  66347,
+                  59987
+                ]
+              ],
+              "q_positive_mi_bits": 0.0001355999864403809,
+              "suffix_low2_table": [
+                [
+                  17843,
+                  18567,
+                  15718,
+                  14930
+                ],
+                [
+                  18544,
+                  20497,
+                  17384,
+                  16501
+                ],
+                [
+                  15919,
+                  17292,
+                  15041,
+                  14274
+                ],
+                [
+                  14751,
+                  16571,
+                  14383,
+                  13926
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00020122007620743324
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  69972,
+                  65835
+                ],
+                [
+                  65834,
+                  60499
+                ]
+              ],
+              "q_positive_mi_bits": 2.4971584501213857e-05,
+              "suffix_low2_table": [
+                [
+                  17105,
+                  18755,
+                  16179,
+                  15019
+                ],
+                [
+                  18535,
+                  20102,
+                  17518,
+                  16771
+                ],
+                [
+                  16123,
+                  17497,
+                  14734,
+                  14172
+                ],
+                [
+                  15294,
+                  16573,
+                  14094,
+                  13669
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.916037392255619e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  68948,
+                  66859
+                ],
+                [
+                  66857,
+                  59475
+                ]
+              ],
+              "q_positive_mi_bits": 0.000334275866650113,
+              "suffix_low2_table": [
+                [
+                  17270,
+                  18739,
+                  15913,
+                  15135
+                ],
+                [
+                  18811,
+                  20163,
+                  17576,
+                  16376
+                ],
+                [
+                  15856,
+                  17471,
+                  14984,
+                  14215
+                ],
+                [
+                  15119,
+                  16554,
+                  14052,
+                  13905
+                ]
+              ],
+              "suffix_low2_mi_bits": 6.302287098347052e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  70825,
+                  64982
+                ],
+                [
+                  64980,
+                  61351
+                ]
+              ],
+              "q_positive_mi_bits": 3.6867455324952544e-05,
+              "suffix_low2_table": [
+                [
+                  17384,
+                  18544,
+                  16112,
+                  15017
+                ],
+                [
+                  18670,
+                  20410,
+                  17377,
+                  16468
+                ],
+                [
+                  15847,
+                  17629,
+                  14816,
+                  14234
+                ],
+                [
+                  15155,
+                  16343,
+                  14220,
+                  13912
+                ]
+              ],
+              "suffix_low2_mi_bits": 7.773067871542494e-05
+            }
+          ]
+        },
+        {
+          "k": 3,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1295386,
+          "remaining_payload_bits": 136587382,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  65553,
+                  64081
+                ],
+                [
+                  64081,
+                  68427
+                ]
+              ],
+              "q_positive_mi_bits": 0.00035159286559343153,
+              "suffix_low2_table": [
+                [
+                  12353,
+                  14488,
+                  16590,
+                  13698
+                ],
+                [
+                  15014,
+                  17627,
+                  18884,
+                  16633
+                ],
+                [
+                  15536,
+                  19156,
+                  19347,
+                  18202
+                ],
+                [
+                  14225,
+                  16887,
+                  17420,
+                  16082
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00031974127217430844
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  63998,
+                  65636
+                ],
+                [
+                  65636,
+                  66871
+                ]
+              ],
+              "q_positive_mi_bits": 1.9821366526042534e-06,
+              "suffix_low2_table": [
+                [
+                  11119,
+                  15036,
+                  16073,
+                  14901
+                ],
+                [
+                  15165,
+                  17711,
+                  18689,
+                  16592
+                ],
+                [
+                  16111,
+                  18907,
+                  19616,
+                  17607
+                ],
+                [
+                  14733,
+                  16504,
+                  17863,
+                  15514
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007563755137868361
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  63414,
+                  66219
+                ],
+                [
+                  66219,
+                  66288
+                ]
+              ],
+              "q_positive_mi_bits": 8.042098510459067e-05,
+              "suffix_low2_table": [
+                [
+                  12424,
+                  15506,
+                  14925,
+                  14274
+                ],
+                [
+                  14985,
+                  17626,
+                  18833,
+                  16712
+                ],
+                [
+                  15401,
+                  18585,
+                  20284,
+                  17971
+                ],
+                [
+                  14318,
+                  16441,
+                  18198,
+                  15657
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00032876417625405275
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  64573,
+                  65060
+                ],
+                [
+                  65060,
+                  67446
+                ]
+              ],
+              "q_positive_mi_bits": 3.661978371248065e-05,
+              "suffix_low2_table": [
+                [
+                  12857,
+                  15028,
+                  15586,
+                  13657
+                ],
+                [
+                  14874,
+                  17778,
+                  18709,
+                  16795
+                ],
+                [
+                  15740,
+                  18722,
+                  19824,
+                  17955
+                ],
+                [
+                  13657,
+                  16630,
+                  18121,
+                  16206
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0001569686934154153
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  64128,
+                  65504
+                ],
+                [
+                  65504,
+                  67002
+                ]
+              ],
+              "q_positive_mi_bits": 8.597922699705215e-08,
+              "suffix_low2_table": [
+                [
+                  12537,
+                  14797,
+                  15793,
+                  14001
+                ],
+                [
+                  14774,
+                  17598,
+                  18983,
+                  16801
+                ],
+                [
+                  15813,
+                  18808,
+                  19720,
+                  17899
+                ],
+                [
+                  14004,
+                  16954,
+                  17744,
+                  15912
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.6197648552513357e-05
+            }
+          ]
+        },
+        {
+          "k": 4,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1554980,
+          "remaining_payload_bits": 136327788,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  61527,
+                  64403
+                ],
+                [
+                  64403,
+                  71809
+                ]
+              ],
+              "q_positive_mi_bits": 0.00017931658358902747,
+              "suffix_low2_table": [
+                [
+                  15850,
+                  15425,
+                  17698,
+                  13596
+                ],
+                [
+                  16279,
+                  17305,
+                  18718,
+                  15002
+                ],
+                [
+                  16323,
+                  18998,
+                  19743,
+                  17358
+                ],
+                [
+                  14116,
+                  15577,
+                  16263,
+                  13891
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007076011023151294
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  60146,
+                  65784
+                ],
+                [
+                  65784,
+                  70427
+                ]
+              ],
+              "q_positive_mi_bits": 2.0585714178824634e-05,
+              "suffix_low2_table": [
+                [
+                  14089,
+                  15825,
+                  17740,
+                  14915
+                ],
+                [
+                  16043,
+                  17562,
+                  18426,
+                  15273
+                ],
+                [
+                  17403,
+                  18562,
+                  19904,
+                  16552
+                ],
+                [
+                  15033,
+                  15356,
+                  16352,
+                  13106
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0004493323995642867
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  61265,
+                  64665
+                ],
+                [
+                  64665,
+                  71545
+                ]
+              ],
+              "q_positive_mi_bits": 9.968519104141746e-05,
+              "suffix_low2_table": [
+                [
+                  14417,
+                  15910,
+                  17796,
+                  14445
+                ],
+                [
+                  16076,
+                  17227,
+                  18748,
+                  15253
+                ],
+                [
+                  17402,
+                  18616,
+                  19881,
+                  16522
+                ],
+                [
+                  14672,
+                  15552,
+                  15997,
+                  13626
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00019427663503049922
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  60244,
+                  65685
+                ],
+                [
+                  65686,
+                  70524
+                ]
+              ],
+              "q_positive_mi_bits": 1.065953790020148e-05,
+              "suffix_low2_table": [
+                [
+                  14557,
+                  16291,
+                  17197,
+                  14523
+                ],
+                [
+                  16098,
+                  17075,
+                  18578,
+                  15552
+                ],
+                [
+                  17402,
+                  18582,
+                  19930,
+                  16507
+                ],
+                [
+                  14510,
+                  15357,
+                  16717,
+                  13263
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00011150365618901837
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  60417,
+                  65511
+                ],
+                [
+                  65512,
+                  70698
+                ]
+              ],
+              "q_positive_mi_bits": 1.0198924423735801e-06,
+              "suffix_low2_table": [
+                [
+                  14997,
+                  16146,
+                  17005,
+                  14420
+                ],
+                [
+                  16072,
+                  17217,
+                  18648,
+                  15365
+                ],
+                [
+                  17405,
+                  18437,
+                  20092,
+                  16487
+                ],
+                [
+                  14093,
+                  15505,
+                  16676,
+                  13573
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.1904599851930244e-05
+            }
+          ]
+        },
+        {
+          "k": 5,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 1737857,
+          "remaining_payload_bits": 136144911,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  92927,
+                  64337
+                ],
+                [
+                  64338,
+                  40540
+                ]
+              ],
+              "q_positive_mi_bits": 0.0003675550105493499,
+              "suffix_low2_table": [
+                [
+                  19910,
+                  18162,
+                  17651,
+                  15733
+                ],
+                [
+                  18150,
+                  17261,
+                  16358,
+                  15181
+                ],
+                [
+                  17395,
+                  16532,
+                  16287,
+                  14628
+                ],
+                [
+                  16000,
+                  14995,
+                  14546,
+                  13353
+                ]
+              ],
+              "suffix_low2_mi_bits": 8.89232391187719e-05
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  91688,
+                  65575
+                ],
+                [
+                  65577,
+                  39301
+                ]
+              ],
+              "q_positive_mi_bits": 0.0012909617135496779,
+              "suffix_low2_table": [
+                [
+                  18996,
+                  18356,
+                  17543,
+                  16561
+                ],
+                [
+                  17883,
+                  16943,
+                  16876,
+                  15247
+                ],
+                [
+                  17625,
+                  16503,
+                  16156,
+                  14558
+                ],
+                [
+                  16951,
+                  15148,
+                  14266,
+                  12529
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003923242844354684
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  98983,
+                  58280
+                ],
+                [
+                  58281,
+                  46596
+                ]
+              ],
+              "q_positive_mi_bits": 0.003907116100969901,
+              "suffix_low2_table": [
+                [
+                  19664,
+                  18286,
+                  17744,
+                  15762
+                ],
+                [
+                  18377,
+                  17126,
+                  16437,
+                  15009
+                ],
+                [
+                  17503,
+                  16650,
+                  16074,
+                  14615
+                ],
+                [
+                  15910,
+                  14888,
+                  14586,
+                  13509
+                ]
+              ],
+              "suffix_low2_mi_bits": 5.620076663002979e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  97005,
+                  60257
+                ],
+                [
+                  60259,
+                  44618
+                ]
+              ],
+              "q_positive_mi_bits": 0.001286284200214276,
+              "suffix_low2_table": [
+                [
+                  19288,
+                  18202,
+                  17741,
+                  16225
+                ],
+                [
+                  18333,
+                  17202,
+                  16493,
+                  14921
+                ],
+                [
+                  17732,
+                  16487,
+                  16120,
+                  14502
+                ],
+                [
+                  16101,
+                  15059,
+                  14487,
+                  13246
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.2375310177154837e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  96686,
+                  60576
+                ],
+                [
+                  60578,
+                  44298
+                ]
+              ],
+              "q_positive_mi_bits": 0.0009961076534166276,
+              "suffix_low2_table": [
+                [
+                  19214,
+                  18551,
+                  17736,
+                  15955
+                ],
+                [
+                  18343,
+                  17005,
+                  16546,
+                  15055
+                ],
+                [
+                  17719,
+                  16372,
+                  16016,
+                  14733
+                ],
+                [
+                  16178,
+                  15021,
+                  14543,
+                  13151
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.41906214760773e-05
+            }
+          ]
+        },
+        {
+          "k": 6,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2071363,
+          "remaining_payload_bits": 135811405,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  68283,
+                  64727
+                ],
+                [
+                  64728,
+                  64404
+                ]
+              ],
+              "q_positive_mi_bits": 0.00010583979378859902,
+              "suffix_low2_table": [
+                [
+                  12824,
+                  17474,
+                  10809,
+                  15979
+                ],
+                [
+                  15740,
+                  20068,
+                  19040,
+                  19154
+                ],
+                [
+                  13896,
+                  17866,
+                  13243,
+                  16510
+                ],
+                [
+                  14626,
+                  18594,
+                  18423,
+                  17896
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.003855484537217472
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  67816,
+                  65193
+                ],
+                [
+                  65194,
+                  63938
+                ]
+              ],
+              "q_positive_mi_bits": 1.8012065922832707e-05,
+              "suffix_low2_table": [
+                [
+                  11210,
+                  16254,
+                  13393,
+                  16228
+                ],
+                [
+                  16459,
+                  21038,
+                  17435,
+                  19070
+                ],
+                [
+                  13512,
+                  17183,
+                  14459,
+                  16361
+                ],
+                [
+                  15905,
+                  19526,
+                  16228,
+                  17880
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0007854253281781823
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  67503,
+                  65506
+                ],
+                [
+                  65507,
+                  63624
+                ]
+              ],
+              "q_positive_mi_bits": 3.364437585813725e-08,
+              "suffix_low2_table": [
+                [
+                  12031,
+                  16063,
+                  13603,
+                  15387
+                ],
+                [
+                  16319,
+                  20935,
+                  17353,
+                  19395
+                ],
+                [
+                  13323,
+                  17399,
+                  14445,
+                  16348
+                ],
+                [
+                  15413,
+                  19604,
+                  16113,
+                  18409
+                ]
+              ],
+              "suffix_low2_mi_bits": 9.303037833711687e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  67415,
+                  65594
+                ],
+                [
+                  65594,
+                  63536
+                ]
+              ],
+              "q_positive_mi_bits": 9.102187454100401e-07,
+              "suffix_low2_table": [
+                [
+                  12431,
+                  16131,
+                  13513,
+                  15009
+                ],
+                [
+                  16329,
+                  21051,
+                  17133,
+                  19488
+                ],
+                [
+                  13320,
+                  17280,
+                  14451,
+                  16464
+                ],
+                [
+                  15006,
+                  19539,
+                  16416,
+                  18578
+                ]
+              ],
+              "suffix_low2_mi_bits": 4.3511769576760896e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  67594,
+                  65414
+                ],
+                [
+                  65414,
+                  63716
+                ]
+              ],
+              "q_positive_mi_bits": 1.893633018823439e-06,
+              "suffix_low2_table": [
+                [
+                  12502,
+                  16010,
+                  13424,
+                  15148
+                ],
+                [
+                  15950,
+                  20940,
+                  17326,
+                  19785
+                ],
+                [
+                  13329,
+                  17458,
+                  14468,
+                  16260
+                ],
+                [
+                  15305,
+                  19593,
+                  16294,
+                  18346
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.1335202720809918e-05
+            }
+          ]
+        },
+        {
+          "k": 7,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2337096,
+          "remaining_payload_bits": 135545672,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  65419,
+                  66248
+                ],
+                [
+                  66249,
+                  64226
+                ]
+              ],
+              "q_positive_mi_bits": 8.571346203764107e-05,
+              "suffix_low2_table": [
+                [
+                  9291,
+                  13997,
+                  16784,
+                  14852
+                ],
+                [
+                  14283,
+                  17133,
+                  19133,
+                  16483
+                ],
+                [
+                  17107,
+                  19142,
+                  21486,
+                  17817
+                ],
+                [
+                  14243,
+                  16759,
+                  18150,
+                  15482
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0023356972565738393
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  66416,
+                  65251
+                ],
+                [
+                  65252,
+                  65222
+                ]
+              ],
+              "q_positive_mi_bits": 1.3394107196893195e-05,
+              "suffix_low2_table": [
+                [
+                  11345,
+                  13806,
+                  16528,
+                  13245
+                ],
+                [
+                  14615,
+                  17347,
+                  18670,
+                  16400
+                ],
+                [
+                  15455,
+                  19199,
+                  22070,
+                  18828
+                ],
+                [
+                  13508,
+                  16679,
+                  18285,
+                  16161
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003261001762450226
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  66058,
+                  65609
+                ],
+                [
+                  65610,
+                  64863
+                ]
+              ],
+              "q_positive_mi_bits": 9.666370135380325e-07,
+              "suffix_low2_table": [
+                [
+                  11934,
+                  14234,
+                  15497,
+                  13259
+                ],
+                [
+                  14078,
+                  17040,
+                  19352,
+                  16561
+                ],
+                [
+                  15653,
+                  19268,
+                  21878,
+                  18753
+                ],
+                [
+                  13258,
+                  16488,
+                  18826,
+                  16061
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.00012257808334454888
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  65983,
+                  65683
+                ],
+                [
+                  65684,
+                  64789
+                ]
+              ],
+              "q_positive_mi_bits": 3.784745777483229e-06,
+              "suffix_low2_table": [
+                [
+                  11349,
+                  13985,
+                  15909,
+                  13681
+                ],
+                [
+                  13861,
+                  17287,
+                  19207,
+                  16676
+                ],
+                [
+                  15831,
+                  19509,
+                  21725,
+                  18487
+                ],
+                [
+                  13882,
+                  16249,
+                  18712,
+                  15789
+                ]
+              ],
+              "suffix_low2_mi_bits": 7.66927742438365e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  66192,
+                  65473
+                ],
+                [
+                  65475,
+                  64998
+                ]
+              ],
+              "q_positive_mi_bits": 5.874769840077108e-07,
+              "suffix_low2_table": [
+                [
+                  11505,
+                  14081,
+                  15745,
+                  13593
+                ],
+                [
+                  14082,
+                  17215,
+                  19232,
+                  16501
+                ],
+                [
+                  15647,
+                  19404,
+                  22012,
+                  18489
+                ],
+                [
+                  13689,
+                  16330,
+                  18563,
+                  16050
+                ]
+              ],
+              "suffix_low2_mi_bits": 3.493725574106551e-05
+            }
+          ]
+        },
+        {
+          "k": 8,
+          "stop_bit": 1,
+          "tokens": 262144,
+          "token_shortfall": 0,
+          "bits_consumed": 2596031,
+          "remaining_payload_bits": 135286737,
+          "q_ge_17": 1,
+          "lags": [
+            {
+              "lag": 1,
+              "candidate_pairs": 262143,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262142,
+              "q_positive_table": [
+                [
+                  65892,
+                  66543
+                ],
+                [
+                  66543,
+                  63164
+                ]
+              ],
+              "q_positive_mi_bits": 0.00017293826976736738,
+              "suffix_low2_table": [
+                [
+                  12620,
+                  15708,
+                  16665,
+                  14406
+                ],
+                [
+                  16079,
+                  18786,
+                  18349,
+                  16645
+                ],
+                [
+                  16176,
+                  18648,
+                  18369,
+                  16702
+                ],
+                [
+                  14524,
+                  16717,
+                  16512,
+                  15236
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0003594380197521385
+            },
+            {
+              "lag": 2,
+              "candidate_pairs": 262142,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262141,
+              "q_positive_table": [
+                [
+                  67015,
+                  65420
+                ],
+                [
+                  65419,
+                  64287
+                ]
+              ],
+              "q_positive_mi_bits": 1.9832148259558502e-06,
+              "suffix_low2_table": [
+                [
+                  14516,
+                  15830,
+                  15504,
+                  13549
+                ],
+                [
+                  15704,
+                  18720,
+                  18442,
+                  16993
+                ],
+                [
+                  15468,
+                  18474,
+                  18722,
+                  17231
+                ],
+                [
+                  13710,
+                  16835,
+                  17227,
+                  15216
+                ]
+              ],
+              "suffix_low2_mi_bits": 0.0005142608901583772
+            },
+            {
+              "lag": 3,
+              "candidate_pairs": 262141,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262140,
+              "q_positive_table": [
+                [
+                  67037,
+                  65397
+                ],
+                [
+                  65397,
+                  64309
+                ]
+              ],
+              "q_positive_mi_bits": 2.8786517783652155e-06,
+              "suffix_low2_table": [
+                [
+                  13129,
+                  15906,
+                  15994,
+                  14370
+                ],
+                [
+                  15764,
+                  18634,
+                  18722,
+                  16739
+                ],
+                [
+                  16073,
+                  18541,
+                  18556,
+                  16724
+                ],
+                [
+                  14432,
+                  16778,
+                  16623,
+                  15155
+                ]
+              ],
+              "suffix_low2_mi_bits": 5.4299084990766476e-05
+            },
+            {
+              "lag": 4,
+              "candidate_pairs": 262140,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262139,
+              "q_positive_table": [
+                [
+                  66736,
+                  65698
+                ],
+                [
+                  65698,
+                  64007
+                ]
+              ],
+              "q_positive_mi_bits": 4.875210998246432e-06,
+              "suffix_low2_table": [
+                [
+                  13356,
+                  15885,
+                  15833,
+                  14325
+                ],
+                [
+                  15759,
+                  18734,
+                  18593,
+                  16772
+                ],
+                [
+                  15957,
+                  18549,
+                  18726,
+                  16662
+                ],
+                [
+                  14326,
+                  16691,
+                  16742,
+                  15229
+                ]
+              ],
+              "suffix_low2_mi_bits": 1.7864035105769207e-05
+            },
+            {
+              "lag": 5,
+              "candidate_pairs": 262139,
+              "omitted_escape_endpoint_pairs": 1,
+              "retained_pairs": 262138,
+              "q_positive_table": [
+                [
+                  66993,
+                  65440
+                ],
+                [
+                  65440,
+                  64265
+                ]
+              ],
+              "q_positive_mi_bits": 1.2833569596991932e-06,
+              "suffix_low2_table": [
+                [
+                  13704,
+                  15708,
+                  15771,
+                  14215
+                ],
+                [
+                  15659,
+                  18734,
+                  18601,
+                  16864
+                ],
+                [
+                  15819,
+                  18580,
+                  18737,
+                  16758
+                ],
+                [
+                  14216,
+                  16837,
+                  16785,
+                  15150
+                ]
+              ],
+              "suffix_low2_mi_bits": 2.7533714368593985e-05
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

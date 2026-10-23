@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Reference decoder (library + CLI) for the uncompressed V0 ORF packings.
 
-Supports: ROADMAP.md, specs/V0.md; findings/V0/ (packed-12 and packed-12.8), lead #71
-(packed-16), findings/container/ (payload location and
+Supports: ROADMAP.md, specs/V0.md; findings/V0/ (packed-12, packed-12.8 and
+packed-16), findings/container/ (payload location and
 the fixed-size rule). Standard library only (Python 3.8+). Released under CC0 1.0.
 
 Handles the exact fixed-size payloads of VARIANTS.md V0:
   packed-12    verified (findings/V0/2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes)
   packed-12.8  verified (findings/V0/2026-10-20--radialmonster--packed-12-8-groups-of-ten-values)
-  packed-16    UNVERIFIED (lead #71)
+  packed-16    verified (findings/V0/2026-10-21--radialmonster--packed16-whole-frame-word-layout)
 Two-field row-layout evidence is verified on the measured cohort (F_ROWLAYOUT,
 partial verification of lead #77); general layout selection remains unverified.
 Compressed payloads (V1, V2, ...) are detected and reported as "not yet specified".
@@ -37,16 +37,31 @@ from array import array
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "tools"))
 import orf_signature  # noqa: E402
 
+F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
+F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
+F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
+F_EXTRA = "2026-10-22--radialmonster--extra-token-fields-not-fixed"
+F_STRIDE_LATER = "2026-10-22--radialmonster--later-band-row-stride-drift"
+F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
+F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
 F_FIXED = "2026-10-19--radialmonster--fixed-size-payloads-exact-else-compressed"
 F_ROWLAYOUT = "2026-10-21--radialmonster--two-field-row-layout-reproduction"
+F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
+F_NULL_BPP = "2026-10-21--radialmonster--null-distance-tracks-bpp-within-body"
+F_NULL_BPP_2 = "2026-10-21--radialmonster--remaining-om1-family-null-distance"
+F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and-separation"
+F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
+F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
+F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
+F_DEP_CORR = "2026-10-22--radialmonster--token-dependence-independence-wording-correction"
 
 # what the evidence is for each layout
 STATUS = {
     "packed-12": "verified (%s, self-verified)" % F_PACKED12,
     "packed-12.8": "verified (%s, self-verified)" % F_PACKED128,
-    "packed-16": "UNVERIFIED (lead #71)",
+    "packed-16": "verified (%s, self-verified)" % F_PACKED16,
 }
 # the order choices per packing; the first one wins a tie
 ORDERS = {
@@ -112,8 +127,11 @@ def unpack_row(packing, order, raw, w):
             out[2 * k + 1::10] = array("H", [y >> 4 | z << 4 for y, z in zip(b1, b2)])
         pad = sum(1 for p in raw[15::16] if p)   # F_PACKED128: byte 15 is 0 on all 5 CC0 files
     elif packing == "packed-16":
-        # lead #71 (unverified): one 16-bit word per pixel (12-bit value << 4 in the three
-        # CC0 files); byte order per body (finding 2026-10-21--radialmonster--iiro-packed12-and-packed16-whole-frame-byte-order, Partial: the smoother order matches the TIFF mark on those 3 files; still autodetected by smoothness). Values are the stored words, not shifted back.
+        # F_PACKED16: one 16-bit word per pixel (12-bit value << 4 on the three CC0
+        # files); byte order per body follows the TIFF mark on 3 of 3 (F_PACKED16;
+        # also measured whole-frame in 2026-10-21--radialmonster--iiro-packed12-and-packed16-whole-frame-byte-order,
+        # Partial), still autodetected by smoothness. Values are the stored words,
+        # not shifted back.
         out = array("H")
         out.frombytes(raw)
         if (order == "be") != (sys.byteorder == "big"):
@@ -172,7 +190,7 @@ def _score(rows):
 
 def detect_order(f, p, packing, w, h, rb):
     """Pick the order with the lowest roughness on a window (3 bands x 16 rows x up to 1200
-    columns, bands spread through the frame): the method of finding F_PACKED12 and lead #71
+    columns, bands spread through the frame): the method of findings F_PACKED12 and F_PACKED16
     (smoothness at same-colour distance 2). Ties go to the first order in ORDERS.
     Returns (order, margin), margin = second-best score / best score."""
     choices = ORDERS[packing]
@@ -239,11 +257,61 @@ def decode_file(path, order=None, layout=None):
          "strips": len(p.strips), "strip_gaps": p.gaps,
          "packing": "", "order": "", "notes": []}
     if sc == "variable":
+        # F_FIG8 (Partial for #196) tests the literal Figure 8 category+extend
+        # table; it stops at the unused code on E-M1 Mark II High Res files and
+        # specifies no decoder step or value mapping.
+        # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
+        # preview-luma correlates; they specify neither sensor values nor a
+        # predictor or round-trip decode.
+        # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
+        # correlate from b2/b4; they specify no sensor values or decode step
+        # (V1 S1.15).
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
-        # (Partial, unassigned 87-file cohort) specifies neither tokens nor padding.
-        r.update(variant="compressed", status="not yet specified")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet, see specs/V1.md S1.7 and ROADMAP.md" % sig["bpp"])
+        # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
+        # specify neither tokens nor padding.
+        # F_BRIDGE_RANGE corrects the six-file Partial suffix-only evidence range;
+        # it establishes no value assembly or compressed decode step (V1 S1.9).
+        # 2026-10-21--radialmonster--em1mk2-full-payload-suffix-dependence
+        # (Partial for #11) measures sequential association, not values or a predictor.
+        # F_BALANCE (Partial for #11) measures within-token H/L MI and b0/b1
+        # marginals within a predeclared tolerance on four further bodies; it
+        # establishes neither exact independence nor values (V1 S1.14).
+        # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
+        # prefix and whole payload pass that tolerance, not exact independence,
+        # population generality, framing or values (V1 S1.16).
+        # F_DEP (Partial for #11): the cross-field/same-field token-dependence
+        # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
+        # at lower MI; it establishes no values, row stride, geometry or decode
+        # (V1 S1.17). F_DEP_CORR (Partial correction for #11, corrects F_DEP):
+        # the measured within-token H/L MI is small but nonzero; exact
+        # independence is not established (V1 S1.17).
+        # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
+        # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
+        # or values (V1 S1.10).
+        # F_EXTRA (Partial for #144): at the measured strides the extra S-W tokens are
+        # not a fixed header or constant pad on five public files and three bands; their
+        # origin, physical rows and any values remain open (V1 S1.10, G3).
+        # F_STRIDE_LATER (self-verified, Partial for #144): later 300-row bands
+        # move the candidate peak and the fixed prefix S loses the contrast; it
+        # establishes no physical rows or whole-frame constant (V1 S1.10, G3).
+        # F_NULL_BPP and F_NULL_BPP_2 (Partial for #106) measure only the k=5
+        # tokens-per-pixel distance from a Bernoulli null and its bpp/body relation;
+        # they specify no value assembly or compressed decode step (V2 S1.1).
+        # F_NULL_CORRECTED (Partial for #231): corrected fixed-prefix q0 null
+        # separation specifies neither entropy-code boundaries nor values (V1 S1.12).
+        # F_Q47 (self-verified, #246): the first payload token is q=39/suffix 0 on
+        # 83 variable-size CC0 files and q=47/suffix 0 on four large-sensor files;
+        # it specifies no value assembly, decode step or variant assignment
+        # (V1 S1.13, V2 S1.2).
+        # F_PRED31 (Partial for #31): a fixed 11-reading x 9-predictor probe
+        # finds no cross-file preview-luma transfer on E-M1 Mark III 3800/3801
+        # and OM-5 6343; it specifies no predictor, values or decode step (V1 G2).
+        # F_RUN31 (Partial for #31): a plain per-row running-sum test on five
+        # public files stays inside a predeclared 0.5..1.5 within-row-null band
+        # in 15/15 cells; it specifies no values, predictor or decode (V1 G2).
+        r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.17, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
@@ -257,7 +325,7 @@ def decode_file(path, order=None, layout=None):
     digest = hashlib.sha256()
     lo, hi, bad, smooth_n, pad = 1 << 30, -1, 0, 0, 0
     # out of range: a value above 4095 for packed-12 and packed-12.8 (12-bit data); for packed-16
-    # (lead #71: 12-bit value << 4) a word with any of its low 4 bits set
+    # (F_PACKED16: 12-bit value << 4) a word with any of its low 4 bits set
     with open(path, "rb") as f:
         margin = None
         if order is None:
@@ -284,7 +352,9 @@ def decode_file(path, order=None, layout=None):
              pad_nonzero=pad if packing == "packed-12.8" else "")
     if packing == "packed-12.8" and pad:
         r["notes"].append("%d group padding bytes are not zero (finding for lead #70 found zero)" % pad)
-    if packing != "packed-12":
+    if packing == "packed-16":
+        r["notes"].append("layout is %s" % STATUS[packing])
+    elif packing != "packed-12":
         r["notes"].append("layout is UNVERIFIED (%s); pixel order inside a unit is undecided" % STATUS[packing].split("(")[1].rstrip(")"))
     else:
         r["notes"].append("pixel order inside a two-pixel unit is undecided by the evidence")

@@ -14,7 +14,7 @@ Columns:
 - `source`: `pixls` (raw.pixls.us, CC0) or `own` (a contributor's file, not shared)
 - `pixls_id`: the site's numeric file id (first column of `pixls_samples.py list`)
 - `pixls_name`: the file name exactly as shown on raw.pixls.us, with `:` (local copies use `_` instead)
-- `licence`: `CC0` for raw.pixls.us files (check with `tools/pixls_samples.py check`); `not-shared` for own files
+- `licence`: `CC0` for raw.pixls.us files (verify at download or first check, then reuse the verified record for the same SHA-256); `not-shared` for own files
 - `sha256`: SHA-256 of the file
 - `make`, `model`: from the file's own tags, spelled as the tags spell them (e.g. `E-M5MarkIII`; the raw.pixls.us list may write `E-M5 Mark III`)
 - `mode`: `normal` / `hires`, measured from the payload width (over 6000 = High Res Shot)
