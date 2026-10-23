@@ -16,7 +16,7 @@ If you have read the ORF decompression code in any of those projects, you're wel
 
 ## Data
 - Raw files are never committed. Reference them by SHA-256, plus the raw.pixls.us id and name when they come from there.
-- **raw.pixls.us files:** use only CC0 ones (check with `tools/pixls_samples.py check`).
+- **raw.pixls.us files:** use only CC0 ones. Verify the licence when downloading, or use `tools/pixls_samples.py check` once for previously unverified content. Keep the verified licence, public identity and SHA-256; reuse that verification while the local hash matches. Do not repeat the online check for unchanged verified files. New or changed content without a verified record still needs verification before use.
 - **Your own files are welcome.** You can test with raws you shot yourself, or ones whose owner agreed. Publish only aggregate numbers and the file's SHA-256, never the file or images from it. Results that rest only on files others can't get are marked `not yet reproducible` until a CC0 copy exists. Uploading a few to raw.pixls.us as CC0 fixes that.
 - Don't use files whose licence you don't know, or that are under a non-CC0 licence (e.g. the CC BY-NC-SA files on raw.pixls.us).
 - No images of decoded or preview data are committed. Aggregate statistics only.

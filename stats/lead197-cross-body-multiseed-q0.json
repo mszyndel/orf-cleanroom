@@ -1,0 +1,2130 @@
+{
+  "lead": 197,
+  "contributor": "radialmonster",
+  "method_commit": "c96a02c5d0615bd3547a19f563a6281890ed21c5",
+  "method_source_sha256": "5d4e7ac3cc682b1744c5cbe715393fccf848bde46d5da22785bec1c4190a6774",
+  "signature_source_sha256": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb",
+  "predeclared_claim": "https://github.com/radialmonster/orf-cleanroom/issues/197#issuecomment-6322189583",
+  "known_reference": "1993",
+  "cross_body_extension": [
+    "6343",
+    "5283"
+  ],
+  "requested_prefix_bytes": 131072,
+  "seeds": [
+    20261021,
+    20261022,
+    20261023,
+    20261024,
+    20261025,
+    20261026,
+    20261027,
+    20261028
+  ],
+  "reports": [
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515545,
+              "ones_fraction": 0.49166202545166016,
+              "q0_count": 73358,
+              "q0_fraction": 0.4921406959660269,
+              "residual_bits": 1,
+              "tokens": 149059
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78394,
+              "q0_fraction": 0.5163274715141936,
+              "residual_bits": 6,
+              "tokens": 151830
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515792,
+              "ones_fraction": 0.4918975830078125,
+              "q0_count": 73723,
+              "q0_fraction": 0.49037188790815545,
+              "residual_bits": 1,
+              "tokens": 150341
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75864,
+              "q0_fraction": 0.5000856943217624,
+              "residual_bits": 6,
+              "tokens": 151702
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521543,
+              "ones_fraction": 0.49738216400146484,
+              "q0_count": 74298,
+              "q0_fraction": 0.49694334827101866,
+              "residual_bits": 1,
+              "tokens": 149510
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76881,
+              "q0_fraction": 0.5079414368583094,
+              "residual_bits": 1,
+              "tokens": 151358
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521710,
+              "ones_fraction": 0.4975414276123047,
+              "q0_count": 74651,
+              "q0_fraction": 0.4960265252694388,
+              "residual_bits": 1,
+              "tokens": 150498
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75529,
+              "q0_fraction": 0.4994379347739836,
+              "residual_bits": 2,
+              "tokens": 151228
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506855,
+              "ones_fraction": 0.48337459564208984,
+              "q0_count": 71721,
+              "q0_fraction": 0.48350040785508674,
+              "residual_bits": 1,
+              "tokens": 148337
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048572,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72604,
+              "q0_fraction": 0.48827465617539256,
+              "residual_bits": 4,
+              "tokens": 148695
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506859,
+              "ones_fraction": 0.48337841033935547,
+              "q0_count": 71921,
+              "q0_fraction": 0.48340177845289384,
+              "residual_bits": 1,
+              "tokens": 148781
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 71968,
+              "q0_fraction": 0.48493669436077813,
+              "residual_bits": 5,
+              "tokens": 148407
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261021,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515946,
+              "ones_fraction": 0.49204444885253906,
+              "q0_count": 73352,
+              "q0_fraction": 0.49185296444808024,
+              "residual_bits": 1,
+              "tokens": 149134
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78360,
+              "q0_fraction": 0.5159811939472957,
+              "residual_bits": 5,
+              "tokens": 151866
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515699,
+              "ones_fraction": 0.4918088912963867,
+              "q0_count": 73961,
+              "q0_fraction": 0.49179139709158126,
+              "residual_bits": 1,
+              "tokens": 150391
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75786,
+              "q0_fraction": 0.4997560107091516,
+              "residual_bits": 1,
+              "tokens": 151646
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521965,
+              "ones_fraction": 0.4977846145629883,
+              "q0_count": 74497,
+              "q0_fraction": 0.4978115456835662,
+              "residual_bits": 1,
+              "tokens": 149649
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76684,
+              "q0_fraction": 0.5069279179226823,
+              "residual_bits": 2,
+              "tokens": 151272
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521699,
+              "ones_fraction": 0.4975309371948242,
+              "q0_count": 74891,
+              "q0_fraction": 0.497406401307094,
+              "residual_bits": 1,
+              "tokens": 150563
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75402,
+              "q0_fraction": 0.49864760305000233,
+              "residual_bits": 3,
+              "tokens": 151213
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 507145,
+              "ones_fraction": 0.48365116119384766,
+              "q0_count": 71750,
+              "q0_fraction": 0.48352314846013883,
+              "residual_bits": 1,
+              "tokens": 148390
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72998,
+              "q0_fraction": 0.49055158324821246,
+              "residual_bits": 3,
+              "tokens": 148808
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 507109,
+              "ones_fraction": 0.48361682891845703,
+              "q0_count": 72004,
+              "q0_fraction": 0.4835761153533603,
+              "residual_bits": 1,
+              "tokens": 148899
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72377,
+              "q0_fraction": 0.4872067584396352,
+              "residual_bits": 0,
+              "tokens": 148555
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261022,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 514922,
+              "ones_fraction": 0.49106788635253906,
+              "q0_count": 72788,
+              "q0_fraction": 0.4888578451784491,
+              "residual_bits": 1,
+              "tokens": 148894
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78146,
+              "q0_fraction": 0.5149111131610505,
+              "residual_bits": 3,
+              "tokens": 151766
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515040,
+              "ones_fraction": 0.491180419921875,
+              "q0_count": 73760,
+              "q0_fraction": 0.4907942802770699,
+              "residual_bits": 1,
+              "tokens": 150287
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75981,
+              "q0_fraction": 0.5010716381885687,
+              "residual_bits": 1,
+              "tokens": 151637
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 520803,
+              "ones_fraction": 0.4966764450073242,
+              "q0_count": 73842,
+              "q0_fraction": 0.4943562964450693,
+              "residual_bits": 1,
+              "tokens": 149370
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76748,
+              "q0_fraction": 0.5072638104931989,
+              "residual_bits": 3,
+              "tokens": 151298
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 520987,
+              "ones_fraction": 0.49685192108154297,
+              "q0_count": 74695,
+              "q0_fraction": 0.4964541363977748,
+              "residual_bits": 1,
+              "tokens": 150457
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048568,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75610,
+              "q0_fraction": 0.49976535286302554,
+              "residual_bits": 8,
+              "tokens": 151291
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506331,
+              "ones_fraction": 0.48287487030029297,
+              "q0_count": 71279,
+              "q0_fraction": 0.4810168439237704,
+              "residual_bits": 1,
+              "tokens": 148184
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72749,
+              "q0_fraction": 0.48896700519555586,
+              "residual_bits": 1,
+              "tokens": 148781
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506347,
+              "ones_fraction": 0.48289012908935547,
+              "q0_count": 71514,
+              "q0_fraction": 0.4810218536231007,
+              "residual_bits": 1,
+              "tokens": 148671
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72068,
+              "q0_fraction": 0.48534888576104307,
+              "residual_bits": 5,
+              "tokens": 148487
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261023,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515885,
+              "ones_fraction": 0.4919862747192383,
+              "q0_count": 73784,
+              "q0_fraction": 0.4946336034967051,
+              "residual_bits": 5,
+              "tokens": 149169
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78372,
+              "q0_fraction": 0.5158971523361903,
+              "residual_bits": 5,
+              "tokens": 151914
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515837,
+              "ones_fraction": 0.4919404983520508,
+              "q0_count": 74282,
+              "q0_fraction": 0.49365010799136066,
+              "residual_bits": 5,
+              "tokens": 150475
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75638,
+              "q0_fraction": 0.4988984895455445,
+              "residual_bits": 1,
+              "tokens": 151610
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 521840,
+              "ones_fraction": 0.4976654052734375,
+              "q0_count": 74839,
+              "q0_fraction": 0.5000501125862772,
+              "residual_bits": 5,
+              "tokens": 149663
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76719,
+              "q0_fraction": 0.5071358218920009,
+              "residual_bits": 6,
+              "tokens": 151279
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 521931,
+              "ones_fraction": 0.49775218963623047,
+              "q0_count": 75361,
+              "q0_fraction": 0.5002290030732877,
+              "residual_bits": 5,
+              "tokens": 150653
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048572,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75872,
+              "q0_fraction": 0.501460654849242,
+              "residual_bits": 4,
+              "tokens": 151302
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 507092,
+              "ones_fraction": 0.4836006164550781,
+              "q0_count": 72198,
+              "q0_fraction": 0.48631608726988595,
+              "residual_bits": 5,
+              "tokens": 148459
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72443,
+              "q0_fraction": 0.4871460368908405,
+              "residual_bits": 1,
+              "tokens": 148709
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 507237,
+              "ones_fraction": 0.48373889923095703,
+              "q0_count": 72409,
+              "q0_fraction": 0.4861426288722087,
+              "residual_bits": 5,
+              "tokens": 148946
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72109,
+              "q0_fraction": 0.485893332434891,
+              "residual_bits": 1,
+              "tokens": 148405
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261024,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515570,
+              "ones_fraction": 0.4916858673095703,
+              "q0_count": 73222,
+              "q0_fraction": 0.4913403791310183,
+              "residual_bits": 0,
+              "tokens": 149025
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78240,
+              "q0_fraction": 0.5153573051766271,
+              "residual_bits": 0,
+              "tokens": 151817
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515723,
+              "ones_fraction": 0.49183177947998047,
+              "q0_count": 74045,
+              "q0_fraction": 0.4924121511983614,
+              "residual_bits": 0,
+              "tokens": 150372
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75896,
+              "q0_fraction": 0.5003494060097834,
+              "residual_bits": 2,
+              "tokens": 151686
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 521604,
+              "ones_fraction": 0.4974403381347656,
+              "q0_count": 74281,
+              "q0_fraction": 0.4968462593224307,
+              "residual_bits": 0,
+              "tokens": 149505
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76582,
+              "q0_fraction": 0.506330620367738,
+              "residual_bits": 2,
+              "tokens": 151249
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 521613,
+              "ones_fraction": 0.4974489212036133,
+              "q0_count": 74868,
+              "q0_fraction": 0.49742543734344996,
+              "residual_bits": 0,
+              "tokens": 150511
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75469,
+              "q0_fraction": 0.49917651649943445,
+              "residual_bits": 1,
+              "tokens": 151187
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 506965,
+              "ones_fraction": 0.48347949981689453,
+              "q0_count": 71648,
+              "q0_fraction": 0.4832102512223908,
+              "residual_bits": 0,
+              "tokens": 148275
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048568,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72403,
+              "q0_fraction": 0.4868705072254238,
+              "residual_bits": 8,
+              "tokens": 148711
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 506940,
+              "ones_fraction": 0.4834556579589844,
+              "q0_count": 71901,
+              "q0_fraction": 0.4832543603185805,
+              "residual_bits": 0,
+              "tokens": 148785
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72475,
+              "q0_fraction": 0.4877088618668533,
+              "residual_bits": 6,
+              "tokens": 148603
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261025,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 514393,
+              "ones_fraction": 0.49056339263916016,
+              "q0_count": 73117,
+              "q0_fraction": 0.49081694300865947,
+              "residual_bits": 0,
+              "tokens": 148970
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78513,
+              "q0_fraction": 0.517005682828376,
+              "residual_bits": 6,
+              "tokens": 151861
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 514517,
+              "ones_fraction": 0.49068164825439453,
+              "q0_count": 73817,
+              "q0_fraction": 0.49118009116012906,
+              "residual_bits": 0,
+              "tokens": 150285
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75801,
+              "q0_fraction": 0.49985492528652253,
+              "residual_bits": 2,
+              "tokens": 151646
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 520401,
+              "ones_fraction": 0.4962930679321289,
+              "q0_count": 74209,
+              "q0_fraction": 0.49650082963121556,
+              "residual_bits": 0,
+              "tokens": 149464
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76725,
+              "q0_fraction": 0.5070280129259928,
+              "residual_bits": 5,
+              "tokens": 151323
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 520447,
+              "ones_fraction": 0.4963369369506836,
+              "q0_count": 74824,
+              "q0_fraction": 0.49724212177195337,
+              "residual_bits": 0,
+              "tokens": 150478
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75561,
+              "q0_fraction": 0.4997453686863008,
+              "residual_bits": 6,
+              "tokens": 151199
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 505637,
+              "ones_fraction": 0.48221302032470703,
+              "q0_count": 71502,
+              "q0_fraction": 0.4823589729751609,
+              "residual_bits": 0,
+              "tokens": 148234
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72858,
+              "q0_fraction": 0.4894364541417833,
+              "residual_bits": 0,
+              "tokens": 148861
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 505893,
+              "ones_fraction": 0.48245716094970703,
+              "q0_count": 71744,
+              "q0_fraction": 0.4823871926415513,
+              "residual_bits": 0,
+              "tokens": 148727
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048569,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72032,
+              "q0_fraction": 0.4851685211628095,
+              "residual_bits": 7,
+              "tokens": 148468
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261026,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 514499,
+              "ones_fraction": 0.4906644821166992,
+              "q0_count": 73237,
+              "q0_fraction": 0.49139157273215245,
+              "residual_bits": 3,
+              "tokens": 149040
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78348,
+              "q0_fraction": 0.5159021769191261,
+              "residual_bits": 5,
+              "tokens": 151866
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 514498,
+              "ones_fraction": 0.4906635284423828,
+              "q0_count": 73816,
+              "q0_fraction": 0.49103294130168695,
+              "residual_bits": 3,
+              "tokens": 150328
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048568,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 75696,
+              "q0_fraction": 0.4991954417156876,
+              "residual_bits": 8,
+              "tokens": 151636
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 520394,
+              "ones_fraction": 0.49628639221191406,
+              "q0_count": 74376,
+              "q0_fraction": 0.49742845486587167,
+              "residual_bits": 3,
+              "tokens": 149521
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048572,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76714,
+              "q0_fraction": 0.5072804940949308,
+              "residual_bits": 4,
+              "tokens": 151226
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 520302,
+              "ones_fraction": 0.4961986541748047,
+              "q0_count": 74713,
+              "q0_fraction": 0.49648137688141675,
+              "residual_bits": 3,
+              "tokens": 150485
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75926,
+              "q0_fraction": 0.5018772639538881,
+              "residual_bits": 1,
+              "tokens": 151284
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 505804,
+              "ones_fraction": 0.4823722839355469,
+              "q0_count": 71651,
+              "q0_fraction": 0.4830936440192291,
+              "residual_bits": 3,
+              "tokens": 148317
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72338,
+              "q0_fraction": 0.4865479297263849,
+              "residual_bits": 1,
+              "tokens": 148676
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 505618,
+              "ones_fraction": 0.4821949005126953,
+              "q0_count": 71839,
+              "q0_fraction": 0.48285712365320377,
+              "residual_bits": 3,
+              "tokens": 148779
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048574,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72310,
+              "q0_fraction": 0.4867491939121011,
+              "residual_bits": 2,
+              "tokens": 148557
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261027,
+      "success_count": 3
+    },
+    {
+      "complete": true,
+      "failure_count": 0,
+      "input_count": 3,
+      "lead": 197,
+      "python_version": "3.13.15",
+      "samples": [
+        {
+          "bernoulli_p": 0.4916696548461914,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4916696548461914,
+            "next_one_probabilities": [
+              0.5225965858884138,
+              0.45969562721122215
+            ],
+            "transition_counts": [
+              [
+                254467,
+                278556
+              ],
+              [
+                278555,
+                236997
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515781,
+              "ones_fraction": 0.49188709259033203,
+              "q0_count": 73472,
+              "q0_fraction": 0.4928823474165806,
+              "residual_bits": 0,
+              "tokens": 149066
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 78280,
+              "q0_fraction": 0.5156139877090483,
+              "residual_bits": 0,
+              "tokens": 151819
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 515613,
+              "ones_fraction": 0.4917268753051758,
+              "q0_count": 73921,
+              "q0_fraction": 0.491643111303249,
+              "residual_bits": 0,
+              "tokens": 150355
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 157927,
+              "q0_fraction": 0.9170392651003983,
+              "residual_bits": 5,
+              "tokens": 172214
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 515553,
+              "ones_fraction": 0.4916696548461914,
+              "q0_count": 76015,
+              "q0_fraction": 0.5011174031419134,
+              "residual_bits": 1,
+              "tokens": 151691
+            }
+          },
+          "payload_bytes": 15760125,
+          "pixls_id": "1993",
+          "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.4973726272583008,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.4973726272583008,
+            "next_one_probabilities": [
+              0.5207715499494349,
+              0.47372740311236894
+            ],
+            "transition_counts": [
+              [
+                252574,
+                274469
+              ],
+              [
+                274468,
+                247064
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 521807,
+              "ones_fraction": 0.4976339340209961,
+              "q0_count": 74504,
+              "q0_fraction": 0.498117950672256,
+              "residual_bits": 0,
+              "tokens": 149571
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048567,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 76739,
+              "q0_fraction": 0.5070836692349373,
+              "residual_bits": 9,
+              "tokens": 151334
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 521606,
+              "ones_fraction": 0.49744224548339844,
+              "q0_count": 74923,
+              "q0_fraction": 0.4977015770104558,
+              "residual_bits": 0,
+              "tokens": 150538
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048573,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 104220,
+              "q0_fraction": 0.6547058158380762,
+              "residual_bits": 3,
+              "tokens": 159186
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048575,
+              "ones_count": 521533,
+              "ones_fraction": 0.4973726272583008,
+              "q0_count": 75773,
+              "q0_fraction": 0.5010547058395657,
+              "residual_bits": 1,
+              "tokens": 151227
+            }
+          },
+          "payload_bytes": 17772487,
+          "pixls_id": "6343",
+          "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5240
+        },
+        {
+          "bernoulli_p": 0.48336124420166016,
+          "compression_tag": 1,
+          "height": 3912,
+          "input_sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+          "markov_fit": {
+            "fallback_states": [],
+            "initial_one_probability": 0.48336124420166016,
+            "next_one_probabilities": [
+              0.4941373441578339,
+              0.4718442272823233
+            ],
+            "transition_counts": [
+              [
+                274043,
+                267691
+              ],
+              [
+                267691,
+                239150
+              ]
+            ]
+          },
+          "models": {
+            "bernoulli": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 507096,
+              "ones_fraction": 0.48360443115234375,
+              "q0_count": 71891,
+              "q0_fraction": 0.484617043937821,
+              "residual_bits": 0,
+              "tokens": 148346
+            },
+            "byte_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048571,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72514,
+              "q0_fraction": 0.4876333167457937,
+              "residual_bits": 5,
+              "tokens": 148706
+            },
+            "markov": {
+              "bits": 1048576,
+              "consumed_bits": 1048576,
+              "ones_count": 507065,
+              "ones_fraction": 0.48357486724853516,
+              "q0_count": 72063,
+              "q0_fraction": 0.4841576974241142,
+              "residual_bits": 0,
+              "tokens": 148842
+            },
+            "real": {
+              "bits": 1048576,
+              "consumed_bits": 1048570,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 79866,
+              "q0_fraction": 0.5295135550855604,
+              "residual_bits": 6,
+              "tokens": 150829
+            },
+            "run_shuffle": {
+              "bits": 1048576,
+              "consumed_bits": 1048569,
+              "ones_count": 506841,
+              "ones_fraction": 0.48336124420166016,
+              "q0_count": 72121,
+              "q0_fraction": 0.48575816152649337,
+              "residual_bits": 7,
+              "tokens": 148471
+            }
+          },
+          "payload_bytes": 20003129,
+          "pixls_id": "5283",
+          "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+          "prefix_bytes": 131072,
+          "requested_prefix_bytes": 131072,
+          "size_class": "variable",
+          "status": "ok",
+          "width": 5220
+        }
+      ],
+      "seed": 20261028,
+      "success_count": 3
+    }
+  ]
+}
