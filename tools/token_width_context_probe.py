@@ -152,7 +152,7 @@ def main():
                       "target_block_size": BLOCK, "smoothing_per_outcome": .5,
                       "escape_extra_bits": 0, "samples": reports, "failures": failures},
                      indent=2, allow_nan=False))
-    return 1 if failures else 0
+    return 1 if failures or any(row["prefix_shortfall"] > 0 for row in reports) else 0
 
 
 if __name__ == "__main__":

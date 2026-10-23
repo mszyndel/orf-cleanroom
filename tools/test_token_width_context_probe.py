@@ -3,9 +3,11 @@
 import collections
 import contextlib
 import io
+import json
 import math
 import os
 import random
+import struct
 import sys
 import unittest
 from unittest import mock
@@ -89,7 +91,7 @@ class Tests(unittest.TestCase):
 
     def test_cli_failure_accounting(self):
         with mock.patch.object(sys, "argv", ["probe", "--sample", "1", "public", "missing", "--sample", "2", "public", "ok"]), \
-                mock.patch.object(probe, "report", side_effect=[OSError("private path"), {"pixls_id": "2"}]), \
+                mock.patch.object(probe, "report", side_effect=[OSError("private path"), {"pixls_id": "2", "prefix_shortfall": 0}]), \
                 contextlib.redirect_stdout(io.StringIO()) as stream:
             code = probe.main()
         self.assertEqual(code, 1)
@@ -100,6 +102,29 @@ class Tests(unittest.TestCase):
             with self.assertRaises(SystemExit) as error:
                 probe.main()
         self.assertEqual(error.exception.code, 2)
+
+    def test_cli_prefix_shortfall_status(self):
+        # A real source-built TIFF with one complete token in a one-byte strip.
+        tags = [(256, 7), (257, 1), (273, 62), (279, 1)]
+        data = (b'II' + struct.pack('<HIH', 42, 8, len(tags))
+                + b''.join(struct.pack('<HHII', tag, 4, 1, value) for tag, value in tags)
+                + struct.pack('<I', 0) + bytes([0x80]))
+        with mock.patch('builtins.open', return_value=io.BytesIO(data)):
+            short = probe.report('1', 'synthetic', 'synthetic')
+        self.assertEqual(short['returned_tokens'], 1)
+        self.assertEqual(short['prefix_shortfall'], probe.LIMIT - 1)
+        complete = dict(short, pixls_id='2', returned_tokens=probe.LIMIT, prefix_shortfall=0)
+        for records, expected in (([short], 1), ([complete, short], 1), ([complete], 0)):
+            argv = ['probe']
+            for row in records:
+                argv.extend(['--sample', row['pixls_id'], 'synthetic', 'synthetic'])
+            with mock.patch.object(sys, 'argv', argv), \
+                    mock.patch.object(probe, 'report', side_effect=records), \
+                    contextlib.redirect_stdout(io.StringIO()) as stream:
+                self.assertEqual(probe.main(), expected)
+            result = json.loads(stream.getvalue())
+            self.assertEqual(result['samples'], records)
+            self.assertEqual(result['failures'], [])
 
 
 if __name__ == "__main__":
