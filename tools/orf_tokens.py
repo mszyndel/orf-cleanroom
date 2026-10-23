@@ -104,6 +104,9 @@ def scan(buf, max_tokens, w, esc_extra, esc_pos, qs, ss, cap, esc_q=None, esc_ma
             pos = p + 6
         else:
             q = avail - v.bit_length()
+            if pos + q + 6 > nbits:
+                # The stop bit is in the payload but the 5-bit suffix is not.
+                break
             s = (v >> (avail - q - 6)) & 31
             pos += q + 6
         if q >= ESC_Q:
@@ -238,7 +241,9 @@ def report(path, a):
     nbits = len(buf) * 8
     print("== %s" % os.path.basename(path))
     print("payload: %dx%d  bytes=%d  bpp=%.3f" % (w, h, len(buf), nbits / (w * h)))
-    complete = endpos + 6 > nbits
+    # A non-fitting final token can leave six or more residual bits. Exhausting
+    # the input before the token limit still constitutes a whole-payload scan.
+    complete = n < limit or endpos + 6 > nbits
     print("tokens parsed: %d%s  in %.1fs (%.2f Mtok/s)" % (
         n, " (whole payload)" if complete else " (prefix)", dt, n / dt / 1e6 if dt else 0))
     if complete:
@@ -256,13 +261,13 @@ def report(path, a):
     qh = collections.Counter(qa)
     esc = sum(c for q, c in qh.items() if q >= ESC_Q)
     print("escapes (q>=%d): %d (%.5f%% of tokens)" % (ESC_Q, esc, 100.0 * esc / n if n else 0))
+    if not n:
+        return
     print("q histogram (share): " + " ".join(
         "%d:%.4f" % (q, qh[q] / n) for q in sorted(qh) if q < 12) + (
         " 12+:%.5f" % (sum(c for q, c in qh.items() if q >= 12) / n)))
     if esc_q:
         print("escape q values: " + " ".join("%d:%d" % kv for kv in sorted(esc_q.items())))
-    if not n:
-        return
     ones = sum(bin(b).count("1") for b in buf[:endpos // 8]) / (8.0 * (endpos // 8)) if endpos >= 8 else 0.5
     if 0 < ones < 1:
         null_bits = 6 + (1 - ones) / ones

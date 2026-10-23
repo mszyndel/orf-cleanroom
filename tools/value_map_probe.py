@@ -203,12 +203,14 @@ def token_aggregates(qs, ss):
 
 
 def guarded_parse(payload, max_tokens):
-    """Use the original parser, rejecting any lookahead into its padding."""
+    """Use the original parser; reject a payload with no complete token or an invalid result."""
     if type(max_tokens) is not int or not 1 <= max_tokens <= MAX_TOKENS:
         raise ProbeError("max_tokens must be between 1 and 262144")
     qs, ss, marks, consumed = orf_tokens.parse(payload, max_tokens, 0, 0)
     if consumed < 0 or consumed > len(payload) * 8:
         raise ProbeError("candidate parser consumed beyond payload; no results emitted")
+    if not qs:
+        raise ProbeError("candidate parser found no complete token; no results emitted")
     if len(qs) != len(ss) or len(qs) > max_tokens:
         raise ProbeError("candidate parser returned invalid token counts")
     return qs, ss, consumed
