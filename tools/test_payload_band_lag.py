@@ -3,10 +3,11 @@
 import collections
 import hashlib
 import importlib.util
+import io
 from pathlib import Path
 import random
-import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('band_lag', Path(__file__).with_name('payload_band_lag.py'))
 probe = importlib.util.module_from_spec(spec)
@@ -76,15 +77,16 @@ class Tests(unittest.TestCase):
             with self.assertRaises(ValueError): probe.analyze(bytes(32),starts,8,[1],1)
         for lags in ([0],[64],[2,1],[]):
             with self.assertRaises(ValueError): probe.analyze(bytes(32),[0,8],8,lags,1)
-        with tempfile.NamedTemporaryFile(delete=False) as source:
-            source.write(bytes(range(32))); path=Path(source.name)
-        try:
-            digest=hashlib.sha256(path.read_bytes()).hexdigest()
-            self.assertEqual(probe.load_extent(path,digest,8,3),bytes([8,9,10]))
-            with self.assertRaises(ValueError): probe.load_extent(path,'0'*64,0,32)
-            with self.assertRaises(ValueError): probe.load_extent(path,digest,31,2)
-        finally:
-            path.unlink()
+        data = bytes(range(32))
+        digest = hashlib.sha256(data).hexdigest()
+        def read_only_open(path, mode):
+            self.assertEqual((path, mode), ('synthetic', 'rb'))
+            return io.BytesIO(data)
+        with patch('builtins.open', side_effect=read_only_open) as source:
+            self.assertEqual(probe.load_extent('synthetic',digest,8,3),bytes([8,9,10]))
+            with self.assertRaises(ValueError): probe.load_extent('synthetic','0'*64,0,32)
+            with self.assertRaises(ValueError): probe.load_extent('synthetic',digest,31,2)
+            self.assertEqual(source.call_count, 3)
 
 
 if __name__ == '__main__':
