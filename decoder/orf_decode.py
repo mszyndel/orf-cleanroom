@@ -40,6 +40,8 @@ import orf_signature  # noqa: E402
 F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
 F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
 F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
+F_EXTRA = "2026-10-22--radialmonster--extra-token-fields-not-fixed"
+F_STRIDE_LATER = "2026-10-22--radialmonster--later-band-row-stride-drift"
 F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
 F_PACKED128 = "2026-10-20--radialmonster--packed-12-8-groups-of-ten-values"
@@ -47,7 +49,13 @@ F_PACKED16 = "2026-10-21--radialmonster--packed16-whole-frame-word-layout"
 F_FIXED = "2026-10-19--radialmonster--fixed-size-payloads-exact-else-compressed"
 F_ROWLAYOUT = "2026-10-21--radialmonster--two-field-row-layout-reproduction"
 F_ENDPOINT = "2026-10-21--radialmonster--token-end-and-final-run"
+F_NULL_BPP = "2026-10-21--radialmonster--null-distance-tracks-bpp-within-body"
+F_NULL_BPP_2 = "2026-10-21--radialmonster--remaining-om1-family-null-distance"
+F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and-separation"
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
+F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
+F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
+F_DEP_CORR = "2026-10-22--radialmonster--token-dependence-independence-wording-correction"
 
 # what the evidence is for each layout
 STATUS = {
@@ -255,6 +263,9 @@ def decode_file(path, order=None, layout=None):
         # F_WEAK_TABLE and F_QXS_TABLE (Partial for #155) measure weak
         # preview-luma correlates; they specify neither sensor values nor a
         # predictor or round-trip decode.
+        # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
+        # correlate from b2/b4; they specify no sensor values or decode step
+        # (V1 S1.15).
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
@@ -263,11 +274,44 @@ def decode_file(path, order=None, layout=None):
         # it establishes no value assembly or compressed decode step (V1 S1.9).
         # 2026-10-21--radialmonster--em1mk2-full-payload-suffix-dependence
         # (Partial for #11) measures sequential association, not values or a predictor.
+        # F_BALANCE (Partial for #11) measures within-token H/L MI and b0/b1
+        # marginals within a predeclared tolerance on four further bodies; it
+        # establishes neither exact independence nor values (V1 S1.14).
+        # F_BALANCE_EM1 (self-verified, Partial for #11): one public E-M1
+        # prefix and whole payload pass that tolerance, not exact independence,
+        # population generality, framing or values (V1 S1.16).
+        # F_DEP (Partial for #11): the cross-field/same-field token-dependence
+        # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
+        # at lower MI; it establishes no values, row stride, geometry or decode
+        # (V1 S1.17). F_DEP_CORR (Partial correction for #11, corrects F_DEP):
+        # the measured within-token H/L MI is small but nonzero; exact
+        # independence is not established (V1 S1.17).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
-        r.update(variant="compressed", status="not yet specified (value assembly remains open)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.11, S2.3 and ROADMAP.md" % sig["bpp"])
+        # F_EXTRA (Partial for #144): at the measured strides the extra S-W tokens are
+        # not a fixed header or constant pad on five public files and three bands; their
+        # origin, physical rows and any values remain open (V1 S1.10, G3).
+        # F_STRIDE_LATER (self-verified, Partial for #144): later 300-row bands
+        # move the candidate peak and the fixed prefix S loses the contrast; it
+        # establishes no physical rows or whole-frame constant (V1 S1.10, G3).
+        # F_NULL_BPP and F_NULL_BPP_2 (Partial for #106) measure only the k=5
+        # tokens-per-pixel distance from a Bernoulli null and its bpp/body relation;
+        # they specify no value assembly or compressed decode step (V2 S1.1).
+        # F_NULL_CORRECTED (Partial for #231): corrected fixed-prefix q0 null
+        # separation specifies neither entropy-code boundaries nor values (V1 S1.12).
+        # F_Q47 (self-verified, #246): the first payload token is q=39/suffix 0 on
+        # 83 variable-size CC0 files and q=47/suffix 0 on four large-sensor files;
+        # it specifies no value assembly, decode step or variant assignment
+        # (V1 S1.13, V2 S1.2).
+        # F_PRED31 (Partial for #31): a fixed 11-reading x 9-predictor probe
+        # finds no cross-file preview-luma transfer on E-M1 Mark III 3800/3801
+        # and OM-5 6343; it specifies no predictor, values or decode step (V1 G2).
+        # F_RUN31 (Partial for #31): a plain per-row running-sum test on five
+        # public files stays inside a predeclared 0.5..1.5 within-row-null band
+        # in 15/15 cells; it specifies no values, predictor or decode (V1 G2).
+        r.update(variant="compressed", status="not yet specified (framing and value assembly remain open)")
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.17, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])

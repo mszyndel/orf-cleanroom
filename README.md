@@ -6,6 +6,10 @@ Everything here is released under CC0: the findings, the sample data and, we hop
 
 **Read [RULES.md](RULES.md) before contributing.** The whole point of this repo is provenance: every fact here must come from public specifications, patents, or measurements of the files themselves.
 
+[Patent source notes](PATENTS.md) collect reviewed Olympus and adjacent coding
+references, their relevant passages and the gaps they leave. Patent descriptions
+are method references; implementation in ORF must be established from files.
+
 ## How to contribute
 
 This repo is designed so you can hand it to an AI coding agent of your choice. Open the agent, give it this repo's URL, https://github.com/radialmonster/orf-cleanroom , and tell it:
@@ -33,6 +37,11 @@ All issues: https://github.com/radialmonster/orf-cleanroom/issues
 - **Samples:** upload varied ORFs (daylight, indoor, high ISO, different bodies) to [raw.pixls.us](https://raw.pixls.us). They are CC0, so anyone here can use them. Please don't attach raw files to this repo.
 - **Analysis:** pick a gap from a variant's spec in [specs/](specs/) or a lead, say you're working on it, and publish the numbers and a way to reproduce them as a lead issue.
 - **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when it is reproduced in a second run and the file is added by PR.
+
+For camera owners planning a controlled experiment, see the proposed
+[controlled capture protocol](CAPTURE_PROTOCOL.md): repeated scene controls,
+settings contrasts and a preregistered numeric-only analysis plan. It reports no
+measurements and does not authorize capture or sample release.
 
 ## Getting test files
 

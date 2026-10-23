@@ -17,6 +17,8 @@ Optional --start-token and --tokens select an absolute candidate-token window.
 Scanning still begins at payload bit zero; skipped tokens are not retained.
 Each window censors both edges independently, even inside an ongoing run.
 These windows alone do not establish stationarity or representativeness.
+The CLI prints all available reports, then exits 1 if any input failed or any
+requested start/window was incomplete; complete error-free reports exit 0.
 """
 import argparse
 from collections import Counter
@@ -171,7 +173,8 @@ def main():
     print(json.dumps(dict(source_sha256=sources, python_version=sys.version.split()[0],
                           escape_extra_bits=0, suffix_bit=2, samples=reports,
                           failures=failures), indent=2, allow_nan=False))
-    return 1 if failures else 0
+    incomplete = any(r["start_shortfall"] or r["token_shortfall"] for r in reports)
+    return 1 if failures or incomplete else 0
 
 
 if __name__ == "__main__":

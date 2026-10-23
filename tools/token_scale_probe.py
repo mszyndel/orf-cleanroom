@@ -15,6 +15,9 @@ P(y|c)=(n[c,y]+0.5)/(n[c]+1); unseen contexts predict 0.5. Held-out log-loss is
 cross-entropy, not empirical entropy. Print exact train/test tables, every loss
 and signed gain vs frequency/lag1, and unseen-context test counts. A loss/gain
 requires nonempty training AND test sets; negative gains remain negative.
+Incomplete requested prefixes retain observed-block diagnostics, but report
+prefix_complete=false and make the CLI exit nonzero. Input failures retain
+other reports and expose only public identity and sanitized error class.
 
 Sixteen Random(20261021+replicate) within-block whole-token permutations refit
 and retest. They preserve block marginals, not temporal dependence. Comparison
@@ -152,7 +155,8 @@ def report(sample_id, name, path):
             "payload_offset": off, "size_class": "variable",
             "compression_tag": (best.get(0x103) or [None])[0],
             "requested_tokens": LIMIT, "returned_tokens": len(tokens),
-            "shortfall_tokens": LIMIT - len(tokens), "bits_consumed": end,
+            "shortfall_tokens": LIMIT - len(tokens),
+            "prefix_complete": len(tokens) == LIMIT, "bits_consumed": end,
             "selection": selection, "statistics": measure(blocks)}
 
 
@@ -169,9 +173,14 @@ def main(argv=None):
     reports, errors = [], []
     for sid, name, path in args.sample:
         try:
-            reports.append(report(sid, name, path))
+            result = report(sid, name, path)
+            reports.append(result)
+            if not result["prefix_complete"]:
+                errors.append({"pixls_id": sid, "pixls_name": name,
+                               "error_type": "IncompletePrefix"})
         except (OSError, ValueError, KeyError, IndexError, TypeError, struct.error) as exc:
-            errors.append({"pixls_id": sid, "error_type": type(exc).__name__})
+            errors.append({"pixls_id": sid, "pixls_name": name,
+                           "error_type": type(exc).__name__})
     hashes = {}
     for source in ("token_scale_probe.py", "suffix_joint_probe.py", "orf_signature.py"):
         with open(os.path.join(os.path.dirname(__file__), source), "rb") as handle:

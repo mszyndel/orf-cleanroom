@@ -10,6 +10,8 @@ means all ordinary tokens are before and the after group is empty. This is a
 new public metric, not reproduction of historical private balance numbers.
 Reads only input files and prints aggregate JSON; stdlib, Python 3.8+.
 Check CC0 licences separately. Repeat --sample ID PUBLIC_NAME FILE.
+The CLI returns 1 if any requested prefix is incomplete or an input fails;
+all available aggregate reports and sanitized errors are still printed.
 """
 import argparse
 import hashlib
@@ -93,7 +95,8 @@ def main():
             hashes[filename] = hashlib.sha256(handle.read()).hexdigest()
     print(json.dumps({"source_sha256": hashes, "python_version": sys.version.split()[0],
                       "samples": reports, "failures": failures}, indent=2, allow_nan=False))
-    return 1 if failures else 0
+    incomplete = any(sample["prefix_shortfall_tokens"] > 0 for sample in reports)
+    return 1 if failures or incomplete else 0
 
 
 if __name__ == "__main__":
