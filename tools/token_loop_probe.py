@@ -26,7 +26,10 @@ Fixed loops, zero initial state:
   LK05/LK09  x[i] = a*x[i-1] + e[i], a = 0.5 / 0.9     (per nominal row)
 
 Growth is the peak-to-peak range (max-min) of the reconstructed sequence. The
-null shuffles the mapped values within each nominal row with a fixed seed and
+initial zero state is excluded from this range. Even for nonnegative values,
+the range need not be invariant under a within-row permutation (although the
+final row sum is invariant).
+The null shuffles the mapped values within each nominal row with a fixed seed and
 repeats the same loops. Reports contain aggregate ranges only: no token or
 pixel values, no images, no paths.
 

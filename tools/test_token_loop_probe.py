@@ -4,9 +4,12 @@
 No sample files, no image data, no writes. Run either directly or with
 `python -I -B tools/token_loop_probe.py --self-test`.
 """
+import os
 import random
+import sys
 import unittest
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import token_loop_probe as probe
 
 
@@ -64,6 +67,10 @@ class LoopTests(unittest.TestCase):
 
     def test_r1_resets_per_row(self):
         self.assertEqual(probe.range_r1([1, 1, 1, 1, 1, 1, 1, 1], 4, 2), 3)
+
+    def test_r1_range_excludes_initial_zero_and_depends_on_order(self):
+        self.assertEqual(probe.range_r1([1, 10], 2, 1), 10)
+        self.assertEqual(probe.range_r1([10, 1], 2, 1), 1)
 
     def test_r2_parity(self):
         self.assertEqual(probe.range_r2([1, 10, 1, 10], 4, 1), 19)
