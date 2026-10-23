@@ -3,6 +3,10 @@
 import os
 import sys
 import unittest
+import contextlib
+import io
+from types import SimpleNamespace
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import orf_tokens as t  # noqa: E402
@@ -39,6 +43,30 @@ class ParseTests(unittest.TestCase):
         qs, ss, _, pos = t.parse(buf, 99, 0)
         self.assertEqual(list(zip(qs, ss)), [(0, 0)])
         self.assertLessEqual(pos, len(buf) * 8)
+
+    def test_report_exhausted_payload_with_six_or_seven_residual_bits(self):
+        args = SimpleNamespace(stride=0, max_tokens=99, rows=None, all=True,
+                               escape_extra=0, escape_landing=False)
+        for residual in (6, 7):
+            # One q=4/3 token uses 10/9 bits; the final stop lacks a suffix.
+            payload = bits_to_bytes(token(10 - residual, 0) + "0" * (residual - 1) + "1")
+            output = io.StringIO()
+            with self.subTest(residual=residual), patch.object(t, "locate", return_value=(1, 1, payload)):
+                with contextlib.redirect_stdout(output):
+                    t.report("synthetic.ORF", args)
+                self.assertIn("(whole payload)", output.getvalue())
+                self.assertIn("tokens / (W*H): 1.00000", output.getvalue())
+
+    def test_report_token_limit_remains_prefix(self):
+        args = SimpleNamespace(stride=0, max_tokens=1, rows=None, all=False,
+                               escape_extra=0, escape_landing=False)
+        payload = bits_to_bytes(token(0, 0) * 4)
+        output = io.StringIO()
+        with patch.object(t, "locate", return_value=(1, 1, payload)):
+            with contextlib.redirect_stdout(output):
+                t.report("synthetic.ORF", args)
+        self.assertIn("(prefix)", output.getvalue())
+        self.assertNotIn("tokens / (W*H):", output.getvalue())
 
     def test_scan_matches_parse(self):
         # the compact one-byte-per-token streams used by --all equal the plain lists

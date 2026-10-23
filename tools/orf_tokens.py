@@ -241,7 +241,9 @@ def report(path, a):
     nbits = len(buf) * 8
     print("== %s" % os.path.basename(path))
     print("payload: %dx%d  bytes=%d  bpp=%.3f" % (w, h, len(buf), nbits / (w * h)))
-    complete = endpos + 6 > nbits
+    # A non-fitting final token can leave six or more residual bits. Exhausting
+    # the input before the token limit still constitutes a whole-payload scan.
+    complete = n < limit or endpos + 6 > nbits
     print("tokens parsed: %d%s  in %.1fs (%.2f Mtok/s)" % (
         n, " (whole payload)" if complete else " (prefix)", dt, n / dt / 1e6 if dt else 0))
     if complete:
