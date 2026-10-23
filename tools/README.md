@@ -287,6 +287,20 @@ Example output on raw.pixls.us `8549_OM System - OM-5 Mark II - 16bit (4_3).ORF`
     python tools/orf_tokens.py path/to/file.ORF --rows 400
     python tools/orf_tokens.py path/to/file.ORF --all
 
+**`token_row_stride.py`** scans a wide range of candidate token row strides
+and scores a row-start q profile: for a stride S it folds the q sequence into
+rows and compares the mean q of the first K tokens of each row with the rest,
+over up to `--rows` rows. A positive peak is a candidate prefix periodicity;
+on the calm E-M1 Mark II files the peak is the payload width, while busy
+OM-5/OM-1 files peak at a larger, file-specific stride (for example S=5472 on
+OM-5 id 6343, S=6010 on OM-1 id 5283 over 300 rows). This extends the W+/-4
+scan of the row-period finding. Standard library only; `--self-test` runs a
+synthetic check. The score is descriptive and does not establish a unique
+physical row boundary. Supports specs/V1.md G3 and lead #30.
+
+    python -I tools/token_row_stride.py path/to/file.ORF --rows 300
+    python -I tools/token_row_stride.py --self-test
+
 **`jpeg_dc.py`** decodes only the DC coefficient of each 8x8 block of a
 baseline JPEG, for the first (luma) component. For an ORF it finds the largest
 embedded preview (width and height at least 1000). On the E-M1 Mark II files the
