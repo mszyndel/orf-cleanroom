@@ -90,7 +90,8 @@ def olympus_tags(blob):
 def main(paths):
     if not paths or paths[0] in ("-h", "--help"):
         print(__doc__)
-        return
+        return 0 if paths else 2
+    failed = False
     for path in paths:
         try:
             with open(path, "rb") as f:
@@ -116,6 +117,8 @@ def main(paths):
                 list(cr) if cr else "not found"))
         except (ValueError, IndexError, KeyError, OSError, struct.error) as exc:
             print("%s: %s" % (path, exc), file=sys.stderr)
+            failed = True
+    return 1 if failed else 0
 
 
 def self_test():
@@ -141,8 +144,8 @@ def main_cli():
     if a.self_test:
         self_test()
         return
-    main(a.files)
+    return main(a.files)
 
 
 if __name__ == "__main__":
-    main_cli()
+    sys.exit(main_cli())
