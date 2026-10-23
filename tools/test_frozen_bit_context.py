@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Meaningful synthetic normalization/count/holdout tests; no camera input."""
 from fractions import Fraction
+import contextlib
 import hashlib
 import io
 import itertools
@@ -92,6 +93,36 @@ class ContextTests(unittest.TestCase):
         with patch.object(probe.Path, 'read_bytes', return_value=malformed):
             with self.assertRaisesRegex(ValueError, 'strip outside file'):
                 probe.load_window('synthetic', [badrow], 0, 1)
+        overlap = data[:38] + struct.pack('<II', 54, 55) + data[46:]
+        badrow = dict(row, sha256=hashlib.sha256(overlap).hexdigest())
+        with patch.object(probe.Path, 'read_bytes', return_value=overlap):
+            with self.assertRaisesRegex(ValueError, 'overlapping strips'):
+                probe.load_window('synthetic', [badrow], 0, 1)
+
+    def test_cli_redacts_manifest_failure(self):
+        private = 'DO_NOT_PUBLISH_PRIVATE_PATH'
+        err, out = io.StringIO(), io.StringIO()
+        with patch('builtins.open', side_effect=OSError(private)):
+            with contextlib.redirect_stderr(err), contextlib.redirect_stdout(out):
+                self.assertEqual(probe.main(['--manifest', private, '--discovery', 'a',
+                                             '--validation', 'b']), 1)
+        self.assertNotIn(private, err.getvalue())
+        self.assertIn('invalid input:', err.getvalue())
+        self.assertEqual(out.getvalue(), '')
+
+    def test_cli_redacts_sample_failure(self):
+        private = 'DO_NOT_PUBLISH_PRIVATE_PATH'
+        for failure in (OSError(private), ValueError(private), struct.error(private),
+                        KeyError(private), UnicodeError(private)):
+            err, out = io.StringIO(), io.StringIO()
+            with patch('builtins.open', return_value=io.StringIO('sha256,licence\n')):
+                with patch.object(probe, 'load_window', side_effect=failure):
+                    with contextlib.redirect_stderr(err), contextlib.redirect_stdout(out):
+                        self.assertEqual(probe.main(['--manifest', 'unused', '--discovery',
+                                                     private, '--validation', 'b']), 1)
+            self.assertNotIn(private, err.getvalue())
+            self.assertIn('invalid input:', err.getvalue())
+            self.assertEqual(out.getvalue(), '')
 
     def test_cli_rejects_duplicate_hashes(self):
         argv = ['probe', '--manifest', 'synthetic.csv', '--discovery', 'a', '--validation', 'b']

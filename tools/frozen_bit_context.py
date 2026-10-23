@@ -29,6 +29,7 @@ import json
 import math
 from pathlib import Path
 import random
+import struct
 import sys
 import time
 
@@ -122,6 +123,10 @@ def load_window(path, manifest, offset, size):
     if any(start < 0 or length <= 0 or start + length > len(data)
            for start, length in zip(starts, lengths)):
         raise ValueError('strip outside file')
+    extents = sorted(zip(starts, lengths))
+    if any(left + length > right for (left, length), (right, _)
+           in zip(extents, extents[1:])):
+        raise ValueError('overlapping strips')
     payload = b''.join(data[start:start + length] for start, length in zip(starts, lengths))
     if offset + size > len(payload):
         raise ValueError('short fixed window')
@@ -133,7 +138,7 @@ def load_window(path, manifest, offset, size):
         'manifest_signature': {key: row[key] for key in ('payload_w', 'payload_h', 'size_class', 'variant')}}
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--discovery', nargs='+', required=True)
@@ -142,27 +147,32 @@ def main():
     parser.add_argument('--validation-offset', type=int, default=None,
                         help='heldout logical-strip byte offset; defaults to --offset')
     parser.add_argument('--bytes', type=int, default=65536, dest='size')
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     validation_offset = args.offset if args.validation_offset is None else args.validation_offset
     if args.offset < 0 or validation_offset < 0 or not 1 <= args.size <= 1048576:
         parser.error('offsets >= 0 and bytes 1..1048576 required')
-    with open(args.manifest, newline='', encoding='utf-8') as stream:
-        manifest = list(csv.DictReader(stream))
-    started = time.perf_counter()
-    loaded = ([load_window(path, manifest, args.offset, args.size) for path in args.discovery]
-              + [load_window(path, manifest, validation_offset, args.size)
-                 for path in args.validation])
-    identities = [identity for _, identity in loaded]
-    if len({row['sha256'] for row in identities}) != len(identities):
-        parser.error('duplicate content or train/test overlap')
-    split = len(args.discovery)
-    result = experiment([x[0] for x in loaded[:split]], [x[0] for x in loaded[split:]])
-    result.update({'inputs_discovery': identities[:split], 'inputs_validation': identities[split:],
-                   'scope': 'compressed-bit predictive baseline only; no codec/reconstruction',
-                   'cpu_seconds': time.perf_counter() - started,
-                   'backend': 'stdlib CPU; fixed tiny campaign, no GPU claim'})
+    try:
+        with open(args.manifest, newline='', encoding='utf-8') as stream:
+            manifest = list(csv.DictReader(stream))
+        started = time.perf_counter()
+        loaded = ([load_window(path, manifest, args.offset, args.size) for path in args.discovery]
+                  + [load_window(path, manifest, validation_offset, args.size)
+                     for path in args.validation])
+        identities = [identity for _, identity in loaded]
+        if len({row['sha256'] for row in identities}) != len(identities):
+            parser.error('duplicate content or train/test overlap')
+        split = len(args.discovery)
+        result = experiment([x[0] for x in loaded[:split]], [x[0] for x in loaded[split:]])
+        result.update({'inputs_discovery': identities[:split], 'inputs_validation': identities[split:],
+                       'scope': 'compressed-bit predictive baseline only; no codec/reconstruction',
+                       'cpu_seconds': time.perf_counter() - started,
+                       'backend': 'stdlib CPU; fixed tiny campaign, no GPU claim'})
+    except (OSError, UnicodeError, ValueError, KeyError, IndexError, TypeError, struct.error):
+        print('invalid input: unreadable manifest/sample or invalid hash/strip/window', file=sys.stderr)
+        return 1
     print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
