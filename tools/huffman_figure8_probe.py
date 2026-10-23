@@ -27,6 +27,7 @@ import array
 import collections
 import math
 import os
+import struct
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -189,6 +190,8 @@ def score(vals, rows, w, path, reset):
 
 def run(path, rows, start, missing, sign, reset):
     w, h, buf = T.locate(path)
+    if w <= 0 or h <= 0 or start >= len(buf) * 8:
+        raise ValueError("invalid dimensions or start beyond payload")
     print("%s payload %dx%d rows=%d start=%d sign=%s reset=%d missing=%s" % (
         os.path.basename(path), w, h, rows, start, sign, reset, missing))
     for name, codes in (("table1", TABLE1), ("table2", TABLE2)):
@@ -247,7 +250,7 @@ def self_test():
     print("self-test ok: prefix/Kraft and a known category+extend sequence")
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(
         description=__doc__.splitlines()[0],
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -261,18 +264,36 @@ def main():
     ap.add_argument("--sign", default="extend", choices=["extend", "separate"])
     ap.add_argument("--reset", action="store_true")
     ap.add_argument("--self-test", action="store_true")
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    if a.rows <= 0:
+        ap.error("--rows must be positive")
+    if a.start < 0:
+        ap.error("--start must be nonnegative")
+    if not 0 <= a.missing_category <= 11:
+        ap.error("--missing-category must be between 0 and 11")
     if a.self_test:
         self_test()
-        return
+        import unittest
+        import test_huffman_figure8_probe
+        suite = unittest.defaultTestLoader.loadTestsFromModule(test_huffman_figure8_probe)
+        return 0 if unittest.TextTestRunner().run(suite).wasSuccessful() else 1
     if not a.files:
         ap.error("no files (or use --self-test)")
+    succeeded = failed = 0
     for p in a.files:
         try:
             run(p, a.rows, a.start, a.missing_category, a.sign, a.reset)
-        except (ValueError, IndexError, KeyError, OSError) as exc:
-            print("%s: %s" % (p, exc), file=sys.stderr)
+        except (ValueError, IndexError, KeyError, OSError, struct.error):
+            failed += 1
+            print("%s: report incomplete; input or measurement failed" % os.path.basename(p),
+                  file=sys.stderr)
+            print("%s status=incomplete" % os.path.basename(p))
+        else:
+            succeeded += 1
+            print("%s status=complete" % os.path.basename(p))
+    print("files: requested=%d complete=%d failed=%d" % (len(a.files), succeeded, failed))
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
