@@ -111,6 +111,16 @@ class ExifTests(unittest.TestCase):
         self.assertEqual(meta["lens"], "TestLens")
         self.assertTrue(sensitivity.rational_equal(meta["focal"], (14, 1)))
 
+    def test_sshort_tag(self):
+        data = bytearray(64)
+        data[0:2] = b"II"
+        struct.pack_into("<H", data, 2, 42)
+        struct.pack_into("<I", data, 4, 8)
+        struct.pack_into("<H", data, 8, 1)
+        struct.pack_into("<HHI", data, 10, 0x1234, 8, 1)
+        struct.pack_into("<h", data, 18, -7)
+        self.assertEqual(sensitivity.read_ifd(bytes(data), 8, "<")[0x1234], [-7])
+
     def test_rational_equality(self):
         self.assertTrue(sensitivity.rational_equal((1, 100), (2, 200)))
         self.assertFalse(sensitivity.rational_equal((1, 100), (1, 50)))

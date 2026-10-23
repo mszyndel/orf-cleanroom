@@ -76,7 +76,7 @@ def read_ifd(data, offset, endian):
         if kind == 2:
             out[tag] = value.split(b"\x00", 1)[0].decode("ascii", "replace").strip()
         elif kind in (3, 4, 8, 9):
-            code = {3: "H", 4: "I", 8: "H", 9: "i"}[kind]
+            code = {3: "H", 4: "I", 8: "h", 9: "i"}[kind]
             out[tag] = list(struct.unpack_from(endian + code * number, value))
         elif kind in (5, 10):
             code = "I" if kind == 5 else "i"
