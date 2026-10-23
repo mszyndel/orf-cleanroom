@@ -3,6 +3,7 @@
 import itertools
 import contextlib
 import io
+import json
 import os
 import random
 import struct
@@ -116,24 +117,90 @@ class TestAffine(unittest.TestCase):
             with mock.patch("builtins.open", side_effect=lambda *args, **kwargs: io.BytesIO(data[:-1])):
                 self.assertRaises(ValueError, probe.report, "1", "synthetic.ORF", "ignored")
 
-    def test_cli_validation_and_no_partial_output(self):
+    def test_cli_validates_all_ids_before_reads(self):
         stdout, stderr = io.StringIO(), io.StringIO()
-        with mock.patch.object(sys, "argv", ["probe", "--sample", "bad", "name", "path"]), \
+        with mock.patch.object(sys, "argv", ["probe", "--sample", "1", "name", "path",
+                                             "--sample", "bad", "name", "path"]), \
+                mock.patch.object(probe, "report") as report, \
                 contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
             with self.assertRaises(SystemExit) as error:
                 probe.main()
         self.assertEqual(error.exception.code, 2)
+        report.assert_not_called()
         self.assertEqual(stdout.getvalue(), "")
+
+    def run_cli(self, results):
+        arguments = ["probe"]
+        for index in range(len(results)):
+            arguments.extend(["--sample", str(index + 1), "public-%d" % index, "private-path"])
         stdout, stderr = io.StringIO(), io.StringIO()
-        with mock.patch.object(sys, "argv", ["probe", "--sample", "1", "n", "a",
-                                             "--sample", "2", "n", "private-path"]), \
-                mock.patch.object(probe, "report", side_effect=[{"ok": True}, OSError("private-path")]), \
+        with mock.patch.object(sys, "argv", arguments), \
+                mock.patch.object(probe, "report", side_effect=results), \
                 contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            with self.assertRaises(SystemExit) as error:
-                probe.main()
-        self.assertEqual(error.exception.code, 1)
-        self.assertEqual(stdout.getvalue(), "")
-        self.assertEqual(stderr.getvalue(), "sample 2: OSError\n")
+            status = probe.main()
+        self.assertEqual(stderr.getvalue(), "")
+        self.assertNotIn("private-path", stdout.getvalue())
+        return status, json.loads(stdout.getvalue())
+
+    def test_cli_retains_all_successes_and_sanitized_failures(self):
+        complete = {"prefix_complete": True, "statistics": {"sentinel": 42}}
+        status, output = self.run_cli([
+            complete, OSError("private-path"), ValueError("private-path"), complete])
+        self.assertEqual(status, 1)
+        self.assertEqual(output["samples"], [complete, complete])
+        self.assertEqual(output["failures"], [
+            {"pixls_id": "2", "pixls_name": "public-1", "error": "OSError"},
+            {"pixls_id": "3", "pixls_name": "public-2", "error": "ValueError"}])
+        status, output = self.run_cli([complete, complete])
+        self.assertEqual(status, 0)
+        self.assertEqual(output["samples"], [complete, complete])
+        self.assertEqual(output["failures"], [])
+        status, output = self.run_cli([OSError("private-path")])
+        self.assertEqual(status, 1)
+        self.assertEqual(output["samples"], [])
+
+    def test_short_and_empty_prefixes_keep_diagnostic_ranks_but_fail_cli(self):
+        # Real scanner path, mocked container only; repeated six-bit 100000 codewords have
+        # an exact affine fit on their observed rows, even for a short prefix.
+        for payload, count in ((bytes([0x82, 0x08, 0x20]) * 4, 16), (bytes(12), 0)):
+            tags = {0x100: [100], 0x101: [100], 0x111: [0], 0x117: [len(payload)]}
+            with mock.patch("builtins.open", return_value=io.BytesIO(payload)), \
+                    mock.patch.object(probe, "Tiff") as tiff:
+                tiff.return_value.all_ifds.return_value = [tags]
+                report = probe.report("1", "synthetic", "ignored")
+            self.assertEqual(report["returned_tokens"], count)
+            self.assertEqual(report["token_shortfall"], probe.LIMIT - count)
+            self.assertFalse(report["prefix_complete"])
+            if count:
+                self.assertTrue(report["statistics"]["systems"][0]["exact_affine_consistent"])
+            else:
+                self.assertIsNone(report["statistics"]["systems"][0]["exact_affine_consistent"])
+            status, output = self.run_cli([report])
+            self.assertEqual(status, 1)
+            self.assertEqual(output["samples"], [report])
+            self.assertEqual(output["failures"], [])
+
+    def test_full_prefix_marks_complete_without_changing_statistics(self):
+        tags = {0x100: [100], 0x101: [100], 0x111: [0], 0x117: [12]}
+        tokens = [(0, 0)] * probe.LIMIT
+        with mock.patch("builtins.open", return_value=io.BytesIO(bytes(12))), \
+                mock.patch.object(probe, "Tiff") as tiff, \
+                mock.patch.object(probe, "scan_prefix", return_value=(tokens, 6 * probe.LIMIT)):
+            tiff.return_value.all_ifds.return_value = [tags]
+            report = probe.report("1", "synthetic", "ignored")
+        self.assertTrue(report["prefix_complete"])
+        self.assertEqual(report["token_shortfall"], 0)
+        self.assertEqual(report["bits_consumed"], 6 * probe.LIMIT)
+        self.assertEqual(report["statistics"]["candidate_windows"], probe.LIMIT - 12)
+        for cell in report["statistics"]["systems"]:
+            expected = probe.LIMIT - 12 if cell["stratum"] == "pooled" else (probe.LIMIT - 12) // 2
+            self.assertEqual(cell["retained_rows"], expected)
+            self.assertEqual(cell["omitted_escape_windows"], 0)
+            self.assertEqual((cell["context_rank"], cell["augmented_rank"]), (1, 1))
+            self.assertTrue(cell["exact_affine_consistent"])
+        status, output = self.run_cli([report])
+        self.assertEqual(status, 0)
+        self.assertEqual(output["samples"], [report])
 
 
 if __name__ == "__main__":

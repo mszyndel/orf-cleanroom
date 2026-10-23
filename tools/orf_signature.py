@@ -6,6 +6,7 @@ Standard library only. Reads the TIFF structure (public TIFF 6.0 spec) and
 reports container and payload facts; it does not decode image data.
 
 Usage: python orf_signature.py FILE [FILE ...] > rows.csv
+Exit status is 1 if any input fails; successful CSV rows are still printed.
 """
 import csv
 import hashlib
@@ -120,19 +121,22 @@ def signature(path):
 def main(paths):
     if not paths or paths[0] in ("-h", "--help"):
         print(__doc__)
-        sys.exit(0 if paths else 2)
+        return 0 if paths else 2
     out = None
+    failed = False
     for p in paths:
         try:
             row = signature(p)
         except (ValueError, struct.error, OSError) as exc:
             print("%s: %s" % (p, exc), file=sys.stderr)
+            failed = True
             continue
         if out is None:
             out = csv.DictWriter(sys.stdout, fieldnames=list(row), lineterminator="\n")
             out.writeheader()
         out.writerow(row)
+    return int(failed)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    sys.exit(main(sys.argv[1:]))

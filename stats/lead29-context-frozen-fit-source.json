@@ -1,0 +1,6130 @@
+{
+  "source_sha256": {
+    "token_context_probe.py": "09c1db54ddef6455c87ea874508ae79c0a134d8282ad708f602e8e41fe5deb7f",
+    "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18",
+    "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb"
+  },
+  "python_version": "3.13.15",
+  "block_tokens": 128,
+  "target_start_within_block": 5,
+  "smoothing_per_outcome": 0.5,
+  "replicates": 16,
+  "seed": 20261021,
+  "samples": [
+    {
+      "pixls_id": "1993",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+      "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+      "variant": "unassigned",
+      "payload_w": 5240,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_bytes": 15760125,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1595634,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          1023,
+          1024
+        ],
+        "escape_omitted_train_test_blocks": [
+          1,
+          0
+        ],
+        "retained_train_test_targets": [
+          125829,
+          125952
+        ],
+        "parsed_escapes": 1,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              85409,
+              40420
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              85417,
+              40535
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9063604782484481,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9066523087373861,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9062326648323764,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9060526963292638,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059233678488996,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.906309440329248,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9062834989878934,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9067820507303229,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.906378305435702,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9066534472997573,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.906839826839772,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9069227804762812,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9056330232495585,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9067585305138435,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.906959794050285,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9065833631869764,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9070652343370204,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              40588,
+              17175
+            ],
+            [
+              26397,
+              5147
+            ],
+            [
+              11184,
+              16429
+            ],
+            [
+              7240,
+              1669
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              40781,
+              17530
+            ],
+            [
+              26576,
+              5187
+            ],
+            [
+              10906,
+              16248
+            ],
+            [
+              7154,
+              1570
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8269746369332102,
+          "gain_vs_empty_bits": 0.07938584131523796,
+          "gain_vs_previous_bits": 0.07938584131523796,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9065973675832503,
+              "gain_vs_empty_bits": 5.494115413584577e-05,
+              "gain_vs_previous_bits": 5.494115413584577e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062007142437851,
+              "gain_vs_empty_bits": 3.195058859128963e-05,
+              "gain_vs_previous_bits": 3.195058859128963e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060324168511346,
+              "gain_vs_empty_bits": 2.0279478129214823e-05,
+              "gain_vs_previous_bits": 2.0279478129214823e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058957598860803,
+              "gain_vs_empty_bits": 2.760796281930933e-05,
+              "gain_vs_previous_bits": 2.760796281930933e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062861444068203,
+              "gain_vs_empty_bits": 2.3295922427668536e-05,
+              "gain_vs_previous_bits": 2.3295922427668536e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062332610424901,
+              "gain_vs_empty_bits": 5.0237945403264206e-05,
+              "gain_vs_previous_bits": 5.0237945403264206e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9067136187212662,
+              "gain_vs_empty_bits": 6.843200905670699e-05,
+              "gain_vs_previous_bits": 6.843200905670699e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9063730400141103,
+              "gain_vs_empty_bits": 5.2654215916270175e-06,
+              "gain_vs_previous_bits": 5.2654215916270175e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.906663463753832,
+              "gain_vs_empty_bits": -1.0016454074723846e-05,
+              "gain_vs_previous_bits": -1.0016454074723846e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9068297013370474,
+              "gain_vs_empty_bits": 1.0125502724611657e-05,
+              "gain_vs_previous_bits": 1.0125502724611657e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.906908891972334,
+              "gain_vs_empty_bits": 1.388850394712371e-05,
+              "gain_vs_previous_bits": 1.388850394712371e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9055719920438825,
+              "gain_vs_empty_bits": 6.103120567602094e-05,
+              "gain_vs_previous_bits": 6.103120567602094e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9067966408923428,
+              "gain_vs_empty_bits": -3.811037849932308e-05,
+              "gain_vs_previous_bits": -3.811037849932308e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9070124618054732,
+              "gain_vs_empty_bits": -5.2667755188196e-05,
+              "gain_vs_previous_bits": -5.2667755188196e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9065922837966102,
+              "gain_vs_empty_bits": -8.920609633755738e-06,
+              "gain_vs_previous_bits": -8.920609633755738e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9070112874358128,
+              "gain_vs_empty_bits": 5.3946901207524434e-05,
+              "gain_vs_previous_bits": 5.3946901207524434e-05
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              19264,
+              5097
+            ],
+            [
+              2569,
+              2165
+            ],
+            [
+              6635,
+              2189
+            ],
+            [
+              5683,
+              1671
+            ],
+            [
+              2863,
+              3862
+            ],
+            [
+              948,
+              951
+            ],
+            [
+              1247,
+              628
+            ],
+            [
+              1379,
+              612
+            ],
+            [
+              7759,
+              1465
+            ],
+            [
+              3903,
+              864
+            ],
+            [
+              1750,
+              222
+            ],
+            [
+              1831,
+              180
+            ],
+            [
+              8433,
+              1793
+            ],
+            [
+              1778,
+              465
+            ],
+            [
+              494,
+              88
+            ],
+            [
+              449,
+              70
+            ],
+            [
+              3621,
+              6154
+            ],
+            [
+              656,
+              1052
+            ],
+            [
+              2809,
+              3606
+            ],
+            [
+              1444,
+              2353
+            ],
+            [
+              707,
+              1113
+            ],
+            [
+              331,
+              419
+            ],
+            [
+              785,
+              786
+            ],
+            [
+              831,
+              946
+            ],
+            [
+              1519,
+              403
+            ],
+            [
+              1092,
+              177
+            ],
+            [
+              538,
+              231
+            ],
+            [
+              316,
+              88
+            ],
+            [
+              2556,
+              406
+            ],
+            [
+              847,
+              176
+            ],
+            [
+              218,
+              93
+            ],
+            [
+              154,
+              95
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              19424,
+              5379
+            ],
+            [
+              2591,
+              2143
+            ],
+            [
+              6808,
+              2284
+            ],
+            [
+              5611,
+              1643
+            ],
+            [
+              2863,
+              3905
+            ],
+            [
+              908,
+              919
+            ],
+            [
+              1202,
+              625
+            ],
+            [
+              1374,
+              632
+            ],
+            [
+              8048,
+              1476
+            ],
+            [
+              3895,
+              910
+            ],
+            [
+              1919,
+              221
+            ],
+            [
+              1749,
+              231
+            ],
+            [
+              8245,
+              1765
+            ],
+            [
+              1814,
+              436
+            ],
+            [
+              460,
+              86
+            ],
+            [
+              446,
+              62
+            ],
+            [
+              3534,
+              6083
+            ],
+            [
+              638,
+              988
+            ],
+            [
+              2846,
+              3699
+            ],
+            [
+              1401,
+              2313
+            ],
+            [
+              632,
+              1028
+            ],
+            [
+              281,
+              384
+            ],
+            [
+              762,
+              820
+            ],
+            [
+              812,
+              933
+            ],
+            [
+              1525,
+              374
+            ],
+            [
+              1096,
+              174
+            ],
+            [
+              497,
+              219
+            ],
+            [
+              289,
+              79
+            ],
+            [
+              2610,
+              427
+            ],
+            [
+              762,
+              145
+            ],
+            [
+              214,
+              89
+            ],
+            [
+              161,
+              63
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8002423700673572,
+          "gain_vs_empty_bits": 0.10611810818109091,
+          "gain_vs_previous_bits": 0.02673226686585295,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9066164926423822,
+              "gain_vs_empty_bits": 3.581609500391547e-05,
+              "gain_vs_previous_bits": -1.91250591319303e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9061987207437995,
+              "gain_vs_empty_bits": 3.394408857693154e-05,
+              "gain_vs_previous_bits": 1.993499985641911e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9061139522961984,
+              "gain_vs_empty_bits": -6.125596693462576e-05,
+              "gain_vs_previous_bits": -8.153544506384058e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060315143266306,
+              "gain_vs_empty_bits": -0.00010814647773105257,
+              "gain_vs_previous_bits": -0.0001357544405503619
+            },
+            {
+              "heldout_log_loss_bits": 0.9063189478245283,
+              "gain_vs_empty_bits": -9.507495280280942e-06,
+              "gain_vs_previous_bits": -3.280341770794948e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062763075409666,
+              "gain_vs_empty_bits": 7.191446926846368e-06,
+              "gain_vs_previous_bits": -4.304649847641784e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.906705176740091,
+              "gain_vs_empty_bits": 7.687399023192931e-05,
+              "gain_vs_previous_bits": 8.441981175222324e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9064651724709385,
+              "gain_vs_empty_bits": -8.686703523652639e-05,
+              "gain_vs_previous_bits": -9.213245682815341e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9065229535058372,
+              "gain_vs_empty_bits": 0.00013049379392005012,
+              "gain_vs_previous_bits": 0.00014051024799477396
+            },
+            {
+              "heldout_log_loss_bits": 0.9067062937280432,
+              "gain_vs_empty_bits": 0.00013353311172881188,
+              "gain_vs_previous_bits": 0.00012340760900420022
+            },
+            {
+              "heldout_log_loss_bits": 0.90689884297488,
+              "gain_vs_empty_bits": 2.3937501401172234e-05,
+              "gain_vs_previous_bits": 1.0048997454048525e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905576702770618,
+              "gain_vs_empty_bits": 5.6320478940552476e-05,
+              "gain_vs_previous_bits": -4.710726735468462e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9068880612967901,
+              "gain_vs_empty_bits": -0.00012953078294664078,
+              "gain_vs_previous_bits": -9.14204044473177e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9070175944281138,
+              "gain_vs_empty_bits": -5.7800377828765015e-05,
+              "gain_vs_previous_bits": -5.132622640569018e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9065749888179454,
+              "gain_vs_empty_bits": 8.374369031005635e-06,
+              "gain_vs_previous_bits": 1.7294978664761373e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9069213070582572,
+              "gain_vs_empty_bits": 0.00014392727876311184,
+              "gain_vs_previous_bits": 8.998037755558741e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              89349,
+              36480
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              90080,
+              35872
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8620100625325521,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8619932530427591,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.862459337151885,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8621622747833395,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8624821012094357,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8629153918730261,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8622164226411961,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.862074181935858,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8627030195233945,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8624022212381012,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8626369892488507,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.862125537420073,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8617387619290235,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8626444250289617,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8621974478106121,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8622685773658051,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8618379853469632,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              57797,
+              27605
+            ],
+            [
+              31552,
+              8875
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              58333,
+              27165
+            ],
+            [
+              31747,
+              8707
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8536385254722347,
+          "gain_vs_empty_bits": 0.008371537060317347,
+          "gain_vs_previous_bits": 0.008371537060317347,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8619212900747795,
+              "gain_vs_empty_bits": 7.196296797962187e-05,
+              "gain_vs_previous_bits": 7.196296797962187e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8624596765373591,
+              "gain_vs_empty_bits": -3.393854740574298e-07,
+              "gain_vs_previous_bits": -3.393854740574298e-07
+            },
+            {
+              "heldout_log_loss_bits": 0.8620988567162202,
+              "gain_vs_empty_bits": 6.341806711929188e-05,
+              "gain_vs_previous_bits": 6.341806711929188e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8624530626057267,
+              "gain_vs_empty_bits": 2.9038603708952948e-05,
+              "gain_vs_previous_bits": 2.9038603708952948e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8628435004998238,
+              "gain_vs_empty_bits": 7.1891373202293e-05,
+              "gain_vs_previous_bits": 7.1891373202293e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8621954749255957,
+              "gain_vs_empty_bits": 2.094771560046116e-05,
+              "gain_vs_previous_bits": 2.094771560046116e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8620267169085419,
+              "gain_vs_empty_bits": 4.7465027316118125e-05,
+              "gain_vs_previous_bits": 4.7465027316118125e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8626817413289158,
+              "gain_vs_empty_bits": 2.1278194478613344e-05,
+              "gain_vs_previous_bits": 2.1278194478613344e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8623873384433117,
+              "gain_vs_empty_bits": 1.4882794789450315e-05,
+              "gain_vs_previous_bits": 1.4882794789450315e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8625525532299315,
+              "gain_vs_empty_bits": 8.443601891916508e-05,
+              "gain_vs_previous_bits": 8.443601891916508e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8621055419530113,
+              "gain_vs_empty_bits": 1.999546706177302e-05,
+              "gain_vs_previous_bits": 1.999546706177302e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8616352878853352,
+              "gain_vs_empty_bits": 0.00010347404368837854,
+              "gain_vs_previous_bits": 0.00010347404368837854
+            },
+            {
+              "heldout_log_loss_bits": 0.8624941221877506,
+              "gain_vs_empty_bits": 0.00015030284121109183,
+              "gain_vs_previous_bits": 0.00015030284121109183
+            },
+            {
+              "heldout_log_loss_bits": 0.8620922502006433,
+              "gain_vs_empty_bits": 0.00010519760996885452,
+              "gain_vs_previous_bits": 0.00010519760996885452
+            },
+            {
+              "heldout_log_loss_bits": 0.862180783670993,
+              "gain_vs_empty_bits": 8.779369481204391e-05,
+              "gain_vs_previous_bits": 8.779369481204391e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8618044125527954,
+              "gain_vs_empty_bits": 3.357279416782433e-05,
+              "gain_vs_previous_bits": 3.357279416782433e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              37729,
+              14054
+            ],
+            [
+              20068,
+              13551
+            ],
+            [
+              26468,
+              7145
+            ],
+            [
+              5084,
+              1730
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              38177,
+              13574
+            ],
+            [
+              20156,
+              13591
+            ],
+            [
+              26584,
+              7108
+            ],
+            [
+              5163,
+              1599
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8430789743921191,
+          "gain_vs_empty_bits": 0.018931088140432983,
+          "gain_vs_previous_bits": 0.010559551080115637,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.861905734114284,
+              "gain_vs_empty_bits": 8.751892847513876e-05,
+              "gain_vs_previous_bits": 1.5555960495516885e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8625266617762529,
+              "gain_vs_empty_bits": -6.732462436787046e-05,
+              "gain_vs_previous_bits": -6.698523889381303e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8620733547544025,
+              "gain_vs_empty_bits": 8.892002893701179e-05,
+              "gain_vs_previous_bits": 2.550196181771991e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8624021590805168,
+              "gain_vs_empty_bits": 7.99421289189306e-05,
+              "gain_vs_previous_bits": 5.090352520997765e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.862880089442275,
+              "gain_vs_empty_bits": 3.5302430751116276e-05,
+              "gain_vs_previous_bits": -3.658894245117672e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8621727201192468,
+              "gain_vs_empty_bits": 4.3702521949295914e-05,
+              "gain_vs_previous_bits": 2.2754806348834755e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8620053809290169,
+              "gain_vs_empty_bits": 6.880100684114598e-05,
+              "gain_vs_previous_bits": 2.133597952502786e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8626647529896609,
+              "gain_vs_empty_bits": 3.8266533733510855e-05,
+              "gain_vs_previous_bits": 1.698833925489751e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8623434931905113,
+              "gain_vs_empty_bits": 5.872804758988437e-05,
+              "gain_vs_previous_bits": 4.3845252800434054e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8624862671829905,
+              "gain_vs_empty_bits": 0.0001507220658601982,
+              "gain_vs_previous_bits": 6.628604694103313e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.862074413020757,
+              "gain_vs_empty_bits": 5.112439931598267e-05,
+              "gain_vs_previous_bits": 3.112893225420965e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8616577625977657,
+              "gain_vs_empty_bits": 8.099933125782499e-05,
+              "gain_vs_previous_bits": -2.2474712430553545e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8624378321597411,
+              "gain_vs_empty_bits": 0.00020659286922053433,
+              "gain_vs_previous_bits": 5.6290028009442494e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8620863181972729,
+              "gain_vs_empty_bits": 0.00011112961333925586,
+              "gain_vs_previous_bits": 5.93200337040134e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.862126107187633,
+              "gain_vs_empty_bits": 0.00014247017817203833,
+              "gain_vs_previous_bits": 5.467648335999442e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.861788761070042,
+              "gain_vs_empty_bits": 4.9224276921222554e-05,
+              "gain_vs_previous_bits": 1.5651482753398227e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "1995",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "sha256": "8af918366ed969c6dddf5a48b8810fec1024858d22c75c5f1ac1a5c750a57a1f",
+      "variant": "unassigned",
+      "payload_w": 5240,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_bytes": 15768425,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1595135,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          1023,
+          1024
+        ],
+        "escape_omitted_train_test_blocks": [
+          1,
+          0
+        ],
+        "retained_train_test_targets": [
+          125829,
+          125952
+        ],
+        "parsed_escapes": 1,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              85474,
+              40355
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              85518,
+              40434
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9054951736997704,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9060260738422063,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9048683306517353,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.905554913968944,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057436062232821,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057872180774228,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059147925435321,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9058380201031145,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057436161745936,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9053748501103187,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9058550908233878,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059233678488996,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059409921313281,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9058548819625644,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9055897406226981,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057607136882286,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9050741039491186,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              40777,
+              17310
+            ],
+            [
+              26459,
+              5286
+            ],
+            [
+              11211,
+              16176
+            ],
+            [
+              7027,
+              1583
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              40595,
+              17305
+            ],
+            [
+              26628,
+              5098
+            ],
+            [
+              11124,
+              16468
+            ],
+            [
+              7171,
+              1563
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8248679985849954,
+          "gain_vs_empty_bits": 0.08062717511477502,
+          "gain_vs_previous_bits": 0.08062717511477502,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9059927226000182,
+              "gain_vs_empty_bits": 3.33512421881732e-05,
+              "gain_vs_previous_bits": 3.33512421881732e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9048326340688719,
+              "gain_vs_empty_bits": 3.569658286339816e-05,
+              "gain_vs_previous_bits": 3.569658286339816e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9055142973918542,
+              "gain_vs_empty_bits": 4.061657708986921e-05,
+              "gain_vs_previous_bits": 4.061657708986921e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9056967072103748,
+              "gain_vs_empty_bits": 4.6899012907331006e-05,
+              "gain_vs_previous_bits": 4.6899012907331006e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9057585510849429,
+              "gain_vs_empty_bits": 2.866699247994209e-05,
+              "gain_vs_previous_bits": 2.866699247994209e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059390469822387,
+              "gain_vs_empty_bits": -2.42544387065724e-05,
+              "gain_vs_previous_bits": -2.42544387065724e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9057582306686701,
+              "gain_vs_empty_bits": 7.978943444442166e-05,
+              "gain_vs_previous_bits": 7.978943444442166e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9056821948611002,
+              "gain_vs_empty_bits": 6.142131349340385e-05,
+              "gain_vs_previous_bits": 6.142131349340385e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9053349655426907,
+              "gain_vs_empty_bits": 3.988456762804571e-05,
+              "gain_vs_previous_bits": 3.988456762804571e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058759320043824,
+              "gain_vs_empty_bits": -2.084118099465737e-05,
+              "gain_vs_previous_bits": -2.084118099465737e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058303795316255,
+              "gain_vs_empty_bits": 9.298831727411194e-05,
+              "gain_vs_previous_bits": 9.298831727411194e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059393585373544,
+              "gain_vs_empty_bits": 1.633593973648928e-06,
+              "gain_vs_previous_bits": 1.633593973648928e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9058308900851878,
+              "gain_vs_empty_bits": 2.3991877376561277e-05,
+              "gain_vs_previous_bits": 2.3991877376561277e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9054934515489254,
+              "gain_vs_empty_bits": 9.628907377279283e-05,
+              "gain_vs_previous_bits": 9.628907377279283e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905800635547377,
+              "gain_vs_empty_bits": -3.992185914836188e-05,
+              "gain_vs_previous_bits": -3.992185914836188e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9050056327597772,
+              "gain_vs_empty_bits": 6.847118934139029e-05,
+              "gain_vs_previous_bits": 6.847118934139029e-05
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              19414,
+              5287
+            ],
+            [
+              2581,
+              2156
+            ],
+            [
+              6749,
+              2172
+            ],
+            [
+              5659,
+              1640
+            ],
+            [
+              2945,
+              3891
+            ],
+            [
+              881,
+              992
+            ],
+            [
+              1144,
+              613
+            ],
+            [
+              1404,
+              559
+            ],
+            [
+              7873,
+              1497
+            ],
+            [
+              3876,
+              936
+            ],
+            [
+              1952,
+              266
+            ],
+            [
+              1757,
+              211
+            ],
+            [
+              8265,
+              1791
+            ],
+            [
+              1830,
+              415
+            ],
+            [
+              469,
+              107
+            ],
+            [
+              437,
+              63
+            ],
+            [
+              3697,
+              6005
+            ],
+            [
+              648,
+              1007
+            ],
+            [
+              2828,
+              3712
+            ],
+            [
+              1417,
+              2301
+            ],
+            [
+              703,
+              1017
+            ],
+            [
+              329,
+              429
+            ],
+            [
+              750,
+              799
+            ],
+            [
+              839,
+              906
+            ],
+            [
+              1487,
+              376
+            ],
+            [
+              1058,
+              169
+            ],
+            [
+              448,
+              243
+            ],
+            [
+              306,
+              83
+            ],
+            [
+              2618,
+              400
+            ],
+            [
+              738,
+              169
+            ],
+            [
+              219,
+              77
+            ],
+            [
+              153,
+              66
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              19043,
+              5245
+            ],
+            [
+              2617,
+              2159
+            ],
+            [
+              6796,
+              2130
+            ],
+            [
+              5726,
+              1613
+            ],
+            [
+              2870,
+              4072
+            ],
+            [
+              869,
+              937
+            ],
+            [
+              1215,
+              577
+            ],
+            [
+              1459,
+              572
+            ],
+            [
+              7950,
+              1417
+            ],
+            [
+              3958,
+              927
+            ],
+            [
+              1833,
+              254
+            ],
+            [
+              1713,
+              204
+            ],
+            [
+              8406,
+              1725
+            ],
+            [
+              1833,
+              427
+            ],
+            [
+              468,
+              83
+            ],
+            [
+              467,
+              61
+            ],
+            [
+              3673,
+              6226
+            ],
+            [
+              638,
+              1003
+            ],
+            [
+              2862,
+              3637
+            ],
+            [
+              1482,
+              2354
+            ],
+            [
+              644,
+              1078
+            ],
+            [
+              264,
+              392
+            ],
+            [
+              759,
+              816
+            ],
+            [
+              802,
+              962
+            ],
+            [
+              1434,
+              361
+            ],
+            [
+              1140,
+              154
+            ],
+            [
+              504,
+              213
+            ],
+            [
+              298,
+              99
+            ],
+            [
+              2666,
+              417
+            ],
+            [
+              799,
+              177
+            ],
+            [
+              182,
+              85
+            ],
+            [
+              148,
+              57
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.7962040344593669,
+          "gain_vs_empty_bits": 0.10929113924040346,
+          "gain_vs_previous_bits": 0.02866396412562844,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9061539591110718,
+              "gain_vs_empty_bits": -0.00012788526886542417,
+              "gain_vs_previous_bits": -0.00016123651105359738
+            },
+            {
+              "heldout_log_loss_bits": 0.9048748533339415,
+              "gain_vs_empty_bits": -6.522682206133723e-06,
+              "gain_vs_previous_bits": -4.2219265069531886e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9056512079034612,
+              "gain_vs_empty_bits": -9.62939345171554e-05,
+              "gain_vs_previous_bits": -0.0001369105116070246
+            },
+            {
+              "heldout_log_loss_bits": 0.9058069838256909,
+              "gain_vs_empty_bits": -6.337760240882062e-05,
+              "gain_vs_previous_bits": -0.00011027661531615163
+            },
+            {
+              "heldout_log_loss_bits": 0.9058505509890352,
+              "gain_vs_empty_bits": -6.333291161242371e-05,
+              "gain_vs_previous_bits": -9.19999040923658e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060281241315287,
+              "gain_vs_empty_bits": -0.00011333158799653464,
+              "gain_vs_previous_bits": -8.907714928996224e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059253868263337,
+              "gain_vs_empty_bits": -8.736672321918437e-05,
+              "gain_vs_previous_bits": -0.00016715615766360603
+            },
+            {
+              "heldout_log_loss_bits": 0.9057942167830353,
+              "gain_vs_empty_bits": -5.060060844164216e-05,
+              "gain_vs_previous_bits": -0.00011202192193504601
+            },
+            {
+              "heldout_log_loss_bits": 0.9055917266062432,
+              "gain_vs_empty_bits": -0.00021687649592450065,
+              "gain_vs_previous_bits": -0.00025676106355254635
+            },
+            {
+              "heldout_log_loss_bits": 0.9059025371467784,
+              "gain_vs_empty_bits": -4.744632339059862e-05,
+              "gain_vs_previous_bits": -2.660514239594125e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.90589806979142,
+              "gain_vs_empty_bits": 2.529805747963909e-05,
+              "gain_vs_previous_bits": -6.769025979447285e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.906245226216872,
+              "gain_vs_empty_bits": -0.0003042340855439196,
+              "gain_vs_previous_bits": -0.00030586767951756855
+            },
+            {
+              "heldout_log_loss_bits": 0.9058868168435719,
+              "gain_vs_empty_bits": -3.1934881007500415e-05,
+              "gain_vs_previous_bits": -5.592675838406169e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9054959711692838,
+              "gain_vs_empty_bits": 9.376945341432741e-05,
+              "gain_vs_previous_bits": -2.519620358465424e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9058941865175746,
+              "gain_vs_empty_bits": -0.00013347282934594862,
+              "gain_vs_previous_bits": -9.355097019758674e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9052302033569134,
+              "gain_vs_empty_bits": -0.00015609940779481857,
+              "gain_vs_previous_bits": -0.00022457059713620886
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              89836,
+              35993
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              89611,
+              36341
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8668372099601726,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8670972099090265,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.866570302720656,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8671036616122934,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.867554891271893,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8662751261886593,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8667889855549795,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8667845529799497,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8663713994519107,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8671320852195398,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8671960522743579,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8666479778193216,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8668442038701799,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.867261372602933,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8661976843121956,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8667007462570765,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8669785476695414,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              58102,
+              27392
+            ],
+            [
+              31734,
+              8601
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              57936,
+              27589
+            ],
+            [
+              31675,
+              8752
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8579367202509872,
+          "gain_vs_empty_bits": 0.008900489709185333,
+          "gain_vs_previous_bits": 0.008900489709185333,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8670497622875537,
+              "gain_vs_empty_bits": 4.744762147279591e-05,
+              "gain_vs_previous_bits": 4.744762147279591e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8665434908474704,
+              "gain_vs_empty_bits": 2.681187318565037e-05,
+              "gain_vs_previous_bits": 2.681187318565037e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8671111108348539,
+              "gain_vs_empty_bits": -7.449222560573787e-06,
+              "gain_vs_previous_bits": -7.449222560573787e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8675188849407929,
+              "gain_vs_empty_bits": 3.600633110012463e-05,
+              "gain_vs_previous_bits": 3.600633110012463e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8661991684847842,
+              "gain_vs_empty_bits": 7.595770387514023e-05,
+              "gain_vs_previous_bits": 7.595770387514023e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8667808822443649,
+              "gain_vs_empty_bits": 8.103310614626658e-06,
+              "gain_vs_previous_bits": 8.103310614626658e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8667253705280895,
+              "gain_vs_empty_bits": 5.9182451860206875e-05,
+              "gain_vs_previous_bits": 5.9182451860206875e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8663940435825627,
+              "gain_vs_empty_bits": -2.2644130652005323e-05,
+              "gain_vs_previous_bits": -2.2644130652005323e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8671174287785525,
+              "gain_vs_empty_bits": 1.4656440987304009e-05,
+              "gain_vs_previous_bits": 1.4656440987304009e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8672000977536634,
+              "gain_vs_empty_bits": -4.04547930543675e-06,
+              "gain_vs_previous_bits": -4.04547930543675e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8665928315039189,
+              "gain_vs_empty_bits": 5.514631540270987e-05,
+              "gain_vs_previous_bits": 5.514631540270987e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8668273878391154,
+              "gain_vs_empty_bits": 1.6816031064514902e-05,
+              "gain_vs_previous_bits": 1.6816031064514902e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8672140997452004,
+              "gain_vs_empty_bits": 4.7272857732649776e-05,
+              "gain_vs_previous_bits": 4.7272857732649776e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.866212972105724,
+              "gain_vs_empty_bits": -1.528779352844012e-05,
+              "gain_vs_previous_bits": -1.528779352844012e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8666225743344796,
+              "gain_vs_empty_bits": 7.817192259684802e-05,
+              "gain_vs_previous_bits": 7.817192259684802e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.866939791953731,
+              "gain_vs_empty_bits": 3.875571581035686e-05,
+              "gain_vs_previous_bits": 3.875571581035686e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              38164,
+              13840
+            ],
+            [
+              19938,
+              13552
+            ],
+            [
+              26468,
+              7005
+            ],
+            [
+              5266,
+              1596
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              37851,
+              13920
+            ],
+            [
+              20085,
+              13669
+            ],
+            [
+              26597,
+              7161
+            ],
+            [
+              5078,
+              1591
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8479896392414921,
+          "gain_vs_empty_bits": 0.018847570718680484,
+          "gain_vs_previous_bits": 0.009947081009495151,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8670212676107395,
+              "gain_vs_empty_bits": 7.594229828700172e-05,
+              "gain_vs_previous_bits": 2.849467681420581e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8664566012489227,
+              "gain_vs_empty_bits": 0.00011370147173339618,
+              "gain_vs_previous_bits": 8.68895985477458e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8671144335861452,
+              "gain_vs_empty_bits": -1.0771973851797512e-05,
+              "gain_vs_previous_bits": -3.3227512912237245e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8674922598609072,
+              "gain_vs_empty_bits": 6.263141098583613e-05,
+              "gain_vs_previous_bits": 2.66250798857115e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.866148141890542,
+              "gain_vs_empty_bits": 0.00012698429811730527,
+              "gain_vs_previous_bits": 5.1026594242165046e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8667842579939941,
+              "gain_vs_empty_bits": 4.727560985462453e-06,
+              "gain_vs_previous_bits": -3.375749629164204e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8666871257338961,
+              "gain_vs_empty_bits": 9.742724605366071e-05,
+              "gain_vs_previous_bits": 3.8244794193453835e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8663884030711219,
+              "gain_vs_empty_bits": -1.700361921119775e-05,
+              "gain_vs_previous_bits": 5.640511440807572e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8670917280941712,
+              "gain_vs_empty_bits": 4.035712536853975e-05,
+              "gain_vs_previous_bits": 2.570068438123574e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.867178099492852,
+              "gain_vs_empty_bits": 1.7952781505958804e-05,
+              "gain_vs_previous_bits": 2.1998260811395554e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.866550399625068,
+              "gain_vs_empty_bits": 9.757819425360026e-05,
+              "gain_vs_previous_bits": 4.243187885089039e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8667849197956501,
+              "gain_vs_empty_bits": 5.928407452981954e-05,
+              "gain_vs_previous_bits": 4.246804346530464e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8671881469948471,
+              "gain_vs_empty_bits": 7.322560808586953e-05,
+              "gain_vs_previous_bits": 2.5952750353219756e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8662140400257502,
+              "gain_vs_empty_bits": -1.6355713554627727e-05,
+              "gain_vs_previous_bits": -1.0679200261876076e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8666017700813973,
+              "gain_vs_empty_bits": 9.897617567922179e-05,
+              "gain_vs_previous_bits": 2.080425308237377e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8669268060474589,
+              "gain_vs_empty_bits": 5.174162208254618e-05,
+              "gain_vs_previous_bits": 1.2985906272189318e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "1997",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "sha256": "89138ccc958509ca1beb7028452400ab7f42061c0fc56e35c8a7d7a4a808dd0a",
+      "variant": "unassigned",
+      "payload_w": 5240,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_bytes": 15767553,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1595581,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          1023,
+          1024
+        ],
+        "escape_omitted_train_test_blocks": [
+          1,
+          0
+        ],
+        "retained_train_test_targets": [
+          125829,
+          125952
+        ],
+        "parsed_escapes": 1,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              85328,
+              40501
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              85490,
+              40462
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9057362176492778,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9063253450657572,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.905924459487764,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9064972940595237,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9054209636766648,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.905881453688538,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057868847937645,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9060264598696255,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9056166076749889,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059236222114466,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057783188253734,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059942057940854,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057095307094236,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9056260596993059,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057544813182241,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059069259106427,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9062141413568396,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              40624,
+              17261
+            ],
+            [
+              26328,
+              5253
+            ],
+            [
+              11101,
+              16385
+            ],
+            [
+              7275,
+              1602
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              40455,
+              17333
+            ],
+            [
+              26542,
+              5198
+            ],
+            [
+              11301,
+              16403
+            ],
+            [
+              7192,
+              1528
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8273426989729372,
+          "gain_vs_empty_bits": 0.07839351867634059,
+          "gain_vs_previous_bits": 0.07839351867634059,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9062913603844851,
+              "gain_vs_empty_bits": 3.398468127213672e-05,
+              "gain_vs_previous_bits": 3.398468127213672e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905929000555623,
+              "gain_vs_empty_bits": -4.541067858965242e-06,
+              "gain_vs_previous_bits": -4.541067858965242e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9064879307001602,
+              "gain_vs_empty_bits": 9.363359363523394e-06,
+              "gain_vs_previous_bits": 9.363359363523394e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9053986480647572,
+              "gain_vs_empty_bits": 2.231561190757514e-05,
+              "gain_vs_previous_bits": 2.231561190757514e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058876628563529,
+              "gain_vs_empty_bits": -6.209167814907879e-06,
+              "gain_vs_previous_bits": -6.209167814907879e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9057071573013245,
+              "gain_vs_empty_bits": 7.97274924400071e-05,
+              "gain_vs_previous_bits": 7.97274924400071e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060697987183977,
+              "gain_vs_empty_bits": -4.333884877216754e-05,
+              "gain_vs_previous_bits": -4.333884877216754e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905506950311637,
+              "gain_vs_empty_bits": 0.00010965736335188936,
+              "gain_vs_previous_bits": 0.00010965736335188936
+            },
+            {
+              "heldout_log_loss_bits": 0.9058956066180095,
+              "gain_vs_empty_bits": 2.801559343712512e-05,
+              "gain_vs_previous_bits": 2.801559343712512e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905842252583221,
+              "gain_vs_empty_bits": -6.3933757847634e-05,
+              "gain_vs_previous_bits": -6.3933757847634e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059818197843726,
+              "gain_vs_empty_bits": 1.2386009712761492e-05,
+              "gain_vs_previous_bits": 1.2386009712761492e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058006935321156,
+              "gain_vs_empty_bits": -9.116282269194809e-05,
+              "gain_vs_previous_bits": -9.116282269194809e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9056119071369778,
+              "gain_vs_empty_bits": 1.4152562328062501e-05,
+              "gain_vs_previous_bits": 1.4152562328062501e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905771708136452,
+              "gain_vs_empty_bits": -1.7226818227911167e-05,
+              "gain_vs_previous_bits": -1.7226818227911167e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058102014419096,
+              "gain_vs_empty_bits": 9.672446873310037e-05,
+              "gain_vs_previous_bits": 9.672446873310037e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062058631662439,
+              "gain_vs_empty_bits": 8.278190595789603e-06,
+              "gain_vs_previous_bits": 8.278190595789603e-06
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              19368,
+              5174
+            ],
+            [
+              2566,
+              2066
+            ],
+            [
+              6726,
+              2149
+            ],
+            [
+              5578,
+              1647
+            ],
+            [
+              2832,
+              3982
+            ],
+            [
+              918,
+              971
+            ],
+            [
+              1182,
+              632
+            ],
+            [
+              1454,
+              640
+            ],
+            [
+              7705,
+              1492
+            ],
+            [
+              4003,
+              908
+            ],
+            [
+              1855,
+              249
+            ],
+            [
+              1781,
+              205
+            ],
+            [
+              8307,
+              1789
+            ],
+            [
+              1756,
+              446
+            ],
+            [
+              506,
+              91
+            ],
+            [
+              415,
+              73
+            ],
+            [
+              3598,
+              6157
+            ],
+            [
+              661,
+              1075
+            ],
+            [
+              2770,
+              3708
+            ],
+            [
+              1470,
+              2287
+            ],
+            [
+              670,
+              990
+            ],
+            [
+              331,
+              387
+            ],
+            [
+              804,
+              776
+            ],
+            [
+              797,
+              1005
+            ],
+            [
+              1451,
+              370
+            ],
+            [
+              1133,
+              177
+            ],
+            [
+              496,
+              250
+            ],
+            [
+              306,
+              105
+            ],
+            [
+              2750,
+              374
+            ],
+            [
+              791,
+              157
+            ],
+            [
+              214,
+              91
+            ],
+            [
+              134,
+              78
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              19162,
+              5135
+            ],
+            [
+              2609,
+              2109
+            ],
+            [
+              6788,
+              2150
+            ],
+            [
+              5510,
+              1660
+            ],
+            [
+              2932,
+              4052
+            ],
+            [
+              860,
+              980
+            ],
+            [
+              1189,
+              619
+            ],
+            [
+              1405,
+              628
+            ],
+            [
+              7730,
+              1507
+            ],
+            [
+              4070,
+              898
+            ],
+            [
+              1901,
+              235
+            ],
+            [
+              1816,
+              186
+            ],
+            [
+              8351,
+              1757
+            ],
+            [
+              1803,
+              452
+            ],
+            [
+              434,
+              89
+            ],
+            [
+              437,
+              74
+            ],
+            [
+              3693,
+              6099
+            ],
+            [
+              611,
+              1054
+            ],
+            [
+              2905,
+              3683
+            ],
+            [
+              1484,
+              2342
+            ],
+            [
+              680,
+              1037
+            ],
+            [
+              360,
+              414
+            ],
+            [
+              782,
+              776
+            ],
+            [
+              786,
+              998
+            ],
+            [
+              1473,
+              348
+            ],
+            [
+              1153,
+              139
+            ],
+            [
+              450,
+              237
+            ],
+            [
+              284,
+              95
+            ],
+            [
+              2676,
+              398
+            ],
+            [
+              820,
+              154
+            ],
+            [
+              202,
+              87
+            ],
+            [
+              134,
+              70
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.7979263092308948,
+          "gain_vs_empty_bits": 0.107809908418383,
+          "gain_vs_previous_bits": 0.029416389742042415,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9063467414542734,
+              "gain_vs_empty_bits": -2.139638851617054e-05,
+              "gain_vs_previous_bits": -5.538106978830726e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060953623323631,
+              "gain_vs_empty_bits": -0.00017090284459908567,
+              "gain_vs_previous_bits": -0.00016636177674012043
+            },
+            {
+              "heldout_log_loss_bits": 0.9065741786857582,
+              "gain_vs_empty_bits": -7.688462623445247e-05,
+              "gain_vs_previous_bits": -8.624798559797586e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9054417434405769,
+              "gain_vs_empty_bits": -2.0779763912126548e-05,
+              "gain_vs_previous_bits": -4.309537581970169e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060292938487835,
+              "gain_vs_empty_bits": -0.00014784016024549373,
+              "gain_vs_previous_bits": -0.00014163099243058586
+            },
+            {
+              "heldout_log_loss_bits": 0.905697710691881,
+              "gain_vs_empty_bits": 8.91741018834713e-05,
+              "gain_vs_previous_bits": 9.446609443464205e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9061632968399617,
+              "gain_vs_empty_bits": -0.0001368369703361738,
+              "gain_vs_previous_bits": -9.349812156400628e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9056399424147545,
+              "gain_vs_empty_bits": -2.3334739765679124e-05,
+              "gain_vs_previous_bits": -0.00013299210311756848
+            },
+            {
+              "heldout_log_loss_bits": 0.9059799717171577,
+              "gain_vs_empty_bits": -5.6349505711095205e-05,
+              "gain_vs_previous_bits": -8.436509914822032e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059150677584328,
+              "gain_vs_empty_bits": -0.00013674893305937186,
+              "gain_vs_previous_bits": -7.281517521173786e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059467649516825,
+              "gain_vs_empty_bits": 4.744084240293489e-05,
+              "gain_vs_previous_bits": 3.50548326901734e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058118242433626,
+              "gain_vs_empty_bits": -0.00010229353393897966,
+              "gain_vs_previous_bits": -1.1130711247031577e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.905759871881404,
+              "gain_vs_empty_bits": -0.0001338121820981808,
+              "gain_vs_previous_bits": -0.0001479647444262433
+            },
+            {
+              "heldout_log_loss_bits": 0.9058444941593701,
+              "gain_vs_empty_bits": -9.001284114595887e-05,
+              "gain_vs_previous_bits": -7.27860229180477e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059077180334794,
+              "gain_vs_empty_bits": -7.921228366569721e-07,
+              "gain_vs_previous_bits": -9.751659156975734e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9062796900410144,
+              "gain_vs_empty_bits": -6.554868417474324e-05,
+              "gain_vs_previous_bits": -7.382687477053285e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              89448,
+              36381
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              89491,
+              36461
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8680532815473211,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8681045573100332,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8678064020962809,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8685272414602802,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8681869266200336,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8680848243625059,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8675388354044776,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8676411039975424,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8676939678624171,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8680347789540311,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8679602712310645,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.868312719333628,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8691421521741539,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8681155798855938,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8678994990923232,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.86742510859409,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8682293886052309,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              57798,
+              27488
+            ],
+            [
+              31650,
+              8893
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              57731,
+              27733
+            ],
+            [
+              31760,
+              8728
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8587008973464652,
+          "gain_vs_empty_bits": 0.009352384200855934,
+          "gain_vs_previous_bits": 0.009352384200855934,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8680944336065348,
+              "gain_vs_empty_bits": 1.0123703498399195e-05,
+              "gain_vs_previous_bits": 1.0123703498399195e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8677876618028086,
+              "gain_vs_empty_bits": 1.874029347226358e-05,
+              "gain_vs_previous_bits": 1.874029347226358e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8684794393153802,
+              "gain_vs_empty_bits": 4.780214489996659e-05,
+              "gain_vs_previous_bits": 4.780214489996659e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8681635832886195,
+              "gain_vs_empty_bits": 2.3343331414071855e-05,
+              "gain_vs_previous_bits": 2.3343331414071855e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8680941808317629,
+              "gain_vs_empty_bits": -9.356469257038036e-06,
+              "gain_vs_previous_bits": -9.356469257038036e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8674974577408886,
+              "gain_vs_empty_bits": 4.137766358902617e-05,
+              "gain_vs_previous_bits": 4.137766358902617e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.867602991246341,
+              "gain_vs_empty_bits": 3.811275120135793e-05,
+              "gain_vs_previous_bits": 3.811275120135793e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8677018680973292,
+              "gain_vs_empty_bits": -7.900234912039394e-06,
+              "gain_vs_previous_bits": -7.900234912039394e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8679985873181443,
+              "gain_vs_empty_bits": 3.619163588686192e-05,
+              "gain_vs_previous_bits": 3.619163588686192e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8679469840558021,
+              "gain_vs_empty_bits": 1.328717526238865e-05,
+              "gain_vs_previous_bits": 1.328717526238865e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8683030917547931,
+              "gain_vs_empty_bits": 9.627578834825457e-06,
+              "gain_vs_previous_bits": 9.627578834825457e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.869075908560656,
+              "gain_vs_empty_bits": 6.62436134979405e-05,
+              "gain_vs_previous_bits": 6.62436134979405e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.868106322115485,
+              "gain_vs_empty_bits": 9.257770108850316e-06,
+              "gain_vs_previous_bits": 9.257770108850316e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8678671330335798,
+              "gain_vs_empty_bits": 3.2366058743460435e-05,
+              "gain_vs_previous_bits": 3.2366058743460435e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8673893217227929,
+              "gain_vs_empty_bits": 3.5786871297127654e-05,
+              "gain_vs_previous_bits": 3.5786871297127654e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8681910273044553,
+              "gain_vs_empty_bits": 3.8361300775613394e-05,
+              "gain_vs_previous_bits": 3.8361300775613394e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              37813,
+              13860
+            ],
+            [
+              19985,
+              13628
+            ],
+            [
+              26460,
+              7220
+            ],
+            [
+              5190,
+              1673
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              37777,
+              13951
+            ],
+            [
+              19954,
+              13782
+            ],
+            [
+              26582,
+              7162
+            ],
+            [
+              5178,
+              1566
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8484566553694887,
+          "gain_vs_empty_bits": 0.01959662617783242,
+          "gain_vs_previous_bits": 0.010244241976976487,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.868056751330659,
+              "gain_vs_empty_bits": 4.780597937426023e-05,
+              "gain_vs_previous_bits": 3.768227587586104e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8677654092846674,
+              "gain_vs_empty_bits": 4.099281161351609e-05,
+              "gain_vs_previous_bits": 2.225251814125251e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8684642876665368,
+              "gain_vs_empty_bits": 6.295379374332555e-05,
+              "gain_vs_previous_bits": 1.5151648843358956e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8680544381265755,
+              "gain_vs_empty_bits": 0.0001324884934581494,
+              "gain_vs_previous_bits": 0.00010914516204407754
+            },
+            {
+              "heldout_log_loss_bits": 0.8680677237259316,
+              "gain_vs_empty_bits": 1.710063657434091e-05,
+              "gain_vs_previous_bits": 2.6457105831378946e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8674877343851941,
+              "gain_vs_empty_bits": 5.110101928351707e-05,
+              "gain_vs_previous_bits": 9.723355694490898e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8675553375301311,
+              "gain_vs_empty_bits": 8.576646741120797e-05,
+              "gain_vs_previous_bits": 4.765371620985004e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8676232591100836,
+              "gain_vs_empty_bits": 7.070875233350371e-05,
+              "gain_vs_previous_bits": 7.86089872455431e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8679936743980343,
+              "gain_vs_empty_bits": 4.110455599681817e-05,
+              "gain_vs_previous_bits": 4.912920109956254e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8678916961363429,
+              "gain_vs_empty_bits": 6.857509472157908e-05,
+              "gain_vs_previous_bits": 5.5287919459190427e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8683097489885139,
+              "gain_vs_empty_bits": 2.9703451140949966e-06,
+              "gain_vs_previous_bits": -6.65723372073046e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8690608440113532,
+              "gain_vs_empty_bits": 8.130816280071951e-05,
+              "gain_vs_previous_bits": 1.5064549302779007e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8680907536066085,
+              "gain_vs_empty_bits": 2.4826278985368155e-05,
+              "gain_vs_previous_bits": 1.556850887651784e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8677744721096551,
+              "gain_vs_empty_bits": 0.0001250269826681416,
+              "gain_vs_previous_bits": 9.266092392468117e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8673927891984446,
+              "gain_vs_empty_bits": 3.23193956454082e-05,
+              "gain_vs_previous_bits": -3.467475651719454e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8681601552333577,
+              "gain_vs_empty_bits": 6.923337187325629e-05,
+              "gain_vs_previous_bits": 3.0872071097642895e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "1998",
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+      "sha256": "4bc52d99e4fbf2f09335a3301a4634bc261a98441edb824434ec069f7026cd71",
+      "variant": "unassigned",
+      "payload_w": 5240,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_bytes": 15772675,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1595500,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          1023,
+          1024
+        ],
+        "escape_omitted_train_test_blocks": [
+          1,
+          0
+        ],
+        "retained_train_test_targets": [
+          125829,
+          125952
+        ],
+        "parsed_escapes": 2,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              85572,
+              40257
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              85511,
+              40441
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9055592585043428,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9058319300902341,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9061779338492467,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057136356239974,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057542064906854,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9060302965947725,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9047653691387356,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9060742082240195,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9052839444150363,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9059127819139099,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9056017249742697,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9060440751031413,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9056505702935532,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9061797513370006,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9057427455119513,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9053599294150452,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9058797812122446,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              40877,
+              17389
+            ],
+            [
+              26387,
+              5130
+            ],
+            [
+              11154,
+              16128
+            ],
+            [
+              7154,
+              1610
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              40686,
+              17475
+            ],
+            [
+              26370,
+              5206
+            ],
+            [
+              11153,
+              16211
+            ],
+            [
+              7302,
+              1549
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8280507086754822,
+          "gain_vs_empty_bits": 0.07750854982886057,
+          "gain_vs_previous_bits": 0.07750854982886057,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9058699080221495,
+              "gain_vs_empty_bits": -3.7977931915400553e-05,
+              "gain_vs_previous_bits": -3.7977931915400553e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9061663999737395,
+              "gain_vs_empty_bits": 1.1533875507230285e-05,
+              "gain_vs_previous_bits": 1.1533875507230285e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9057227358937698,
+              "gain_vs_empty_bits": -9.10026977241074e-06,
+              "gain_vs_previous_bits": -9.10026977241074e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9057909841088743,
+              "gain_vs_empty_bits": -3.6777618188876815e-05,
+              "gain_vs_previous_bits": -3.6777618188876815e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060048022736944,
+              "gain_vs_empty_bits": 2.5494321078123328e-05,
+              "gain_vs_previous_bits": 2.5494321078123328e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9047626210954203,
+              "gain_vs_empty_bits": 2.74804331534817e-06,
+              "gain_vs_previous_bits": 2.74804331534817e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.906121806352339,
+              "gain_vs_empty_bits": -4.759812831944821e-05,
+              "gain_vs_previous_bits": -4.759812831944821e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9053226801057016,
+              "gain_vs_empty_bits": -3.873569066525917e-05,
+              "gain_vs_previous_bits": -3.873569066525917e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9059132088792249,
+              "gain_vs_empty_bits": -4.269653149924224e-07,
+              "gain_vs_previous_bits": -4.269653149924224e-07
+            },
+            {
+              "heldout_log_loss_bits": 0.9055969265368639,
+              "gain_vs_empty_bits": 4.798437405861833e-06,
+              "gain_vs_previous_bits": 4.798437405861833e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.905913319011143,
+              "gain_vs_empty_bits": 0.0001307560919983075,
+              "gain_vs_previous_bits": 0.0001307560919983075
+            },
+            {
+              "heldout_log_loss_bits": 0.9055650215522026,
+              "gain_vs_empty_bits": 8.554874135058288e-05,
+              "gain_vs_previous_bits": 8.554874135058288e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9061748365184258,
+              "gain_vs_empty_bits": 4.9148185747860396e-06,
+              "gain_vs_previous_bits": 4.9148185747860396e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9056762526674367,
+              "gain_vs_empty_bits": 6.649284451465398e-05,
+              "gain_vs_previous_bits": 6.649284451465398e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9052571104396185,
+              "gain_vs_empty_bits": 0.00010281897542663287,
+              "gain_vs_previous_bits": 0.00010281897542663287
+            },
+            {
+              "heldout_log_loss_bits": 0.9058530719580067,
+              "gain_vs_empty_bits": 2.670925423786663e-05,
+              "gain_vs_previous_bits": 2.670925423786663e-05
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              19400,
+              5358
+            ],
+            [
+              2602,
+              2145
+            ],
+            [
+              6881,
+              2180
+            ],
+            [
+              5611,
+              1624
+            ],
+            [
+              2903,
+              3956
+            ],
+            [
+              867,
+              981
+            ],
+            [
+              1203,
+              579
+            ],
+            [
+              1410,
+              566
+            ],
+            [
+              7854,
+              1582
+            ],
+            [
+              4005,
+              845
+            ],
+            [
+              1892,
+              238
+            ],
+            [
+              1655,
+              202
+            ],
+            [
+              8212,
+              1673
+            ],
+            [
+              1849,
+              435
+            ],
+            [
+              464,
+              90
+            ],
+            [
+              456,
+              65
+            ],
+            [
+              3677,
+              6053
+            ],
+            [
+              624,
+              1021
+            ],
+            [
+              2852,
+              3499
+            ],
+            [
+              1424,
+              2306
+            ],
+            [
+              646,
+              1045
+            ],
+            [
+              334,
+              399
+            ],
+            [
+              772,
+              837
+            ],
+            [
+              825,
+              968
+            ],
+            [
+              1477,
+              374
+            ],
+            [
+              1101,
+              151
+            ],
+            [
+              490,
+              252
+            ],
+            [
+              317,
+              88
+            ],
+            [
+              2608,
+              407
+            ],
+            [
+              792,
+              174
+            ],
+            [
+              208,
+              104
+            ],
+            [
+              161,
+              60
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              19216,
+              5320
+            ],
+            [
+              2603,
+              2193
+            ],
+            [
+              6835,
+              2286
+            ],
+            [
+              5545,
+              1565
+            ],
+            [
+              2911,
+              3926
+            ],
+            [
+              905,
+              949
+            ],
+            [
+              1203,
+              596
+            ],
+            [
+              1468,
+              640
+            ],
+            [
+              7981,
+              1497
+            ],
+            [
+              3944,
+              898
+            ],
+            [
+              1901,
+              228
+            ],
+            [
+              1773,
+              204
+            ],
+            [
+              8059,
+              1746
+            ],
+            [
+              1835,
+              477
+            ],
+            [
+              437,
+              88
+            ],
+            [
+              440,
+              68
+            ],
+            [
+              3701,
+              5939
+            ],
+            [
+              631,
+              1043
+            ],
+            [
+              2823,
+              3658
+            ],
+            [
+              1398,
+              2282
+            ],
+            [
+              648,
+              1075
+            ],
+            [
+              343,
+              417
+            ],
+            [
+              759,
+              854
+            ],
+            [
+              850,
+              943
+            ],
+            [
+              1495,
+              358
+            ],
+            [
+              1099,
+              171
+            ],
+            [
+              487,
+              207
+            ],
+            [
+              326,
+              94
+            ],
+            [
+              2709,
+              411
+            ],
+            [
+              824,
+              155
+            ],
+            [
+              215,
+              85
+            ],
+            [
+              147,
+              68
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8009193517363264,
+          "gain_vs_empty_bits": 0.10463990676801638,
+          "gain_vs_previous_bits": 0.027131356939155804,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.905959541161511,
+              "gain_vs_empty_bits": -0.00012761107127690074,
+              "gain_vs_previous_bits": -8.963313936150019e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.906251703518483,
+              "gain_vs_empty_bits": -7.376966923633432e-05,
+              "gain_vs_previous_bits": -8.530354474356461e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9058687870651828,
+              "gain_vs_empty_bits": -0.00015515144118538604,
+              "gain_vs_previous_bits": -0.0001460511714129753
+            },
+            {
+              "heldout_log_loss_bits": 0.9058745224717143,
+              "gain_vs_empty_bits": -0.00012031598102890673,
+              "gain_vs_previous_bits": -8.353836284002991e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9060475271487399,
+              "gain_vs_empty_bits": -1.7230553967406692e-05,
+              "gain_vs_previous_bits": -4.272487504553002e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9049118547618076,
+              "gain_vs_empty_bits": -0.0001464856230719569,
+              "gain_vs_previous_bits": -0.00014923366638730506
+            },
+            {
+              "heldout_log_loss_bits": 0.9061650500766267,
+              "gain_vs_empty_bits": -9.084185260721522e-05,
+              "gain_vs_previous_bits": -4.3243724287767016e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9054330731518077,
+              "gain_vs_empty_bits": -0.000149128736771309,
+              "gain_vs_previous_bits": -0.00011039304610604983
+            },
+            {
+              "heldout_log_loss_bits": 0.9060362673088963,
+              "gain_vs_empty_bits": -0.0001234853949864112,
+              "gain_vs_previous_bits": -0.00012305842967141878
+            },
+            {
+              "heldout_log_loss_bits": 0.9056403872545171,
+              "gain_vs_empty_bits": -3.866228024740348e-05,
+              "gain_vs_previous_bits": -4.346071765326531e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9061012724531464,
+              "gain_vs_empty_bits": -5.71973500050893e-05,
+              "gain_vs_previous_bits": -0.0001879534420033968
+            },
+            {
+              "heldout_log_loss_bits": 0.9055407907598827,
+              "gain_vs_empty_bits": 0.00010977953367052873,
+              "gain_vs_previous_bits": 2.423079231994585e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9063199625312898,
+              "gain_vs_empty_bits": -0.00014021119428919704,
+              "gain_vs_previous_bits": -0.00014512601286398308
+            },
+            {
+              "heldout_log_loss_bits": 0.905869860918173,
+              "gain_vs_empty_bits": -0.00012711540622167838,
+              "gain_vs_previous_bits": -0.00019360825073633237
+            },
+            {
+              "heldout_log_loss_bits": 0.9053648020272631,
+              "gain_vs_empty_bits": -4.872612217932115e-06,
+              "gain_vs_previous_bits": -0.00010769158764456499
+            },
+            {
+              "heldout_log_loss_bits": 0.9058843936099548,
+              "gain_vs_empty_bits": -4.612397710213045e-06,
+              "gain_vs_previous_bits": -3.1321651948079676e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              89734,
+              36095
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              89750,
+              36202
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8653753764522835,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8660537837843342,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8657844545623316,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8657603422618046,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8662905099332282,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.866040522885502,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8660253226034388,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8656070063127629,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8658289158594077,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8663456351454234,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8660657308741517,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8657640280465527,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8664339377204365,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8660668865318697,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8658481599566209,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.8660762490024566,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.866767962610285,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              58231,
+              27296
+            ],
+            [
+              31503,
+              8799
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              58144,
+              27348
+            ],
+            [
+              31606,
+              8854
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8572890210105056,
+          "gain_vs_empty_bits": 0.008086355441777826,
+          "gain_vs_previous_bits": 0.008086355441777826,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8660285498113043,
+              "gain_vs_empty_bits": 2.5233973029892276e-05,
+              "gain_vs_previous_bits": 2.5233973029892276e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8657575144190249,
+              "gain_vs_empty_bits": 2.6940143306619646e-05,
+              "gain_vs_previous_bits": 2.6940143306619646e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8657374424556017,
+              "gain_vs_empty_bits": 2.2899806202958395e-05,
+              "gain_vs_previous_bits": 2.2899806202958395e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8662658289349787,
+              "gain_vs_empty_bits": 2.4680998249482222e-05,
+              "gain_vs_previous_bits": 2.4680998249482222e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8659897833750033,
+              "gain_vs_empty_bits": 5.073951049872072e-05,
+              "gain_vs_previous_bits": 5.073951049872072e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8660004643483342,
+              "gain_vs_empty_bits": 2.4858255104565075e-05,
+              "gain_vs_previous_bits": 2.4858255104565075e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8655634187927594,
+              "gain_vs_empty_bits": 4.3587520003440794e-05,
+              "gain_vs_previous_bits": 4.3587520003440794e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8658435346939698,
+              "gain_vs_empty_bits": -1.4618834562107885e-05,
+              "gain_vs_previous_bits": -1.4618834562107885e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8663693216122357,
+              "gain_vs_empty_bits": -2.3686466812278262e-05,
+              "gain_vs_previous_bits": -2.3686466812278262e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8661165172066857,
+              "gain_vs_empty_bits": -5.078633253396969e-05,
+              "gain_vs_previous_bits": -5.078633253396969e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8656737706771515,
+              "gain_vs_empty_bits": 9.025736940126983e-05,
+              "gain_vs_previous_bits": 9.025736940126983e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8664047756364688,
+              "gain_vs_empty_bits": 2.9162083967748664e-05,
+              "gain_vs_previous_bits": 2.9162083967748664e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8659966202267069,
+              "gain_vs_empty_bits": 7.026630516282495e-05,
+              "gain_vs_previous_bits": 7.026630516282495e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8657391944171275,
+              "gain_vs_empty_bits": 0.0001089655394933553,
+              "gain_vs_previous_bits": 0.0001089655394933553
+            },
+            {
+              "heldout_log_loss_bits": 0.8660122262554452,
+              "gain_vs_empty_bits": 6.402274701144961e-05,
+              "gain_vs_previous_bits": 6.402274701144961e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8666927128905411,
+              "gain_vs_empty_bits": 7.524971974393058e-05,
+              "gain_vs_previous_bits": 7.524971974393058e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              38167,
+              13798
+            ],
+            [
+              20064,
+              13498
+            ],
+            [
+              26445,
+              7111
+            ],
+            [
+              5058,
+              1688
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              38010,
+              13784
+            ],
+            [
+              20134,
+              13564
+            ],
+            [
+              26455,
+              7227
+            ],
+            [
+              5151,
+              1627
+            ]
+          ],
+          "training_targets": 125829,
+          "test_targets": 125952,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.8472998888919577,
+          "gain_vs_empty_bits": 0.01807548756032573,
+          "gain_vs_previous_bits": 0.009989132118547905,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.8659813284121396,
+              "gain_vs_empty_bits": 7.245537219457976e-05,
+              "gain_vs_previous_bits": 4.722139916468748e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8656870432489112,
+              "gain_vs_empty_bits": 9.741131342033693e-05,
+              "gain_vs_previous_bits": 7.047117011371729e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8656669370222305,
+              "gain_vs_empty_bits": 9.340523957412916e-05,
+              "gain_vs_previous_bits": 7.050543337117077e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8662263152095553,
+              "gain_vs_empty_bits": 6.419472367291679e-05,
+              "gain_vs_previous_bits": 3.9513725423434565e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8659237318330635,
+              "gain_vs_empty_bits": 0.00011679105243855847,
+              "gain_vs_previous_bits": 6.605154193983775e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8659607320565573,
+              "gain_vs_empty_bits": 6.459054688146004e-05,
+              "gain_vs_previous_bits": 3.973229177689497e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8655253722147654,
+              "gain_vs_empty_bits": 8.163409799744059e-05,
+              "gain_vs_previous_bits": 3.80465779939998e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.865787190907515,
+              "gain_vs_empty_bits": 4.172495189269654e-05,
+              "gain_vs_previous_bits": 5.634378645480442e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8664108431940453,
+              "gain_vs_empty_bits": -6.520804862186758e-05,
+              "gain_vs_previous_bits": -4.1521581809589314e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8661293053185345,
+              "gain_vs_empty_bits": -6.35744443827635e-05,
+              "gain_vs_previous_bits": -1.2788111848793804e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8656902804828436,
+              "gain_vs_empty_bits": 7.374756370914781e-05,
+              "gain_vs_previous_bits": -1.6509805692122015e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8663669916018789,
+              "gain_vs_empty_bits": 6.694611855762034e-05,
+              "gain_vs_previous_bits": 3.7784034589871673e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8659560812276201,
+              "gain_vs_empty_bits": 0.00011080530424956159,
+              "gain_vs_previous_bits": 4.053899908673664e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.86569117865451,
+              "gain_vs_empty_bits": 0.00015698130211094785,
+              "gain_vs_previous_bits": 4.801576261759255e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.8660160107252183,
+              "gain_vs_empty_bits": 6.023827723833364e-05,
+              "gain_vs_previous_bits": -3.7844697731159727e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.8666762355733522,
+              "gain_vs_empty_bits": 9.172703693283157e-05,
+              "gain_vs_previous_bits": 1.6477317188900997e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "6343",
+      "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+      "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+      "variant": "unassigned",
+      "payload_w": 5240,
+      "payload_h": 3912,
+      "payload_offset": 1523712,
+      "payload_bytes": 17772487,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1725464,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          1006,
+          1008
+        ],
+        "escape_omitted_train_test_blocks": [
+          18,
+          16
+        ],
+        "retained_train_test_targets": [
+          123738,
+          123984
+        ],
+        "parsed_escapes": 34,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              71089,
+              52649
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              71518,
+              52466
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9829150992290441,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9829063044861492,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9830076504421367,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9832493054720769,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9829998116533131,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9829923509572597,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9828945986666138,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9827978249741129,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9830387972634989,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9830342431041921,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9830575620556276,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.982875948333645,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9831987232279461,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9833220575055531,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9829268098525246,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9829608750385976,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9828782207942373,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              25822,
+              16127
+            ],
+            [
+              18830,
+              12134
+            ],
+            [
+              14915,
+              14241
+            ],
+            [
+              11522,
+              10147
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              25878,
+              16175
+            ],
+            [
+              18872,
+              11872
+            ],
+            [
+              15273,
+              14180
+            ],
+            [
+              11495,
+              10239
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9769054224456458,
+          "gain_vs_empty_bits": 0.0060096767833982545,
+          "gain_vs_previous_bits": 0.0060096767833982545,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9825376409305098,
+              "gain_vs_empty_bits": 0.0003686635556394702,
+              "gain_vs_previous_bits": 0.0003686635556394702
+            },
+            {
+              "heldout_log_loss_bits": 0.9827007439542902,
+              "gain_vs_empty_bits": 0.0003069064878464811,
+              "gain_vs_previous_bits": 0.0003069064878464811
+            },
+            {
+              "heldout_log_loss_bits": 0.9828747671510357,
+              "gain_vs_empty_bits": 0.00037453832104117346,
+              "gain_vs_previous_bits": 0.00037453832104117346
+            },
+            {
+              "heldout_log_loss_bits": 0.9826325822909431,
+              "gain_vs_empty_bits": 0.0003672293623699918,
+              "gain_vs_previous_bits": 0.0003672293623699918
+            },
+            {
+              "heldout_log_loss_bits": 0.9824819280702344,
+              "gain_vs_empty_bits": 0.0005104228870252969,
+              "gain_vs_previous_bits": 0.0005104228870252969
+            },
+            {
+              "heldout_log_loss_bits": 0.9824654536725451,
+              "gain_vs_empty_bits": 0.00042914499406865314,
+              "gain_vs_previous_bits": 0.00042914499406865314
+            },
+            {
+              "heldout_log_loss_bits": 0.9823327958165281,
+              "gain_vs_empty_bits": 0.00046502915758483976,
+              "gain_vs_previous_bits": 0.00046502915758483976
+            },
+            {
+              "heldout_log_loss_bits": 0.9828033320092046,
+              "gain_vs_empty_bits": 0.0002354652542942981,
+              "gain_vs_previous_bits": 0.0002354652542942981
+            },
+            {
+              "heldout_log_loss_bits": 0.9826617219303059,
+              "gain_vs_empty_bits": 0.00037252117388619777,
+              "gain_vs_previous_bits": 0.00037252117388619777
+            },
+            {
+              "heldout_log_loss_bits": 0.9827319533839277,
+              "gain_vs_empty_bits": 0.00032560867169983965,
+              "gain_vs_previous_bits": 0.00032560867169983965
+            },
+            {
+              "heldout_log_loss_bits": 0.982409131736618,
+              "gain_vs_empty_bits": 0.00046681659702696443,
+              "gain_vs_previous_bits": 0.00046681659702696443
+            },
+            {
+              "heldout_log_loss_bits": 0.982791805293869,
+              "gain_vs_empty_bits": 0.0004069179340771001,
+              "gain_vs_previous_bits": 0.0004069179340771001
+            },
+            {
+              "heldout_log_loss_bits": 0.9827772089933271,
+              "gain_vs_empty_bits": 0.000544848512226026,
+              "gain_vs_previous_bits": 0.000544848512226026
+            },
+            {
+              "heldout_log_loss_bits": 0.9825548056888378,
+              "gain_vs_empty_bits": 0.0003720041636867677,
+              "gain_vs_previous_bits": 0.0003720041636867677
+            },
+            {
+              "heldout_log_loss_bits": 0.9825701339285167,
+              "gain_vs_empty_bits": 0.0003907411100809721,
+              "gain_vs_previous_bits": 0.0003907411100809721
+            },
+            {
+              "heldout_log_loss_bits": 0.9825425371537985,
+              "gain_vs_empty_bits": 0.0003356836404387886,
+              "gain_vs_previous_bits": 0.0003356836404387886
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              7886,
+              3546
+            ],
+            [
+              2799,
+              2083
+            ],
+            [
+              3815,
+              2231
+            ],
+            [
+              3005,
+              1782
+            ],
+            [
+              2937,
+              2402
+            ],
+            [
+              1823,
+              1448
+            ],
+            [
+              1802,
+              1359
+            ],
+            [
+              1755,
+              1276
+            ],
+            [
+              4143,
+              2156
+            ],
+            [
+              2438,
+              1459
+            ],
+            [
+              2196,
+              1697
+            ],
+            [
+              1797,
+              1325
+            ],
+            [
+              3532,
+              1721
+            ],
+            [
+              1818,
+              1297
+            ],
+            [
+              1501,
+              1255
+            ],
+            [
+              1405,
+              1224
+            ],
+            [
+              3142,
+              2900
+            ],
+            [
+              1796,
+              1641
+            ],
+            [
+              2248,
+              2289
+            ],
+            [
+              1695,
+              1756
+            ],
+            [
+              1888,
+              1688
+            ],
+            [
+              1441,
+              1330
+            ],
+            [
+              1334,
+              1333
+            ],
+            [
+              1371,
+              1304
+            ],
+            [
+              1805,
+              1515
+            ],
+            [
+              1399,
+              1181
+            ],
+            [
+              1402,
+              1333
+            ],
+            [
+              1203,
+              1195
+            ],
+            [
+              1912,
+              1436
+            ],
+            [
+              1348,
+              1200
+            ],
+            [
+              1291,
+              1162
+            ],
+            [
+              1162,
+              1125
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              7866,
+              3431
+            ],
+            [
+              2906,
+              2075
+            ],
+            [
+              3780,
+              2258
+            ],
+            [
+              2993,
+              1715
+            ],
+            [
+              2936,
+              2430
+            ],
+            [
+              1896,
+              1540
+            ],
+            [
+              1785,
+              1350
+            ],
+            [
+              1716,
+              1376
+            ],
+            [
+              4051,
+              2109
+            ],
+            [
+              2538,
+              1465
+            ],
+            [
+              2128,
+              1576
+            ],
+            [
+              1787,
+              1298
+            ],
+            [
+              3520,
+              1746
+            ],
+            [
+              1813,
+              1239
+            ],
+            [
+              1519,
+              1258
+            ],
+            [
+              1516,
+              1181
+            ],
+            [
+              3227,
+              3055
+            ],
+            [
+              1799,
+              1544
+            ],
+            [
+              2257,
+              2198
+            ],
+            [
+              1851,
+              1806
+            ],
+            [
+              2058,
+              1729
+            ],
+            [
+              1410,
+              1278
+            ],
+            [
+              1390,
+              1333
+            ],
+            [
+              1281,
+              1237
+            ],
+            [
+              1848,
+              1454
+            ],
+            [
+              1431,
+              1272
+            ],
+            [
+              1424,
+              1334
+            ],
+            [
+              1159,
+              1170
+            ],
+            [
+              1888,
+              1464
+            ],
+            [
+              1330,
+              1202
+            ],
+            [
+              1257,
+              1178
+            ],
+            [
+              1158,
+              1165
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9718227862588524,
+          "gain_vs_empty_bits": 0.011092312970191642,
+          "gain_vs_previous_bits": 0.005082636186793388,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9822159454697709,
+              "gain_vs_empty_bits": 0.0006903590163783724,
+              "gain_vs_previous_bits": 0.0003216954607389022
+            },
+            {
+              "heldout_log_loss_bits": 0.9821961094279037,
+              "gain_vs_empty_bits": 0.0008115410142329749,
+              "gain_vs_previous_bits": 0.0005046345263864938
+            },
+            {
+              "heldout_log_loss_bits": 0.9823573435486459,
+              "gain_vs_empty_bits": 0.000891961923430995,
+              "gain_vs_previous_bits": 0.0005174236023898215
+            },
+            {
+              "heldout_log_loss_bits": 0.9822099288249625,
+              "gain_vs_empty_bits": 0.0007898828283505743,
+              "gain_vs_previous_bits": 0.0004226534659805825
+            },
+            {
+              "heldout_log_loss_bits": 0.9820386573158044,
+              "gain_vs_empty_bits": 0.0009536936414552555,
+              "gain_vs_previous_bits": 0.00044327075442995856
+            },
+            {
+              "heldout_log_loss_bits": 0.9820122524136431,
+              "gain_vs_empty_bits": 0.0008823462529706783,
+              "gain_vs_previous_bits": 0.0004532012589020251
+            },
+            {
+              "heldout_log_loss_bits": 0.9819310216362228,
+              "gain_vs_empty_bits": 0.0008668033378901319,
+              "gain_vs_previous_bits": 0.0004017741803052921
+            },
+            {
+              "heldout_log_loss_bits": 0.9823168391888673,
+              "gain_vs_empty_bits": 0.0007219580746316012,
+              "gain_vs_previous_bits": 0.0004864928203373031
+            },
+            {
+              "heldout_log_loss_bits": 0.9821539409309819,
+              "gain_vs_empty_bits": 0.0008803021732102234,
+              "gain_vs_previous_bits": 0.0005077809993240257
+            },
+            {
+              "heldout_log_loss_bits": 0.982150917453047,
+              "gain_vs_empty_bits": 0.0009066446025806085,
+              "gain_vs_previous_bits": 0.0005810359308807689
+            },
+            {
+              "heldout_log_loss_bits": 0.9818803903116207,
+              "gain_vs_empty_bits": 0.0009955580220243343,
+              "gain_vs_previous_bits": 0.0005287414249973699
+            },
+            {
+              "heldout_log_loss_bits": 0.9827423982154279,
+              "gain_vs_empty_bits": 0.00045632501251824387,
+              "gain_vs_previous_bits": 4.940707844114378e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9822984019501221,
+              "gain_vs_empty_bits": 0.0010236555554310467,
+              "gain_vs_previous_bits": 0.00047880704320502065
+            },
+            {
+              "heldout_log_loss_bits": 0.9820787880611794,
+              "gain_vs_empty_bits": 0.0008480217913451327,
+              "gain_vs_previous_bits": 0.00047601762765836497
+            },
+            {
+              "heldout_log_loss_bits": 0.9819776678559597,
+              "gain_vs_empty_bits": 0.0009832071826378908,
+              "gain_vs_previous_bits": 0.0005924660725569186
+            },
+            {
+              "heldout_log_loss_bits": 0.9821114408213272,
+              "gain_vs_empty_bits": 0.000766779972910081,
+              "gain_vs_previous_bits": 0.0004310963324712924
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              72933,
+              50805
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              72790,
+              51194
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9780183574704656,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9779223937019078,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9777836659029527,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9777179272893406,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9780104873607699,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9776787505718186,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9779217847434207,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9780515213547505,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9775303214183365,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.978035300324583,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9778031639237632,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9777924831196231,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9779494348736686,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9779658813157581,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9779649513976743,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9776768886278341,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9779878600324875,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              41977,
+              29134
+            ],
+            [
+              30956,
+              21671
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              42033,
+              29466
+            ],
+            [
+              30757,
+              21728
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9780159088111873,
+          "gain_vs_empty_bits": 2.448659278342369e-06,
+          "gain_vs_previous_bits": 2.448659278342369e-06,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9776243864224838,
+              "gain_vs_empty_bits": 0.000298007279423973,
+              "gain_vs_previous_bits": 0.000298007279423973
+            },
+            {
+              "heldout_log_loss_bits": 0.9775078753683544,
+              "gain_vs_empty_bits": 0.00027579053459836356,
+              "gain_vs_previous_bits": 0.00027579053459836356
+            },
+            {
+              "heldout_log_loss_bits": 0.9773777316705194,
+              "gain_vs_empty_bits": 0.00034019561882114857,
+              "gain_vs_previous_bits": 0.00034019561882114857
+            },
+            {
+              "heldout_log_loss_bits": 0.9777472618641416,
+              "gain_vs_empty_bits": 0.0002632254966282721,
+              "gain_vs_previous_bits": 0.0002632254966282721
+            },
+            {
+              "heldout_log_loss_bits": 0.9775506834604238,
+              "gain_vs_empty_bits": 0.00012806711139479177,
+              "gain_vs_previous_bits": 0.00012806711139479177
+            },
+            {
+              "heldout_log_loss_bits": 0.9777690879608869,
+              "gain_vs_empty_bits": 0.00015269678253382324,
+              "gain_vs_previous_bits": 0.00015269678253382324
+            },
+            {
+              "heldout_log_loss_bits": 0.9777698115256448,
+              "gain_vs_empty_bits": 0.00028170982910569187,
+              "gain_vs_previous_bits": 0.00028170982910569187
+            },
+            {
+              "heldout_log_loss_bits": 0.9773296726403209,
+              "gain_vs_empty_bits": 0.00020064877801562186,
+              "gain_vs_previous_bits": 0.00020064877801562186
+            },
+            {
+              "heldout_log_loss_bits": 0.9778901465944878,
+              "gain_vs_empty_bits": 0.00014515373009515997,
+              "gain_vs_previous_bits": 0.00014515373009515997
+            },
+            {
+              "heldout_log_loss_bits": 0.9776577841009586,
+              "gain_vs_empty_bits": 0.00014537982280460326,
+              "gain_vs_previous_bits": 0.00014537982280460326
+            },
+            {
+              "heldout_log_loss_bits": 0.9776421542849125,
+              "gain_vs_empty_bits": 0.0001503288347105558,
+              "gain_vs_previous_bits": 0.0001503288347105558
+            },
+            {
+              "heldout_log_loss_bits": 0.977739499278741,
+              "gain_vs_empty_bits": 0.0002099355949275461,
+              "gain_vs_previous_bits": 0.0002099355949275461
+            },
+            {
+              "heldout_log_loss_bits": 0.977778284224517,
+              "gain_vs_empty_bits": 0.00018759709124116508,
+              "gain_vs_previous_bits": 0.00018759709124116508
+            },
+            {
+              "heldout_log_loss_bits": 0.9777694890342696,
+              "gain_vs_empty_bits": 0.0001954623634046193,
+              "gain_vs_previous_bits": 0.0001954623634046193
+            },
+            {
+              "heldout_log_loss_bits": 0.9773976877635535,
+              "gain_vs_empty_bits": 0.000279200864280571,
+              "gain_vs_previous_bits": 0.000279200864280571
+            },
+            {
+              "heldout_log_loss_bits": 0.9777832879313437,
+              "gain_vs_empty_bits": 0.000204572101143774,
+              "gain_vs_previous_bits": 0.000204572101143774
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              24941,
+              15815
+            ],
+            [
+              17036,
+              13319
+            ],
+            [
+              18558,
+              11793
+            ],
+            [
+              12398,
+              9878
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              25058,
+              16098
+            ],
+            [
+              16975,
+              13368
+            ],
+            [
+              18481,
+              11895
+            ],
+            [
+              12276,
+              9833
+            ]
+          ],
+          "training_targets": 123738,
+          "test_targets": 123984,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9761306027953311,
+          "gain_vs_empty_bits": 0.0018877546751344676,
+          "gain_vs_previous_bits": 0.0018853060158561252,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9774985405108084,
+              "gain_vs_empty_bits": 0.0004238531910993881,
+              "gain_vs_previous_bits": 0.00012584591167541515
+            },
+            {
+              "heldout_log_loss_bits": 0.9773265261478498,
+              "gain_vs_empty_bits": 0.00045713975510297544,
+              "gain_vs_previous_bits": 0.00018134922050461189
+            },
+            {
+              "heldout_log_loss_bits": 0.9771151254025519,
+              "gain_vs_empty_bits": 0.0006028018867887397,
+              "gain_vs_previous_bits": 0.0002626062679675911
+            },
+            {
+              "heldout_log_loss_bits": 0.9775779732593113,
+              "gain_vs_empty_bits": 0.00043251410145861424,
+              "gain_vs_previous_bits": 0.00016928860483034214
+            },
+            {
+              "heldout_log_loss_bits": 0.9774106352581147,
+              "gain_vs_empty_bits": 0.0002681153137039649,
+              "gain_vs_previous_bits": 0.00014004820230917314
+            },
+            {
+              "heldout_log_loss_bits": 0.9774095414961984,
+              "gain_vs_empty_bits": 0.0005122432472223215,
+              "gain_vs_previous_bits": 0.00035954646468849827
+            },
+            {
+              "heldout_log_loss_bits": 0.97750138429883,
+              "gain_vs_empty_bits": 0.000550137055920441,
+              "gain_vs_previous_bits": 0.0002684272268147492
+            },
+            {
+              "heldout_log_loss_bits": 0.9771003111904745,
+              "gain_vs_empty_bits": 0.00043001022786204324,
+              "gain_vs_previous_bits": 0.00022936144984642137
+            },
+            {
+              "heldout_log_loss_bits": 0.9776143171433411,
+              "gain_vs_empty_bits": 0.00042098318124184075,
+              "gain_vs_previous_bits": 0.0002758294511466808
+            },
+            {
+              "heldout_log_loss_bits": 0.9774676357269578,
+              "gain_vs_empty_bits": 0.00033552819680537915,
+              "gain_vs_previous_bits": 0.0001901483740007759
+            },
+            {
+              "heldout_log_loss_bits": 0.9774444937980201,
+              "gain_vs_empty_bits": 0.0003479893216029595,
+              "gain_vs_previous_bits": 0.00019766048689240368
+            },
+            {
+              "heldout_log_loss_bits": 0.977540042445412,
+              "gain_vs_empty_bits": 0.00040939242825654976,
+              "gain_vs_previous_bits": 0.00019945683332900366
+            },
+            {
+              "heldout_log_loss_bits": 0.9775557800468777,
+              "gain_vs_empty_bits": 0.000410101268880414,
+              "gain_vs_previous_bits": 0.0002225041776392489
+            },
+            {
+              "heldout_log_loss_bits": 0.977502082553512,
+              "gain_vs_empty_bits": 0.0004628688441622453,
+              "gain_vs_previous_bits": 0.00026740648075762596
+            },
+            {
+              "heldout_log_loss_bits": 0.9772368292570128,
+              "gain_vs_empty_bits": 0.00044005937082125524,
+              "gain_vs_previous_bits": 0.00016085850654068423
+            },
+            {
+              "heldout_log_loss_bits": 0.9776021649655992,
+              "gain_vs_empty_bits": 0.0003856950668883474,
+              "gain_vs_previous_bits": 0.00018112296574457343
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pixls_id": "5283",
+      "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+      "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+      "variant": "unassigned",
+      "payload_w": 5220,
+      "payload_h": 3912,
+      "payload_offset": 1817600,
+      "payload_bytes": 20003129,
+      "size_class": "variable",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "prefix_shortfall": 0,
+      "bits_consumed": 1822446,
+      "selection": {
+        "complete_blocks": 2048,
+        "retained_train_test_blocks": [
+          890,
+          897
+        ],
+        "escape_omitted_train_test_blocks": [
+          134,
+          127
+        ],
+        "retained_train_test_targets": [
+          109470,
+          110331
+        ],
+        "parsed_escapes": 313,
+        "tail_tokens": 0,
+        "tail_escapes": 0
+      },
+      "models": [
+        {
+          "name": "b2_empty",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              58353,
+              51117
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              59180,
+              51151
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.996208806240413,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9962196594105281,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.996217203502748,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962408176879441,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962689199075231,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.996188397934494,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962395616078156,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9963551494676738,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962303812089425,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962659349080855,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962604036249253,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962713455300986,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.996283741647246,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962979440780387,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962354688431935,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9962284325102669,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9963005430882405,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b2_two",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              17354,
+              14224
+            ],
+            [
+              15156,
+              12612
+            ],
+            [
+              13813,
+              12990
+            ],
+            [
+              12030,
+              11291
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              17693,
+              14271
+            ],
+            [
+              15338,
+              12525
+            ],
+            [
+              14077,
+              13141
+            ],
+            [
+              12072,
+              11214
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9953588602482212,
+          "gain_vs_empty_bits": 0.0008499459921917918,
+          "gain_vs_previous_bits": 0.0008499459921917918,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9962064138447947,
+              "gain_vs_empty_bits": 1.3245565733455145e-05,
+              "gain_vs_previous_bits": 1.3245565733455145e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.996197116848748,
+              "gain_vs_empty_bits": 2.008665399999554e-05,
+              "gain_vs_previous_bits": 2.008665399999554e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9962372954695008,
+              "gain_vs_empty_bits": 3.5222184433525427e-06,
+              "gain_vs_previous_bits": 3.5222184433525427e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.996249741166567,
+              "gain_vs_empty_bits": 1.9178740956138363e-05,
+              "gain_vs_previous_bits": 1.9178740956138363e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9961731355711737,
+              "gain_vs_empty_bits": 1.5262363320278638e-05,
+              "gain_vs_previous_bits": 1.5262363320278638e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9961957592866962,
+              "gain_vs_empty_bits": 4.380232111933502e-05,
+              "gain_vs_previous_bits": 4.380232111933502e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963227580882749,
+              "gain_vs_empty_bits": 3.239137939892167e-05,
+              "gain_vs_previous_bits": 3.239137939892167e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963319946409696,
+              "gain_vs_empty_bits": -0.00010161343202708117,
+              "gain_vs_previous_bits": -0.00010161343202708117
+            },
+            {
+              "heldout_log_loss_bits": 0.9961685651703431,
+              "gain_vs_empty_bits": 9.736973774232549e-05,
+              "gain_vs_previous_bits": 9.736973774232549e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9962124299044354,
+              "gain_vs_empty_bits": 4.797372048992443e-05,
+              "gain_vs_previous_bits": 4.797372048992443e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9961791339988972,
+              "gain_vs_empty_bits": 9.221153120131387e-05,
+              "gain_vs_previous_bits": 9.221153120131387e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9962703389547611,
+              "gain_vs_empty_bits": 1.3402692484842937e-05,
+              "gain_vs_previous_bits": 1.3402692484842937e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963460692072591,
+              "gain_vs_empty_bits": -4.81251292203666e-05,
+              "gain_vs_previous_bits": -4.81251292203666e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9961874325113017,
+              "gain_vs_empty_bits": 4.803633189176537e-05,
+              "gain_vs_previous_bits": 4.803633189176537e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9961750314640879,
+              "gain_vs_empty_bits": 5.3401046179013534e-05,
+              "gain_vs_previous_bits": 5.3401046179013534e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9962962684670169,
+              "gain_vs_empty_bits": 4.2746212235433845e-06,
+              "gain_vs_previous_bits": 4.2746212235433845e-06
+            }
+          ]
+        },
+        {
+          "name": "b2_five",
+          "target_bit": 2,
+          "context_taps_first_is_msb": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              3218,
+              2379
+            ],
+            [
+              2202,
+              1775
+            ],
+            [
+              2430,
+              1939
+            ],
+            [
+              2148,
+              1758
+            ],
+            [
+              2153,
+              1936
+            ],
+            [
+              1752,
+              1554
+            ],
+            [
+              1800,
+              1472
+            ],
+            [
+              1651,
+              1411
+            ],
+            [
+              2421,
+              1960
+            ],
+            [
+              1895,
+              1590
+            ],
+            [
+              2009,
+              1607
+            ],
+            [
+              1718,
+              1517
+            ],
+            [
+              2242,
+              1656
+            ],
+            [
+              1659,
+              1445
+            ],
+            [
+              1647,
+              1518
+            ],
+            [
+              1565,
+              1319
+            ],
+            [
+              2270,
+              2120
+            ],
+            [
+              1764,
+              1620
+            ],
+            [
+              1849,
+              1820
+            ],
+            [
+              1674,
+              1552
+            ],
+            [
+              1796,
+              1663
+            ],
+            [
+              1501,
+              1438
+            ],
+            [
+              1512,
+              1470
+            ],
+            [
+              1447,
+              1307
+            ],
+            [
+              1766,
+              1711
+            ],
+            [
+              1505,
+              1357
+            ],
+            [
+              1577,
+              1493
+            ],
+            [
+              1393,
+              1337
+            ],
+            [
+              1733,
+              1462
+            ],
+            [
+              1369,
+              1383
+            ],
+            [
+              1384,
+              1360
+            ],
+            [
+              1303,
+              1188
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              3205,
+              2372
+            ],
+            [
+              2298,
+              1902
+            ],
+            [
+              2543,
+              1904
+            ],
+            [
+              2093,
+              1685
+            ],
+            [
+              2230,
+              1929
+            ],
+            [
+              1815,
+              1552
+            ],
+            [
+              1893,
+              1547
+            ],
+            [
+              1616,
+              1380
+            ],
+            [
+              2542,
+              1900
+            ],
+            [
+              2011,
+              1545
+            ],
+            [
+              1888,
+              1603
+            ],
+            [
+              1777,
+              1461
+            ],
+            [
+              2205,
+              1799
+            ],
+            [
+              1697,
+              1443
+            ],
+            [
+              1659,
+              1396
+            ],
+            [
+              1559,
+              1378
+            ],
+            [
+              2344,
+              2236
+            ],
+            [
+              1763,
+              1593
+            ],
+            [
+              1923,
+              1840
+            ],
+            [
+              1691,
+              1636
+            ],
+            [
+              1880,
+              1662
+            ],
+            [
+              1556,
+              1456
+            ],
+            [
+              1507,
+              1400
+            ],
+            [
+              1413,
+              1318
+            ],
+            [
+              1848,
+              1573
+            ],
+            [
+              1503,
+              1355
+            ],
+            [
+              1586,
+              1439
+            ],
+            [
+              1407,
+              1361
+            ],
+            [
+              1706,
+              1579
+            ],
+            [
+              1371,
+              1311
+            ],
+            [
+              1343,
+              1332
+            ],
+            [
+              1308,
+              1264
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9954263979683932,
+          "gain_vs_empty_bits": 0.0007824082720198078,
+          "gain_vs_previous_bits": -6.7537720171984e-05,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9963071697522127,
+              "gain_vs_empty_bits": -8.751034168452687e-05,
+              "gain_vs_previous_bits": -0.00010075590741798202
+            },
+            {
+              "heldout_log_loss_bits": 0.9962880945500694,
+              "gain_vs_empty_bits": -7.08910473213864e-05,
+              "gain_vs_previous_bits": -9.097770132138194e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9965354074804358,
+              "gain_vs_empty_bits": -0.00029458979249163963,
+              "gain_vs_previous_bits": -0.0002981120109349922
+            },
+            {
+              "heldout_log_loss_bits": 0.9963298990342646,
+              "gain_vs_empty_bits": -6.097912674152273e-05,
+              "gain_vs_previous_bits": -8.015786769766109e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.99624432332155,
+              "gain_vs_empty_bits": -5.592538705601058e-05,
+              "gain_vs_previous_bits": -7.118775037628922e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963226938651414,
+              "gain_vs_empty_bits": -8.313225732581309e-05,
+              "gain_vs_previous_bits": -0.0001269345784451481
+            },
+            {
+              "heldout_log_loss_bits": 0.9964343946453283,
+              "gain_vs_empty_bits": -7.924517765456329e-05,
+              "gain_vs_previous_bits": -0.00011163655705348496
+            },
+            {
+              "heldout_log_loss_bits": 0.9963955625388631,
+              "gain_vs_empty_bits": -0.00016518132992060508,
+              "gain_vs_previous_bits": -6.35678978935239e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9962970432043299,
+              "gain_vs_empty_bits": -3.11082962444198e-05,
+              "gain_vs_previous_bits": -0.0001284780339867453
+            },
+            {
+              "heldout_log_loss_bits": 0.996399240383432,
+              "gain_vs_empty_bits": -0.00013883675850667743,
+              "gain_vs_previous_bits": -0.00018681047899660186
+            },
+            {
+              "heldout_log_loss_bits": 0.9961553971676487,
+              "gain_vs_empty_bits": 0.00011594836244988027,
+              "gain_vs_previous_bits": 2.3736831248566403e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963687408398623,
+              "gain_vs_empty_bits": -8.49991926162863e-05,
+              "gain_vs_previous_bits": -9.840188510112924e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.996388864723908,
+              "gain_vs_empty_bits": -9.092064586924131e-05,
+              "gain_vs_previous_bits": -4.279551664887471e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9963395843557492,
+              "gain_vs_empty_bits": -0.00010411551255573581,
+              "gain_vs_previous_bits": -0.00015215184444750118
+            },
+            {
+              "heldout_log_loss_bits": 0.9963963250348057,
+              "gain_vs_empty_bits": -0.0001678925245387486,
+              "gain_vs_previous_bits": -0.00022129357071776212
+            },
+            {
+              "heldout_log_loss_bits": 0.9963284595961738,
+              "gain_vs_empty_bits": -2.791650793332323e-05,
+              "gain_vs_previous_bits": -3.2191129156866616e-05
+            }
+          ]
+        },
+        {
+          "name": "b4_empty",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [],
+          "training_counts_context_by_outcome": [
+            [
+              59370,
+              50100
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              59842,
+              50489
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9948099428832629,
+          "gain_vs_empty_bits": 0.0,
+          "gain_vs_previous_bits": null,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9948787849840864,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947546546259814,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947850305801295,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9948593372813341,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947072780755266,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9949034739538741,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947005549301648,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947677652181447,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9948169503764026,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947208172478427,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947965942700456,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947861971698552,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9947055838347594,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9948224771020616,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.9946825412242022,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            },
+            {
+              "heldout_log_loss_bits": 0.994855950007895,
+              "gain_vs_empty_bits": 0.0,
+              "gain_vs_previous_bits": null
+            }
+          ]
+        },
+        {
+          "name": "b4_one",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              31592,
+              26780
+            ],
+            [
+              27778,
+              23320
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              31971,
+              27215
+            ],
+            [
+              27871,
+              23274
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9947975749389221,
+          "gain_vs_empty_bits": 1.2367944340785364e-05,
+          "gain_vs_previous_bits": 1.2367944340785364e-05,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9948528899399357,
+              "gain_vs_empty_bits": 2.5895044150736624e-05,
+              "gain_vs_previous_bits": 2.5895044150736624e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947549906940705,
+              "gain_vs_empty_bits": -3.360680890240886e-07,
+              "gain_vs_previous_bits": -3.360680890240886e-07
+            },
+            {
+              "heldout_log_loss_bits": 0.9947500707262538,
+              "gain_vs_empty_bits": 3.495985387569345e-05,
+              "gain_vs_previous_bits": 3.495985387569345e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9948471592986177,
+              "gain_vs_empty_bits": 1.2177982716465863e-05,
+              "gain_vs_previous_bits": 1.2177982716465863e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947316396680358,
+              "gain_vs_empty_bits": -2.436159250918113e-05,
+              "gain_vs_previous_bits": -2.436159250918113e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.994895941219953,
+              "gain_vs_empty_bits": 7.5327339211783695e-06,
+              "gain_vs_previous_bits": 7.5327339211783695e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.994691950447594,
+              "gain_vs_empty_bits": 8.6044825708953e-06,
+              "gain_vs_previous_bits": 8.6044825708953e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9947685902012513,
+              "gain_vs_empty_bits": -8.249831066065028e-07,
+              "gain_vs_previous_bits": -8.249831066065028e-07
+            },
+            {
+              "heldout_log_loss_bits": 0.9948378465592341,
+              "gain_vs_empty_bits": -2.089618283152017e-05,
+              "gain_vs_previous_bits": -2.089618283152017e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947050245638058,
+              "gain_vs_empty_bits": 1.5792684036841642e-05,
+              "gain_vs_previous_bits": 1.5792684036841642e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947684965776655,
+              "gain_vs_empty_bits": 2.80976923801024e-05,
+              "gain_vs_previous_bits": 2.80976923801024e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947287277327587,
+              "gain_vs_empty_bits": 5.746943709650232e-05,
+              "gain_vs_previous_bits": 5.746943709650232e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9946996841459645,
+              "gain_vs_empty_bits": 5.899688794830382e-06,
+              "gain_vs_previous_bits": 5.899688794830382e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.994826896683823,
+              "gain_vs_empty_bits": -4.419581761339053e-06,
+              "gain_vs_previous_bits": -4.419581761339053e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9946663439260811,
+              "gain_vs_empty_bits": 1.619729812107895e-05,
+              "gain_vs_previous_bits": 1.619729812107895e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9948470933625874,
+              "gain_vs_empty_bits": 8.856645307586675e-06,
+              "gain_vs_previous_bits": 8.856645307586675e-06
+            }
+          ]
+        },
+        {
+          "name": "b4_two",
+          "target_bit": 4,
+          "context_taps_first_is_msb": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "training_counts_context_by_outcome": [
+            [
+              16998,
+              14156
+            ],
+            [
+              14594,
+              12624
+            ],
+            [
+              14896,
+              12296
+            ],
+            [
+              12882,
+              11024
+            ]
+          ],
+          "test_counts_context_by_outcome": [
+            [
+              17322,
+              14467
+            ],
+            [
+              14649,
+              12748
+            ],
+            [
+              15145,
+              12248
+            ],
+            [
+              12726,
+              11026
+            ]
+          ],
+          "training_targets": 109470,
+          "test_targets": 110331,
+          "fitted_transfer": true,
+          "test_targets_in_unseen_training_contexts": 0,
+          "heldout_log_loss_bits": 0.9946817156708868,
+          "gain_vs_empty_bits": 0.00012822721237604195,
+          "gain_vs_previous_bits": 0.00011585926803525659,
+          "permuted_scores": [
+            {
+              "heldout_log_loss_bits": 0.9948410942797593,
+              "gain_vs_empty_bits": 3.7690704327131286e-05,
+              "gain_vs_previous_bits": 1.1795660176394662e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947516059146115,
+              "gain_vs_empty_bits": 3.0487113699129154e-06,
+              "gain_vs_previous_bits": 3.384779458937004e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9947573523751061,
+              "gain_vs_empty_bits": 2.76782050233626e-05,
+              "gain_vs_previous_bits": -7.2816488523308465e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9948371110491298,
+              "gain_vs_empty_bits": 2.2226232204380914e-05,
+              "gain_vs_previous_bits": 1.004824948791505e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947156150409205,
+              "gain_vs_empty_bits": -8.336965393929141e-06,
+              "gain_vs_previous_bits": 1.6024627115251988e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9948708583829355,
+              "gain_vs_empty_bits": 3.26155709385878e-05,
+              "gain_vs_previous_bits": 2.5082837017409432e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9946829832977554,
+              "gain_vs_empty_bits": 1.7571632409452143e-05,
+              "gain_vs_previous_bits": 8.967149838556843e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9947685555619147,
+              "gain_vs_empty_bits": -7.903437699852134e-07,
+              "gain_vs_previous_bits": 3.4639336621289374e-08
+            },
+            {
+              "heldout_log_loss_bits": 0.9948433514379225,
+              "gain_vs_empty_bits": -2.6401061519853997e-05,
+              "gain_vs_previous_bits": -5.504878688333825e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9946517924007199,
+              "gain_vs_empty_bits": 6.902484712278945e-05,
+              "gain_vs_previous_bits": 5.3232163085947803e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9947601514605158,
+              "gain_vs_empty_bits": 3.6442809529857456e-05,
+              "gain_vs_previous_bits": 8.345117149755055e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9947407223750132,
+              "gain_vs_empty_bits": 4.547479484195982e-05,
+              "gain_vs_previous_bits": -1.1994642254542498e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9946840073266517,
+              "gain_vs_empty_bits": 2.1576508107634673e-05,
+              "gain_vs_previous_bits": 1.567681931280429e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9948287854604174,
+              "gain_vs_empty_bits": -6.3083583557999034e-06,
+              "gain_vs_previous_bits": -1.8887765944608503e-06
+            },
+            {
+              "heldout_log_loss_bits": 0.9947147771596218,
+              "gain_vs_empty_bits": -3.223593541956671e-05,
+              "gain_vs_previous_bits": -4.843323354064566e-05
+            },
+            {
+              "heldout_log_loss_bits": 0.9948409922399618,
+              "gain_vs_empty_bits": 1.4957767933143629e-05,
+              "gain_vs_previous_bits": 6.101122625556954e-06
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

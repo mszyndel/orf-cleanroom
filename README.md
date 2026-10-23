@@ -6,6 +6,10 @@ Everything here is released under CC0: the findings, the sample data and, we hop
 
 **Read [RULES.md](RULES.md) before contributing.** The whole point of this repo is provenance: every fact here must come from public specifications, patents, or measurements of the files themselves.
 
+[Patent source notes](PATENTS.md) collect reviewed Olympus and adjacent coding
+references, their relevant passages and the gaps they leave. Patent descriptions
+are method references; implementation in ORF must be established from files.
+
 ## How to contribute
 
 This repo is designed so you can hand it to an AI coding agent of your choice. Open the agent, give it this repo's URL, https://github.com/radialmonster/orf-cleanroom , and tell it:
@@ -34,6 +38,11 @@ All issues: https://github.com/radialmonster/orf-cleanroom/issues
 - **Analysis:** pick a gap from a variant's spec in [specs/](specs/) or a lead, say you're working on it, and publish the numbers and a way to reproduce them as a lead issue.
 - **Findings:** [findings/](findings/README.md) holds only verified findings, one file each. A lead becomes a finding when it is reproduced in a second run and the file is added by PR.
 
+For camera owners planning a controlled experiment, see the proposed
+[controlled capture protocol](CAPTURE_PROTOCOL.md): repeated scene controls,
+settings contrasts and a preregistered numeric-only analysis plan. It reports no
+measurements and does not authorize capture or sample release.
+
 ## Getting test files
 
 **Your own ORFs are welcome**: run the tools on them and publish the numbers (never the files). See RULES.md, "Data".
@@ -51,6 +60,8 @@ Use `tools/pixls_samples.py`. It reads the site's own licence listing:
 On Windows, run these in Git Bash, or in PowerShell/cmd use a folder path like `..\orf-samples` and list files explicitly (they do not expand `*`).
 
 `download` fetches CC0 files only, verifies each SHA-256, and refuses to save inside the repo. `check` looks files up by SHA-256 and tells you if one is not CC0 or not a raw.pixls.us file. Run it on files you got from elsewhere.
+
+Licence verification is done once for each exact file hash. Retain the verified licence, public identity and SHA-256 from the download or first successful check. Later measurements and reviews reuse that record after checking the local hash; copied or renamed identical files need no new online lookup. `check` makes a live catalogue request, so do not run it before every measurement on already verified files. A catalogue outage does not prevent using those unchanged inputs. New or changed content without a verified record still needs its first licence check. Do not infer licence from a filename or camera model.
 
 Record each file you use in `samples/manifest.csv` (see samples/README.md).
 

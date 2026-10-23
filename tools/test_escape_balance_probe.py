@@ -1,13 +1,103 @@
 #!/usr/bin/env python3
 """Synthetic tests for #11's first-escape balance split; no sample files."""
 import itertools
+import contextlib
+import io
+import json
 import os
+import struct
 import sys
 import unittest
 from collections import Counter
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import escape_balance_probe as P
+
+
+class CliTests(unittest.TestCase):
+    @staticmethod
+    def tiff(payload):
+        offset = 8 + 2 + 4 * 12 + 4
+        tags = ((0x100, 100), (0x101, 100), (0x111, offset),
+                (0x117, len(payload)))
+        return (b"II" + struct.pack("<HIH", 0x4f52, 8, 4)
+                + b"".join(struct.pack("<HHII", tag, 4, 1, value)
+                           for tag, value in tags)
+                + bytes(4) + payload)
+
+    def invoke(self, inputs):
+        real_open = open
+        fixtures = {"sample-%d" % i: value for i, value in enumerate(inputs)}
+
+        def read_fixture(path, *args, **kwargs):
+            if path in fixtures:
+                value = fixtures[path]
+                if isinstance(value, Exception):
+                    raise value
+                return io.BytesIO(value)
+            return real_open(path, *args, **kwargs)
+
+        argv = ["escape_balance_probe.py"]
+        for i, path in enumerate(fixtures):
+            argv += ["--sample", str(i + 1), "synthetic", path]
+        output = io.StringIO()
+        with mock.patch.object(sys, "argv", argv), \
+                mock.patch("builtins.open", side_effect=read_fixture), \
+                contextlib.redirect_stdout(output):
+            status = P.main()
+        return status, json.loads(output.getvalue())
+
+    def test_complete_prefix(self):
+        status, report = self.invoke([self.tiff(b"\xff" * (P.LIMIT * 6 // 8))])
+        self.assertEqual(status, 0)
+        self.assertEqual(report["failures"], [])
+        sample = report["samples"][0]
+        self.assertEqual(sample["returned_tokens"], P.LIMIT)
+        self.assertEqual(sample["prefix_shortfall_tokens"], 0)
+        self.assertEqual(sample["statistics"]["before"]["ordinary_tokens"], P.LIMIT)
+
+    def test_short_prefix_preserves_aggregate(self):
+        status, report = self.invoke([self.tiff(b"\xff")])
+        self.assertEqual(status, 1)
+        self.assertEqual(report["failures"], [])
+        sample = report["samples"][0]
+        self.assertEqual(sample["returned_tokens"], 1)
+        self.assertEqual(sample["prefix_shortfall_tokens"], P.LIMIT - 1)
+        self.assertEqual(sample["bits_consumed"], 6)
+        self.assertEqual(sample["statistics"]["before"]["suffix_counts_0_to_31"],
+                         [0] * 31 + [1])
+
+    def test_no_complete_token_preserves_empty_groups(self):
+        status, report = self.invoke([self.tiff(b"\x01")])
+        self.assertEqual(status, 1)
+        sample = report["samples"][0]
+        self.assertEqual(sample["returned_tokens"], 0)
+        self.assertEqual(sample["bits_consumed"], 0)
+        for label in ("before", "after"):
+            self.assertEqual(sample["statistics"][label]["p_one_b4_to_b0"], [None] * 5)
+
+    def test_mixed_complete_short_and_exception(self):
+        complete = self.tiff(b"\xff" * (P.LIMIT * 6 // 8))
+        status, report = self.invoke([complete, self.tiff(b"\xff"),
+                                      OSError("private fixture detail")])
+        self.assertEqual(status, 1)
+        self.assertEqual([s["returned_tokens"] for s in report["samples"]], [P.LIMIT, 1])
+        self.assertEqual(report["failures"], [{"pixls_id": "3", "error": "OSError"}])
+        self.assertNotIn("private fixture detail", json.dumps(report))
+
+    def test_mixed_complete_and_short_without_exception(self):
+        complete = self.tiff(b"\xff" * (P.LIMIT * 6 // 8))
+        status, report = self.invoke([complete, self.tiff(b"\xff")])
+        self.assertEqual(status, 1)
+        self.assertEqual(len(report["samples"]), 2)
+        self.assertEqual(report["failures"], [])
+
+    def test_exception_only_is_sanitized(self):
+        status, report = self.invoke([OSError("private fixture detail")])
+        self.assertEqual(status, 1)
+        self.assertEqual(report["samples"], [])
+        self.assertEqual(report["failures"], [{"pixls_id": "1", "error": "OSError"}])
 
 
 class BalanceTests(unittest.TestCase):

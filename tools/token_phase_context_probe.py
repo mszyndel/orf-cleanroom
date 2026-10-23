@@ -12,11 +12,23 @@ Stratification and sparse cells can increase finite-sample bias. This is
 not the historical private context-gain metric or a physical-column test.
 The candidate parse and post-escape framing remain unverified; excluding
 triples containing escapes cannot repair an incorrect post-escape parse.
+An additional held-out report discards incomplete 128-token blocks and whole
+blocks containing q>=17. Original even blocks train; original odd blocks test.
+Targets start at local index 2, so triples never cross block boundaries.
+For all m=2..8 compare Jeffreys-smoothed P(Y|C) and P(Y|C,P) on identical
+held-out targets; phase uses absolute indices. Exact tables, unseen-context
+counts, losses and signed baseline-minus-phase gains are emitted. With no
+training data a 0.5 prediction is scored but gain is null; no test means null
+loss/gain. This selection differs from the triple-wise plug-in report above.
+Adjacent train/test blocks can remain dependent. Held-out scores are not
+unbiased estimates, null calibration, significance, historical reproduction,
+physical columns or a decoder. Negative gains are retained.
 Check public sample licences separately before use.
 """
 import argparse
 import hashlib
 import json
+import math
 import os
 import struct
 import sys
@@ -27,6 +39,7 @@ from suffix_joint_probe import LIMIT, scan_prefix  # noqa: E402
 from token_phase_probe import entropy  # noqa: E402
 
 MODULI = tuple(range(2, 9))
+HELDOUT_BLOCK = 128
 
 
 def table_statistics(table):
@@ -80,6 +93,72 @@ def phase_context_statistics(tokens):
             "moduli": [dict(modulus=m, **table_statistics(table)) for m, table in tables.items()]}
 
 
+def predictive_score(train, test):
+    """Jeffreys binary loss from exact context-by-outcome tables."""
+    if len(train) != len(test) or not train:
+        raise ValueError("matching nonempty context tables required")
+    if any(len(row) != 2 or any(type(c) is not int or c < 0 for c in row)
+           for table in (train, test) for row in table):
+        raise ValueError("nonnegative integer binary counts required")
+    nt, nv = sum(map(sum, train)), sum(map(sum, test))
+    terms = [-heldout[y] * math.log2((observed[y] + 0.5) / (sum(observed) + 1))
+             for observed, heldout in zip(train, test) for y in range(2)]
+    return {"training_counts_context_by_target": train,
+            "test_counts_context_by_target": test,
+            "training_targets": nt, "test_targets": nv,
+            "fitted_transfer": bool(nt and nv),
+            "test_targets_in_unseen_training_contexts":
+                sum(sum(heldout) for observed, heldout in zip(train, test) if not sum(observed)),
+            "heldout_log_loss_bits": math.fsum(terms) / nv if nv else None}
+
+
+def heldout_statistics(tokens):
+    """Fixed even-block training / odd-block test; no context crosses blocks."""
+    for q, suffix in tokens:
+        if type(q) is not int or q < 0 or type(suffix) is not int or not 0 <= suffix < 32:
+            raise ValueError("invalid candidate token")
+    tables = {m: [[[[0, 0] for _ in range(m)] for _ in range(4)]
+                  for _ in range(2)] for m in MODULI}
+    complete = len(tokens) // HELDOUT_BLOCK
+    retained, omitted = [0, 0], [0, 0]
+    for index in range(complete):
+        start = index * HELDOUT_BLOCK
+        block = tokens[start:start + HELDOUT_BLOCK]
+        split = index % 2
+        if any(q >= 17 for q, _ in block):
+            omitted[split] += 1
+            continue
+        retained[split] += 1
+        for local in range(2, HELDOUT_BLOCK):
+            c = 2 * ((block[local - 1][1] >> 4) & 1) + ((block[local - 2][1] >> 2) & 1)
+            y = (block[local][1] >> 2) & 1
+            for m, table in tables.items():
+                table[split][c][(start + local) % m][y] += 1
+    results = []
+    for m, (train, test) in tables.items():
+        pooled = [[[sum(table[c][p][y] for p in range(m)) for y in range(2)]
+                   for c in range(4)] for table in (train, test)]
+        baseline = predictive_score(*pooled)
+        phase = predictive_score([row for stratum in train for row in stratum],
+                                 [row for stratum in test for row in stratum])
+        results.append({"modulus": m, "training_context_by_phase_by_target": train,
+                        "test_context_by_phase_by_target": test,
+                        "context_baseline": baseline, "context_plus_phase": phase,
+                        "gain_vs_context_bits":
+                            baseline["heldout_log_loss_bits"] - phase["heldout_log_loss_bits"]
+                            if baseline["fitted_transfer"] else None})
+    tail = tokens[complete * HELDOUT_BLOCK:]
+    return {"block_tokens": HELDOUT_BLOCK, "training_original_block_parity": 0,
+            "test_original_block_parity": 1, "first_local_target": 2,
+            "smoothing_per_outcome": 0.5, "complete_blocks": complete,
+            "retained_train_test_blocks": retained,
+            "escape_omitted_train_test_blocks": omitted,
+            "retained_train_test_targets": [n * (HELDOUT_BLOCK - 2) for n in retained],
+            "omitted_context_boundary_train_test_targets": [n * 2 for n in retained],
+            "tail_tokens": len(tail), "tail_escapes": sum(q >= 17 for q, _ in tail),
+            "parsed_escapes": sum(q >= 17 for q, _ in tokens), "moduli": results}
+
+
 def report(sample_id, name, path):
     with open(path, "rb") as handle:
         data = handle.read()
@@ -100,7 +179,8 @@ def report(sample_id, name, path):
             "payload_bytes": count, "size_class": "variable",
             "compression_tag": best.get(0x103), "bits_consumed": end,
             "requested_tokens": LIMIT, "prefix_shortfall": LIMIT - len(tokens),
-            "statistics": phase_context_statistics(tokens)}
+            "statistics": phase_context_statistics(tokens),
+            "heldout": heldout_statistics(tokens)}
 
 
 def main():
