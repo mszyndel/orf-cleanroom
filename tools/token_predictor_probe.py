@@ -21,6 +21,11 @@ Re-encoding a reconstruction with the same predictor is exact by construction,
 so it is not evidence for the camera's model; this tool scores the reconstruction
 against the embedded preview instead. No round-trip is claimed.
 
+Every tested combination is printed. The fixed RNG is shared across the ordered
+kind/predictor loops, so selecting or reordering combinations changes the null
+draws. Reports state that order and the seed. The small-shuffle z scores are
+descriptive standardized differences, not calibrated significance tests.
+
 Usage:
     python -I tools/token_predictor_probe.py FILE [FILE ...] [--rows 156]
         [--perms 2] [--kinds ...] [--preds ...]
@@ -31,6 +36,7 @@ import array
 import math
 import os
 import random
+import struct
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -197,6 +203,10 @@ def run_file(path, rows, perms, kinds, preds):
     target = [dc[r * wb:(r + 1) * wb] for r in range(nd)]
     print("%s  payload %dx%d  rows %d  preview used %dx%d  perms %d" % (
         os.path.basename(path), w, h, rows, nd, wb, perms))
+    print("  settings kinds=%s preds=%s seed=20261021 rng=shared-ordered" % (
+        ",".join(kinds), ",".join(preds)))
+    print("  z is descriptive, not calibrated significance; all %d combinations follow" % (
+        len(kinds) * len(preds)))
     rng = random.Random(20261021)
     rows_out = []
     for kind in kinds:
@@ -213,7 +223,7 @@ def run_file(path, rows, perms, kinds, preds):
             z = (real - m) / sd if sd else 0.0
             rows_out.append((abs(real), kind, pred, real, m, sd, z))
     rows_out.sort(reverse=True)
-    for _, kind, pred, real, m, sd, z in rows_out[:15]:
+    for _, kind, pred, real, m, sd, z in rows_out:
         print("  %-7s %-6s r=%+.5f  null=%+.5f +/- %.5f  z=%+.2f" % (
             kind, pred, real, m, sd, z))
 
@@ -271,7 +281,7 @@ def self_test():
     print("self-test ok: all predictors invert their own residuals; shuffle loses the match")
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(
         description=__doc__.splitlines()[0],
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -282,20 +292,38 @@ def main():
     ap.add_argument("--kinds", default=",".join(KINDS))
     ap.add_argument("--preds", default=",".join(PREDS))
     ap.add_argument("--self-test", action="store_true")
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    if a.rows <= 0 or a.perms <= 0:
+        ap.error("--rows and --perms must be positive")
     if a.self_test:
         self_test()
-        return
+        import unittest
+        import test_token_predictor_probe
+        suite = unittest.defaultTestLoader.loadTestsFromModule(test_token_predictor_probe)
+        return 0 if unittest.TextTestRunner().run(suite).wasSuccessful() else 1
     if not a.files:
         ap.error("no files (or use --self-test)")
     kinds = [k for k in a.kinds.split(",") if k]
     preds = [p for p in a.preds.split(",") if p]
+    if not kinds or any(k not in KINDS for k in kinds):
+        ap.error("--kinds must list known readings")
+    if not preds or any(p not in PREDS for p in preds):
+        ap.error("--preds must list known predictors")
+    succeeded = failed = 0
     for p in a.files:
         try:
             run_file(p, a.rows, a.perms, kinds, preds)
-        except (ValueError, IndexError, KeyError, OSError) as exc:
-            print("%s: %s" % (p, exc), file=sys.stderr)
+        except (ValueError, IndexError, KeyError, OSError, struct.error):
+            failed += 1
+            print("%s: report incomplete; input or measurement failed" % os.path.basename(p),
+                  file=sys.stderr)
+            print("%s status=incomplete" % os.path.basename(p))
+        else:
+            succeeded += 1
+            print("%s status=complete" % os.path.basename(p))
+    print("files: requested=%d complete=%d failed=%d" % (len(a.files), succeeded, failed))
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
