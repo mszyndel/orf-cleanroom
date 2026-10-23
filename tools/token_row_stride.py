@@ -9,7 +9,8 @@ The stream is parsed with the lead #11 model (q zero bits, stop bit, 5-bit
 suffix; escape at q >= 17). Rows are not delimited in the stream, so for a
 candidate stride S the tool folds the q sequence into rows of S tokens and asks
 whether the first K tokens of a row carry a higher mean q than the rest of the
-row. A real row start gives a sharp z peak at one S; a wrong fold smears it.
+row. A positive peak identifies a candidate periodicity in the chosen prefix;
+it does not establish a unique physical row boundary or calibrated significance.
 
 This is a measurement, not a decoder. It makes no claim about where the extra
 tokens on a busy body go; it only reports the stride that maximises the

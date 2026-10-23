@@ -1,0 +1,1426 @@
+{
+  "_provenance": {
+    "inputs": [
+      {
+        "pixls_id": 1993,
+        "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+        "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8"
+      },
+      {
+        "pixls_id": 6343,
+        "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+        "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7"
+      },
+      {
+        "pixls_id": 1995,
+        "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+        "sha256": "8af918366ed969c6dddf5a48b8810fec1024858d22c75c5f1ac1a5c750a57a1f"
+      },
+      {
+        "pixls_id": 1997,
+        "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+        "sha256": "89138ccc958509ca1beb7028452400ab7f42061c0fc56e35c8a7d7a4a808dd0a"
+      },
+      {
+        "pixls_id": 5283,
+        "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+        "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b"
+      },
+      {
+        "pixls_id": 7262,
+        "pixls_name": "OM System - OM-1 Mark II - 16bit (4:3).orf",
+        "sha256": "d0fe58daf2f0bd749ecb18311e55408f0e7804de8e5e6580e815eae50d834cbd"
+      }
+    ],
+    "measurement_tool": "tools/q_value_bridge_probe.py",
+    "source_commit": "ce39a503cde7cbe669d5eb369c7d18db8ec19147"
+  },
+  "builds_on": [
+    11,
+    32,
+    64
+  ],
+  "failures": [],
+  "python_version": "3.13.15",
+  "reduction": "Individual block A/V arrays omitted; every sample, selection count and exact pooled/parity summary retained. Reproduce individual blocks using the unchanged measurement CLI.",
+  "samples": [
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.6604373095644005,
+              "denominator": 206526318133,
+              "numerator": 342924004035
+            },
+            "lane_count": 2047,
+            "sum_A": 21947136258240,
+            "sum_E": {
+              "approx": 10465210.084075928,
+              "denominator": 32768,
+              "numerator": 342924004035
+            },
+            "sum_N": {
+              "approx": 6302683.048492432,
+              "denominator": 32768,
+              "numerator": 206526318133
+            },
+            "sum_V": 4802937631,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.1745396123362757,
+                "denominator": 2642692715,
+                "numerator": 3103947277
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 993263128640,
+              "sum_E": {
+                "approx": 3788998.1408691406,
+                "denominator": 4096,
+                "numerator": 15519736385
+              },
+              "sum_N": {
+                "approx": 3225943.2556152344,
+                "denominator": 4096,
+                "numerator": 13213463575
+              },
+              "sum_V": 1219704330,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.1212613045157673,
+                "denominator": 75352103645,
+                "numerator": 84489398031
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 901220245664,
+              "sum_E": {
+                "approx": 3437882.4068603516,
+                "denominator": 8192,
+                "numerator": 28163132677
+              },
+              "sum_N": {
+                "approx": 3066084.946492513,
+                "denominator": 24576,
+                "numerator": 75352103645
+              },
+              "sum_V": 1159263133,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.1485772656436253,
+              "denominator": 154632885095,
+              "numerator": 177607816341
+            },
+            "lane_count": 4094,
+            "sum_A": 1894483374304,
+            "sum_E": {
+              "approx": 7226880.547729492,
+              "denominator": 8192,
+              "numerator": 59202605447
+            },
+            "sum_N": {
+              "approx": 6292028.202107747,
+              "denominator": 24576,
+              "numerator": 154632885095
+            },
+            "sum_V": 2378967463,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0011504276853458,
+              "denominator": 121449798001,
+              "numerator": 121589517211
+            },
+            "lane_count": 2047,
+            "sum_A": 7781729101504,
+            "sum_E": {
+              "approx": 3710617.5906677246,
+              "denominator": 32768,
+              "numerator": 121589517211
+            },
+            "sum_N": {
+              "approx": 3706353.6987609863,
+              "denominator": 32768,
+              "numerator": 121449798001
+            },
+            "sum_V": 2824413907,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.0131756846313802,
+                "denominator": 9388059707,
+                "numerator": 9511753821
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 507293537120,
+              "sum_E": {
+                "approx": 1935171.2689208984,
+                "denominator": 8192,
+                "numerator": 15852923035
+              },
+              "sum_N": {
+                "approx": 1910005.6370035808,
+                "denominator": 24576,
+                "numerator": 46940298535
+              },
+              "sum_V": 722158439,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 0.9888897586319733,
+                "denominator": 22063539745,
+                "numerator": 21818408493
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 465459381184,
+              "sum_E": {
+                "approx": 1775586.6286621094,
+                "denominator": 4096,
+                "numerator": 7272802831
+              },
+              "sum_N": {
+                "approx": 1795535.4610188801,
+                "denominator": 12288,
+                "numerator": 22063539745
+              },
+              "sum_V": 678878146,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0014078374581599,
+              "denominator": 30355792675,
+              "numerator": 30398528697
+            },
+            "lane_count": 4094,
+            "sum_A": 972752918304,
+            "sum_E": {
+              "approx": 3710757.897583008,
+              "denominator": 8192,
+              "numerator": 30398528697
+            },
+            "sum_N": {
+              "approx": 3705541.098022461,
+              "denominator": 8192,
+              "numerator": 30355792675
+            },
+            "sum_V": 1401036585,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1595634,
+      "payload_bytes": 15760125,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_w": 5240,
+      "pixls_id": 1993,
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORF",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 1,
+        "escape_omitted_tokens": 128,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 1,
+        "retained_blocks": 2047,
+        "tail_escapes": 0
+      },
+      "sha256": "0b433019e5fa61548d7eb0eb7bb90894251542c056da72355202382696d0ceb8",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    },
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 3.1291148737774397,
+              "denominator": 755582851331,
+              "numerator": 2364305538471
+            },
+            "lane_count": 2014,
+            "sum_A": 302631108924288,
+            "sum_E": {
+              "approx": 144305757.96331787,
+              "denominator": 16384,
+              "numerator": 2364305538471
+            },
+            "sum_N": {
+              "approx": 46117117.390808105,
+              "denominator": 16384,
+              "numerator": 755582851331
+            },
+            "sum_V": 35143388434,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.9806367883805753,
+                "denominator": 188907935775,
+                "numerator": 374158007213
+              },
+              "absolute_parity": 0,
+              "lane_count": 2014,
+              "sum_A": 11973056230816,
+              "sum_E": {
+                "approx": 45673584.864868164,
+                "denominator": 8192,
+                "numerator": 374158007213
+              },
+              "sum_N": {
+                "approx": 23060050.75378418,
+                "denominator": 8192,
+                "numerator": 188907935775
+              },
+              "sum_V": 8718827805,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.9975136173690973,
+                "denominator": 567839514905,
+                "numerator": 1134267163503
+              },
+              "absolute_parity": 1,
+              "lane_count": 2014,
+              "sum_A": 12098849744032,
+              "sum_E": {
+                "approx": 46153449.0357666,
+                "denominator": 8192,
+                "numerator": 378089054501
+              },
+              "sum_N": {
+                "approx": 23105449.011433918,
+                "denominator": 24576,
+                "numerator": 567839514905
+              },
+              "sum_V": 8735992537,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.9890835010480894,
+              "denominator": 567281661115,
+              "numerator": 1128370592571
+            },
+            "lane_count": 4028,
+            "sum_A": 24071905974848,
+            "sum_E": {
+              "approx": 91827033.90063477,
+              "denominator": 4096,
+              "numerator": 376123530857
+            },
+            "sum_N": {
+              "approx": 46165499.7652181,
+              "denominator": 12288,
+              "numerator": 567281661115
+            },
+            "sum_V": 17454820342,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0367568061673516,
+              "denominator": 781787206733,
+              "numerator": 810523207555
+            },
+            "lane_count": 2014,
+            "sum_A": 51873485283520,
+            "sum_E": {
+              "approx": 24735205.308685303,
+              "denominator": 32768,
+              "numerator": 810523207555
+            },
+            "sum_N": {
+              "approx": 23858252.158599854,
+              "denominator": 32768,
+              "numerator": 781787206733
+            },
+            "sum_V": 18181097831,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 0.9967690384777929,
+                "denominator": 36691597280,
+                "numerator": 36573048141
+              },
+              "absolute_parity": 0,
+              "lane_count": 2014,
+              "sum_A": 3120900108032,
+              "sum_E": {
+                "approx": 11905289.108398438,
+                "denominator": 1024,
+                "numerator": 12191016047
+              },
+              "sum_N": {
+                "approx": 11943879.322916666,
+                "denominator": 96,
+                "numerator": 1146612415
+              },
+              "sum_V": 4515888896,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.0126584338527855,
+                "denominator": 26638020305,
+                "numerator": 26975215923
+              },
+              "absolute_parity": 1,
+              "lane_count": 2014,
+              "sum_A": 3165092001632,
+              "sum_E": {
+                "approx": 12073867.804077148,
+                "denominator": 8192,
+                "numerator": 98909125051
+              },
+              "sum_N": {
+                "approx": 11922942.031046549,
+                "denominator": 24576,
+                "numerator": 293018223355
+              },
+              "sum_V": 4507972667,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0047067666383531,
+              "denominator": 586551001595,
+              "numerator": 589311760281
+            },
+            "lane_count": 4028,
+            "sum_A": 6285992109664,
+            "sum_E": {
+              "approx": 23979156.912475586,
+              "denominator": 8192,
+              "numerator": 196437253427
+            },
+            "sum_N": {
+              "approx": 23866821.353963215,
+              "denominator": 24576,
+              "numerator": 586551001595
+            },
+            "sum_V": 9023861563,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1725464,
+      "payload_bytes": 17772487,
+      "payload_h": 3912,
+      "payload_offset": 1523712,
+      "payload_w": 5240,
+      "pixls_id": 6343,
+      "pixls_name": "OM System - OM-5 - 16bit (4:3).ORF",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 34,
+        "escape_omitted_tokens": 4352,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 34,
+        "retained_blocks": 2014,
+        "tail_escapes": 0
+      },
+      "sha256": "ee0213ee4899d677d9bd538d8cfa4d0f69bdbacd462c1cf3ca3901036cf2fce7",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    },
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.6907024480731472,
+              "denominator": 101937686453,
+              "numerator": 172346296037
+            },
+            "lane_count": 2047,
+            "sum_A": 22060325892736,
+            "sum_E": {
+              "approx": 10519183.10772705,
+              "denominator": 16384,
+              "numerator": 172346296037
+            },
+            "sum_N": {
+              "approx": 6221782.620422363,
+              "denominator": 16384,
+              "numerator": 101937686453
+            },
+            "sum_V": 4741287742,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.1505822563650203,
+                "denominator": 148995795,
+                "numerator": 171431918
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 943561276672,
+              "sum_E": {
+                "approx": 3599400.6220703125,
+                "denominator": 1024,
+                "numerator": 3685786237
+              },
+              "sum_N": {
+                "approx": 3128329.6801757812,
+                "denominator": 2048,
+                "numerator": 6406819185
+              },
+              "sum_V": 1182797388,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.1644408942471944,
+                "denominator": 9471505030,
+                "numerator": 11029007787
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 941141997824,
+              "sum_E": {
+                "approx": 3590171.8056640625,
+                "denominator": 1024,
+                "numerator": 3676335929
+              },
+              "sum_N": {
+                "approx": 3083172.2102864585,
+                "denominator": 1536,
+                "numerator": 4735752515
+              },
+              "sum_V": 1165723696,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.157461199323462,
+              "denominator": 5451923945,
+              "numerator": 6310390428
+            },
+            "lane_count": 4094,
+            "sum_A": 1884703274496,
+            "sum_E": {
+              "approx": 7189572.427734375,
+              "denominator": 512,
+              "numerator": 3681061083
+            },
+            "sum_N": {
+              "approx": 6211501.890462239,
+              "denominator": 6144,
+              "numerator": 38163467615
+            },
+            "sum_V": 2348521084,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.023556119304032,
+              "denominator": 59978974625,
+              "numerator": 61391846507
+            },
+            "lane_count": 2047,
+            "sum_A": 7858156352896,
+            "sum_E": {
+              "approx": 3747060.9440307617,
+              "denominator": 16384,
+              "numerator": 61391846507
+            },
+            "sum_N": {
+              "approx": 3660826.08795166,
+              "denominator": 16384,
+              "numerator": 59978974625
+            },
+            "sum_V": 2789719750,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 0.9969673005888886,
+                "denominator": 145705835,
+                "numerator": 145263953
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 483438435584,
+              "sum_E": {
+                "approx": 1844171.2783203125,
+                "denominator": 1024,
+                "numerator": 1888431389
+              },
+              "sum_N": {
+                "approx": 1849781.1083984375,
+                "denominator": 1024,
+                "numerator": 1894175855
+              },
+              "sum_V": 699388008,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.022860373305276,
+                "denominator": 3707367105,
+                "numerator": 3792118901
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 485391219328,
+              "sum_E": {
+                "approx": 1851620.5571289062,
+                "denominator": 2048,
+                "numerator": 3792118901
+              },
+              "sum_N": {
+                "approx": 1810237.8442382812,
+                "denominator": 2048,
+                "numerator": 3707367105
+              },
+              "sum_V": 684437004,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.009773961084745,
+              "denominator": 7495718815,
+              "numerator": 7568981679
+            },
+            "lane_count": 4094,
+            "sum_A": 968829654912,
+            "sum_E": {
+              "approx": 3695791.8354492188,
+              "denominator": 2048,
+              "numerator": 7568981679
+            },
+            "sum_N": {
+              "approx": 3660018.9526367188,
+              "denominator": 2048,
+              "numerator": 7495718815
+            },
+            "sum_V": 1383825012,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1595135,
+      "payload_bytes": 15768425,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_w": 5240,
+      "pixls_id": 1995,
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 1,
+        "escape_omitted_tokens": 128,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 1,
+        "retained_blocks": 2047,
+        "tail_escapes": 0
+      },
+      "sha256": "8af918366ed969c6dddf5a48b8810fec1024858d22c75c5f1ac1a5c750a57a1f",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    },
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.6886523215622253,
+              "denominator": 206764338183,
+              "numerator": 349153079689
+            },
+            "lane_count": 2047,
+            "sum_A": 22345797100096,
+            "sum_E": {
+              "approx": 10655306.386993408,
+              "denominator": 32768,
+              "numerator": 349153079689
+            },
+            "sum_N": {
+              "approx": 6309946.843963623,
+              "denominator": 32768,
+              "numerator": 206764338183
+            },
+            "sum_V": 4808472981,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.160044700004277,
+                "denominator": 37378940495,
+                "numerator": 43361241813
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 925039825344,
+              "sum_E": {
+                "approx": 3528746.8923339844,
+                "denominator": 4096,
+                "numerator": 14453747271
+              },
+              "sum_N": {
+                "approx": 3041905.9647623696,
+                "denominator": 12288,
+                "numerator": 37378940495
+              },
+              "sum_V": 1150121246,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.1381370961593542,
+                "denominator": 26707938335,
+                "numerator": 30397295381
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 972713452192,
+              "sum_E": {
+                "approx": 3710607.3463134766,
+                "denominator": 8192,
+                "numerator": 30397295381
+              },
+              "sum_N": {
+                "approx": 3260246.3787841797,
+                "denominator": 8192,
+                "numerator": 26707938335
+              },
+              "sum_V": 1232674077,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.1487113995364795,
+              "denominator": 154881695995,
+              "numerator": 177914369769
+            },
+            "lane_count": 4094,
+            "sum_A": 1897753277536,
+            "sum_E": {
+              "approx": 7239354.238647461,
+              "denominator": 8192,
+              "numerator": 59304789923
+            },
+            "sum_N": {
+              "approx": 6302152.34354655,
+              "denominator": 24576,
+              "numerator": 154881695995
+            },
+            "sum_V": 2382795323,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.014334536893296,
+              "denominator": 121647724163,
+              "numerator": 123391487953
+            },
+            "lane_count": 2047,
+            "sum_A": 7897055228992,
+            "sum_E": {
+              "approx": 3765609.373565674,
+              "denominator": 32768,
+              "numerator": 123391487953
+            },
+            "sum_N": {
+              "approx": 3712393.9258728027,
+              "denominator": 32768,
+              "numerator": 121647724163
+            },
+            "sum_V": 2829016841,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.0143362930252275,
+                "denominator": 43923072505,
+                "numerator": 44552766543
+              },
+              "absolute_parity": 0,
+              "lane_count": 2047,
+              "sum_A": 475229509792,
+              "sum_E": {
+                "approx": 1812856.7115478516,
+                "denominator": 8192,
+                "numerator": 14850922181
+              },
+              "sum_N": {
+                "approx": 1787234.3955485027,
+                "denominator": 24576,
+                "numerator": 43923072505
+              },
+              "sum_V": 675739577,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.0030271555465258,
+                "denominator": 7879237665,
+                "numerator": 7903089343
+              },
+              "absolute_parity": 1,
+              "lane_count": 2047,
+              "sum_A": 505797717952,
+              "sum_E": {
+                "approx": 1929465.1716308594,
+                "denominator": 4096,
+                "numerator": 7903089343
+              },
+              "sum_N": {
+                "approx": 1923642.0080566406,
+                "denominator": 4096,
+                "numerator": 7879237665
+              },
+              "sum_V": 727314246,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0084738687451347,
+              "denominator": 91198498495,
+              "numerator": 91971302601
+            },
+            "lane_count": 4094,
+            "sum_A": 981027227744,
+            "sum_E": {
+              "approx": 3742321.883178711,
+              "denominator": 8192,
+              "numerator": 30657100867
+            },
+            "sum_N": {
+              "approx": 3710876.403605143,
+              "denominator": 24576,
+              "numerator": 91198498495
+            },
+            "sum_V": 1403053823,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1595581,
+      "payload_bytes": 15767553,
+      "payload_h": 3912,
+      "payload_offset": 1500160,
+      "payload_w": 5240,
+      "pixls_id": 1997,
+      "pixls_name": "Olympus - E-M1MarkII - 16bit (4:3).ORI",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 1,
+        "escape_omitted_tokens": 128,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 1,
+        "retained_blocks": 2047,
+        "tail_escapes": 0
+      },
+      "sha256": "89138ccc958509ca1beb7028452400ab7f42061c0fc56e35c8a7d7a4a808dd0a",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    },
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.3012223043096036,
+              "denominator": 2422445930883,
+              "numerator": 3152140676249
+            },
+            "lane_count": 1787,
+            "sum_A": 201737003279936,
+            "sum_E": {
+              "approx": 96195699.34841919,
+              "denominator": 32768,
+              "numerator": 3152140676249
+            },
+            "sum_N": {
+              "approx": 73927182.9493103,
+              "denominator": 32768,
+              "numerator": 2422445930883
+            },
+            "sum_V": 56335951881,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.111131285470522,
+                "denominator": 302356933385,
+                "numerator": 335958248063
+              },
+              "absolute_parity": 0,
+              "lane_count": 1787,
+              "sum_A": 10750663938016,
+              "sum_E": {
+                "approx": 41010528.32800293,
+                "denominator": 8192,
+                "numerator": 335958248063
+              },
+              "sum_N": {
+                "approx": 36908805.34484863,
+                "denominator": 8192,
+                "numerator": 302356933385
+              },
+              "sum_V": 13954935387,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.146157255587032,
+                "denominator": 10120127927,
+                "numerator": 11599258051
+              },
+              "absolute_parity": 1,
+              "lane_count": 1787,
+              "sum_A": 11135287728960,
+              "sum_E": {
+                "approx": 42477751.65161133,
+                "denominator": 4096,
+                "numerator": 173988870765
+              },
+              "sum_N": {
+                "approx": 37061015.357666016,
+                "denominator": 4096,
+                "numerator": 151801918905
+              },
+              "sum_V": 14012484822,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.1286803075456964,
+              "denominator": 605960771195,
+              "numerator": 683935989593
+            },
+            "lane_count": 3574,
+            "sum_A": 21885951666976,
+            "sum_E": {
+              "approx": 83488279.97961426,
+              "denominator": 8192,
+              "numerator": 683935989593
+            },
+            "sum_N": {
+              "approx": 73969820.70251465,
+              "denominator": 8192,
+              "numerator": 605960771195
+            },
+            "sum_V": 27967420209,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0241268813606652,
+              "denominator": 612251748379,
+              "numerator": 627023473675
+            },
+            "lane_count": 1787,
+            "sum_A": 80259004630400,
+            "sum_E": {
+              "approx": 38270475.68817139,
+              "denominator": 16384,
+              "numerator": 627023473675
+            },
+            "sum_N": {
+              "approx": 37368881.12664795,
+              "denominator": 16384,
+              "numerator": 612251748379
+            },
+            "sum_V": 28476825506,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 0.9785119584428359,
+                "denominator": 91676713895,
+                "numerator": 89706760857
+              },
+              "absolute_parity": 0,
+              "lane_count": 1787,
+              "sum_A": 4784360579040,
+              "sum_E": {
+                "approx": 18250887.21862793,
+                "denominator": 8192,
+                "numerator": 149511268095
+              },
+              "sum_N": {
+                "approx": 18651675.19022624,
+                "denominator": 24576,
+                "numerator": 458383569475
+              },
+              "sum_V": 7052054915,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 0.9886642788210599,
+                "denominator": 460179776095,
+                "numerator": 454963306461
+              },
+              "absolute_parity": 1,
+              "lane_count": 1787,
+              "sum_A": 4852941935584,
+              "sum_E": {
+                "approx": 18512504.33190918,
+                "denominator": 8192,
+                "numerator": 151654435487
+              },
+              "sum_N": {
+                "approx": 18724763.024698894,
+                "denominator": 24576,
+                "numerator": 460179776095
+              },
+              "sum_V": 7079688863,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 0.9835980448200327,
+              "denominator": 459281672785,
+              "numerator": 451748555373
+            },
+            "lane_count": 3574,
+            "sum_A": 9637302514624,
+            "sum_E": {
+              "approx": 36763391.55053711,
+              "denominator": 4096,
+              "numerator": 150582851791
+            },
+            "sum_N": {
+              "approx": 37376438.21492513,
+              "denominator": 12288,
+              "numerator": 459281672785
+            },
+            "sum_V": 14131743778,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1822446,
+      "payload_bytes": 20003129,
+      "payload_h": 3912,
+      "payload_offset": 1817600,
+      "payload_w": 5220,
+      "pixls_id": 5283,
+      "pixls_name": "OM System - OM-1 - 16bit (4:3).ORF",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 261,
+        "escape_omitted_tokens": 33408,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 313,
+        "retained_blocks": 1787,
+        "tail_escapes": 0
+      },
+      "sha256": "bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    },
+    {
+      "cells": [
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 3.198206008147217,
+              "denominator": 23543003573,
+              "numerator": 75295375477
+            },
+            "lane_count": 1292,
+            "sum_A": 337323282136960,
+            "sum_E": {
+              "approx": 160848275.24993896,
+              "denominator": 16384,
+              "numerator": 2635338141695
+            },
+            "sum_N": {
+              "approx": 50293281.558532715,
+              "denominator": 16384,
+              "numerator": 824005125055
+            },
+            "sum_V": 38325819770,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 2.0005303151603164,
+                "denominator": 154282289330,
+                "numerator": 308646396897
+              },
+              "absolute_parity": 0,
+              "lane_count": 1292,
+              "sum_A": 13168912934272,
+              "sum_E": {
+                "approx": 50235416.161621094,
+                "denominator": 2048,
+                "numerator": 102882132299
+              },
+              "sum_N": {
+                "approx": 25111049.69563802,
+                "denominator": 3072,
+                "numerator": 77141144665
+              },
+              "sum_V": 9494294728,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 2.087966808497568,
+                "denominator": 77520836705,
+                "numerator": 161860934007
+              },
+              "absolute_parity": 1,
+              "lane_count": 1292,
+              "sum_A": 13812133035264,
+              "sum_E": {
+                "approx": 52689106.12207031,
+                "denominator": 1024,
+                "numerator": 53953644669
+              },
+              "sum_N": {
+                "approx": 25234647.364908855,
+                "denominator": 3072,
+                "numerator": 77520836705
+              },
+              "sum_V": 9541026056,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 2.0443558892413796,
+              "denominator": 103107987580,
+              "numerator": 210789421637
+            },
+            "lane_count": 2584,
+            "sum_A": 26981045969536,
+            "sum_E": {
+              "approx": 102924522.2836914,
+              "denominator": 2048,
+              "numerator": 210789421637
+            },
+            "sum_N": {
+              "approx": 50345697.060546875,
+              "denominator": 512,
+              "numerator": 25776996895
+            },
+            "sum_V": 19035320784,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 128,
+          "lane_count": 1,
+          "mapping": "zigzag_u32",
+          "parity_pools": [],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0348087089907212,
+              "denominator": 171445613642,
+              "numerator": 177413414115
+            },
+            "lane_count": 1292,
+            "sum_A": 45417834013440,
+            "sum_E": {
+              "approx": 21656910.90270996,
+              "denominator": 8192,
+              "numerator": 177413414115
+            },
+            "sum_N": {
+              "approx": 20928419.634033203,
+              "denominator": 4096,
+              "numerator": 85722806821
+            },
+            "sum_V": 15948429176,
+            "zero_variance_lanes": 0
+          }
+        },
+        {
+          "increments_per_lane": 64,
+          "lane_count": 2,
+          "mapping": "zigzag_u32",
+          "parity_pools": [
+            {
+              "R_pool": {
+                "approx": 1.0113723232400706,
+                "denominator": 128189450935,
+                "numerator": 129647262807
+              },
+              "absolute_parity": 0,
+              "lane_count": 1292,
+              "sum_A": 2765808273216,
+              "sum_E": {
+                "approx": 10550721.257080078,
+                "denominator": 4096,
+                "numerator": 43215754269
+              },
+              "sum_N": {
+                "approx": 10432084.223225912,
+                "denominator": 12288,
+                "numerator": 128189450935
+              },
+              "sum_V": 3944290798,
+              "zero_variance_lanes": 0
+            },
+            {
+              "R_pool": {
+                "approx": 1.0369492953112065,
+                "denominator": 9914771335,
+                "numerator": 10281115149
+              },
+              "absolute_parity": 1,
+              "lane_count": 1292,
+              "sum_A": 2851295934656,
+              "sum_E": {
+                "approx": 10876830.805419922,
+                "denominator": 4096,
+                "numerator": 44551498979
+              },
+              "sum_N": {
+                "approx": 10489260.0386556,
+                "denominator": 12288,
+                "numerator": 128892027355
+              },
+              "sum_V": 3965908534,
+              "zero_variance_lanes": 0
+            }
+          ],
+          "pool": {
+            "R_pool": {
+              "approx": 1.0241957588519202,
+              "denominator": 128540739145,
+              "numerator": 131650879872
+            },
+            "lane_count": 2584,
+            "sum_A": 5617104207872,
+            "sum_E": {
+              "approx": 21427552.0625,
+              "denominator": 16,
+              "numerator": 342840833
+            },
+            "sum_N": {
+              "approx": 20921344.26188151,
+              "denominator": 6144,
+              "numerator": 128540739145
+            },
+            "sum_V": 7910199332,
+            "zero_variance_lanes": 0
+          }
+        }
+      ],
+      "compression_tag": 1,
+      "consumed_bits": 1790936,
+      "payload_bytes": 20619192,
+      "payload_h": 3912,
+      "payload_offset": 1817600,
+      "payload_w": 5220,
+      "pixls_id": 7262,
+      "pixls_name": "OM System - OM-1 Mark II - 16bit (4:3).orf",
+      "requested_tokens": 262144,
+      "returned_tokens": 262144,
+      "selection": {
+        "complete_blocks": 2048,
+        "escape_omitted_blocks": 756,
+        "escape_omitted_tokens": 96768,
+        "incomplete_tail_tokens": 0,
+        "parsed_escapes": 1156,
+        "retained_blocks": 1292,
+        "tail_escapes": 0
+      },
+      "sha256": "d0fe58daf2f0bd749ecb18311e55408f0e7804de8e5e6580e815eae50d834cbd",
+      "size_class": "variable",
+      "token_shortfall": 0,
+      "variant": "unassigned"
+    }
+  ],
+  "schema": "orf-lead32-q-bridge-v1",
+  "settings": {
+    "block_tokens": 128,
+    "escape_extra": 0,
+    "escape_q_min": 17,
+    "lane_counts": [
+      1,
+      2
+    ],
+    "mappings": [
+      "u32",
+      "zigzag_u32"
+    ],
+    "null": "exact permutation mean",
+    "pooling": "sum(E)/sum(N)",
+    "prefix_tokens": 262144
+  },
+  "source_sha256": {
+    "orf_signature.py": "b1b6f091bfb986ab7aca3ad1f513202acfaaccc424272523589142444d025afb",
+    "q_value_bridge_probe.py": "ec6d0f95d64cea1dd64593b5165b4fc0d100e8fb78ec934ad5303f9f1b93b698",
+    "suffix_joint_probe.py": "c16c0f55bff91897a949cd94cc8c64d8117568d7ce215a735c6f1ae04d092f18"
+  },
+  "summary": {
+    "max_ratio_approx": 3.198206008147217,
+    "min_ratio_approx": 0.9835980448200327,
+    "primary_cells": 24,
+    "primary_cells_at_or_below_half": 0
+  }
+}
