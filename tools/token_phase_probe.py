@@ -15,6 +15,8 @@ The candidate parse and post-escape framing remain unverified.
 Licence-check public samples separately before use. A single contiguous,
 in-bounds, variable-size strip is required; compression tag alone is not a
 variant selector. The source hashes pin this tool and its repository imports.
+Exit 1 for any input failure or nonzero prefix_shortfall; available short-prefix
+statistics remain visible but do not fulfill the declared fixed-prefix design.
 """
 import argparse
 import hashlib
@@ -115,7 +117,7 @@ def main():
     print(json.dumps({"source_sha256": sources, "python_version": sys.version.split()[0],
                       "escape_extra_bits": 0, "requested_prefix_tokens": LIMIT,
                       "samples": reports, "failures": failures}, indent=2, allow_nan=False))
-    return 1 if failures else 0
+    return 1 if failures or any(r["prefix_shortfall"] for r in reports) else 0
 
 
 if __name__ == "__main__":
