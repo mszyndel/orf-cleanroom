@@ -60,7 +60,7 @@ def stride_scores(q, lo, hi, rows, head=32):
         if var > 0:
             z = mean / (math.sqrt(var) / math.sqrt(nrow))
         else:
-            z = math.inf if mean != 0 else 0.0
+            z = math.copysign(math.inf, mean) if mean != 0 else 0.0
         out.append((z, mean, s, nrow))
     out.sort(reverse=True)
     return out
@@ -115,17 +115,22 @@ def main():
     ap.add_argument("--top", type=int, default=10, help="rows printed per file")
     ap.add_argument("--self-test", action="store_true", help="run the synthetic test")
     a = ap.parse_args()
+    if a.head <= 0:
+        ap.error("--head must be positive")
     if a.self_test:
         self_test()
         return
     if not a.files:
         ap.error("no files (or use --self-test)")
+    failed = False
     for p in a.files:
         try:
             scan_file(p, a)
         except (ValueError, KeyError, TypeError, OSError) as exc:
             print("%s: %s" % (p, exc), file=sys.stderr)
+            failed = True
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
