@@ -68,6 +68,18 @@ class ParseTests(unittest.TestCase):
         self.assertIn("(prefix)", output.getvalue())
         self.assertNotIn("tokens / (W*H):", output.getvalue())
 
+    def test_report_no_complete_tokens(self):
+        args = SimpleNamespace(stride=0, max_tokens=99, rows=None, all=True,
+                               escape_extra=0, escape_landing=False)
+        for payload in (b"\x01", b"\x00", b""):
+            output = io.StringIO()
+            with self.subTest(payload=payload), patch.object(t, "locate", return_value=(1, 1, payload)):
+                with contextlib.redirect_stdout(output):
+                    t.report("synthetic.ORF", args)
+                self.assertIn("tokens parsed: 0 (whole payload)", output.getvalue())
+                self.assertIn("tokens / (W*H): 0.00000", output.getvalue())
+                self.assertNotIn("q histogram", output.getvalue())
+
     def test_scan_matches_parse(self):
         # the compact one-byte-per-token streams used by --all equal the plain lists
         spec = [(0, 5), (3, 31), (45, 7), (1, 0), (20, 9), (0, 1)]

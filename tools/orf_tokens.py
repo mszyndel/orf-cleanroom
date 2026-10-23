@@ -261,13 +261,13 @@ def report(path, a):
     qh = collections.Counter(qa)
     esc = sum(c for q, c in qh.items() if q >= ESC_Q)
     print("escapes (q>=%d): %d (%.5f%% of tokens)" % (ESC_Q, esc, 100.0 * esc / n if n else 0))
+    if not n:
+        return
     print("q histogram (share): " + " ".join(
         "%d:%.4f" % (q, qh[q] / n) for q in sorted(qh) if q < 12) + (
         " 12+:%.5f" % (sum(c for q, c in qh.items() if q >= 12) / n)))
     if esc_q:
         print("escape q values: " + " ".join("%d:%d" % kv for kv in sorted(esc_q.items())))
-    if not n:
-        return
     ones = sum(bin(b).count("1") for b in buf[:endpos // 8]) / (8.0 * (endpos // 8)) if endpos >= 8 else 0.5
     if 0 < ones < 1:
         null_bits = 6 + (1 - ones) / ones
