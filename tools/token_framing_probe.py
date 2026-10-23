@@ -24,6 +24,13 @@ The parser restarts at window bit zero; all nulls fit that window independently.
 This anchor is not an established whole-stream token boundary. A short requested
 window fails before any model statistics, including at the default zero offset.
 
+Optional --suffix-width-scan additionally parses k=2..8 on the same bytes for
+each enabled model, generated once per window/model. All candidate grammars use
+q zero bits, stop 1, then k suffix bits, without extra escape skips. Reports
+retain every width and exact endpoint/counts; null q0 fractions mean no complete
+tokens. This is a common-bit-window comparison, not significance, a winning-k
+estimator or proof of the actual entropy grammar. Default output is unchanged.
+
 Read-only, stdlib, aggregate JSON only; no paths or exception text are emitted.
 Every input has an explicit success/failure record. Any failure exits nonzero
 and the enclosing report is marked incomplete. Each model resets the seeded
@@ -124,17 +131,20 @@ def markov_bytes(nbytes, fit, rng):
     return pack_bits(bits)
 
 
-def parse_stats(buf):
+def parse_stats(buf, suffix_bits=5):
+    if type(suffix_bits) is not int or suffix_bits not in range(2, 9):
+        raise ValueError('suffix width must be an integer from 2 to 8')
+    minimum = suffix_bits + 1
     nbits, pos, tokens, q0 = len(buf) * 8, 0, 0, 0
-    while pos + 6 <= nbits:
+    while pos + minimum <= nbits:
         stop = pos
         while stop < nbits and not ((buf[stop >> 3] >> (7 - (stop & 7))) & 1):
             stop += 1
-        if stop + 6 > nbits:
+        if stop + minimum > nbits:
             break
         tokens += 1
         q0 += stop == pos
-        pos = stop + 6
+        pos = stop + minimum
     ones = sum(bin(byte).count('1') for byte in buf)
     return {'bits': nbits, 'ones_count': ones,
             'ones_fraction': ones / nbits if nbits else None,
@@ -143,7 +153,8 @@ def parse_stats(buf):
             'consumed_bits': pos, 'residual_bits': nbits - pos}
 
 
-def compare_prefix(prefix, seed, include_markov=False, local_byte_block=None):
+def compare_prefix(prefix, seed, include_markov=False, local_byte_block=None,
+                   suffix_width_scan=False):
     if not prefix:
         raise ValueError('empty payload prefix')
     p = sum(bin(byte).count('1') for byte in prefix) / (len(prefix) * 8)
@@ -152,20 +163,26 @@ def compare_prefix(prefix, seed, include_markov=False, local_byte_block=None):
         ('bernoulli', lambda rng: bernoulli_bytes(len(prefix), p, rng)),
         ('byte_shuffle', lambda rng: byte_shuffle(prefix, rng)),
         ('run_shuffle', lambda rng: run_shuffle(prefix, rng)))
-    result = {'bernoulli_p': p, 'prefix_bytes': len(prefix),
-              'models': {name: parse_stats(make(random.Random(seed)))
-                         for name, make in generators}}
+    buffers = {name: make(random.Random(seed)) for name, make in generators}
+    result = {'bernoulli_p': p, 'prefix_bytes': len(prefix)}
     if include_markov:
         fit = fit_markov(prefix)
         result['markov_fit'] = fit
-        result['models']['markov'] = parse_stats(markov_bytes(len(prefix), fit, random.Random(seed)))
+        buffers['markov'] = markov_bytes(len(prefix), fit, random.Random(seed))
     if local_byte_block is not None:
-        result['models']['local_byte_shuffle'] = parse_stats(
-            local_byte_shuffle(prefix, local_byte_block, random.Random(seed)))
+        buffers['local_byte_shuffle'] = local_byte_shuffle(prefix, local_byte_block, random.Random(seed))
         result['local_byte_shuffle'] = {
             'block_bytes': local_byte_block,
             'complete_blocks': len(prefix) // local_byte_block,
             'tail_bytes': len(prefix) % local_byte_block}
+    result['models'] = {name: parse_stats(buf) for name, buf in buffers.items()}
+    if suffix_width_scan:
+        result['suffix_width_scan'] = {
+            'suffix_bits': list(range(2, 9)), 'stop_bit': 1, 'escape_extra': 0,
+            'parser_origin': 'window_bit_zero',
+            'models': {name: [dict(suffix_bits=k, **(result['models'][name] if k == 5
+                                                    else parse_stats(buf, k)))
+                              for k in range(2, 9)] for name, buf in buffers.items()}}
     return result
 
 
@@ -178,7 +195,8 @@ class WindowShortfall(ValueError):
                        'shortfall_bytes': requested - max(0, payload_bytes - offset)}
 
 
-def measure(path, nbytes, seed, include_markov=False, local_byte_block=None, offset_bytes=0):
+def measure(path, nbytes, seed, include_markov=False, local_byte_block=None, offset_bytes=0,
+            suffix_width_scan=False):
     if nbytes <= 0:
         raise ValueError('nonpositive window length')
     if offset_bytes < 0:
@@ -204,7 +222,7 @@ def measure(path, nbytes, seed, include_markov=False, local_byte_block=None, off
         raise WindowShortfall(offset_bytes, nbytes, len(payload))
     window = payload[offset_bytes:offset_bytes + nbytes]
     result = compare_prefix(window, seed, include_markov=include_markov,
-                            local_byte_block=local_byte_block)
+                            local_byte_block=local_byte_block, suffix_width_scan=suffix_width_scan)
     result.update({'input_sha256': hashlib.sha256(data).hexdigest(),
                    'width': width, 'height': height, 'payload_bytes': len(payload),
                    'compression_tag': first(best, 0x103),
@@ -229,6 +247,8 @@ def main(argv=None):
                         help='also compare a fitted first-order binary Markov null')
     parser.add_argument('--local-byte-block', type=int,
                         help='also shuffle bytes within fixed-size prefix blocks')
+    parser.add_argument('--suffix-width-scan', action='store_true',
+                        help='also parse all k=2..8 candidates on the same bytes per enabled model')
     args = parser.parse_args(argv)
     if args.bytes <= 0:
         parser.error('--bytes must be positive')
@@ -247,7 +267,8 @@ def main(argv=None):
                   'requested_window': {'offset_bytes': args.offset_bytes, 'bytes': args.bytes}}
         try:
             record.update(measure(path, args.bytes, args.seed, include_markov=args.markov,
-                                  local_byte_block=args.local_byte_block, offset_bytes=args.offset_bytes))
+                                  local_byte_block=args.local_byte_block, offset_bytes=args.offset_bytes,
+                                  suffix_width_scan=args.suffix_width_scan))
             record['status'] = 'ok'
         except WindowShortfall as shortfall:
             failures += 1

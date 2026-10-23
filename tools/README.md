@@ -15,6 +15,20 @@ SHA-256 is checked before parsing; failures are sanitized. Stdlib only.
 
 Analysis scripts, all original code (see RULES.md).
 
+**`synthetic_resync_classify.py`** supports research plan #300 with frozen
+nearest-centroid source-generator classification on disjoint synthetic LCG
+seeds. Recovery indicators, censored distances and length/density are separate
+feature ablations. Real and exact-length/popcount-preserving bit-shuffle
+training/evaluation groups are crossed; complete confusion matrices and exact
+rational scores retain every held-out trial. Shuffle labels refer to source
+generators, not shuffle codec identity. Length/density can retain perfect
+source-label classification without any coding structure. No camera files,
+significance, generator identification in general or finding is asserted.
+CPU stdlib only, aggregates only; no input files or image data.
+
+    python -I -B tools/synthetic_resync_classify.py --self-test
+    python -I -B tools/synthetic_resync_classify.py
+
 Each script should:
 - take raw.pixls.us file paths as arguments and not download anything itself (`pixls_samples.py` is the one exception);
 - print or write aggregate statistics only, with no images or pixel dumps;
@@ -97,6 +111,20 @@ not known whole-stream token boundaries and do not establish framing,
 stationarity, significance or a decode. Use fixed offsets before outcomes.
 
     python -I -B tools/token_framing_probe.py --offset-bytes 1048576 --bytes 131072 --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF
+
+Optional `--suffix-width-scan` adds every fixed suffix width k=2..8 to each
+enabled model, keeping the default k5 reports unchanged. Each real/control byte
+window is generated once and reused across widths, so the comparison uses
+identical bit intervals rather than different token-block spans. Each candidate
+consumes q zero bits, stop 1 and k suffix bits, with no extra escape skip. All
+token/q0/ones counts and consumed/residual bits are retained; no complete token
+gives a null q0 fraction. This is a descriptive common-window control comparison,
+not calibrated significance, an estimator of optimal k or proof of camera
+framing. Short residuals remain diagnostics. All enabled widths/models are
+reported without selecting a winner; known-profile smoke files are not untouched
+validation captures. Existing output is unchanged when the flag is absent.
+
+    python -I -B tools/token_framing_probe.py --suffix-width-scan --markov --local-byte-block 256 --sample ID PUBLIC_NAME path/to/file.ORF --bytes 131072 --seed 20261021
 
 **`token_anchor_sync_probe.py`** supports #197 with a distinct anchor diagnostic.
 Restart the candidate q-zero/stop1/five-suffix parser at bits 0..7 of the same
@@ -218,12 +246,36 @@ private figures. Stdlib only, aggregates only; no images or raw values.
 
     python -I -B tools/token_loop_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_token_loop_probe.py
+**`code_family_screen.py`** supports lead #339. It screens a payload for standard containers
+(magic counts; zlib, raw DEFLATE, gzip, bzip2 and lzma/xz decompression at the first byte offsets,
+output capped, each hit marked complete or partial from the decompressor's end-of-stream state),
+measures recompressibility, and parses the whole payload with Rice (k 0..8, both stop bits),
+Exp-Golomb (0..6), Elias gamma/delta and Fibonacci codes, reporting prefix and whole-payload consumed
+bits and completed codewords separately. `--shuffle` runs the same tests on shuffled payload bytes.
+The screen is bounded and descriptive: it cannot exclude other framings, parameters or hybrid coders.
+
+    python -I -B tools/code_family_screen.py path/to/file.ORF [--shuffle]
+    python -I -B tools/test_code_family_screen.py
+
+**`bayer_grid_probe.py`** supports lead #338. On the candidate k=5 parse it counts suffix
+equality on the lag lattice `dy*W + dx` (dy 0..3, dx -4..4) over a token prefix, next to one fixed
+shuffle that permutes ordinary suffixes within W-token blocks (escape positions kept). It also reports
+whole-payload token and residual-bit counts, the positions of large-q tokens, and (row % 2, col % 2)
+tables of the most common tokens for chosen row windows. Token index -> (row, col) uses W from the
+TIFF tags; that is a coordinate choice, not an established pixel map or CFA phase.
+
+    python -I -B tools/bayer_grid_probe.py path/to/file.ORF
+    python -I -B tools/test_bayer_grid_probe.py
 
 **`pixls_samples.py`** lists, checks and downloads raw.pixls.us Olympus/OM samples using the site's licence listing. It downloads CC0 files only and verifies SHA-256. See the top-level README.
 
 **`manifest_rows.py`** turns local CC0 files into ready-made `samples/manifest.csv` rows, combining the licence listing with `orf_signature.py`.
 
 **`orf_signature.py`** prints one CSV row per file with its measured container and payload facts: SHA-256, magic, make, model, payload size, bits per sample, compression tag, payload offset and bytes, and bits per pixel. It reads the TIFF structure only and decodes nothing.
+
+It exits with status 1 if any input fails, while preserving successful CSV rows
+and reporting each failed input on stderr. Status 0 means every requested input
+succeeded; `--help` also exits 0, and no arguments exits 2.
 
     python tools/orf_signature.py path/to/* > rows.csv
 
@@ -844,3 +896,102 @@ SHA256 before TIFF parsing. Stdlib only; reads files/prints aggregate JSON.
 
     python -I -B tools/token_head_stride_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 CENTER path/to/file.ORF
     python -I -B tools/test_token_head_stride_probe.py
+
+**`e400_zero_low4_probe.py`** addresses #79's zero-low4 selection limitation
+(Builds on #146/#190/#215/#261). It counts the entire stored-raster interior,
+excluding two pixels at every edge, with diagonal-1 means at equal coordinate
+parity and axial-2 elsewhere. All four parity strata retain zero/nonzero-low4
+denominators, exact means, floor-only means and nonmatches. Zero-low4 exact
+candidates also retain a 0..4 histogram of nonzero-low4 selected neighbours.
+These are arithmetic candidates, not identified corrections: constant and
+affine scenes can satisfy all equalities without any mapping operation.
+No camera mechanism, processing order, sensor values, significance, finding
+or decoder change follows. Reuse retained CC0 provenance after local hash
+matching; the required hash is checked before TIFF parsing. Stdlib only,
+read-only packed16 strips, aggregate JSON, sanitized failures return 1.
+
+    python -I -B tools/e400_zero_low4_probe.py FILE2151 --sha256 VERIFIED_SHA256
+    python -I -B tools/test_e400_zero_low4_probe.py
+
+**`sensor_rejection_controls.py`** is a synthetic-only rejection-control
+baseline for research plan #301. It prints exact aggregate range, lag-2,
+coordinate-parity-lane and fixed-central-seam counts, with scalar features.
+Development maxima from smooth, checker-textured and dark toy controls at two
+noise scales define an illustrative upper-envelope rule; new seeds from the
+same families receive full per-trial and scene/noise/mapping confusion reports.
+The non-identity mappings are reversible by construction, not empirically
+impossible sensor arrays. Complement can retain every feature, and valid toy
+controls can exceed development maxima. With the strict binary64 comparison,
+one of the 31 development non-identity rejections is a rounding-level tie
+(lane spread exceeds its limit by about 4.55e-13), not discriminating evidence.
+No universal thresholds, held-out scene/body validation, V0/ORF evidence,
+effective precision, black level, CFA
+or sensor truth is established. No files are read or written. CPU stdlib only;
+`--benchmark` optionally includes experiment wall time, excluding JSON output.
+
+    python -I -B tools/sensor_rejection_controls.py
+    python -I -B tools/test_sensor_rejection_controls.py
+
+**`cohort_design_audit.py`** supports #299/#318 with exact categorical design
+rank, nullspace and conditional rank increments over explicit public manifest
+IDs. The recorded mode is a width proxy; algebraic support does not establish
+independent captures or causal effects. No raw files are read.
+
+    python -I -B tools/cohort_design_audit.py --manifest samples/manifest.csv --ids 1993 1994 1995 1996
+    python -I -B tools/test_cohort_design_audit.py
+
+**`payload_feature_probe.py`** supports #299 with fixed raw-bit windows and
+aggregate density, transitions, byte entropy and run spectra. Schema v2 follows
+TIFF strip-table order, excludes physical gaps and explicitly omits planned
+cross-strip windows without replacement, including adjacent strips. Zero usable
+windows are reported, not replaced. This does not assign variants or clusters.
+Match supplied hashes to retained CC0 records before using any sample tool.
+
+    python -I -B tools/payload_feature_probe.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE --window-bytes 65536 --windows 3
+    python -I -B tools/test_payload_feature_probe.py
+
+**`body_label_holdout.py`** supports #299/#329 using the aggregate feature
+report and public manifest. File-held-out body centroids compare bitrate,
+raw-bit means and their union with training-fold scaling; every fold and
+failure remains visible. File holdout is not capture/scene holdout, causal
+attribution or variant discovery. No raw files are read by this diagnostic.
+
+    python -I -B tools/body_label_holdout.py --features FEATURES_JSON --manifest samples/manifest.csv --ids ID_A ID_B ID_C
+    python -I -B tools/test_body_label_holdout.py
+
+**`run_reorder_search.py`** supports #322 and the closed #297 protocol with a
+complete frozen width/phase/window search under run-order surrogates. Exact
+global run multisets, endpoints, density and transitions are preserved; local
+window density and byte histograms are not. Complete candidate/maxima ledgers,
+ties and boundary winners remain visible. Surrogate tail diagnostics do not
+establish camera exchangeability, significance or framing.
+
+    python -I -B tools/run_reorder_search.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_run_reorder_search.py
+
+**`synthetic_adaptive_resync.py`** supports #300 with original state-dependent
+Rice grammars, explicit edit coordinates, incomplete tails and censored
+recovery. State selects k injectively, so aligned-interval state/value equality
+and coincident boundary/state recovery follow structurally. No camera inference,
+generator classifier or matched null is supplied.
+
+    python -I -B tools/synthetic_adaptive_resync.py --self-test
+    python -I -B tools/synthetic_adaptive_resync.py
+
+**`v0_sensor_controls.py`** supports #301/#325 with fixed packed-16 V0 windows
+and the unchanged synthetic rejection envelope. Stored words are separate and
+unclassified; floor(word/16) is an explicit diagnostic scale assumption. Both
+identity rejection and nonidentity acceptance are retained. General layout
+selectors, physical precision, black level, CFA and sensor truth remain open.
+
+    python -I -B tools/v0_sensor_controls.py --sample ID PUBLIC_NAME VERIFIED_SHA256 FILE
+    python -I -B tools/test_v0_sensor_controls.py
+
+**`frozen_bit_context.py`** supports #298/#332 with discovery-selected binary
+contexts, quantized probabilities, explicit model cost and file holdout. It
+prints the complete order ledger and exact-count shuffled-bit control. Scores
+are normalized predictive log loss plus parameter cost; no serialized coder,
+framing/termination/padding cost, round trip or reconstruction is implemented.
+
+    python -I -B tools/frozen_bit_context.py --manifest samples/manifest.csv --discovery DISCOVERY_FILE --validation VALIDATION_FILE
+    python -I -B tools/test_frozen_bit_context.py

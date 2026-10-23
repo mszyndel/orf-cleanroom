@@ -26,6 +26,97 @@ def fixture(endian='<', truncated=False):
 
 
 class FramingTests(unittest.TestCase):
+    def test_width_scan_exhaustive_two_byte_independent_string_parser(self):
+        for number in range(65536):
+            source = number.to_bytes(2, 'big')
+            bits = format(number, '016b')
+            for width in range(2, 9):
+                cursor, starts = 0, []
+                while True:
+                    end = bits.find('1', cursor)
+                    if end < 0 or end + 1 + width > len(bits):
+                        break
+                    starts.append((cursor, end))
+                    cursor = end + 1 + width
+                actual = probe.parse_stats(source, width)
+                q0 = sum(start == end for start, end in starts)
+                self.assertEqual(actual, {
+                    'bits': 16, 'ones_count': bits.count('1'),
+                    'ones_fraction': bits.count('1') / 16,
+                    'tokens': len(starts), 'q0_count': q0,
+                    'q0_fraction': q0 / len(starts) if starts else None,
+                    'consumed_bits': cursor, 'residual_bits': 16 - cursor})
+
+    def test_width_scan_planted_periodic_and_nondiscriminating_ones(self):
+        for width in range(2, 9):
+            source = probe.pack_bits(([1] + [0] * width) * 8)
+            planted = probe.parse_stats(source, width)
+            self.assertEqual((planted['tokens'], planted['q0_count'], planted['residual_bits']),
+                             (8, 8, 0))
+            # A constant-one stream has q0=1 for every candidate width.
+            ones = probe.parse_stats(b'\xff' * 16, width)
+            self.assertEqual(ones['q0_fraction'], 1)
+            self.assertEqual(ones['tokens'], 128 // (width + 1))
+            rejected = probe.parse_stats(b'\x00' * 16, width)
+            self.assertEqual((rejected['tokens'], rejected['consumed_bits'], rejected['residual_bits']),
+                             (0, 0, 128))
+            self.assertIsNone(rejected['q0_fraction'])
+        self.assertIsNone(probe.parse_stats(b'', 2)['ones_fraction'])
+        for width in (True, 1, 9, 5.0, '5', None):
+            with self.assertRaises(ValueError):
+                probe.parse_stats(b'\xff', width)
+
+    def test_width_scan_reuses_generated_bytes_and_preserves_defaults(self):
+        source = bytes(range(32))
+        baseline = probe.compare_prefix(source, 7, True, 7)
+        # Top-level byte_shuffle is also called by local-byte shuffling.
+        with patch.object(probe, 'bernoulli_bytes', wraps=probe.bernoulli_bytes) as bernoulli, \
+                patch.object(probe, 'run_shuffle', wraps=probe.run_shuffle) as run, \
+                patch.object(probe, 'markov_bytes', wraps=probe.markov_bytes) as markov, \
+                patch.object(probe, 'local_byte_shuffle', wraps=probe.local_byte_shuffle) as local:
+            extended = probe.compare_prefix(source, 7, True, 7, suffix_width_scan=True)
+        self.assertEqual([item.call_count for item in (bernoulli, run, markov, local)], [1] * 4)
+        grid = extended.pop('suffix_width_scan')
+        self.assertEqual(extended, baseline)
+        self.assertEqual(grid['suffix_bits'], list(range(2, 9)))
+        self.assertEqual(set(grid['models']), set(baseline['models']))
+        for model, rows in grid['models'].items():
+            self.assertEqual([row['suffix_bits'] for row in rows], list(range(2, 9)))
+            self.assertEqual({k: v for k, v in rows[3].items() if k != 'suffix_bits'},
+                             baseline['models'][model])
+            self.assertEqual({row['bits'] for row in rows}, {256})
+            self.assertEqual(len({row['ones_count'] for row in rows}), 1)
+        with patch.object(probe, 'byte_shuffle', wraps=probe.byte_shuffle) as byte:
+            probe.compare_prefix(source, 7, suffix_width_scan=True)
+        self.assertEqual(byte.call_count, 1)
+
+    def test_width_scan_cli_and_shortfall(self):
+        with patch('builtins.open', return_value=io.BytesIO(fixture())):
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                status = probe.main(['--bytes', '8', '--sample', '1', 'public', 'unused',
+                                     '--suffix-width-scan', '--markov', '--local-byte-block', '2'])
+        report = json.loads(output.getvalue())
+        self.assertEqual(status, 0)
+        self.assertEqual(len(report['samples'][0]['suffix_width_scan']['models']), 6)
+        with patch('builtins.open', return_value=io.BytesIO(fixture())):
+            with patch.object(probe, 'compare_prefix') as compare:
+                with self.assertRaises(ValueError):
+                    probe.measure('unused', 9, 7, suffix_width_scan=True)
+        compare.assert_not_called()
+
+    def test_width_scan_uses_exact_nonzero_window(self):
+        for endian in ('<', '>'):
+            source = fixture(endian)[:-8] + bytes(range(8))
+            with patch('builtins.open', return_value=io.BytesIO(source)):
+                measured = probe.measure('fixture', 3, 7, True, 2, offset_bytes=4,
+                                         suffix_width_scan=True)
+            expected = probe.compare_prefix(bytes([4, 5, 6]), 7, True, 2,
+                                            suffix_width_scan=True)
+            self.assertEqual(measured['suffix_width_scan'], expected['suffix_width_scan'])
+            self.assertEqual(measured['window']['start_bit'], 32)
+            self.assertEqual(measured['window']['end_bit_exclusive'], 56)
+
     def test_window_exact_selection_and_metadata_both_byte_orders(self):
         for endian in ('<', '>'):
             source = fixture(endian)[:-8] + bytes(range(8))
@@ -95,7 +186,7 @@ class FramingTests(unittest.TestCase):
 
         output = io.StringIO()
         with patch('builtins.open', side_effect=open_input), contextlib.redirect_stdout(output):
-            status = probe.main(['--bytes', '4', '--offset-bytes', '4',
+            status = probe.main(['--bytes', '4', '--offset-bytes', '4', '--suffix-width-scan',
                                  '--sample', '1', 'public-complete', 'PRIVATE_FULL',
                                  '--sample', '2', 'public-short', 'PRIVATE_SHORT'])
         report = json.loads(output.getvalue())
@@ -104,9 +195,11 @@ class FramingTests(unittest.TestCase):
         self.assertFalse(report['complete'])
         complete, short = report['samples']
         self.assertIn('models', complete)
+        self.assertIn('suffix_width_scan', complete)
         self.assertEqual(complete['window']['offset_bytes'], 4)
         self.assertEqual(short['requested_window'], {'offset_bytes': 4, 'bytes': 4})
         self.assertNotIn('models', short)
+        self.assertNotIn('suffix_width_scan', short)
         self.assertEqual(short['window'], {'offset_bytes': 4, 'requested_bytes': 4,
                                           'actual_bytes': 0, 'payload_bytes': 4,
                                           'shortfall_bytes': 4})
@@ -168,7 +261,8 @@ class FramingTests(unittest.TestCase):
             self.assertEqual(probe.main(['--sample', '1', 'public', 'unused',
                                          '--local-byte-block', '256', '--markov']), 0)
         measure.assert_called_once_with('unused', 131072, 20261021,
-                                        include_markov=True, local_byte_block=256, offset_bytes=0)
+                                        include_markov=True, local_byte_block=256, offset_bytes=0,
+                                        suffix_width_scan=False)
         for value in ('0', '-1'):
             with patch.object(probe, 'measure') as measure, contextlib.redirect_stderr(io.StringIO()):
                 with self.assertRaises(SystemExit) as failure:
@@ -236,7 +330,8 @@ class FramingTests(unittest.TestCase):
         with patch.object(probe, 'measure', return_value={}) as measure, contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(probe.main(['--sample', '1', 'public', 'unused', '--markov']), 0)
         measure.assert_called_once_with('unused', 131072, 20261021,
-                                        include_markov=True, local_byte_block=None, offset_bytes=0)
+                                        include_markov=True, local_byte_block=None, offset_bytes=0,
+                                        suffix_width_scan=False)
 
     def test_bounded_parser_exact_and_unfinished_tokens(self):
         result = probe.parse_stats(probe.pack_bits([1, 0, 0, 0, 0, 0] * 4))
