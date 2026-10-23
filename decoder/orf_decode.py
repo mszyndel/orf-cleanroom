@@ -40,6 +40,7 @@ import orf_signature  # noqa: E402
 F_WEAK_TABLE = "2026-10-21--radialmonster--suffix-luma-table-weak-transfer"
 F_QXS_TABLE = "2026-10-21--radialmonster--suffix-qxs-table-and-reverse-direction"
 F_STRIDE = "2026-10-21--radialmonster--wide-row-stride-new-bodies"
+F_EXTRA = "2026-10-22--radialmonster--extra-token-fields-not-fixed"
 F_STRIDE_LATER = "2026-10-22--radialmonster--later-band-row-stride-drift"
 F_FIG8 = "2026-10-21--radialmonster--figure8-negative-highres-e-m1-mark-ii"
 F_PACKED12 = "2026-10-19--radialmonster--packed-12-msb-two-values-per-three-bytes"
@@ -54,6 +55,7 @@ F_NULL_CORRECTED = "2026-10-21--radialmonster--corrected-q0-null-definitions-and
 F_BRIDGE_RANGE = "2026-10-21--radialmonster--six-file-suffix-bridge-range-correction"
 F_BALANCE_EM1 = "2026-10-21--radialmonster--em1-prefix-and-whole-suffix-balance"
 F_DEP = "2026-10-21--radialmonster--token-dependence-new-bodies"
+F_DEP_CORR = "2026-10-22--radialmonster--token-dependence-independence-wording-correction"
 
 # what the evidence is for each layout
 STATUS = {
@@ -281,10 +283,15 @@ def decode_file(path, order=None, layout=None):
         # F_DEP (Partial for #11): the cross-field/same-field token-dependence
         # structure appears on whole E-M1 Mark III and E-M5 Mark III payloads
         # at lower MI; it establishes no values, row stride, geometry or decode
-        # (V1 S1.17).
+        # (V1 S1.17). F_DEP_CORR (Partial correction for #11, corrects F_DEP):
+        # the measured within-token H/L MI is small but nonzero; exact
+        # independence is not established (V1 S1.17).
         # F_STRIDE (Partial for #144): a 300-row row-start q profile finds file-specific
         # token strides above W on new OM-5/OM-1 files; it establishes no physical rows
         # or values (V1 S1.10).
+        # F_EXTRA (Partial for #144): at the measured strides the extra S-W tokens are
+        # not a fixed header or constant pad on five public files and three bands; their
+        # origin, physical rows and any values remain open (V1 S1.10, G3).
         # F_STRIDE_LATER (self-verified, Partial for #144): later 300-row bands
         # move the candidate peak and the fixed prefix S loses the contrast; it
         # establishes no physical rows or whole-frame constant (V1 S1.10, G3).
