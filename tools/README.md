@@ -232,6 +232,17 @@ permutation tests run with `python -I tools/suffix_match_probe.py --self-test`.
 
     python -I tools/suffix_match_probe.py --cohort PUBLIC_COHORT.json --measured-by @yourhandle --sample ID path/to/file.ORF
 
+**`code_family_screen.py`** supports lead #339. It screens a payload for standard containers
+(magic counts; zlib, raw DEFLATE, gzip, bzip2 and lzma/xz decompression at the first byte offsets,
+output capped, each hit marked complete or partial from the decompressor's end-of-stream state),
+measures recompressibility, and parses the whole payload with Rice (k 0..8, both stop bits),
+Exp-Golomb (0..6), Elias gamma/delta and Fibonacci codes, reporting prefix and whole-payload consumed
+bits and completed codewords separately. `--shuffle` runs the same tests on shuffled payload bytes.
+The screen is bounded and descriptive: it cannot exclude other framings, parameters or hybrid coders.
+
+    python -I -B tools/code_family_screen.py path/to/file.ORF [--shuffle]
+    python -I -B tools/test_code_family_screen.py
+
 **`bayer_grid_probe.py`** supports lead #338. On the candidate k=5 parse it counts suffix
 equality on the lag lattice `dy*W + dx` (dy 0..3, dx -4..4) over a token prefix, next to one fixed
 shuffle that permutes ordinary suffixes within W-token blocks (escape positions kept). It also reports
