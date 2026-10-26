@@ -195,7 +195,7 @@ def run_file(path, rows, window, perms, seed, mapping="sum", shift_null=False):
         print("  shift-null: best k=%d r=%+.5f; observed rank %d/%d; "
               "shifts %+.5f +/- %.5f max %+.5f" % (
                   summary["best_shift"], summary["best"], summary["rank"],
-                  summary["shifts"], summary["mean"], summary["sd"],
+                  summary["shifts"] + 1, summary["mean"], summary["sd"],
                   summary["maximum"]))
 
 
