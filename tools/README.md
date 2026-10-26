@@ -350,14 +350,20 @@ zeroes escape markers, box-averages `v` over `--window` tokens within each row,
 block-averages to the preview's luma DC grid, and correlates the row-centred
 grids. The target comes from `jpeg_dc.py`; the null permutes the suffix tokens
 within each row. It prints one aggregate line per file (`r`, shuffle mean and
-sd, z, escape count). The default `--rows 300` is the top token band; a
-full-frame reshape is not used because the token row stride can drift. This is
-a low-frequency luma proxy, not a full pixel decode. The camera rendering is
-a numerical sanity reference, not sensor ground truth. Marginal map rankings
-do not establish unique bit contribution or significance. Test:
+sd, z, escape count). `--shift-null` additionally scores every circular shift
+of the preview rows and prints the best shift, the observed rank and the shift
+mean, sd and maximum. A rank above 1 means a shifted preview scores at least as
+well; the within-row shuffle null tests horizontal structure only, so the shift
+null is a vertical-alignment sensitivity check, not a calibrated p-value. The
+default `--rows 300` is the top token band; a full-frame reshape is not used
+because the token row stride can drift. This is a low-frequency luma proxy, not
+a full pixel decode. The camera rendering is a numerical sanity reference, not
+sensor ground truth. Marginal map rankings do not establish unique bit
+contribution or significance. Test:
 `python -I tools/token_luma_probe.py --self-test`.
 
     python -I tools/token_luma_probe.py path/to/file.ORF --rows 300 --window 63 --perms 20
+    python -I tools/token_luma_probe.py path/to/file.ORF --rows 300 --window 63 --perms 20 --shift-null
     python -I tools/token_luma_probe.py path/to/file.ORF --map b2 --rows 300 --window 63 --perms 20
     python -I tools/token_luma_probe.py --self-test
 
