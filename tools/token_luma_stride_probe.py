@@ -70,8 +70,8 @@ def score_with_null(image, rows, w, window, target, mapping, perms, seed):
     null = [L.score(L.shuffle_rows(image, rows, w, rng), rows, w, window,
                     len(target), target, mapping) for _ in range(perms)]
     mean = sum(null) / len(null)
-    var = sum((x - mean) ** 2 for x in null) / (len(null) - 1)
-    sd = math.sqrt(var)
+    var = sum((x - mean) ** 2 for x in null) / (len(null) - 1) if len(null) > 1 else 0.0
+    sd = math.sqrt(var) if var > 0 else 0.0
     return real, mean, sd, ((real - mean) / sd if sd else 0.0)
 
 

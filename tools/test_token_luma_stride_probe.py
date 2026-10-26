@@ -2,6 +2,7 @@
 
 import contextlib
 import io
+import math
 import os
 import sys
 import unittest
@@ -73,6 +74,15 @@ class ScoreTests(unittest.TestCase):
         real, mean, sd, z = p.score_with_null(image, rows, w, window, target, "sum", 10, 1)
         self.assertGreater(real, 0.8)
         self.assertGreater(z, 5)
+
+    def test_single_permutation_has_no_sample_variance(self):
+        rows, w, window = 24, 32, 5
+        image = bytearray((r * w + c) % 251 for r in range(rows) for c in range(w))
+        target = [[((r + c) // 4) % 2 for c in range(8)] for r in range(4)]
+        real, mean, sd, z = p.score_with_null(image, rows, w, window, target, "sum", 1, 1)
+        self.assertTrue(math.isfinite(real))
+        self.assertEqual(sd, 0.0)
+        self.assertEqual(z, 0.0)
 
     def test_self_test(self):
         p.self_test()
