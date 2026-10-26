@@ -265,7 +265,8 @@ def decode_file(path, order=None, layout=None):
         # predictor or round-trip decode.
         # F_B2B4 and F_SEP (Partial for #149) measure a top-band preview-luma
         # correlate from b2/b4; they specify no sensor values or decode step
-        # (V1 S1.15).
+        # (V1 S1.15). F_SHIFT (Partial for #351) shows the normal-mode score is
+        # not specific to preview row alignment; it also specifies no decode step.
         # finding F_FIXED: a payload that is not an exact 12 / 12.8 / 16 bit packing is compressed
         # Tail counts: finding 2026-10-21--radialmonster--compressed-tail-full-cohort-reproduction
         # and terminal endpoint: finding F_ENDPOINT (both Partial, unassigned 87-file cohort)
