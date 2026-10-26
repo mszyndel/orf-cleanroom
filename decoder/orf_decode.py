@@ -194,6 +194,10 @@ def detect_order(f, p, packing, w, h, rb):
     (smoothness at same-colour distance 2). Ties go to the first order in ORDERS.
     Returns (order, margin), margin = second-best score / best score."""
     choices = ORDERS[packing]
+    if packing == "packed-12" and rb % 4:
+        # word4-reversed is only defined for row bytes % 4 == 0 (unpack_row); don't let it
+        # fail the whole file when plain is the only order that applies.
+        choices = [o for o in choices if o != "word4-reversed"]
     if len(choices) == 1:
         return choices[0], 1.0
     nb, nr = 3, min(16, h)

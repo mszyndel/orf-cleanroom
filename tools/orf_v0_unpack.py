@@ -75,8 +75,10 @@ def candidates(size_class):
             c["12-" + v] = lambda r, n, v=v: pairs12(r, 0, n, v)
             # same 3-byte layouts, after reversing bytes inside 16-bit or 32-bit words
             for width in (2, 4):
+                # slice rounded up to whole words, so n*3/2 bytes not a multiple of the
+                # word width still leaves every byte pairs12 reads
                 c["w%d-12-%s" % (width, v)] = lambda r, n, v=v, wd=width: pairs12(
-                    swapped(r[:n * 3 // 2], wd), 0, n, v)
+                    swapped(r[:-(-(n * 3 // 2) // wd) * wd], wd), 0, n, v)
     elif size_class == "packed-12.8":
         for v in VARIANTS:
             for pad in (15, 0):

@@ -99,6 +99,23 @@ class ParseTests(unittest.TestCase):
             self.assertEqual(t.mi_base(xs, ys, lag),
                              t.mi_base(memoryview(bytes(xs)), memoryview(bytes(ys)), lag))
 
+    def test_mi_base_rotates_short_sequences(self):
+        # 5000 tokens, y a function of x: the rotated baseline must be near 0, not equal
+        # to the measured MI (rotation longer than the sequence used to be a no-op)
+        import random
+        rng = random.Random(1)
+        x = bytes(rng.randrange(4) for _ in range(5000))
+        v, base, n = t.mi_base(memoryview(x), memoryview(x))
+        self.assertGreater(v, 1.9)
+        self.assertLess(base, 0.05)
+        self.assertEqual(n, 5000)
+
+    def test_no_row_mark_without_a_token(self):
+        # two tokens then 12 zero bits (no stop bit), stride 1: two row starts, not three
+        buf = bits_to_bytes(token(0, 1) + token(0, 2) + "0" * 12)
+        marks, _ = t.scan(buf, 10, 1, 0, None, None, None, 40)
+        self.assertEqual(marks, [0, 6])
+
     def test_pearson(self):
         self.assertAlmostEqual(t.pearson([1, 2, 3, 4], [2, 4, 6, 8]), 1.0)
         self.assertAlmostEqual(t.pearson([1, 2, 3, 4], [4, 3, 2, 1]), -1.0)
