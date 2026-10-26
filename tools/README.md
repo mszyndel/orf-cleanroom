@@ -559,6 +559,24 @@ ISO/bpp correlation, scene content, or causality. Licence-check inputs first.
     python -I -B tools/exif_sensitivity_probe.py --sample ID PUBLIC_NAME path/to/file.ORF
     python -I -B tools/test_exif_sensitivity_probe.py
 
+**`capture_pair_calibration.py`** supports #295. It labels the pairs printed by
+`preview_pair_screen.py` from each file's own metadata only (EXIF
+DateTimeOriginal, payload width, file name): camera-written High Res ORF / ORI
+companions require exactly matching stems after removing the extension; numeric
+suffixes are preserved and copy suffixes are not normalized. Same-second
+non-companions (bursts), same-session pairs within
+600 s, same-day and different-day pairs. Same-session H pairs have unknown scene
+identity; their hit rate is not an established false-positive rate. It reports
+class counts alongside AUC and score ranges. A threshold is calibrated on
+alternating shooting days only with at least 10 P and 10 H pairs on calibration
+days; held-out validation also requires at least 10 of each. This descriptive
+minimum does not establish statistical validity or independent captures. The
+tool reports aggregates only; no previews, payloads or images.
+
+    python -I -B tools/preview_pair_screen.py FILE ... > screen.jsonl
+    python -I -B tools/capture_pair_calibration.py --screen screen.jsonl FILE ...
+    python -I -B tools/test_capture_pair_calibration.py
+
 **`token_lag_probe.py`** supports lead #29 item 6 and builds on #11 and
 `suffix_joint_probe.py`'s bounded candidate scanner. In the first 262144 tokens,
 it keeps complete 128-token blocks without q>=17, forms only within-block
