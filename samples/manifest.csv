@@ -201,3 +201,4 @@ own,,,c68fdaa4c029cf1f276dc38e4e6a7cd27a9d259d8dd53de6e20d952d35793c40,not-share
 own,,,2e0f965e634ca03e6dbec3c1a59d68f5108b7f31c678c8543fd54dca0350e5f5,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,7.506,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py fe85f79
 own,,,ce760e1e3e0a163c49fe32e90a0f9bb1c7c0922d1e4727a7276da98e40ff004e,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.650,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py fe85f79
 own,,,b484e2fc424b850d338fd83b90c37a42b0f6ebfbf7d445e9baa80d6003180187,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.405,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py fe85f79
+pixls,5283,OM System - OM-1 - 16bit (4:3).ORF,bf2eef6becc0851e48231617c3e2eac27a2cdb44c75b93035c561d837952c18b,CC0,OM Digital Solutions,OM-1,normal,5220,3912,7.836,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py fe85f79
