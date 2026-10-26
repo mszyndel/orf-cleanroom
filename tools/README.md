@@ -307,8 +307,10 @@ F-number, ISO, lens model and focal length for same-model pairs above and below
 the cutoff. Same-model uses the manifest `model` text matched by SHA-256. The
 metadata comparison is a descriptive negative control, not a shared-exposure or
 scene/capture classifier; time zones and wrong camera clocks are not corrected,
-and EXIF agreement does not establish a shared scene. Read-only, standard
-library CPU, aggregate JSON only. Verify input licences separately.
+and EXIF agreement does not establish a shared scene. Time bins count scored
+pairs for each grid and report unscored pairs separately; unscored pairs are
+excluded from the high/low metadata classes. Read-only, standard library CPU,
+aggregate JSON only. Verify input licences separately.
 
     python -I -B tools/preview_pair_sensitivity.py FILE [FILE ...] > sensitivity.jsonl
     python -I -B tools/test_preview_pair_sensitivity.py

@@ -311,6 +311,8 @@ def main():
         print(json.dumps({"grid": {
             "size": grid, "pairs": len(pairs), "eligible_pairs": len(scores),
             "positive": len(positive[grid]), "same_model_pairs": len(same),
+            "same_model_scored": sum(1 for pair in same
+                                     if pair["r"][str(grid)] is not None),
             "same_model_positive": len(selected),
             "cross_model_pairs": len(cross),
             "cross_model_positive": sum(pair["positive"][str(grid)]
@@ -320,14 +322,18 @@ def main():
             "positive_min": min(positive_scores, default=None),
             "positive_max": max(positive_scores, default=None),
         }}, sort_keys=True))
-        bins = {key: [0, 0] for key in TIME_BINS}
+        bins = {key: [0, 0, 0] for key in TIME_BINS}  # scored, positive, unscored
         for pair in same:
-            bins[pair["time_bin"]][0] += 1
-            bins[pair["time_bin"]][1] += 1 if pair["positive"][str(grid)] else 0
+            if pair["r"][str(grid)] is None:
+                bins[pair["time_bin"]][2] += 1
+            else:
+                bins[pair["time_bin"]][0] += 1
+                bins[pair["time_bin"]][1] += 1 if pair["positive"][str(grid)] else 0
         for key in TIME_BINS:
             print(json.dumps({"time": {"grid": grid, "bin": key,
                                        "pairs": bins[key][0],
-                                       "positive": bins[key][1]}}, sort_keys=True))
+                                       "positive": bins[key][1],
+                                       "unscored": bins[key][2]}}, sort_keys=True))
 
     for first_grid, second_grid in itertools.combinations(grids, 2):
         left, right = positive[first_grid], positive[second_grid]
@@ -339,6 +345,7 @@ def main():
     high = [pair for pair in pairs if pair["same_model"]
             and pair["positive"][str(primary)]]
     low = [pair for pair in pairs if pair["same_model"]
+           and pair["r"][str(primary)] is not None
            and not pair["positive"][str(primary)]]
     for label, group in (("high", high), ("low", low)):
         for field in METADATA_FIELDS:

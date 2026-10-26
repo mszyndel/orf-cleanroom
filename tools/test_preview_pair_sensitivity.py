@@ -1,10 +1,14 @@
 """Synthetic controls for preview_pair_sensitivity; no images or raw files."""
+import contextlib
 import datetime
+import io
+import json
 import math
 import os
 import struct
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import preview_pair_screen as screen
@@ -97,6 +101,50 @@ class GridTests(unittest.TestCase):
             sensitivity.grid_fingerprint(12, 12, [], 96, 96, 12)
         with self.assertRaises(ValueError):
             sensitivity.grid_fingerprint(11, 12, [0] * 132, 88, 96, 12)
+
+
+class AggregationTests(unittest.TestCase):
+    def test_unscored_pairs_stay_out_of_low_and_time_denominators(self):
+        def record(sha, status):
+            return {"sha256": sha, "name": sha[:6] + ".ORF", "pixls_id": "1",
+                    "model": "TestModel", "manifest_row": True,
+                    "exif_model": "TestModel", "make": "Test",
+                    "datetime": "2020:01:02 03:04:05",
+                    "exposure": (1, 100), "fnumber": (28, 10), "iso": 200,
+                    "lens": "TestLens", "focal": (14, 1), "status": status}
+
+        left = record("a" * 64, "unsupported")
+        right = record("b" * 64, "low_information")
+        results = [(left, {12: None, 24: [1.0, 0.0]}),
+                   (right, {12: None, 24: [1.0, 0.0]})]
+        stdout = io.StringIO()
+        with patch.object(sys, "argv",
+                          ["probe", "a.ORF", "b.ORF", "--grids", "12,24"]), \
+                patch.object(sensitivity, "measure", return_value=results), \
+                patch.object(sensitivity, "read_manifest", return_value={}), \
+                contextlib.redirect_stdout(stdout):
+            sensitivity.main()
+        rows = [json.loads(line) for line in stdout.getvalue().splitlines()]
+
+        grids = {row["grid"]["size"]: row["grid"] for row in rows if "grid" in row}
+        self.assertEqual(grids[12]["eligible_pairs"], 0)
+        self.assertEqual(grids[12]["same_model_scored"], 0)
+        self.assertEqual(grids[24]["eligible_pairs"], 1)
+        self.assertEqual(grids[24]["same_model_scored"], 1)
+
+        times = {(row["time"]["grid"], row["time"]["bin"]): row["time"]
+                 for row in rows if "time" in row}
+        self.assertEqual(times[(12, "<=60s")],
+                         {"grid": 12, "bin": "<=60s", "pairs": 0,
+                          "positive": 0, "unscored": 1})
+        self.assertEqual(times[(24, "<=60s")]["pairs"], 1)
+        self.assertEqual(times[(24, "<=60s")]["positive"], 1)
+        self.assertEqual(times[(24, "<=60s")]["unscored"], 0)
+
+        low = [row["metadata"] for row in rows
+               if row.get("metadata", {}).get("class") == "low"]
+        self.assertTrue(low)
+        self.assertTrue(all(entry["pairs"] == 0 for entry in low))
 
 
 class ExifTests(unittest.TestCase):
