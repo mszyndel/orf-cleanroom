@@ -30,6 +30,37 @@ class BoxTests(unittest.TestCase):
         self.assertAlmostEqual(p.corr_rows(a, b), -1.0)
 
 
+class ShiftTests(unittest.TestCase):
+    def test_shift_scores_match_rolled_targets(self):
+        rows, w, window, nd = 4, 4, 1, 4
+        image = bytes([0, 0, 20, 20, 20, 20, 0, 0,
+                       0, 0, 20, 20, 20, 20, 0, 0])
+        target = [[0, 0, 1, 1], [1, 1, 0, 0], [0, 0, 1, 1], [1, 1, 0, 0]]
+        shifts = p.preview_shift_scores(image, rows, w, window, target)
+        self.assertEqual([k for k, _ in shifts], [1, 2, 3])
+        for k, value in shifts:
+            self.assertAlmostEqual(
+                value, p.score(image, rows, w, window, nd,
+                               target[k:] + target[:k]))
+
+    def test_shift_summary_rank_and_extremes(self):
+        summary = p.shift_summary(0.5, [(1, 0.6), (2, 0.4), (3, 0.2)])
+        self.assertEqual(summary["rank"], 2)
+        self.assertEqual(summary["best_shift"], 1)
+        self.assertAlmostEqual(summary["best"], 0.6)
+        self.assertAlmostEqual(summary["maximum"], 0.6)
+        self.assertAlmostEqual(summary["mean"], 0.4)
+        self.assertEqual(summary["shifts"], 3)
+        self.assertEqual(p.shift_summary(0.5, [(1, 0.4), (2, 0.3)])["rank"], 1)
+        self.assertEqual(p.shift_summary(0.5, [(1, 0.5)])["rank"], 2)
+
+    def test_shift_scores_require_two_rows(self):
+        with self.assertRaisesRegex(ValueError, "two preview rows"):
+            p.preview_shift_scores(b"", 1, 1, 1, [[0]])
+        with self.assertRaisesRegex(ValueError, "shifted score"):
+            p.shift_summary(0.5, [])
+
+
 class MappingTests(unittest.TestCase):
     def test_all_translation_entries_and_escapes(self):
         for value in range(256):
@@ -91,7 +122,7 @@ class CliStatusTests(unittest.TestCase):
                         code = p.main()
                 self.assertEqual(code, 1)
                 self.assertEqual(run.call_count, 3)
-                self.assertEqual(run.call_args.args[-1], mapping)
+                self.assertEqual(run.call_args.args[5], mapping)
                 self.assertEqual(stderr.getvalue(), "input 2: %s\n" % type(error).__name__)
 
     def test_complete_batch_and_self_test_succeed(self):
@@ -103,6 +134,12 @@ class CliStatusTests(unittest.TestCase):
             with patch.object(p, "self_test") as test:
                 self.assertEqual(p.main(), 0)
                 test.assert_called_once_with()
+
+    def test_shift_null_flag_reaches_run_file(self):
+        with patch.object(sys, "argv", ["probe", "first", "--shift-null"]):
+            with patch.object(p, "run_file") as run:
+                self.assertEqual(p.main(), 0)
+                self.assertTrue(run.call_args.args[-1])
 
     def test_invalid_measurement_sizes_reject_before_reads(self):
         for option, value in (("--rows", "1"), ("--window", "0"), ("--perms", "0")):
