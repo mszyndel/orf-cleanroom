@@ -342,6 +342,23 @@ do not establish unique bit contribution or significance. Test:
     python -I tools/token_luma_probe.py path/to/file.ORF --map b2 --rows 300 --window 63 --perms 20
     python -I tools/token_luma_probe.py --self-test
 
+**`token_luma_stride_probe.py`** applies the same fixed b2+b4 luma map as
+`token_luma_probe.py`, but takes W tokens from each S-token candidate row
+(`--stride S`) instead of assuming a row is exactly the payload width. Optional
+`--start-row` and `--offset` select later bands and the row-internal image
+start; the null permutes the used suffix tokens within each W-token image row.
+It prints aggregate `r`, shuffle mean and sd, z and escape count per file, and
+writes nothing. A candidate stride is a periodicity of the q row-start profile,
+not a physical row length, and a positive result is a low-frequency luma
+correlate rather than a value mapping. Supports lead #149 and the row-stride
+work of lead #144 / specs/V1.md G3.
+`python -I tools/token_luma_stride_probe.py --self-test` checks the
+stride/offset extraction and preview row crop.
+
+    python -I tools/token_luma_stride_probe.py path/to/file.ORF --stride 5472 --rows 300
+    python -I tools/token_luma_stride_probe.py path/to/file.ORF --stride 5472 --start-row 1000 --rows 300
+    python -I tools/token_luma_stride_probe.py --self-test
+
 **`token_value_probe.py`** supports leads #11 and #32 with band-wise
 b2+b4 correlations, nominal versus whole-preview scale comparisons, column
 statistics and fixed suffix-table transfer against numeric embedded-preview
