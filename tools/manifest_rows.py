@@ -14,12 +14,13 @@ Usage: python manifest_rows.py --by @yourhandle [--own] FILE [FILE ...] >> ../sa
 import argparse
 import csv
 import os
+import re
 import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from orf_signature import signature  # noqa: E402
-from pixls_samples import rows  # noqa: E402
+from pixls_samples import by_hash, rows  # noqa: E402
 
 COLUMNS = ["source", "pixls_id", "pixls_name", "sha256", "licence", "make", "model", "mode",
            "payload_w", "payload_h", "bpp", "size_class", "compression_tag", "escape_bits",
@@ -47,6 +48,12 @@ def mode(width):
     return "hires" if width and int(width) > 6000 else "normal"
 
 
+def clean(text):
+    # Make and model come from the file's own tags: keep them to plain characters so a row
+    # cannot carry CSV tricks, formulas or shell metacharacters into the manifest.
+    return re.sub(r"[^A-Za-z0-9 ,._()/-]", "_", str(text)).strip()
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--by", required=True, help="your own GitHub handle, e.g. @you")
@@ -57,11 +64,13 @@ def main():
                     help="append the rows to this file (e.g. samples/manifest.csv) with LF endings, instead of printing them")
     ap.add_argument("files", nargs="+")
     a = ap.parse_args()
-    listing = {r["sha256"]: r for r in rows()}
+    listing = by_hash(rows())
     # Write LF endings ourselves; shell redirection on Windows can turn them into CRLF.
+    # --header with --append writes the header only into a new or empty file.
+    fresh = not a.append or not os.path.exists(a.append) or os.path.getsize(a.append) == 0
     dest = open(a.append, "a", encoding="utf-8", newline="") if a.append else sys.stdout
     out = csv.DictWriter(dest, fieldnames=COLUMNS, lineterminator="\n")
-    if a.header:
+    if a.header and fresh:
         out.writeheader()
     by = "%s tools/orf_signature.py %s" % (a.by, commit())
     for p in a.files:
@@ -78,7 +87,7 @@ def main():
             "source": "own" if own else "pixls",
             "pixls_id": "" if own else r["id"], "pixls_name": "" if own else r["name"],
             "sha256": s["sha256"], "licence": "not-shared" if own else "CC0",
-            "make": s["make"], "model": s["model"], "mode": mode(s["payload_w"]),
+            "make": clean(s["make"]), "model": clean(s["model"]), "mode": mode(s["payload_w"]),
             "payload_w": s["payload_w"], "payload_h": s["payload_h"], "bpp": s["bpp"],
             "size_class": s["size_class"],
             "compression_tag": s["compression_tag"], "escape_bits": "", "calm_parse": "",
