@@ -324,11 +324,14 @@ def decode_file(path, order=None, layout=None):
         # F_OM1_GRID (Partial for #338): a parity-dependent suffix-lag pattern
         # repeats on two own OM-1 Mark II flat captures; it is unassigned token-index
         # evidence, not a physical CFA map, predictor, or decode step (V1 S1.19).
+        # F_OM1_GRID_EVEN (Partial for #338): one of five additional evenly lit
+        # OM-1 Mark II flats repeats lag parity; the other four and strong site-table
+        # suffix concentration do not. Unassigned token-index evidence only (V1 S1.21).
         # F_OM1_DARK (Partial for #338): same-colour offset signs repeat on four
         # own lens-cap captures from two bodies and two sensitivity settings; this
         # does not identify a predictor, values or a decode step (V1 S1.20).
         r.update(variant="compressed", status="not yet specified (framing and value assembly remain open; predictive baselines and unassigned #338 token-index findings are not a codec)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.20, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.21, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
