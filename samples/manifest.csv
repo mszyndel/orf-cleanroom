@@ -306,3 +306,7 @@ own,,,4be54a503ec4ba79c7f1be701ca63cecc7ed7d4a74378af862afd901f8d0b3d7,not-share
 own,,,6bb0c5ff6ff29d9a93dd4789518c66ec6c3d9a36cb3196c42e62b81873734dd8,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.427,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
 own,,,581f55d248968e6e6adc07dd854a9fb440a67efbfac61eaa7f364efd8077dd82,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.427,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
 own,,,33c02879a6d8c566f27e26932570c71f52d912d3f747cbd117d58eb5cc5ed49d,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.428,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
+own,,,966afc1a0ea8a2c8e9cd78bf86a432f6296f2f0b2eaf89ac12c94a75ee18f516,not-shared,OM Digital Solutions,OM-1,normal,5220,3912,6.002,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
+own,,,6a917fe3b5d41adb026ca1df592f14d3874fd029aedb82da4e66c5d1e95ee64a,not-shared,OM Digital Solutions,OM-1,normal,5220,3912,6.006,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
+own,,,5e3c85c517b8914ad67b5caffd560c2bfb8d77290903cf68f035376622264983,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.002,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
+own,,,4d22b06cb79933dd7c5d42ee7596c2de6215e18ce458393f3645fc6f9d8c2ecf,not-shared,OM Digital Solutions,OM-1MarkII,normal,5220,3912,6.005,variable,1,,,,unassigned,@mszyndel tools/orf_signature.py 9f748fd
