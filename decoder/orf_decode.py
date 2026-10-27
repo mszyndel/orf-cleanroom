@@ -321,8 +321,11 @@ def decode_file(path, order=None, layout=None):
         # F_CONTEXT (Partial for #332): order-8 predictive structure reproduces on
         # a named unassigned four-file cohort, but is not an identified codec or
         # reconstruction (V1 S1.18).
-        r.update(variant="compressed", status="not yet specified (framing and value assembly remain open; predictive baselines are not a codec)")
-        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.18, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
+        # F_OM1_GRID (Partial for #338): a parity-dependent suffix-lag pattern
+        # repeats on two own OM-1 Mark II flat captures; it is unassigned token-index
+        # evidence, not a physical CFA map, predictor, or decode step (V1 S1.19).
+        r.update(variant="compressed", status="not yet specified (framing and value assembly remain open; predictive baselines and the unassigned #338 token-index pattern are not a codec)")
+        r["notes"].append("compressed payload (%s bits per pixel); no decoder or padding rule is specified yet; suffix associations do not specify values, see specs/V1.md S1.1-S1.2, S1.7-S1.19, S2.3, G2, specs/V2.md S1.1-S1.2 and ROADMAP.md" % sig["bpp"])
         return r
     packing = sc
     r.update(variant="V0", packing=packing, status=STATUS[packing])
